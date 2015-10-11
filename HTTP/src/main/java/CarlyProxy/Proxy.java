@@ -10,7 +10,7 @@ import java.util.Iterator;
 public class Proxy {
 
 	private static final Integer proxyPort = 8088;
-	private static final Integer BUFSIZE = 5;
+	private static final Integer BUFSIZE = 1024;
 	private static final int TIMEOUT = 3000;
 	
 	public static void createConnection() throws IOException{

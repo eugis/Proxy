@@ -1,6 +1,7 @@
 package CarlyProxy;
 
 import java.io.IOException;
+import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.ServerSocketChannel;
@@ -55,7 +56,11 @@ public class ClientTCPHandler implements TCPProtocol{
     	//ByteBuffer buf = (ByteBuffer) key.attachment();
     	ByteBuffer buf = attch.getBuffer();
         buf.flip(); // Prepare buffer for writing
-        SocketChannel clntChan = (SocketChannel) key.channel();
+        
+        //SocketChannel clntChan = (SocketChannel) key.channel();
+        SocketChannel clntChan = SocketChannel.open();
+        clntChan.connect(new InetSocketAddress("www.google.com", 80));
+        
         clntChan.write(buf);
         if (!buf.hasRemaining()) { // Buffer completely written?
             // Nothing left, so no longer interested in writes
