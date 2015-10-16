@@ -11,6 +11,8 @@ import java.util.Properties;
 
 import org.apache.log4j.Logger;
 
+import CarlyAdmin.manager.ConfigurationManager;
+import CarlyAdmin.manager.StatisticsManager;
 import Logs.CarlyLogger;
 
 public class CarlyAdmin implements Runnable{

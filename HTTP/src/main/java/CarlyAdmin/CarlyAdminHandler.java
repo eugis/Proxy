@@ -3,6 +3,9 @@ package CarlyAdmin;
 import java.io.IOException;
 import java.nio.channels.SelectionKey;
 
+import CarlyAdmin.manager.ConfigurationManager;
+import CarlyAdmin.manager.StatisticsManager;
+
 public class CarlyAdminHandler implements TCPProtocol {
 
 	public CarlyAdminHandler(StatisticsManager instance,
