@@ -1,6 +1,9 @@
 package CarlyAdmin.parser;
 
+import org.apache.log4j.Logger;
+
 import CarlyAdmin.manager.ConfigurationManager;
+import Logs.CarlyLogger;
 
 
 public enum CarlyAdminProtocol {
@@ -159,14 +162,52 @@ public enum CarlyAdminProtocol {
 	};
 
 	protected abstract CarlyAdminProtocol handleRead(CarlyAdminMsg msg);
+	private static Logger logs = CarlyLogger.getCarlyLogger();
 	
 	private static String parse(CarlyAdminMsg msg) {
-		// TODO Auto-generated method stub
+		msg.buffer.flip();
+		
+		while(msg.buffer.hasRemaining()){
+			byte c = msg.buffer.get();
+			msg.lineBuffer[msg.lineBufferIndex++] = c;
+			if(msg.lineBufferIndex == msg.lineBuffer.length){
+				logs.error("State Protocol - parse: linea muy larga");
+				throw new RuntimeException("linea muy larga");
+			}
+			if(c == '\n'){
+				String line = new String(msg.lineBuffer, 0, 
+						msg.lineBufferIndex);
+				msg.lineBufferIndex = 0;
+				msg.buffer.compact();
+				return line.toLowerCase();
+			} 
+		}
+		msg.buffer.compact();
 		return null;
 	}
 	
 	private static String parseHeaders(CarlyAdminMsg msg) {
-		// TODO Auto-generated method stub
-		return null;
+		String ans = null;
+		msg.buffer.flip();
+		
+		while(msg.buffer.hasRemaining()){
+			byte c = msg.buffer.get();
+			msg.lineBuffer[msg.lineBufferIndex++] = c;
+			if(msg.lineBufferIndex == msg.lineBuffer.length){
+				logs.error("StateProtocol - parseHeaders: linea muy larga");
+				throw new RuntimeException("linea muy larga");
+			}
+			if(c == '\n'){
+				if(msg.lineBufferIndex != 1){
+					ans = new String(msg.lineBuffer, 0,
+							msg.lineBufferIndex);
+				} else {
+					ans = null;
+				}
+			}
+		}
+		msg.lineBufferIndex = 0;
+		msg.buffer.compact();
+		return ans;
 	}
 }

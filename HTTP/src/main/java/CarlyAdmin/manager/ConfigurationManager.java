@@ -1,5 +1,8 @@
 package CarlyAdmin.manager;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -17,7 +20,30 @@ public class ConfigurationManager {
 	private Logger logs = CarlyLogger.getCarlyLogger();
 	
 	public ConfigurationManager() {
-		// TODO Auto-generated constructor stub
+		this.authorization = new ConcurrentHashMap<String, String>();
+		this.l33t = new AtomicBoolean(true);
+		InputStream is = getClass().getResourceAsStream(
+				"../resources/setup.properties");
+		Properties p = new Properties();
+		
+		try {
+			p.load(is);
+			String user = p.getProperty("carlyAdmin-user");
+			authorization.put("user", user);
+			String pass = p.getProperty("carlyAdmin-pass");
+			authorization.put("pass", pass);
+			
+		} catch (IOException e) {
+			logs.error("ConfigurationManager - Missing configuration file", e);
+			throw new RuntimeException("Missing configuration file...");
+		} finally {
+			try {
+				is.close();
+			} catch (IOException e) {
+				logs.error("ConfigurationManager - Error occured when reading the configuration file", e);
+				throw new RuntimeException("Error when reading the configuration file");
+			}
+		}
 	}
 	
 	public static ConfigurationManager getInstance() {
@@ -52,12 +78,20 @@ public class ConfigurationManager {
 	}
 
 	public boolean changeUser(String user) {
-		// TODO Auto-generated method stub
 		String aux = user.trim();
 		if(aux == null || aux.equals("")){
 			return false;
 		}
 		authorization.put("user", user);
+		return true;
+	}
+
+	public boolean changePass(String pass) {
+		String aux = pass.trim();
+		if(aux == null || aux.equals("")){
+			return false;
+		}
+		authorization.put("pass", pass);
 		return true;
 	}
 

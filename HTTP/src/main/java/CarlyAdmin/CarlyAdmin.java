@@ -32,14 +32,14 @@ public class CarlyAdmin implements Runnable{
 			String stringPort = p.getProperty("carlyAdmin-port");
 			this.port = Integer.parseInt(stringPort);
 		} catch (Exception e) {
-			logs.error("carlyAdmin: carlyAdmin - Falta el archivo de configuracion", e);
-			throw new RuntimeException("Falta el archivo de configuracion...");
+			logs.error("carlyAdmin: carlyAdmin - Missing configuration file", e);
+			throw new RuntimeException("Missing configuration file...");
 		} finally{
 			try {
 				is.close();
 			} catch (IOException e) {
-				logs.error("carlyAdmin: carlyAdmin - Error al leer el archivo de configuracion.", e);
-				throw new RuntimeException("Error al leer el archivo de configuracion.");
+				logs.error("carlyAdmin: carlyAdmin - Error when reading the configuration file", e);
+				throw new RuntimeException("Error when reading the configuration file");
 			}
 		}
 	}
