@@ -6,6 +6,7 @@ import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
+import java.util.HashMap;
 
 import Parser.HTTPParser;
 
@@ -13,6 +14,8 @@ public class ClientTCPHandler implements TCPProtocol{
 	
 	private int bufSize; // Size of I/O buffer
 
+	private HashMap<SocketChannel, SocketChannel> openChannels = new HashMap<SocketChannel, SocketChannel>();
+	
     public ClientTCPHandler(int bufSize) {
         this.bufSize = bufSize;
     }
@@ -35,26 +38,44 @@ public class ClientTCPHandler implements TCPProtocol{
         ByteBuffer buf = (ByteBuffer) attch.getBuffer();
         long bytesRead = clntChan.read(buf);
         if (bytesRead == -1) { // Did the other end close?
+        	//busco si tenia un canal asociado
+        	SocketChannel openChannel = this.openChannels.get(clntChan); 
+        	if(openChannel != null){
+        		this.openChannels.remove(clntChan);
+        		openChannel.close();
+        	}
             clntChan.close();
         } else if (bytesRead > 0) {
-        	//SI LA CONEXION VIENE DEL "SERVER"
-        	if(clntChan.getRemoteAddress().toString().startsWith("www.google.com")){
-        		//al attch le agregue con que "cliente" habla
-            	attch.getClientChannel().register(key.selector(), SelectionKey.OP_WRITE, new ProxyAttachment(clntChan, buf, new HTTPParser()));
+        	if(attch.getClientChannel() != null){ //SI LA CONEXION VIENE DEL "SERVER"
+            	attch.getClientChannel().register(key.selector(), SelectionKey.OP_WRITE, new ProxyAttachment(null, buf, new HTTPParser()));
             }else{
-	            // Indicate via key that reading/writing are both of interest now.
-	        	ParserResponse resp = attch.getParser().sendData(buf);
-	        	//if(resp.isDoneReading()){
-		        	SocketChannel hostChan = SocketChannel.open();
+	            
+            	SocketChannel hostChan = null;
+            	ParserResponse resp = attch.getParser().sendData(buf);
+            	
+            	//busco si ya existe este canal (porque no termino de leer)
+            	SocketChannel openChannel = this.openChannels.get(clntChan); 
+	        	if(openChannel == null){ //sino, lo creo
+		        	hostChan = SocketChannel.open();
 		        	hostChan.configureBlocking(false);
-		        	hostChan.connect(new InetSocketAddress("www.google.com", 80));
+		        	hostChan.connect(new InetSocketAddress(resp.getHost(), resp.getPort()));
 		        	while(!hostChan.finishConnect()){}
-		        	ProxyAttachment hostAttch = new ProxyAttachment(clntChan, buf, new HTTPParser());
-		        	hostChan.register(key.selector(), SelectionKey.OP_WRITE, hostAttch);
-	        		//key.interestOps(SelectionKey.OP_READ | SelectionKey.OP_WRITE);
-	        	//}else{
-	        		//key.interestOps(SelectionKey.OP_READ);
-	        	//}
+	        	}else{
+	        		hostChan = this.openChannels.get(clntChan);
+	        	}
+	        	
+	        	//al attch le agregue con que "cliente" habla
+	        	ProxyAttachment hostAttch = new ProxyAttachment(clntChan, buf, new HTTPParser());
+        		hostChan.register(key.selector(), SelectionKey.OP_WRITE, hostAttch);
+        		
+        		if(resp.isDoneReading()){ //si no hay mas nada para leer
+        			
+	        	}else{ //si no termino de leer
+	        		if(openChannel == null){ //y el canal abierto es nuevo (o sea, primer leida)
+	        			this.openChannels.put(clntChan, hostChan);
+	        		}
+	        		key.interestOps(SelectionKey.OP_READ); //sigo leyendo
+	        	}
             }
         }
     }
@@ -73,7 +94,7 @@ public class ClientTCPHandler implements TCPProtocol{
         SocketChannel clntChan = (SocketChannel) key.channel();
         clntChan.write(buf);
         if (!buf.hasRemaining()) { // Buffer completely written?
-            // Nothing left, so no longer interested in writes
+        	// Nothing left, so no longer interested in writes
             key.interestOps(SelectionKey.OP_READ);
         }
         buf.compact(); // Make room for more data to be read in
