@@ -6,6 +6,7 @@ import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
+import java.nio.charset.Charset;
 import java.util.HashMap;
 
 import Parser.HTTPParser;
@@ -51,7 +52,12 @@ public class ClientTCPHandler implements TCPProtocol{
             }else{
 	            
             	SocketChannel hostChan = null;
-            	ParserResponse resp = attch.getParser().sendData(buf);
+            	
+            	//TODO: Darme el byte[] posta!
+            	String request = "GET / HTTP/1.1"+"/n"+"Host: www.google.com"+"/n/n";
+        		byte[] msg = request.getBytes(Charset.forName("UTF-8"));
+            	
+            	ParserResponse resp = attch.getParser().sendData(msg);
             	
             	//busco si ya existe este canal (porque no termino de leer)
             	SocketChannel openChannel = this.openChannels.get(clntChan); 
@@ -59,6 +65,8 @@ public class ClientTCPHandler implements TCPProtocol{
 		        	hostChan = SocketChannel.open();
 		        	hostChan.configureBlocking(false);
 		        	hostChan.connect(new InetSocketAddress(resp.getHost(), resp.getPort()));
+		        	
+		        	//registrarme al "o connect" pq sinno queda al 100 de cpu
 		        	while(!hostChan.finishConnect()){}
 	        	}else{
 	        		hostChan = this.openChannels.get(clntChan);

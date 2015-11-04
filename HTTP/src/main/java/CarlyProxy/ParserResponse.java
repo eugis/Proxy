@@ -1,6 +1,6 @@
 package CarlyProxy;
 
-import java.net.InetAddress;
+
 
 public class ParserResponse {
 

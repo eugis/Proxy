@@ -1,62 +1,97 @@
 package Parser;
 
-import java.nio.ByteBuffer;
+import java.nio.charset.Charset;
 
 public enum HttpState {
 	STATUS_LINE {
 		@Override
-		protected HttpState next(final ByteBuffer bb, final HttpMessage message) {
-			// TODO Auto-generated method stub
-			return HEADER;
+		protected State next(final byte[] buf, final int pos,final HttpMessage message) {
+			 
+			int i = pos;
+			String sbuf = new String( buf, Charset.forName("UTF-8") );
+			char c = sbuf.charAt(i);
+			StringBuilder aux = new StringBuilder(); 
+						
+			while( c != '\n'){
+				
+				c = sbuf.charAt(i);
+				
+				if(c != ' ' && message.hasMethod()){
+					aux.append(c);
+					
+				}
+				
+				
+				
+				i++;
+				
+			}
+			
+			
+			return new State(HEADER,i);
 		}
 	},
 	HEADER {
 		@Override
-		protected HttpState next(final ByteBuffer bb, final HttpMessage message) {
+		protected State next(final byte[] buf, final int pos,final HttpMessage message) {
 			// TODO Auto-generated method stub
 			// if (moreHeadersToCome) {
 			//	return HEADER;
 			//}
-			
-			return EMPTY_LINE;
+			int i = pos;
+			return new State(EMPTY_LINE, i);
 		}
 	},
 	EMPTY_LINE {
 		@Override
-		protected HttpState next(final ByteBuffer bb, final HttpMessage message) {
+		protected State next(final byte[] buf,final int pos,final HttpMessage message) {
 			// TODO Auto-generated method stub
-			return BODY;
+			int i = pos;
+			return new State(BODY,i);
 		}
 	},
 	BODY {
 		@Override
-		protected HttpState next(final ByteBuffer bb, final HttpMessage message) {
+		protected State next(final byte[] buf, final int pos,final HttpMessage message) {
 			// TODO Auto-generated method stub
-			return DONE;
+			int i = pos;
+			return new State(DONE, i);
 		}
 	},
 	DONE {
 		@Override
-		protected HttpState next(final ByteBuffer bb, final HttpMessage message) {
-			return DONE;
+		protected State next(final byte[] buf, final int pos,final HttpMessage message) {
+			int i = pos;
+			return new State(DONE,i);
 		}
 	};
 	
-	protected abstract HttpState next(final ByteBuffer bb, final HttpMessage message);
+	protected abstract State next(final byte[] buf,final int pos,final HttpMessage message);
 	
-	public final HttpState process(final ByteBuffer bb, final HttpMessage message) {
-		// Should never happen, but let's be defensive
-		if (bb.remaining() == 0) {
-			return this;
-		}
+	public final HttpState process(final byte[] buf, final HttpMessage message) {
 		
 		int remaining;
-		HttpState current = this;
-		do {
-			remaining = bb.remaining();
-			current = current.next(bb, message);
-		} while (remaining != bb.remaining() && current != DONE);
+		State current = new State (this, 0);
 		
-		return current;
+		do {
+			remaining = buf.length - current.position;
+			current = current.state.next(buf, current.position, message);
+		} while (remaining != buf.length - current.position && current.state != DONE);
+		
+		return current.state;
+	}
+	
+	private class State{
+		
+		HttpState state;
+		int position;
+		
+		State(HttpState state, int position){
+			this.state = state;
+			this.position = position;
+		}
+	
 	}
 }
+
+
