@@ -1,5 +1,8 @@
 package Parser;
 
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class HttpMessage {
 
@@ -8,6 +11,20 @@ public class HttpMessage {
 	private String host;
 	private String body;
 	private boolean doneReading;
+	
+	//TODO guardaria todos los headres.. key: header, value: valor. Host iria aca adentro
+	private Map<String, String> headers;
+	//TODO en la primera linea viene la version, esa version es la que usa en el response
+	private String version;
+	//TODO si el metodo no es valido esto va en false, y nos quiere decir que no esribimos 
+	//en el servidor, y la respuesta al cliente la damos nosotros, usando 
+	//ParserUtils.generateHttpResponseIM(version)
+	private boolean isMethodValid;
+	
+	public HttpMessage() {
+		headers = new HashMap<String, String>();
+		isMethodValid = true;
+	}
 		
 	public String getHost() {
 		return host;
