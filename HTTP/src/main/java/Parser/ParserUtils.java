@@ -142,6 +142,21 @@ public class ParserUtils {
 		headersLine += "\n";
 		return headersLine;
 	}
+
+	public static String readLine(byte[] buf, int pos) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public static boolean parseMethod(String line, HttpMessage message) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public static boolean parseHeaders(String line, HttpMessage message) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
 	//Prueba
 //	public static void main(String[] args) {

@@ -6,7 +6,21 @@ public enum HttpState {
 	STATUS_LINE {
 		@Override
 		protected State next(final byte[] buf, final int pos,final HttpMessage message) {
-			 
+			
+			//TODO no entiendo para que es ese i
+			int i = 0; 
+			boolean valid = true;
+			
+			String line = ParserUtils.readLine(buf, pos);
+			if(!line.isEmpty()){
+				valid = ParserUtils.parseMethod(line, message);
+				if(valid){
+					return new State(HEADER,i);
+				}
+			}
+			return new State(INVALID, i);
+			
+			/*TODO fijarse donde poner este metodo
 			int i = pos;
 			String sbuf = new String( buf, Charset.forName("UTF-8") );
 			char c = sbuf.charAt(i);
@@ -28,7 +42,7 @@ public enum HttpState {
 			}
 			
 			
-			return new State(HEADER,i);
+			return new State(HEADER,i);*/
 		}
 	},
 	HEADER {
@@ -38,7 +52,16 @@ public enum HttpState {
 			// if (moreHeadersToCome) {
 			//	return HEADER;
 			//}
-			int i = pos;
+			int i = pos; //TODO esto no entiendo para q es
+			String line = ParserUtils.readLine(buf, pos);
+			if(!line.isEmpty()){
+				boolean valid = ParserUtils.parseHeaders(line, message);
+				if(valid){
+					return new State(HEADER,i);
+				}else{
+					return new State(INVALID, i);
+				}
+			}
 			return new State(EMPTY_LINE, i);
 		}
 	},
@@ -63,6 +86,13 @@ public enum HttpState {
 		protected State next(final byte[] buf, final int pos,final HttpMessage message) {
 			int i = pos;
 			return new State(DONE,i);
+		}
+	},
+	INVALID {
+		@Override
+		protected State next(final byte[] buf, final int pos,final HttpMessage message) {
+			int i = pos;
+			return new State(INVALID,i);
 		}
 	};
 	
