@@ -1,5 +1,6 @@
 package Parser;
 
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -10,7 +11,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
 
-import CarlyAdmin.manager.ConfigurationManager;
+
 
 public class ParserUtils {
 	
@@ -19,7 +20,8 @@ public class ParserUtils {
 	private static Map<Integer, String> msgs = loadMsgs();
 	
 	public static boolean isLeetEnabled(){
-		return ConfigurationManager.getInstance().isL33t();
+		//return ConfigurationManager.getInstance().isL33t();
+		return false;
 	}
 	
 	private static Map<Integer, String> loadMsgs() {
@@ -147,8 +149,7 @@ public class ParserUtils {
 
 	public static String readLine(BufferedReader buf) {
 
-		//TODO Ver para esto "MyByteArrayToReader"
-		
+			
 		String ret=null;
     	try {
 			ret= buf.readLine();
@@ -175,6 +176,8 @@ public class ParserUtils {
 	public static boolean parseRequestLine(String line, HttpMessage message) {
 		
 		//TODO ver como avisar si llega CUALQUIER MIERDA NADA VALIDO (por ejemplo isValidVersion, isValidUrl... etc)
+		//TODO ver si queres modularizar mas
+		
 		int i = 0;
 		boolean ret = true;
 		char c;
@@ -242,9 +245,7 @@ public class ParserUtils {
 			break;
 		
 			}
-			
-			
-			
+						
 			i++;
 			
 		}
@@ -252,9 +253,84 @@ public class ParserUtils {
 		return ret;
 	}
 
-	public static boolean parseHeaders(String line, HttpMessage message) {
-		// TODO Auto-generated method stub
-		return false;
+	public static boolean parseHeaderLine(String line, HttpMessage message) {
+
+		//TODO ver si falta chequear si me pasaron cualq mierda, además de ver si los headers son validos (ej: isValidHeader()... etc)
+		
+		HeaderLineState state = HeaderLineState.HEADER;
+		StringBuilder aux = new StringBuilder();
+		String header="", value="";
+		char c;
+		int i=0;
+		
+		while(i<line.length()){
+			
+			c = line.charAt(i);
+			
+			switch(state){
+				case HEADER:
+					
+					if(c!= ' '){
+						
+						if(c!=':'){
+							aux.append(c);
+						}
+							
+						
+					}else{
+												
+						header = aux.toString();
+						if(isValidHeader(header)){
+							state = HeaderLineState.VALUE;
+							//Reseteo StringBuilder
+							aux.setLength(0);
+							
+						}else{
+							return false;
+						}
+					}
+					
+				break;
+				
+				case VALUE:
+					
+					aux.append(c);
+										
+					//Si estamos en el último char de la linea.
+					if(i==line.length()-1){
+						value = aux.toString();
+						if(isValidValue(value)){
+							
+							message.setHeader(header, value);
+						}
+						else{
+							return false;
+						}
+						
+							
+					}
+					
+				break;
+				
+			
+			}
+		i++;	
+		}
+		
+		
+		
+		
+		return true;
+	}
+
+	private static boolean isValidValue(String value) {
+		// TODO Ver si no es vacio o cualq otra cosa q se t ocurra
+		return true;
+	}
+
+	private static boolean isValidHeader(String header) {
+		// TODO Ver si es Host, Length, etc..
+		return true;
 	}
 
 	public static void doneReading(HttpMessage message) {

@@ -24,7 +24,13 @@ public class HttpMessage {
 		headers = new HashMap<String, String>();
 		setMethodValid(true);
 	}
-		
+	
+	public void setHeader(String header, String value){
+		headers.put(header, value);
+	}
+	public String getHeader(String header){
+		return headers.get(header);
+	}
 	
 	public String getBody() {
 		return body;

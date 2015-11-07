@@ -29,7 +29,7 @@ public enum HttpState {
 						
 			String line = ParserUtils.readLine(buf);
 			if(!line.isEmpty()){
-				boolean valid = ParserUtils.parseHeaders(line, message);
+				boolean valid = ParserUtils.parseHeaderLine(line, message);
 				if(valid){
 					return HEADER;
 				}else{
