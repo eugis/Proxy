@@ -11,7 +11,7 @@ import July.EchoHandler;
 public class ThreadPoolSocketServer  {
     private ServerSocket serverSocket;
     private ConnectionHandler handler;
-    private int THREAD_POOL_SIZE = 10;
+    private int THREAD_POOL_SIZE = 2;
 
     public ThreadPoolSocketServer(final int port, final InetAddress interfaz, final ConnectionHandler handler)
             throws IOException {
@@ -45,12 +45,14 @@ public class ThreadPoolSocketServer  {
                             System.out.printf("Se conecto %s\n", s);
                             
                             ThreadPoolSocketServer.this.handler.handle(socket);
+                            
                             if (!socket.isClosed()) {
                                 socket.close();
                                 System.out.printf("Cerrando %s\n", s);
                             }
                             System.out.printf("Se desconecto %s\n", s);
                         } catch (IOException e) {
+                        	e.printStackTrace();
                             System.err.printf("Excepcion al manejar conexion\n");
                         }
                     }
