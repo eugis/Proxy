@@ -1,5 +1,7 @@
 package Parser;
 
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -143,19 +145,67 @@ public class ParserUtils {
 		return headersLine;
 	}
 
-	public static String readLine(byte[] buf, int pos) {
-		// TODO Auto-generated method stub
-		return null;
+	public static String readLine(BufferedReader buf) {
+
+		//TODO Ver para esto "MyByteArrayToReader"
+		
+		String ret=null;
+    	try {
+			ret= buf.readLine();
+			if(ret!=null)
+				System.out.println(ret);
+						
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+    	
+    	return ret.trim();
+	
 	}
 
-	public static boolean parseMethod(String line, HttpMessage message) {
-		// TODO Auto-generated method stub
+	public static boolean parseBody(String line, HttpMessage message) {
+
+		//TODO		
+		return false;
+	}
+
+	
+	
+	public static boolean parseRequestLine(String line, HttpMessage message) {
+		
+		int i = 0;
+		boolean noMethod =true;
+		char c = line.charAt(i);
+		
+		StringBuilder aux = new StringBuilder(); 
+					
+		while( i < line.length()){
+			
+			c = line.charAt(i);
+			
+			if(c != ' ' && noMethod){
+				aux.append(c);
+				
+			}
+			
+			
+			
+			i++;
+			
+		}
+
 		return false;
 	}
 
 	public static boolean parseHeaders(String line, HttpMessage message) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	public static void doneReading(HttpMessage message) {
+		message.setDoneReading(true);
+		
 	}
 	
 	//Prueba

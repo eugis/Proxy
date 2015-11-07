@@ -6,14 +6,12 @@ import java.util.Map;
 
 public class HttpMessage {
 
+	//TODO Juli llama a "getMessage" si no está completo le mando null y ella va a tener q seguir leyendo y pasandome bytes 
+	
 	private String method;
-	private boolean hasMethod=false;
-	private String host;
+	private Map<String, String> headers;
 	private String body;
 	private boolean doneReading;
-	
-	//TODO guardaria todos los headres.. key: header, value: valor. Host iria aca adentro
-	private Map<String, String> headers;
 	//TODO en la primera linea viene la version, esa version es la que usa en el response
 	private String version;
 	//TODO si el metodo no es valido esto va en false, y nos quiere decir que no esribimos 
@@ -26,12 +24,7 @@ public class HttpMessage {
 		isMethodValid = true;
 	}
 		
-	public String getHost() {
-		return host;
-	}
-	public void setHost(String host) {
-		this.host = host;
-	}
+	
 	public String getBody() {
 		return body;
 	}
@@ -47,17 +40,11 @@ public class HttpMessage {
 	public String getMethod() {
 		return method;
 	}
-	public void setMethod(String method) {
+	
+	public void setMethod(String method){
 		this.method = method;
 	}
 	
-	public boolean hasMethod(){
-		return hasMethod;
-	}
-	public void methodDone(){
-		this.hasMethod = true;
-	}
-	
-	
+		
 	
 }

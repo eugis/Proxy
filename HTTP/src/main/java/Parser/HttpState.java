@@ -1,127 +1,111 @@
 package Parser;
 
-import java.nio.charset.Charset;
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public enum HttpState {
-	STATUS_LINE {
+	REQUEST_LINE {
 		@Override
-		protected State next(final byte[] buf, final int pos,final HttpMessage message) {
+		protected HttpState next(final BufferedReader buf, final HttpMessage message){
 			
-			//TODO no entiendo para que es ese i
-			int i = 0; 
 			boolean valid = true;
 			
-			String line = ParserUtils.readLine(buf, pos);
+			String line = ParserUtils.readLine(buf);
 			if(!line.isEmpty()){
-				valid = ParserUtils.parseMethod(line, message);
+				valid = ParserUtils.parseRequestLine(line, message);
 				if(valid){
-					return new State(HEADER,i);
+					return HEADER;
 				}
 			}
-			return new State(INVALID, i);
-			
-			/*TODO fijarse donde poner este metodo
-			int i = pos;
-			String sbuf = new String( buf, Charset.forName("UTF-8") );
-			char c = sbuf.charAt(i);
-			StringBuilder aux = new StringBuilder(); 
+			return INVALID;
 						
-			while( c != '\n'){
-				
-				c = sbuf.charAt(i);
-				
-				if(c != ' ' && message.hasMethod()){
-					aux.append(c);
-					
-				}
-				
-				
-				
-				i++;
-				
-			}
-			
-			
-			return new State(HEADER,i);*/
 		}
 	},
 	HEADER {
 		@Override
-		protected State next(final byte[] buf, final int pos,final HttpMessage message) {
-			// TODO Auto-generated method stub
-			// if (moreHeadersToCome) {
-			//	return HEADER;
-			//}
-			int i = pos; //TODO esto no entiendo para q es
-			String line = ParserUtils.readLine(buf, pos);
+		protected HttpState next(final BufferedReader buf, final HttpMessage message){
+						
+			String line = ParserUtils.readLine(buf);
 			if(!line.isEmpty()){
 				boolean valid = ParserUtils.parseHeaders(line, message);
 				if(valid){
-					return new State(HEADER,i);
+					return HEADER;
 				}else{
-					return new State(INVALID, i);
+					return INVALID;
 				}
 			}
-			return new State(EMPTY_LINE, i);
+			return EMPTY_LINE;
 		}
 	},
 	EMPTY_LINE {
 		@Override
-		protected State next(final byte[] buf,final int pos,final HttpMessage message) {
-			// TODO Auto-generated method stub
-			int i = pos;
-			return new State(BODY,i);
+		protected HttpState next(final BufferedReader buf, final HttpMessage message) {
+						
+			return BODY;
 		}
 	},
 	BODY {
 		@Override
-		protected State next(final byte[] buf, final int pos,final HttpMessage message) {
-			// TODO Auto-generated method stub
-			int i = pos;
-			return new State(DONE, i);
+		protected HttpState next(final BufferedReader buf, final HttpMessage message){
+			
+			String line = ParserUtils.readLine(buf);
+			
+			if(!line.isEmpty()){
+				boolean valid = ParserUtils.parseBody(line, message);
+				if(valid){
+					return BODY;
+				}else{
+					return INVALID;
+				}
+			}
+						
+			return DONE;
 		}
 	},
 	DONE {
 		@Override
-		protected State next(final byte[] buf, final int pos,final HttpMessage message) {
-			int i = pos;
-			return new State(DONE,i);
+		protected HttpState next(final BufferedReader buf, final HttpMessage message){
+			
+			ParserUtils.doneReading(message);
+			
+			return DONE;
 		}
 	},
 	INVALID {
 		@Override
-		protected State next(final byte[] buf, final int pos,final HttpMessage message) {
-			int i = pos;
-			return new State(INVALID,i);
+		protected HttpState next(final BufferedReader buf, final HttpMessage message) {
+			
+			return INVALID;
 		}
 	};
 	
-	protected abstract State next(final byte[] buf,final int pos,final HttpMessage message);
+	protected abstract HttpState next(final BufferedReader buf, final HttpMessage message);
 	
 	public final HttpState process(final byte[] buf, final HttpMessage message) {
 		
-		int remaining;
-		State current = new State (this, 0);
 		
-		do {
-			remaining = buf.length - current.position;
-			current = current.state.next(buf, current.position, message);
-		} while (remaining != buf.length - current.position && current.state != DONE);
-		
-		return current.state;
-	}
-	
-	private class State{
-		
-		HttpState state;
-		int position;
-		
-		State(HttpState state, int position){
-			this.state = state;
-			this.position = position;
+		HttpState current = this;
+		InputStreamReader in = new InputStreamReader(new ByteArrayInputStream(buf));
+		BufferedReader br = new BufferedReader(in); 
+		 		
+		try {
+			do {
+
+				current = current.next(br, message);
+				
+				//TODO VER SI CON br.ready() alcanza!!
+			} while (br.ready() && current != DONE);
+		} catch (IOException e) {
+			
+			e.printStackTrace();
 		}
-	
+		
+		return current;
 	}
+	
+	
 }
 
 
