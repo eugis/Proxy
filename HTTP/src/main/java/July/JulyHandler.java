@@ -29,34 +29,34 @@ public class JulyHandler implements ConnectionHandler{
         OutputStream out = s.getOutputStream();
         
         byte[] receiveBuf = new byte[BUFSIZE];  // Receive buffer
-        byte[] responseBuf = new byte[BUFSIZE];
         int recvMsgSize = in.read(receiveBuf);   // Size of received message
         ParserResponse resp = null;
-        if(recvMsgSize != -1){
-        	//resp = parser.sendData(receiveBuf);
-        }
+        boolean keepReading = false;
         String host2connect = "";
         int port2connect = -1;
         // Receive until client closes connection, indicated by -1 return
-        while (recvMsgSize != -1 && !resp.isDoneReading()) {
-          //out.write(receiveBuf, 0, recvMsgSize);
-          resp = parser.sendData(receiveBuf);
-          recvMsgSize = in.read(receiveBuf);
+        while (recvMsgSize != -1 && !keepReading) {
+        	recvMsgSize = in.read(receiveBuf);
+        	resp = parser.sendData(receiveBuf);
+        	keepReading = resp.isDoneReading();
         }
+        
+        
         
         host2connect = resp.getHost();
         port2connect = resp.getPort();
-        //byte[] response = resp.getResponse();
         String hardCodeResp = "GET / HTTP/1.1 \n\n";
         byte[] byteReq = hardCodeResp.getBytes();
         if(!s.getLocalAddress().toString().contains(host2connect)){//devuelve la response al mismo cliente, o sea, reboto en el proxy
         	Socket serverSocket = writeToServer(host2connect, port2connect, byteReq);
         	readFromServer(serverSocket, out);
         }else{
-      	  out.write(byteReq);
+        	out.write(byteReq);
+      	  	out.flush();
         }
-        ProxyConnectionManager.closeConnection(s);
+       
         s.close();  // Close the socket.  We are done with this client!
+        ProxyConnectionManager.closeConnection(s);
 	}
 
 	private Socket writeToServer(String host, int port, byte[] byteReq) throws UnknownHostException, IOException{

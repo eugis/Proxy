@@ -22,4 +22,8 @@ public class ProxyConnections {
 	public ProxySocket getConnection(String host_port){
 		return this.connections.get(host_port);
 	}
+
+	public HashMap<String, ProxySocket> getConnections() {
+		return this.connections;
+	}
 }

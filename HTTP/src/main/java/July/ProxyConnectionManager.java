@@ -3,6 +3,7 @@ package July;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.Map.Entry;
 
 public class ProxyConnectionManager {
 
@@ -28,7 +29,14 @@ public class ProxyConnectionManager {
 	}
 
 	public static void closeConnection(Socket s) {
-		
-		
+		String key = "";
+		for (Entry<String, ProxySocket> conns : ProxyConnections.getInstance().getConnections().entrySet()) {
+			if(conns.getValue().getSocket().equals(s)){
+				key = conns.getKey();
+			}
+		}
+		//antes de borrarlo deberia preguntar si no lo quiere usar otro cliente que este actualmente bloqueado
+		ProxyConnections.getInstance().getConnections().remove(key);
+		//--------------------------------------------------------
 	}
 }
