@@ -40,7 +40,8 @@ public class HttpMessage {
 	public String getMethod() {
 		return method;
 	}
-	public void setMethod(String method) {
+	
+	public void setMethod(String method){
 		this.method = method;
 	}
 	

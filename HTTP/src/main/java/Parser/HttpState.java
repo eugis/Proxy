@@ -14,7 +14,7 @@ public enum HttpState {
 			
 			String line = ParserUtils.readLine(buf);
 			if(!line.isEmpty()){
-				valid = ParserUtils.parseMethod(line, message);
+				valid = ParserUtils.parseRequestLine(line, message);
 				if(valid){
 					return HEADER;
 				}

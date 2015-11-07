@@ -1,6 +1,7 @@
 package Parser;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -146,10 +147,21 @@ public class ParserUtils {
 
 	public static String readLine(BufferedReader buf) {
 
-		//TODO Usar buf.readLine(); Ver si vale la pena hacerlo acá afuera
-		//Ver para esto "MyByteArrayToReader"
+		//TODO Ver para esto "MyByteArrayToReader"
 		
-		return null;
+		String ret=null;
+    	try {
+			ret= buf.readLine();
+			if(ret!=null)
+				System.out.println(ret);
+						
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+    	
+    	return ret.trim();
+	
 	}
 
 	public static boolean parseBody(String line, HttpMessage message) {
@@ -160,20 +172,19 @@ public class ParserUtils {
 
 	
 	
-	public static boolean parseMethod(String line, HttpMessage message) {
-		// TODO Auto-generated method stub
+	public static boolean parseRequestLine(String line, HttpMessage message) {
 		
-		/*TODO fijarse donde poner este metodo
-		int i = pos;
-		String sbuf = new String( buf, Charset.forName("UTF-8") );
-		char c = sbuf.charAt(i);
+		int i = 0;
+		boolean noMethod =true;
+		char c = line.charAt(i);
+		
 		StringBuilder aux = new StringBuilder(); 
 					
-		while( c != '\n'){
+		while( i < line.length()){
 			
-			c = sbuf.charAt(i);
+			c = line.charAt(i);
 			
-			if(c != ' ' && message.hasMethod()){
+			if(c != ' ' && noMethod){
 				aux.append(c);
 				
 			}
@@ -183,10 +194,7 @@ public class ParserUtils {
 			i++;
 			
 		}
-			
-		*/
-		
-		
+
 		return false;
 	}
 
