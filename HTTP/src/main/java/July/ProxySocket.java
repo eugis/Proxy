@@ -1,15 +1,19 @@
 package July;
 
 import java.net.Socket;
+import java.util.LinkedList;
 
 public class ProxySocket {
 
 	private Socket s;
 	private boolean inUse;
+	private LinkedList<Thread> users;
 	
-	public ProxySocket(Socket serverSocket) {
+	public ProxySocket(Socket serverSocket, Thread thread) {
 		this.s = serverSocket;
 		this.inUse = true;
+		this.users = new LinkedList<Thread>();
+		this.users.add(thread);
 	}
 
 	public Socket getSocket() {
@@ -27,6 +31,16 @@ public class ProxySocket {
 	public void setInUse(boolean inUse) {
 		this.inUse = inUse;
 	}
-
 	
+	public void setUser(Thread t) {
+		this.users.addLast(t);
+	}
+
+	public Thread getCurrentUser() {
+		return this.users.getFirst();
+	}
+	
+	public void userFinished() {
+		this.users.removeFirst();
+	}
 }

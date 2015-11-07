@@ -42,13 +42,13 @@ public class JulyHandler implements ConnectionHandler{
         }
         
         
-        
         host2connect = resp.getHost();
         port2connect = resp.getPort();
         String hardCodeResp = "GET / HTTP/1.1 \n\n";
         byte[] byteReq = hardCodeResp.getBytes();
+        Socket serverSocket = null;
         if(!s.getLocalAddress().toString().contains(host2connect)){//devuelve la response al mismo cliente, o sea, reboto en el proxy
-        	Socket serverSocket = writeToServer(host2connect, port2connect, byteReq);
+        	serverSocket = writeToServer(host2connect, port2connect, byteReq);
         	readFromServer(serverSocket, out);
         }else{
         	out.write(byteReq);
@@ -56,7 +56,7 @@ public class JulyHandler implements ConnectionHandler{
         }
        
         s.close();  // Close the socket.  We are done with this client!
-        ProxyConnectionManager.closeConnection(s);
+        ProxyConnectionManager.closeConnection(serverSocket);
 	}
 
 	private Socket writeToServer(String host, int port, byte[] byteReq) throws UnknownHostException, IOException{

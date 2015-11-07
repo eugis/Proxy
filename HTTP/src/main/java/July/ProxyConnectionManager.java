@@ -13,7 +13,7 @@ public class ProxyConnectionManager {
 		if(pSocket == null){
 			serverSocket = new Socket(host, port);
     		serverSocket.setSoTimeout(5000);
-    		pSocket = new ProxySocket(serverSocket);
+    		pSocket = new ProxySocket(serverSocket, Thread.currentThread());
     		pSocket.setInUse(true);
     		ProxyConnections.getInstance().saveNewConnection(host+"-"+port, pSocket);
 		}else{
@@ -33,10 +33,13 @@ public class ProxyConnectionManager {
 		for (Entry<String, ProxySocket> conns : ProxyConnections.getInstance().getConnections().entrySet()) {
 			if(conns.getValue().getSocket().equals(s)){
 				key = conns.getKey();
+				conns.getValue().userFinished();
+				if (conns.getValue().getCurrentUser() == null) {
+					//antes de borrarlo deberia preguntar si no lo quiere usar otro cliente que este actualmente bloqueado
+					ProxyConnections.getInstance().getConnections().remove(key);
+					//--------------------------------------------------------			
+				}
 			}
 		}
-		//antes de borrarlo deberia preguntar si no lo quiere usar otro cliente que este actualmente bloqueado
-		ProxyConnections.getInstance().getConnections().remove(key);
-		//--------------------------------------------------------
 	}
 }
