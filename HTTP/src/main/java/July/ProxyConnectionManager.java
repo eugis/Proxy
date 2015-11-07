@@ -7,13 +7,13 @@ import java.util.Map.Entry;
 
 public class ProxyConnectionManager {
 
-	public static ProxySocket getConnection(String host, int port) throws UnknownHostException, IOException{
+	public static ProxySocket getConnection(String host, int port, Thread t) throws UnknownHostException, IOException{
 		ProxySocket pSocket = ProxyConnections.getInstance().getConnection(host+"-"+port);
 		Socket serverSocket = null;
 		if(pSocket == null){
 			serverSocket = new Socket(host, port);
     		serverSocket.setSoTimeout(5000);
-    		pSocket = new ProxySocket(serverSocket, Thread.currentThread());
+    		pSocket = new ProxySocket(serverSocket, t);
     		pSocket.setInUse(true);
     		ProxyConnections.getInstance().saveNewConnection(host+"-"+port, pSocket);
 		}else{
@@ -39,6 +39,17 @@ public class ProxyConnectionManager {
 					ProxyConnections.getInstance().getConnections().remove(key);
 					//--------------------------------------------------------			
 				}
+			}
+		}
+	}
+	
+	public static void endUsingConnection(Socket s, Thread t) {
+		String key = "";
+		for (Entry<String, ProxySocket> conns : ProxyConnections.getInstance().getConnections().entrySet()) {
+			if(conns.getValue().getSocket().equals(s)){
+				key = conns.getKey();
+				conns.getValue().userFinished();
+				conns.getValue().setUser(t);
 			}
 		}
 	}

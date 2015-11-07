@@ -1,5 +1,6 @@
 package July;
 
+import java.io.IOException;
 import java.net.Socket;
 import java.util.LinkedList;
 
@@ -42,5 +43,14 @@ public class ProxySocket {
 	
 	public void userFinished() {
 		this.users.removeFirst();
+		if (this.users.size() != 0) {
+			this.users.getFirst().interrupt(); //Despertar el primero de la cola??	
+		} else {
+			try {
+				this.getSocket().close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 }

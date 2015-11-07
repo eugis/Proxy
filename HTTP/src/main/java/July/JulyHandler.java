@@ -13,7 +13,8 @@ import Parser.HTTPParser;
 
 public class JulyHandler implements ConnectionHandler{
 
-	private static final int BUFSIZE = 1024; 
+	private static final int BUFSIZE = 1024;
+	private static final int SLEEP_TIME = 1000;
 	private HTTPParser parser;
 	private Map<String, Socket> connections;
 	
@@ -35,6 +36,7 @@ public class JulyHandler implements ConnectionHandler{
         String host2connect = "";
         int port2connect = -1;
         // Receive until client closes connection, indicated by -1 return
+        Socket serverSocket = null;
         while (recvMsgSize != -1 /*&& !keepReading*/) {
         	recvMsgSize = in.read(receiveBuf);
         	resp = parser.sendData(receiveBuf);
@@ -46,8 +48,9 @@ public class JulyHandler implements ConnectionHandler{
                 String hardCodeResp = "GET / HTTP/1.1 \n\n";
                 byte[] byteReq = hardCodeResp.getBytes();
                 if(!s.getInetAddress().toString().contains(host2connect)){//devuelve la response al mismo cliente, o sea, reboto en el proxy
-                	Socket serverSocket = writeToServer(host2connect, port2connect, byteReq);
+                	serverSocket = writeToServer(host2connect, port2connect, byteReq);
                 	readFromServer(serverSocket, out);
+                	ProxyConnectionManager.endUsingConnection(serverSocket, Thread.currentThread());
                 }else{
                 	out.write(byteReq);
               	  	out.flush();
@@ -56,11 +59,20 @@ public class JulyHandler implements ConnectionHandler{
         }
 
         s.close();  // Close the socket.  We are done with this client!
-        ProxyConnectionManager.closeConnection(serverSocket);
+        if (serverSocket != null) {
+        	ProxyConnectionManager.closeConnection(serverSocket);	
+        }
 	}
 
 	private Socket writeToServer(String host, int port, byte[] byteReq) throws UnknownHostException, IOException{
-		ProxySocket pSocket = ProxyConnectionManager.getConnection(host, port);
+		ProxySocket pSocket = ProxyConnectionManager.getConnection(host, port, Thread.currentThread());
+		while (pSocket.getCurrentUser() != Thread.currentThread()) {
+			try {
+				Thread.sleep(SLEEP_TIME);
+			} catch (InterruptedException e) {
+				// I'm awake :)
+			}
+		}
 		Socket serverSocket = pSocket.getSocket();
     	if(serverSocket != null){//doble validacion, podria no ir
     		OutputStream outFromServer = serverSocket.getOutputStream();
