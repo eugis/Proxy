@@ -1,5 +1,6 @@
 package Parser;
 
+import java.io.BufferedReader;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -143,8 +144,11 @@ public class ParserUtils {
 		return headersLine;
 	}
 
-	public static String readLine(byte[] buf, int pos) {
-		// TODO Auto-generated method stub
+	public static String readLine(BufferedReader buf) {
+
+		//TODO Usar buf.readLine(); Ver si vale la pena hacerlo acá afuera
+		//Ver para esto "MyByteArrayToReader"
+		
 		return null;
 	}
 

@@ -25,11 +25,8 @@ public class HTTPParser {
 	
 	private void parse(byte[] buf){
 		
-		
-		
 		state = state.process(buf, message);
-		
-				
+						
 	}
 	
 		
