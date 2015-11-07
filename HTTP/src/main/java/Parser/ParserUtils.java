@@ -174,19 +174,73 @@ public class ParserUtils {
 	
 	public static boolean parseRequestLine(String line, HttpMessage message) {
 		
+		//TODO ver como avisar si llega CUALQUIER MIERDA NADA VALIDO (por ejemplo isValidVersion, isValidUrl... etc)
 		int i = 0;
-		boolean noMethod =true;
-		char c = line.charAt(i);
-		
+		boolean ret = true;
+		char c;
 		StringBuilder aux = new StringBuilder(); 
-					
+		RequestLineState state = RequestLineState.METHOD;
+		
 		while( i < line.length()){
 			
 			c = line.charAt(i);
 			
-			if(c != ' ' && noMethod){
+			switch(state){
+			
+			case METHOD:
+				
+				if(c != ' '){
+					aux.append(c);
+				
+				}else {
+					
+					String method = aux.toString().trim();
+					
+					if(isValidMethod(method)){
+						message.setMethod(method);
+						state=RequestLineState.URL;
+						message.setMethodValid(true);
+					}else{
+						message.setMethodValid(false);
+						ret = false;
+					}
+					//Reinicio el StringBuilder
+					aux.setLength(0);
+				}
+								
+			break;
+			
+			case URL:
+				
+				if(c!= ' '){
+					aux.append(c);
+				}else{
+					
+					String url = aux.toString();
+					message.setUrl(url);
+					state = RequestLineState.VERSION;
+					//Reinicio el StringBuilder
+					aux.setLength(0);
+				}
+				
+			break;
+			
+			case VERSION:
+				
 				aux.append(c);
 				
+				//Si estoy en el último char de la linea, ya cargo la version.
+				if(i==line.length()-1){
+					String version = aux.toString();
+					message.setVersion(version);
+				}
+				
+			break;
+			
+			case INVALID:
+				//TODO por ahora no uso invalid porque necesito que aunq el metodo sea inválido, siga el flow para cargar la version.
+			break;
+		
 			}
 			
 			
@@ -195,7 +249,7 @@ public class ParserUtils {
 			
 		}
 
-		return false;
+		return ret;
 	}
 
 	public static boolean parseHeaders(String line, HttpMessage message) {

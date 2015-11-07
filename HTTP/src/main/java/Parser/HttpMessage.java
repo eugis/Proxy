@@ -9,6 +9,7 @@ public class HttpMessage {
 	//TODO Juli llama a "getMessage" si no está completo le mando null y ella va a tener q seguir leyendo y pasandome bytes 
 	
 	private String method;
+	private String url;
 	private Map<String, String> headers;
 	private String body;
 	private boolean doneReading;
@@ -21,7 +22,7 @@ public class HttpMessage {
 	
 	public HttpMessage() {
 		headers = new HashMap<String, String>();
-		isMethodValid = true;
+		setMethodValid(true);
 	}
 		
 	
@@ -43,6 +44,36 @@ public class HttpMessage {
 	
 	public void setMethod(String method){
 		this.method = method;
+	}
+
+
+	public boolean isMethodValid() {
+		return isMethodValid;
+	}
+
+
+	public void setMethodValid(boolean isMethodValid) {
+		this.isMethodValid = isMethodValid;
+	}
+
+
+	public String getUrl() {
+		return url;
+	}
+
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+
+	public String getVersion() {
+		return version;
+	}
+
+
+	public void setVersion(String version) {
+		this.version = version;
 	}
 	
 		
