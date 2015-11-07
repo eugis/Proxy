@@ -10,6 +10,8 @@ public enum HttpState {
 		@Override
 		protected HttpState next(final BufferedReader buf, final HttpMessage message){
 			
+			System.out.println("REQUEST_LINE");
+			
 			boolean valid = true;
 			
 			String line = ParserUtils.readLine(buf);
@@ -26,7 +28,7 @@ public enum HttpState {
 	HEADER {
 		@Override
 		protected HttpState next(final BufferedReader buf, final HttpMessage message){
-						
+			System.out.println("HEADER");
 			String line = ParserUtils.readLine(buf);
 			if(!line.isEmpty()){
 				boolean valid = ParserUtils.parseHeaderLine(line, message);
@@ -42,14 +44,14 @@ public enum HttpState {
 	EMPTY_LINE {
 		@Override
 		protected HttpState next(final BufferedReader buf, final HttpMessage message) {
-						
+			System.out.println("EMPTY LINE");				
 			return BODY;
 		}
 	},
 	BODY {
 		@Override
 		protected HttpState next(final BufferedReader buf, final HttpMessage message){
-			
+			System.out.println("BODY");
 			String line = ParserUtils.readLine(buf);
 			
 			if(!line.isEmpty()){
@@ -67,7 +69,7 @@ public enum HttpState {
 	DONE {
 		@Override
 		protected HttpState next(final BufferedReader buf, final HttpMessage message){
-			
+			System.out.println("DONE");
 			ParserUtils.doneReading(message);
 			
 			return DONE;
@@ -76,27 +78,24 @@ public enum HttpState {
 	INVALID {
 		@Override
 		protected HttpState next(final BufferedReader buf, final HttpMessage message) {
-			
+			message.setValidMessage(false);
 			return INVALID;
 		}
 	};
 	
 	protected abstract HttpState next(final BufferedReader buf, final HttpMessage message);
 	
-	public final HttpState process(final byte[] buf, final HttpMessage message) {
-		
-		
+	public final HttpState process(final BufferedReader buf, final HttpMessage message) {
+				
 		HttpState current = this;
-		InputStreamReader in = new InputStreamReader(new ByteArrayInputStream(buf));
-		BufferedReader br = new BufferedReader(in); 
 		 		
 		try {
 			do {
 
-				current = current.next(br, message);
+				current = current.next(buf, message);
 				
 				//TODO VER SI CON br.ready() alcanza!!
-			} while (br.ready() && current != DONE);
+			} while (buf.ready() && current != DONE);
 		} catch (IOException e) {
 			
 			e.printStackTrace();

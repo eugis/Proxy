@@ -1,8 +1,9 @@
 package Parser;
 
-
-
-import CarlyProxy.ParserResponse;
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class HTTPParser {
 
@@ -16,18 +17,38 @@ public class HTTPParser {
 	
 	public ParserResponse sendData(byte[] buf) {
 		
-		
-		parse(buf);		
-						
-		//TODO: retornar httpmsg directo?
-		return new ParserResponse();
+		return parse(buf);
 	}
 	
-	private void parse(byte[] buf){
+	private ParserResponse parse(byte[] buf){
 		
-		state = state.process(buf, message);
-						
+		ParserResponse response = new ParserResponse();
+		InputStreamReader in = new InputStreamReader(new ByteArrayInputStream(buf));
+		BufferedReader br = new BufferedReader(in); 
+		
+		state = state.process(br, message);
+				
+		
+		try {
+			//Si br no está ready significa que no hay más para leer.
+			if(state!=HttpState.DONE && !br.ready()){
+				message.setDoneReading(false);
+			}
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+		
+		if(state == HttpState.INVALID){
+		//TODO ver que casos tengo
+		}
+		
+		response.populate(message);
+		
+		return response;
 	}
+	
+	
 	
 		
 	

@@ -168,7 +168,7 @@ public class ParserUtils {
 	public static boolean parseBody(String line, HttpMessage message) {
 
 		//TODO		
-		return false;
+		return true;
 	}
 
 	

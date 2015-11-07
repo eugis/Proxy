@@ -5,11 +5,10 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Map;
-
-import CarlyProxy.ParserResponse;
-import Parser.HTTPParser;
+import Parser.*;
 
 public class JulyHandler implements ConnectionHandler{
 
@@ -39,8 +38,15 @@ public class JulyHandler implements ConnectionHandler{
         Socket serverSocket = null;
         while (recvMsgSize != -1 /*&& !keepReading*/) {
         	recvMsgSize = in.read(receiveBuf);
-        	resp = parser.sendData(receiveBuf);
+        	
+        	//Harcoded receiveBuf
+        	String request = "GET / HTTP/1.1/n"+"Host: www.google.com/n/n";
+    		byte[] msg = request.getBytes(Charset.forName("UTF-8"));
+        	        	
+        	resp = parser.sendData(msg);
         	//keepReading = resp.isDoneReading();
+        	
+        	System.out.println("Host: "+resp.getHost());
         	
         	if(resp.isDoneReading()){
         		host2connect = resp.getHost();
@@ -92,6 +98,7 @@ public class JulyHandler implements ConnectionHandler{
 			recvMsgSize = inFromServer.read(responseBuf);
 			out.write(responseBuf, 0, recvMsgSize);
 			out.flush();
+			
         	resp = parser.sendData(responseBuf);
         	keepReading = resp.isDoneReading();
         }

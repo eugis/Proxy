@@ -8,6 +8,7 @@ public class HttpMessage {
 
 	//TODO Juli llama a "getMessage" si no está completo le mando null y ella va a tener q seguir leyendo y pasandome bytes 
 	
+	private boolean validMessage=true;
 	private String method;
 	private String url;
 	private Map<String, String> headers;
@@ -80,6 +81,14 @@ public class HttpMessage {
 
 	public void setVersion(String version) {
 		this.version = version;
+	}
+
+	public boolean isValidMessage() {
+		return validMessage;
+	}
+
+	public void setValidMessage(boolean validMessage) {
+		this.validMessage = validMessage;
 	}
 	
 		

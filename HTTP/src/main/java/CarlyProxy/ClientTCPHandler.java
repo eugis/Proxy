@@ -10,6 +10,7 @@ import java.nio.charset.Charset;
 import java.util.HashMap;
 
 import Parser.HTTPParser;
+import Parser.ParserResponse;
 
 public class ClientTCPHandler implements TCPProtocol{
 	
