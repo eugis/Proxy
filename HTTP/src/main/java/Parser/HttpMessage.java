@@ -13,7 +13,7 @@ public class HttpMessage {
 	private String url;
 	private Map<String, String> headers;
 	private String body;
-	private boolean doneReading;
+	private boolean doneReading=true;
 	//TODO en la primera linea viene la version, esa version es la que usa en el response
 	private String version;
 	//TODO si el metodo no es valido esto va en false, y nos quiere decir que no esribimos 
