@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public enum HttpState {
-	STATUS_LINE {
+	REQUEST_LINE {
 		@Override
 		protected HttpState next(final BufferedReader buf, final HttpMessage message){
 			
@@ -20,40 +20,13 @@ public enum HttpState {
 				}
 			}
 			return INVALID;
-			
-			/*TODO fijarse donde poner este metodo
-			int i = pos;
-			String sbuf = new String( buf, Charset.forName("UTF-8") );
-			char c = sbuf.charAt(i);
-			StringBuilder aux = new StringBuilder(); 
 						
-			while( c != '\n'){
-				
-				c = sbuf.charAt(i);
-				
-				if(c != ' ' && message.hasMethod()){
-					aux.append(c);
-					
-				}
-				
-				
-				
-				i++;
-				
-			}
-			
-			
-			return new State(HEADER,i);*/
 		}
 	},
 	HEADER {
 		@Override
 		protected HttpState next(final BufferedReader buf, final HttpMessage message){
-			// TODO Auto-generated method stub
-			// if (moreHeadersToCome) {
-			//	return HEADER;
-			//}
-			
+						
 			String line = ParserUtils.readLine(buf);
 			if(!line.isEmpty()){
 				boolean valid = ParserUtils.parseHeaders(line, message);
@@ -69,21 +42,33 @@ public enum HttpState {
 	EMPTY_LINE {
 		@Override
 		protected HttpState next(final BufferedReader buf, final HttpMessage message) {
-			// TODO Auto-generated method stub
-			
+						
 			return BODY;
 		}
 	},
 	BODY {
 		@Override
 		protected HttpState next(final BufferedReader buf, final HttpMessage message){
-			// TODO Auto-generated method stub
+			
+			String line = ParserUtils.readLine(buf);
+			
+			if(!line.isEmpty()){
+				boolean valid = ParserUtils.parseBody(line, message);
+				if(valid){
+					return BODY;
+				}else{
+					return INVALID;
+				}
+			}
+						
 			return DONE;
 		}
 	},
 	DONE {
 		@Override
 		protected HttpState next(final BufferedReader buf, final HttpMessage message){
+			
+			ParserUtils.doneReading(message);
 			
 			return DONE;
 		}

@@ -152,14 +152,52 @@ public class ParserUtils {
 		return null;
 	}
 
+	public static boolean parseBody(String line, HttpMessage message) {
+
+		//TODO		
+		return false;
+	}
+
+	
+	
 	public static boolean parseMethod(String line, HttpMessage message) {
 		// TODO Auto-generated method stub
+		
+		/*TODO fijarse donde poner este metodo
+		int i = pos;
+		String sbuf = new String( buf, Charset.forName("UTF-8") );
+		char c = sbuf.charAt(i);
+		StringBuilder aux = new StringBuilder(); 
+					
+		while( c != '\n'){
+			
+			c = sbuf.charAt(i);
+			
+			if(c != ' ' && message.hasMethod()){
+				aux.append(c);
+				
+			}
+			
+			
+			
+			i++;
+			
+		}
+			
+		*/
+		
+		
 		return false;
 	}
 
 	public static boolean parseHeaders(String line, HttpMessage message) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	public static void doneReading(HttpMessage message) {
+		message.setDoneReading(true);
+		
 	}
 	
 	//Prueba

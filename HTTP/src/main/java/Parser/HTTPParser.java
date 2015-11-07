@@ -1,6 +1,6 @@
 package Parser;
 
-import java.nio.charset.Charset;
+
 
 import CarlyProxy.ParserResponse;
 
@@ -10,7 +10,7 @@ public class HTTPParser {
 	private HttpMessage message;
 	
 	public HTTPParser(){
-		this.state = HttpState.STATUS_LINE;
+		this.state = HttpState.REQUEST_LINE;
 		this.message = new HttpMessage();
 	}
 	
