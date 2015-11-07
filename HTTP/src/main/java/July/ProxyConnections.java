@@ -7,12 +7,12 @@ public class ProxyConnections {
 	private HashMap<String, ProxySocket> connections;
 	private static ProxyConnections instance;
 	
-	public ProxyConnections getInstance(){
-		if(this.instance == null){
+	public static ProxyConnections getInstance(){
+		if(instance == null){
 			instance = new ProxyConnections();
-			connections = new HashMap<String, ProxySocket>();
+			instance.connections = new HashMap<String, ProxySocket>();
 		}
-		return this.instance;
+		return instance;
 	}
 	
 	public void saveNewConnection(String host_port, ProxySocket ps){

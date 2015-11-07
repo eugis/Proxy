@@ -55,16 +55,14 @@ public class JulyHandler implements ConnectionHandler{
         }else{
       	  out.write(byteReq);
         }
+        ProxyConnectionManager.closeConnection(s);
         s.close();  // Close the socket.  We are done with this client!
 	}
 
 	private Socket writeToServer(String host, int port, byte[] byteReq) throws UnknownHostException, IOException{
-		Socket serverSocket = connections.get(host+"-"+port);
-    	if(serverSocket == null){
-    		serverSocket = new Socket(host, port);
-    		serverSocket.setSoTimeout(5000);
-    		connections.put(host+"-"+port, serverSocket);
-    		  
+		ProxySocket pSocket = ProxyConnectionManager.getConnection(host, port);
+		Socket serverSocket = pSocket.getSocket();
+    	if(serverSocket != null){//doble validacion, podria no ir
     		OutputStream outFromServer = serverSocket.getOutputStream();
     		outFromServer.write(byteReq);
     		outFromServer.flush();
