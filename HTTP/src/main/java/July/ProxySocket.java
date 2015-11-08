@@ -2,6 +2,7 @@ package July;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.util.HashMap;
 import java.util.LinkedList;
 
 public class ProxySocket {
@@ -14,7 +15,7 @@ public class ProxySocket {
 		this.s = serverSocket;
 		this.inUse = true;
 		this.users = new LinkedList<Thread>();
-		this.users.add(thread);
+		//this.users.add(thread);
 	}
 
 	public Socket getSocket() {
@@ -43,11 +44,17 @@ public class ProxySocket {
 	
 	public void userFinished() {
 		this.users.removeFirst();
+		System.out.println(this.users);
+		this.setInUse(false);
 		if (this.users.size() != 0) {
+			//Thread t = this.users.getFirst();
+			//this.users.removeFirst();
 			this.users.getFirst().interrupt(); //Despertar el primero de la cola??	
 		} else {
 			try {
+				System.out.println("closing socket");
 				this.getSocket().close();
+				//hostConnections.remove(host);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
