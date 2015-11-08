@@ -310,40 +310,39 @@ public class ParserUtils {
 	}
 
 	public static boolean parseHeaderLine(String line, HttpMessage message) {
-
-		//TODO ver si falta chequear si me pasaron cualq mierda, además de ver si los headers son validos (ej: isValidHeader()... etc)
 		
 		HeaderLineState state = HeaderLineState.HEADER;
 		StringBuilder aux = new StringBuilder();
 		String header="", value="";
 		char c;
 		int i=0;
+		boolean dots = false;
 		
 		while(i<line.length()){
 			
 			c = line.charAt(i);
-			
+			//TODO: fijarse de arreglar el ciclo de ifs (está horrible)
 			switch(state){
 				case HEADER:
-					
-					if(c!= ' '){
-						
+					if(c!= ' ' && i != line.length() - 1){
 						if(c!=':'){
 							aux.append(c);
+						} else {
+							dots = true;
 						}
-							
-						
-					}else{
-												
+					}else{			
+						if (i == line.length() - 1) {
+							aux.append(c);
+						}
 						header = aux.toString();
-						if(isValidHeader(header)){
+						if(isValidHeader(header) && dots){
 							state = HeaderLineState.VALUE;
-							//Reseteo StringBuilder
-							aux.setLength(0);
-							
 						}else{
+							System.out.println("Invalid header 2");
 							return false;
 						}
+						//Reseteo StringBuilder
+						aux.setLength(0);
 					}
 					
 				break;
@@ -356,24 +355,17 @@ public class ParserUtils {
 					if(i==line.length()-1){
 						value = aux.toString();
 						if(isValidValue(value)){
-							
 							message.setHeader(header, value);
+							return true;
 						}
-						else{
-							return false;
-						}
-						
-							
+						aux.setLength(0);
 					}
 					
 				break;
-				
-			
 			}
 		i++;	
 		}
-		
-		return true;
+		return false;
 	}
 
 	private static boolean isValidValue(String value) {
@@ -382,7 +374,7 @@ public class ParserUtils {
 	}
 
 	private static boolean isValidHeader(String header) {
-		System.out.println("isValidHEader: " + (validRequestHeaders.contains(header) || validGeneralHeaders.contains(header)));
+		System.out.println("isValidHeader: " + (validRequestHeaders.contains(header) || validGeneralHeaders.contains(header)));
 		return validRequestHeaders.contains(header) || validGeneralHeaders.contains(header);
 	}
 
