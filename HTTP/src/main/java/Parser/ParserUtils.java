@@ -141,10 +141,12 @@ public class ParserUtils {
 	
 	
 	public static boolean isValidMethod(String method){
+		System.out.println("valid method: " + validMethods.contains(method));
 		return validMethods.contains(method);
 	}
 
 	public static boolean isValidURL(String url){
+		System.out.println("isValidURL: " +  (url != null && url.length() > 0));
 		return url != null && url.length() > 0;
 	}
 
@@ -238,12 +240,13 @@ public class ParserUtils {
 			switch(state){
 			
 			case METHOD:
-				
-				if(c != ' '){
+				//TODO: fijarse de arreglar el ciclo de ifs (está horrible)
+				if(c != ' ' && i != line.length() - 1){
 					aux.append(c);
-				
-				}else {
-					
+				} else {
+					if (i == line.length() - 1) {
+						aux.append(c);
+					}
 					String method = aux.toString().trim();
 					
 					if(isValidMethod(method)){
@@ -256,22 +259,22 @@ public class ParserUtils {
 					//Reinicio el StringBuilder
 					state=RequestLineState.URL;
 					aux.setLength(0);
-					state=RequestLineState.URL;
 				}
 								
 			break;
 			
 			case URL:
 				
-				if(c!= ' '){
+				if(c != ' ' || i == line.length() - 1){
 					aux.append(c);
 				}else{
 					String url = aux.toString();
-					if (isValidURL(url)) {
+					if (isValidURL(url) && i != line.length() - 1) {
 						message.setUrl(url);
+						message.setValidMessage(true); //set it true (default: false)
 						//Reinicio el StringBuilder
 					} else {
-						invalidMessage(message);
+						invalidMessage(message); 
 						ret = false;
 					}
 					aux.setLength(0);
@@ -290,7 +293,7 @@ public class ParserUtils {
 					if (isValidVersion(version)) {
 						message.setVersion(version.substring(5));	
 					}else{
-						invalidMessage(message);
+						invalidMessage(message); //change to invalid in case the URL has setted to valid
 						ret = false;
 					}
 					aux.setLength(0);
@@ -374,10 +377,12 @@ public class ParserUtils {
 	}
 
 	private static boolean isValidValue(String value) {
-		return (value != null && value.length() > 0);
+		System.out.println("valid value: "+ value != null && value.length() > 0);
+		return value != null && value.length() > 0;
 	}
 
 	private static boolean isValidHeader(String header) {
+		System.out.println("isValidHEader: " + (validRequestHeaders.contains(header) || validGeneralHeaders.contains(header)));
 		return validRequestHeaders.contains(header) || validGeneralHeaders.contains(header);
 	}
 
@@ -385,6 +390,7 @@ public class ParserUtils {
 		String regex = "HTTP/1.(0|1)";
 		Pattern patt = Pattern.compile(regex);
         Matcher matcher = patt.matcher(version);
+        System.out.println("valid version: " + matcher.matches());
         return matcher.matches();
 	}
 	

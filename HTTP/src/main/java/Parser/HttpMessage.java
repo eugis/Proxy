@@ -25,7 +25,8 @@ public class HttpMessage {
 
 	public HttpMessage() {
 		headers = new HashMap<String, String>();
-		setMethodValid(true);
+		setMethodValid(false);
+		setValidMessage(false);
 	}
 	
 	public void setHeader(String header, String value){

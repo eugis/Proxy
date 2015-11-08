@@ -8,7 +8,7 @@ public class Test {
 			HTTPParser httpParser = new HTTPParser();
 			ParserResponse resp;
 						
-			String request = "GeT / HTTP/1.1\n"+"Host: www.google.com\n\n";
+			String request = "GET / HTTP/1.1\n"+"Host: www.google.com\n\n";
     		byte[] buf = request.getBytes(Charset.forName("UTF-8"));
 			
 			resp = httpParser.sendData(buf);
