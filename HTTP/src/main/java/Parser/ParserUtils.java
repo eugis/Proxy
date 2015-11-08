@@ -117,7 +117,10 @@ public class ParserUtils {
 		
 		html = "<html><body>";
 		html += "<h1>" + error + ": " + statusCode.get(error) + "</h1>";
-		html += msgs.get(error);
+		String msg = msgs.get(error);
+		if(msg != null){
+			html += msgs.get(error);
+		}
 		html += "</body></html>";
 		
 		return html;
@@ -342,9 +345,9 @@ public class ParserUtils {
 	
 	public static void setHttpResponseMsg(HttpMessage message){
 		if(!message.isMethodValid()){
-			message.setHttpResponse(generateHttpResponseIM(405, message.getVersion()));
-		}else if(!message.isValidMessage()){
 			message.setHttpResponse(generateHttpResponseIM(400, message.getVersion()));
+		}else if(!message.isValidMessage()){
+			message.setHttpResponse(generateHttpResponseIM(405, message.getVersion()));
 		}	
 	} 
 	

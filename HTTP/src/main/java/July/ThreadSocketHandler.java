@@ -43,7 +43,7 @@ public class ThreadSocketHandler implements ConnectionHandler{
         	recvMsgSize = in.read(receiveBuf);
         	if(recvMsgSize != -1){
         		//Harcoded receiveBuf
-            	String request = "GET / HTTP/1.1\n"+"Host: www.google.com\n\n";
+            	String request = "GeT / HTTP/1.1\n"+"Host: www.google.com\n\n";
         		byte[] msg = request.getBytes(Charset.forName("UTF-8"));
             	
             	//String str = new String(receiveBuf, StandardCharsets.UTF_8);
@@ -56,15 +56,17 @@ public class ThreadSocketHandler implements ConnectionHandler{
             	//System.out.println("Host: "+resp.getHost());
             	
             	if(resp.isDoneReading()){
-            		host2connect = resp.getHost();
-                    port2connect = resp.getPort();
-                    String hardCodeResp = "GET / HTTP/1.1 \n\n";
-                    byte[] byteReq = hardCodeResp.getBytes();
-                    if(!s.getInetAddress().toString().contains(host2connect)){//devuelve la response al mismo cliente, o sea, reboto en el proxy
-                    	serverSocket = writeToServer(host2connect, port2connect, byteReq);
-                    	readFromServer(serverSocket, out);
-                    	//ProxyConnectionManager.endUsingConnection(serverSocket, Thread.currentThread());
+            		byte[] byteReq;
+            		if(!resp.returnToClient()){
+	            		host2connect = resp.getHost();
+	                    port2connect = resp.getPort();
+	                    String hardCodeResp = "GET / HTTP/1.1 \n\n";
+	                    byteReq = hardCodeResp.getBytes();
+	                    serverSocket = writeToServer(host2connect, port2connect, byteReq);
+	                    readFromServer(serverSocket, out);
+	                    //ProxyConnectionManager.endUsingConnection(serverSocket, Thread.currentThread());
                     }else{
+                    	byteReq = resp.getHttpResponse().getBytes();
                     	out.write(byteReq);
                   	  	out.flush();
                     }

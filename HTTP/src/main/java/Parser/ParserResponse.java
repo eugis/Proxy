@@ -5,15 +5,22 @@ import Parser.HttpMessage;
 public class ParserResponse {
 
 	private boolean doneReading;
-	private boolean validMessage;
+	private boolean returnToClient;
 	private String host;
+	private String httpResponse;
+
+	protected void populate(HttpMessage message) {
 		
-	public boolean isDoneReading(){
-		return this.doneReading;
+		this.host=message.getHeader("Host");
+		//this.validMessage = message.isValidMessage();
+		this.doneReading = message.isDoneReading(); 
+		this.returnToClient = message.returnToclient();
+		this.httpResponse = message.getHttpResponse();
+		
 	}
 	
-	public boolean isValidMessage(){
-		return validMessage;
+	public boolean isDoneReading(){
+		return this.doneReading;
 	}
 
 	public String getHost() {
@@ -24,12 +31,11 @@ public class ParserResponse {
 		return 80;
 	}
 
-	protected void populate(HttpMessage message) {
-		
-		this.host=message.getHeader("Host");
-		this.validMessage = message.isValidMessage();
-		this.doneReading = message.isDoneReading(); 
-		
-		
+	public boolean returnToClient() {
+		return this.returnToClient;
+	}
+
+	public String getHttpResponse() {
+		return this.httpResponse;
 	}
 }

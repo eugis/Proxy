@@ -101,4 +101,8 @@ public class HttpMessage {
 		this.httpResponse = httpResponse;
 	}	
 	
+	public boolean returnToclient(){
+		return !(this.isMethodValid && this.validMessage); 
+	}
+	
 }
