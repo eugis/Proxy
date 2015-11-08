@@ -28,6 +28,7 @@ public enum HttpState {
 	HEADER {
 		@Override
 		protected HttpState next(final BufferedReader buf, final HttpMessage message){
+			HttpState state = EMPTY_LINE;
 			System.out.println("HEADER");
 			String line = ParserUtils.readLine(buf);
 			if(!line.isEmpty()){
@@ -38,13 +39,20 @@ public enum HttpState {
 					return INVALID;
 				}
 			}
-			return EMPTY_LINE;
+			
+			if(message.getMethod().equals("GET")){
+				state = DONE;
+			}
+			
+			return state;
 		}
 	},
 	EMPTY_LINE {
 		@Override
 		protected HttpState next(final BufferedReader buf, final HttpMessage message) {
-			System.out.println("EMPTY LINE");				
+			System.out.println("EMPTY LINE");
+				
+			
 			return BODY;
 		}
 	},
@@ -78,7 +86,8 @@ public enum HttpState {
 	INVALID {
 		@Override
 		protected HttpState next(final BufferedReader buf, final HttpMessage message) {
-			message.setValidMessage(false);
+			
+			ParserUtils.invalidMessage(message);			
 			return INVALID;
 		}
 	};
@@ -95,7 +104,7 @@ public enum HttpState {
 				current = current.next(buf, message);
 				
 				//TODO VER SI CON br.ready() alcanza!!
-			} while (buf.ready() && current != DONE);
+			} while (buf.ready() && current != DONE && current!=INVALID);
 		} catch (IOException e) {
 			
 			e.printStackTrace();

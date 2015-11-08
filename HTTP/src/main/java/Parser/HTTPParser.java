@@ -48,9 +48,5 @@ public class HTTPParser {
 		return response;
 	}
 	
-	
-	
-		
-	
 
 }

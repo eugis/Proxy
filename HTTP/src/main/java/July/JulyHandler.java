@@ -40,10 +40,10 @@ public class JulyHandler implements ConnectionHandler{
         	recvMsgSize = in.read(receiveBuf);
         	
         	//Harcoded receiveBuf
-        	String request = "GET / HTTP/1.1/n"+"Host: www.google.com/n/n";
-    		byte[] msg = request.getBytes(Charset.forName("UTF-8"));
+//        	String request = "GET / HTTP/1.1\n"+"Host: www.google.com\n\n";
+//    		byte[] msg = request.getBytes(Charset.forName("UTF-8"));
         	        	
-        	resp = parser.sendData(msg);
+        	resp = parser.sendData(receiveBuf);
         	//keepReading = resp.isDoneReading();
         	
         	System.out.println("Host: "+resp.getHost());

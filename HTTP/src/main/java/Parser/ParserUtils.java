@@ -153,8 +153,6 @@ public class ParserUtils {
 		String ret=null;
     	try {
 			ret= buf.readLine();
-			if(ret!=null)
-				System.out.println(ret);
 						
 		} catch (IOException e) {
 			
@@ -317,9 +315,6 @@ public class ParserUtils {
 		i++;	
 		}
 		
-		
-		
-		
 		return true;
 	}
 
@@ -335,6 +330,11 @@ public class ParserUtils {
 
 	public static void doneReading(HttpMessage message) {
 		message.setDoneReading(true);
+		
+	}
+
+	public static void invalidMessage(HttpMessage message) {
+		message.setValidMessage(false);
 		
 	}
 	
