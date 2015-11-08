@@ -119,7 +119,7 @@ public class ParserUtils {
 		html += "<h1>" + error + ": " + statusCode.get(error) + "</h1>";
 		String msg = msgs.get(error);
 		if(msg != null){
-			html += msgs.get(error);
+			html += msg;
 		}
 		html += "</body></html>";
 		
@@ -174,7 +174,34 @@ public class ParserUtils {
 		return true;
 	}
 
-	
+
+	public static HttpResponse parseResponseStatusLine(String line){
+		HttpResponse response = new HttpResponse();
+		int i = 0;
+		int item = 0;
+		StringBuilder word = null;
+		char c;
+		while(i < line.length()){
+			if(item < 2){
+				word = new StringBuilder();
+				do{
+					c = line.charAt(i++);
+					word = word.append(c);
+				}while(c != ' ');
+				word.deleteCharAt(word.length()-1);
+			}
+			
+			item++;
+			switch(item){
+				case 1: response.setVersion(getVersion(word.toString())); 
+					break;
+				case 2: response.setStatusCode(Integer.valueOf(word.toString()));
+					break;
+				case 3: response.setStatusResponse(line.substring(i, line.length()));
+			}
+		}
+		return response;
+	}
 	
 	public static boolean parseRequestLine(String line, HttpMessage message) {
 		
@@ -350,6 +377,12 @@ public class ParserUtils {
 			message.setHttpResponse(generateHttpResponseIM(405, message.getVersion()));
 		}	
 	} 
+	
+	private static String getVersion(String serverVersion){
+		String v = "";
+		v = serverVersion.substring(serverVersion.indexOf("/")+1, serverVersion.length());
+		return v;
+	}
 	
 	//Prueba
 //	public static void main(String[] args) {
