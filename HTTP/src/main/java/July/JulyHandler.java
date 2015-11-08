@@ -6,9 +6,12 @@ import java.io.OutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
-import Parser.*;
+
+import Parser.HTTPParser;
+import Parser.ParserResponse;
 
 public class JulyHandler implements ConnectionHandler{
 
@@ -40,10 +43,14 @@ public class JulyHandler implements ConnectionHandler{
         	recvMsgSize = in.read(receiveBuf);
         	
         	//Harcoded receiveBuf
-//        	String request = "GET / HTTP/1.1\n"+"Host: www.google.com\n\n";
-//    		byte[] msg = request.getBytes(Charset.forName("UTF-8"));
-        	        	
-        	resp = parser.sendData(receiveBuf);
+        	String request = "GET / HTTP/1.1\n"+"Host: www.google.com\n\n";
+    		byte[] msg = request.getBytes(Charset.forName("UTF-8"));
+        	
+        	String str = new String(receiveBuf, StandardCharsets.UTF_8);
+        	System.out.println(str);
+        	
+        	resp = parser.sendData(msg);
+        	
         	//keepReading = resp.isDoneReading();
         	
         	System.out.println("Host: "+resp.getHost());
