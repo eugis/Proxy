@@ -20,7 +20,9 @@ public class HttpMessage {
 	//en el servidor, y la respuesta al cliente la damos nosotros, usando 
 	//ParserUtils.generateHttpResponseIM(version)
 	private boolean isMethodValid;
+	private String httpResponse;
 	
+
 	public HttpMessage() {
 		headers = new HashMap<String, String>();
 		setMethodValid(true);
@@ -91,6 +93,12 @@ public class HttpMessage {
 		this.validMessage = validMessage;
 	}
 	
-		
+	public String getHttpResponse() {
+		return httpResponse;
+	}
+
+	public void setHttpResponse(String httpResponse) {
+		this.httpResponse = httpResponse;
+	}	
 	
 }

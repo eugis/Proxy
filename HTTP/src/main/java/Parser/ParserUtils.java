@@ -9,6 +9,9 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+
+import CarlyAdmin.manager.ConfigurationManager;
+
 import java.util.Map.Entry;
 
 
@@ -20,8 +23,8 @@ public class ParserUtils {
 	private static Map<Integer, String> msgs = loadMsgs();
 	
 	public static boolean isLeetEnabled(){
-		//return ConfigurationManager.getInstance().isL33t();
-		return false;
+		return ConfigurationManager.getInstance().isL33t();
+
 	}
 	
 	private static Map<Integer, String> loadMsgs() {
@@ -98,9 +101,8 @@ public class ParserUtils {
 		return validMethods.contains(method);
 	}
 
-	public static String generateHttpResponseIM(String version){
+	public static String generateHttpResponseIM(int sCode, String version){
 		String aux = "";
-		Integer sCode = 405;
 		String firstLine = generateFirstLine(version, aux, sCode);
 		String dataLine = generateHTMLData(sCode);
 		Map<String,String> headerLine = generateHeaders(dataLine.length());
@@ -199,13 +201,13 @@ public class ParserUtils {
 					
 					if(isValidMethod(method)){
 						message.setMethod(method);
-						state=RequestLineState.URL;
 						message.setMethodValid(true);
 					}else{
 						message.setMethodValid(false);
 						ret = false;
 					}
 					//Reinicio el StringBuilder
+					state=RequestLineState.URL;
 					aux.setLength(0);
 				}
 								
@@ -232,7 +234,7 @@ public class ParserUtils {
 				
 				//Si estoy en el último char de la linea, ya cargo la version.
 				if(i==line.length()-1){
-					String version = aux.toString();
+					String version = aux.toString().substring(5);
 					message.setVersion(version);
 				}
 				
@@ -337,6 +339,14 @@ public class ParserUtils {
 		message.setValidMessage(false);
 		
 	}
+	
+	public static void setHttpResponseMsg(HttpMessage message){
+		if(!message.isMethodValid()){
+			message.setHttpResponse(generateHttpResponseIM(405, message.getVersion()));
+		}else if(!message.isValidMessage()){
+			message.setHttpResponse(generateHttpResponseIM(400, message.getVersion()));
+		}	
+	} 
 	
 	//Prueba
 //	public static void main(String[] args) {
