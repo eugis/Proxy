@@ -21,6 +21,7 @@ public enum HttpState {
 					return HEADER;
 				}
 			}
+			ParserUtils.setHttpResponseMsg(message);
 			return INVALID;
 						
 		}
@@ -36,6 +37,8 @@ public enum HttpState {
 				if(valid){
 					return HEADER;
 				}else{
+					
+					ParserUtils.setHttpResponseMsg(message);
 					return INVALID;
 				}
 			}

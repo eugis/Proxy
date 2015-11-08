@@ -8,16 +8,14 @@ public class Test {
 			HTTPParser httpParser = new HTTPParser();
 			ParserResponse resp;
 						
-			String request = "GET / HTTP/1.1\n"+"Host: www.google.com\n\n";
+			String request = "GeT / HTTP/1.1\n"+"Host: www.google.com\n\n";
     		byte[] buf = request.getBytes(Charset.forName("UTF-8"));
 			
 			resp = httpParser.sendData(buf);
 			
 			System.out.println("Host: "+resp.getHost());
 			System.out.println("DoneReading: "+resp.isDoneReading());
-			System.out.println("ValidMessage: "+resp.isValidMessage());
-			
-
+			System.out.println("Return to client: "+resp.returnToClient());
 	}
 
 }

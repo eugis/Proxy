@@ -13,6 +13,8 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import CarlyAdmin.manager.ConfigurationManager;
+
 
 
 public class ParserUtils {
@@ -24,8 +26,8 @@ public class ParserUtils {
 	private static final Set<String> validGeneralHeaders = loadGeneralHeaders();
 	
 	public static boolean isLeetEnabled(){
-		//return ConfigurationManager.getInstance().isL33t();
-		return false;
+		return ConfigurationManager.getInstance().isL33t();
+
 	}
 	
 	private static Map<Integer, String> loadMsgs() {
@@ -145,10 +147,9 @@ public class ParserUtils {
 	public static boolean isValidURL(String url){
 		return url != null && url.length() > 0;
 	}
-	
-	public static String generateHttpResponseIM(String version){
+
+	public static String generateHttpResponseIM(int sCode, String version){
 		String aux = "";
-		Integer sCode = 405;
 		String firstLine = generateFirstLine(version, aux, sCode);
 		String dataLine = generateHTMLData(sCode);
 		Map<String,String> headerLine = generateHeaders(dataLine.length());
@@ -163,7 +164,10 @@ public class ParserUtils {
 		
 		html = "<html><body>";
 		html += "<h1>" + error + ": " + statusCode.get(error) + "</h1>";
-		html += msgs.get(error);
+		String msg = msgs.get(error);
+		if(msg != null){
+			html += msgs.get(error);
+		}
 		html += "</body></html>";
 		
 		return html;
@@ -250,6 +254,7 @@ public class ParserUtils {
 						ret = false;
 					}
 					//Reinicio el StringBuilder
+					state=RequestLineState.URL;
 					aux.setLength(0);
 					state=RequestLineState.URL;
 				}
@@ -283,7 +288,7 @@ public class ParserUtils {
 				if(i==line.length()-1){
 					String version = aux.toString();
 					if (isValidVersion(version)) {
-						message.setVersion(version);	
+						message.setVersion(version.substring(5));	
 					}else{
 						invalidMessage(message);
 						ret = false;
@@ -391,6 +396,14 @@ public class ParserUtils {
 	public static void invalidMessage(HttpMessage message) {
 		message.setValidMessage(false);	
 	}
+	
+	public static void setHttpResponseMsg(HttpMessage message){
+		if(!message.isMethodValid()){
+			message.setHttpResponse(generateHttpResponseIM(400, message.getVersion()));
+		}else if(!message.isValidMessage()){
+			message.setHttpResponse(generateHttpResponseIM(405, message.getVersion()));
+		}	
+	} 
 	
 	//Prueba
 //	public static void main(String[] args) {
