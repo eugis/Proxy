@@ -8,11 +8,12 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import CarlyAdmin.manager.ConfigurationManager;
-
-import java.util.Map.Entry;
 
 
 
@@ -21,6 +22,8 @@ public class ParserUtils {
 	private static final Set<String> validMethods = loadMethods();
 	private static Map<Integer, String> statusCode = loadStatusCode();
 	private static Map<Integer, String> msgs = loadMsgs();
+	private static final Set<String> validRequestHeaders = loadRequestHeaders();
+	private static final Set<String> validGeneralHeaders = loadGeneralHeaders();
 	
 	public static boolean isLeetEnabled(){
 		return ConfigurationManager.getInstance().isL33t();
@@ -86,6 +89,44 @@ public class ParserUtils {
 		return result;
 	}
 
+	private static Set<String> loadRequestHeaders() {
+		Set<String> rh = new HashSet<String>();
+		rh.add("Accept");
+		rh.add("Accept-Charset");
+		rh.add("Accept-Encoding");
+		rh.add("Accept-Language");
+        rh.add("Authorization");
+        rh.add("Expect");
+        rh.add("From");
+        rh.add("Host");
+        rh.add("If-Match");
+        rh.add("If-Modified-Since");
+        rh.add("If-None-Match");
+        rh.add("If-Range");
+        rh.add("If-Unmodified-Since");
+        rh.add("Max-Forwards");
+        rh.add("Proxy-Authorization");
+        rh.add("Range");
+        rh.add("Referer");
+        rh.add("TE");
+        rh.add("User-Agent");
+        return rh;
+	}
+	
+	private static Set<String> loadGeneralHeaders() {
+		Set<String> rh = new HashSet<String>();
+		rh.add("Cache-Control");
+		rh.add("Connection");
+		rh.add("Date");
+		rh.add("Pragma");
+        rh.add("Trailer");
+        rh.add("Transfer-Encoding");
+        rh.add("Upgrade");
+        rh.add("Via");
+        rh.add("Warning");
+        return rh;
+	}
+	
 	public static String toLeet(String text){
 		if(isLeetEnabled()){
 			text = text.replace('a', '4');
@@ -97,8 +138,14 @@ public class ParserUtils {
 		return text;
 	}
 	
+	
+	
 	public static boolean isValidMethod(String method){
 		return validMethods.contains(method);
+	}
+
+	public static boolean isValidURL(String url){
+		return url != null && url.length() > 0;
 	}
 
 	public static String generateHttpResponseIM(int sCode, String version){
@@ -170,7 +217,7 @@ public class ParserUtils {
 
 	public static boolean parseBody(String line, HttpMessage message) {
 
-		//TODO		
+		//TODO: sólo para el response y POST		
 		return true;
 	}
 
@@ -205,9 +252,6 @@ public class ParserUtils {
 	
 	public static boolean parseRequestLine(String line, HttpMessage message) {
 		
-		//TODO ver como avisar si llega CUALQUIER MIERDA NADA VALIDO (por ejemplo isValidVersion, isValidUrl... etc)
-		//TODO ver si queres modularizar mas
-		
 		int i = 0;
 		boolean ret = true;
 		char c;
@@ -239,6 +283,7 @@ public class ParserUtils {
 					//Reinicio el StringBuilder
 					state=RequestLineState.URL;
 					aux.setLength(0);
+					state=RequestLineState.URL;
 				}
 								
 			break;
@@ -248,12 +293,16 @@ public class ParserUtils {
 				if(c!= ' '){
 					aux.append(c);
 				}else{
-					
 					String url = aux.toString();
-					message.setUrl(url);
-					state = RequestLineState.VERSION;
-					//Reinicio el StringBuilder
+					if (isValidURL(url)) {
+						message.setUrl(url);
+						//Reinicio el StringBuilder
+					} else {
+						invalidMessage(message);
+						ret = false;
+					}
 					aux.setLength(0);
+					state = RequestLineState.VERSION;
 				}
 				
 			break;
@@ -264,16 +313,17 @@ public class ParserUtils {
 				
 				//Si estoy en el último char de la linea, ya cargo la version.
 				if(i==line.length()-1){
-					String version = aux.toString().substring(5);
-					message.setVersion(version);
+					String version = aux.toString();
+					if (isValidVersion(version)) {
+						message.setVersion(version.substring(5));	
+					}else{
+						invalidMessage(message);
+						ret = false;
+					}
+					aux.setLength(0);
 				}
 				
 			break;
-			
-			case INVALID:
-				//TODO por ahora no uso invalid porque necesito que aunq el metodo sea inválido, siga el flow para cargar la version.
-			break;
-		
 			}
 						
 			i++;
@@ -351,23 +401,27 @@ public class ParserUtils {
 	}
 
 	private static boolean isValidValue(String value) {
-		// TODO Ver si no es vacio o cualq otra cosa q se t ocurra
-		return true;
+		return (value != null && value.length() > 0);
 	}
 
 	private static boolean isValidHeader(String header) {
-		// TODO Ver si es Host, Length, etc..
-		return true;
+		return validRequestHeaders.contains(header) || validGeneralHeaders.contains(header);
 	}
 
+	private static boolean isValidVersion(String version) {
+		String regex = "HTTP/1.(0|1)";
+		Pattern patt = Pattern.compile(regex);
+        Matcher matcher = patt.matcher(version);
+        return matcher.matches();
+	}
+	
 	public static void doneReading(HttpMessage message) {
 		message.setDoneReading(true);
 		
 	}
 
 	public static void invalidMessage(HttpMessage message) {
-		message.setValidMessage(false);
-		
+		message.setValidMessage(false);	
 	}
 	
 	public static void setHttpResponseMsg(HttpMessage message){

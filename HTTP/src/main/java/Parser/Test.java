@@ -15,9 +15,7 @@ public class Test {
 			
 			System.out.println("Host: "+resp.getHost());
 			System.out.println("DoneReading: "+resp.isDoneReading());
-			//System.out.println("ValidMessage: "+resp.isValidMessage());
-			
-
+			System.out.println("Return to client: "+resp.returnToClient());
 	}
 
 }
