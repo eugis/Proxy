@@ -13,7 +13,7 @@ import java.util.Map;
 import Parser.HTTPParser;
 import Parser.ParserResponse;
 
-public class JulyHandler implements ConnectionHandler{
+public class ThreadSocketHandler implements ConnectionHandler{
 
 	private static final int BUFSIZE = 1024;
 	//private static final int SLEEP_TIME = 1000;

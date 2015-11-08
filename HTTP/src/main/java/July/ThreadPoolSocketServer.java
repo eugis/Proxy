@@ -65,7 +65,7 @@ public class ThreadPoolSocketServer  {
 
     public static void main(String[] args) {
         try {
-            ThreadPoolSocketServer server = new ThreadPoolSocketServer(20007, InetAddress.getByName("localhost"), new JulyHandler());
+            ThreadPoolSocketServer server = new ThreadPoolSocketServer(20007, InetAddress.getByName("localhost"), new ThreadSocketHandler());
             server.run();
         } catch (final Exception e) {
             System.out.println("Ocurrio un error");

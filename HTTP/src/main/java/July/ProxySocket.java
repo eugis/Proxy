@@ -34,6 +34,7 @@ public class ProxySocket {
 		this.inUse = inUse;
 	}
 	
+	synchronized
 	public void setUser(Thread t) {
 		this.users.addLast(t);
 	}
@@ -42,6 +43,7 @@ public class ProxySocket {
 		return this.users.getFirst();
 	}
 	
+	synchronized
 	public void userFinished() {
 		this.users.removeFirst();
 		System.out.println(this.users);
