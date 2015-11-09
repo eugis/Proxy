@@ -1,5 +1,10 @@
 package Parser;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import July.StateResponse;
+
 public class HttpResponse {
 
 	private String version;
@@ -8,10 +13,15 @@ public class HttpResponse {
 	private int length;
 	private boolean plainText;
 	private boolean gZip;
+	private boolean closeConnection;
+	private StateResponse state;
+	Map<String, String> headers;
 	
 
 	public HttpResponse(){
-		
+		this.closeConnection = false;
+		setState(new StateResponse());
+		headers = new HashMap<String, String>();
 	}
 
 	public String getVersion() {
@@ -60,5 +70,21 @@ public class HttpResponse {
 
 	public void setgZip(boolean gZip) {
 		this.gZip = gZip;
+	}
+
+	public void closeConnection(boolean non_persistent) {
+		this.closeConnection = non_persistent;
+	}
+	
+	public Map<String, String> getHeaders(){
+		return this.headers;
+	}
+
+	public StateResponse getState() {
+		return state;
+	}
+
+	public void setState(StateResponse state) {
+		this.state = state;
 	}
 }
