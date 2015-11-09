@@ -10,9 +10,9 @@ public class CarlyResponse {
 	}
 
 	public String getCarlyAns() {
-		String response = "CarlyAdmin Answer\n";
+		String response = "CARLYADMIN Answer\n";
 		
-		response = msg.getResponse();
+		response += msg.getResponse();
 		
 		// linea vacia
 		response = response + "\n";
