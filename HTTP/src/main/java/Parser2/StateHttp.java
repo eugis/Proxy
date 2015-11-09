@@ -1,6 +1,8 @@
 package Parser2;
 
 import java.nio.ByteBuffer;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import Parser2.ParserUtils;
 
@@ -52,7 +54,8 @@ public enum StateHttp {
 			if(line == null){
 				return this;
 			}
-			if(line.equals("\n")){
+
+			if(true){
 				message.state = BODY;
 				return message.state.process(buf, message);
 			}

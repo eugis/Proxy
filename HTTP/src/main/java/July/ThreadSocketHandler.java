@@ -5,20 +5,23 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
 import Parser.HTTPParser;
 import Parser.ParserResponse;
+import Parser2.HttpParser;
+import Parser2.ReadingState;
 
 public class ThreadSocketHandler implements ConnectionHandler{
 
 	private static final int BUFSIZE = 1024;
-	private HTTPParser parser;
+	private HttpParser parser;
 	
 	@Override
 	public void handle(Socket s) throws IOException {
-		this.parser = new HTTPParser();
+		this.parser = new HttpParser();
 		readDataFromClient(s);
 	}
 
@@ -35,10 +38,11 @@ public class ThreadSocketHandler implements ConnectionHandler{
         boolean client = true;
         // Receive until client closes connection, indicated by -1 return
         Socket serverSocket = null;
+        ByteBuffer bBuffer;
         while (recvMsgSize != -1 /*&& !keepReading*/) {
         	receiveBuf = new byte[BUFSIZE]; //hacer de forma elegante
         	recvMsgSize = in.read(receiveBuf);
-        	
+        	bBuffer = ByteBuffer.wrap(receiveBuf);
         	if(recvMsgSize != -1){
         		//Harcoded receiveBuf
             	String request = "GET / HTTP/1.1\n"+"Host: www.google.com\n\n";
@@ -47,11 +51,11 @@ public class ThreadSocketHandler implements ConnectionHandler{
             	String str = new String(receiveBuf, StandardCharsets.UTF_8);
             	System.out.print(str);
             	
-            	resp = parser.sendData(receiveBuf, client);
+            	ReadingState state = parser.sendData(bBuffer);
             	
             	//keepReading = resp.isDoneReading();
             	
-            	System.out.println("Host: "+resp.getHost());
+            	/*System.out.println("Host: "+resp.getHost());
             	
             	if(resp.isDoneReading()){ //Debería llamarse, puedo empezar a mandar
 //            	if (resp.isAvailableToSend()) {	
@@ -70,7 +74,7 @@ public class ThreadSocketHandler implements ConnectionHandler{
                     	out.write(byteReq);
                   	  	out.flush();
                     }
-            	}
+            	}*/
         	}
         }
         System.out.println("cerrarrrrrrrrrr");
