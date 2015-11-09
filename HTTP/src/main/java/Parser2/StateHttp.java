@@ -32,20 +32,23 @@ public enum StateHttp {
 			if(line == null){
 				return this;
 			}
-			while(!line.trim().equals("")){
+//			while(!line.trim().equals("")){
 				boolean valid = ParserUtils.parseHeaders(line.trim(), message);
 				if(!valid){
 					return INVALID;
 				}
-				line = ParserUtils.readLine(buf, message);
-				if(line == null){
-					return this;
-				}
-			}		
+//				line = ParserUtils.readLine(buf, message);
+//				if(line == null){
+//					return this;
+//				}
+//			}		
 			if(line.isEmpty()){
-				//TODO validar que esten los headers necesarios: host, content-line,...
-				message.state = EMPTY_LINE;
-				return message.state.process(buf, message);
+				if(!ParserUtils.minHeaders(message)){
+					return INVALID;
+				}else{
+					message.state = EMPTY_LINE;
+					return message.state.process(buf, message);
+				}
 			}
 			return this;
 		}
