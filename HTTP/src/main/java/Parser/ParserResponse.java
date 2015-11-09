@@ -5,6 +5,8 @@ import Parser.HttpMessage;
 public class ParserResponse {
 
 	private boolean doneReading;
+	private boolean availableToSend;
+	private boolean completeRead;
 	private boolean returnToClient;
 	private String host;
 	private String httpResponse;
@@ -37,5 +39,21 @@ public class ParserResponse {
 
 	public String getHttpResponse() {
 		return this.httpResponse;
+	}
+
+	public boolean isAvailableToSend() {
+		return availableToSend;
+	}
+
+	public void setAvailableToSend(boolean availableToSend) {
+		this.availableToSend = availableToSend;
+	}
+
+	public boolean isCompleteRead() {
+		return completeRead;
+	}
+
+	public void setCompleteRead(boolean isCompleteRead) {
+		this.completeRead = isCompleteRead;
 	}
 }
