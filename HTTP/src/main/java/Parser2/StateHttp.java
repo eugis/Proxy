@@ -1,8 +1,6 @@
 package Parser2;
 
 import java.nio.ByteBuffer;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import Parser2.ParserUtils;
 
@@ -34,13 +32,23 @@ public enum StateHttp {
 			if(line == null){
 				return this;
 			}
-			boolean valid = ParserUtils.parseHeaders(line.trim(), message);
-			if(!valid){
-				return INVALID;
-			}
-			if(message.headerFinished()){
-				message.state = EMPTY_LINE;
-				return message.state.process(buf, message);
+//			while(!line.trim().equals("")){
+				boolean valid = ParserUtils.parseHeaders(line.trim(), message);
+				if(!valid){
+					return INVALID;
+				}
+//				line = ParserUtils.readLine(buf, message);
+//				if(line == null){
+//					return this;
+//				}
+//			}		
+			if(line.isEmpty()){
+				if(!ParserUtils.minHeaders(message)){
+					return INVALID;
+				}else{
+					message.state = EMPTY_LINE;
+					return message.state.process(buf, message);
+				}
 			}
 			return this;
 		}
@@ -50,16 +58,8 @@ public enum StateHttp {
 
 		@Override
 		public StateHttp process(ByteBuffer buf, HttpMessage message) {
-			String line = ParserUtils.readLine(buf, message);
-			if(line == null){
-				return this;
-			}
-
-			if(true){
-				message.state = BODY;
-				return message.state.process(buf, message);
-			}
-			return INVALID;
+			message.state = BODY;
+			return message.state.process(buf, message);
 		}
 		
 	},

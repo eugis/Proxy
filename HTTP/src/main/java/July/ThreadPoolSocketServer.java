@@ -44,6 +44,7 @@ public class ThreadPoolSocketServer  {
                             String s = socket.getRemoteSocketAddress().toString();
                             System.out.printf("Se conecto %s\n", s);
                             
+                            System.out.println(ThreadPoolSocketServer.this.handler);
                             ThreadPoolSocketServer.this.handler.handle(socket);
                             
                             if (!socket.isClosed()) {

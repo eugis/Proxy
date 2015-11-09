@@ -146,6 +146,7 @@ public class ParserUtils {
 	}
 
 	public static boolean isValidURL(String url){
+		//TODO: verificar si la url debe comenzar con una /
 		System.out.println("isValidURL: " +  (url != null && url.length() > 0));
 		return url != null && url.length() > 0;
 	}

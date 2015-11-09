@@ -6,12 +6,10 @@ import java.io.OutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.nio.ByteBuffer;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
-import Parser.HTTPParser;
-import Parser.ParserResponse;
 import Parser2.HttpParser;
+import Parser2.ParserResponse;
 import Parser2.ReadingState;
 
 public class ThreadSocketHandler implements ConnectionHandler{
@@ -28,10 +26,10 @@ public class ThreadSocketHandler implements ConnectionHandler{
 	private void readDataFromClient(Socket s) throws IOException{
 		InputStream in = s.getInputStream();
         OutputStream out = s.getOutputStream();
-        
         byte[] receiveBuf = new byte[BUFSIZE];  // Receive buffer
         int recvMsgSize = 0;   // Size of received message
         ParserResponse resp = null;
+        ReadingState state = null;
         //boolean keepReading = false;
         String host2connect = "";
         int port2connect = -1;
@@ -40,43 +38,55 @@ public class ThreadSocketHandler implements ConnectionHandler{
         Socket serverSocket = null;
         ByteBuffer bBuffer;
         while (recvMsgSize != -1 /*&& !keepReading*/) {
-        	receiveBuf = new byte[BUFSIZE]; //hacer de forma elegante
+        	receiveBuf = new byte[BUFSIZE]; //TODO: hacer de forma elegante
         	recvMsgSize = in.read(receiveBuf);
         	bBuffer = ByteBuffer.wrap(receiveBuf);
         	if(recvMsgSize != -1){
         		//Harcoded receiveBuf
-            	String request = "GET / HTTP/1.1\n"+"Host: www.google.com\n\n";
-        		byte[] msg = request.getBytes(Charset.forName("UTF-8"));
-            	
+//            	String request = "GET / HTTP/1.1\n"+"Host: www.google.com\n\n";
+//        		byte[] msg = request.getBytes(Charset.forName("UTF-8"));
+//            	
             	String str = new String(receiveBuf, StandardCharsets.UTF_8);
-            	System.out.print(str);
+//            	System.out.print(str);
             	
-            	ReadingState state = parser.sendData(bBuffer);
+//            	ReadingState state = parser.sendData(bBuffer);
+            	resp = parser.sendData(bBuffer);
+            	if(resp.isReadyToSend()){
+            		System.out.println("Host:" + resp.getHost());
+                	System.out.println("Port:" + resp.getPort());
+            	}else{
+            		System.out.println("No host yet!!");
+            	}
+            	
+            	System.out.println("Finished: " + resp.isFinished());
+            	System.out.println("isError" + resp.isError());
+            	
+            	
             	
             	//keepReading = resp.isDoneReading();
             	
-            	/*System.out.println("Host: "+resp.getHost());
+            	System.out.println("Host: "+resp.getHost());
             	
-            	if(resp.isDoneReading()){ //Debería llamarse, puedo empezar a mandar
+//            	if(resp.isDoneReading()){ //Debería llamarse, puedo empezar a mandar
 //            	if (resp.isAvailableToSend()) {	
             		byte[] byteReq;
-            		if(!resp.returnToClient()){
+//            		if(!resp.returnToClient()){
 	            		host2connect = resp.getHost();
 	                    port2connect = resp.getPort();
 	                    String hardCodeResp = "GET / HTTP/1.1 \n\n";
 	                    byteReq = hardCodeResp.getBytes();
-	                    serverSocket = writeToServer(host2connect, port2connect, byteReq);
-	                    if (resp.isCompleteRead()) {
+	                    serverSocket = writeToServer(host2connect, port2connect, byteReq, serverSocket);
+//	                    if (resp.isCompleteRead()) {
 	                    	readFromServer(serverSocket, out);	
 	                    }
-                    }else{
-                    	byteReq = resp.getHttpResponse().getBytes();
-                    	out.write(byteReq);
-                  	  	out.flush();
-                    }
-            	}*/
-        	}
-        }
+//                    }else{
+//                    	byteReq = resp.getHttpResponse().getBytes();
+//                    	out.write(byteReq);
+//                  	  	out.flush();
+//                    }
+            	}
+//        	}
+//        }
         System.out.println("cerrarrrrrrrrrr");
         // Close the socket.  We are done with this client!
         if (serverSocket != null) {
@@ -85,15 +95,16 @@ public class ThreadSocketHandler implements ConnectionHandler{
         s.close();
 	}
 
-	private Socket writeToServer(String host, int port, byte[] byteReq) throws UnknownHostException, IOException{
-		ProxySocket pSocket = ProxyConnectionManager.getConnection(host, port);
-		Socket serverSocket = pSocket.getSocket();
-    	if(serverSocket != null){//doble validacion, podria no ir
-    		System.out.println(serverSocket);
-    		OutputStream outFromServer = serverSocket.getOutputStream();
-    		outFromServer.write(byteReq);
-    		outFromServer.flush();
-    	}
+	private Socket writeToServer(String host, int port, byte[] byteReq, Socket serverSocket) throws UnknownHostException, IOException{
+		if (serverSocket == null ){
+			ProxySocket pSocket = ProxyConnectionManager.getConnection(host, port);
+			serverSocket = pSocket.getSocket();	
+		}
+		//TODO: remover syso
+    	System.out.println(serverSocket);
+    	OutputStream outFromServer = serverSocket.getOutputStream();
+    	outFromServer.write(byteReq);
+    	outFromServer.flush();
     	return serverSocket;
 	}
     
@@ -108,8 +119,10 @@ public class ThreadSocketHandler implements ConnectionHandler{
 			recvMsgSize = inFromServer.read(responseBuf);
 
         	//resp = parser.sendData(responseBuf);
-        	keepReading = resp.isDoneReading();
-
+//        	keepReading = resp.isDoneReading();
+			//TODO: responseBuf debería ser el que venga en el resp del parser
+			out.write(responseBuf, 0, recvMsgSize);
+			out.flush();
         }
     }
 }
