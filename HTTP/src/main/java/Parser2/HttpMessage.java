@@ -49,7 +49,7 @@ public class HttpMessage {
 	public boolean headerFinished() {
 		// TODO fijarse que ya haya levantado todos los headers para
 		// cambiar de estado
-		return false;
+		return true;
 	}
 
 	public void setVersion(String version) {

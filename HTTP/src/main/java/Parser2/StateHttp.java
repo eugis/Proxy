@@ -14,7 +14,7 @@ public enum StateHttp {
 			if(line == null){
 				return this;
 			}
-			boolean valid = ParserUtils.parseMethod(line, message);
+			boolean valid = ParserUtils.parseMethod(line.trim(), message);
 			if(valid){
 				message.state = HEADER;
 				return message.state.process(buf, message);
@@ -32,7 +32,7 @@ public enum StateHttp {
 			if(line == null){
 				return this;
 			}
-			boolean valid = ParserUtils.parseHeaders(line, message);
+			boolean valid = ParserUtils.parseHeaders(line.trim(), message);
 			if(!valid){
 				return INVALID;
 			}
@@ -52,7 +52,7 @@ public enum StateHttp {
 			if(line == null){
 				return this;
 			}
-			if(line == "\n"){
+			if(line.equals("\n")){
 				message.state = BODY;
 				return message.state.process(buf, message);
 			}

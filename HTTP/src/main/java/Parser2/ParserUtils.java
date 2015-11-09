@@ -102,7 +102,7 @@ public class ParserUtils {
 		buf.compact();
 		int pos = buf.position();
 		buf.limit(pos);
-		return new String(array).trim();
+		return new String(array);//.trim();
 	}
 
 	public static boolean parseMethod(String line, HttpMessage message) {
@@ -129,22 +129,21 @@ public class ParserUtils {
 
 	private static boolean isValidVersion(String string) {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	private static boolean isValidURL(String string) {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	private static boolean isValidMethod(String method) {
-		// TODO Auto-generated method stub
-		return false;
+		return validMethods.contains(method);
 	}
 
 	public static boolean parseHeaders(String line, HttpMessage message) {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	public static boolean parseData(ByteBuffer buf, HttpMessage message) {
