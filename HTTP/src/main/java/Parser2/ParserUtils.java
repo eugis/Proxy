@@ -70,21 +70,21 @@ public class ParserUtils {
 
 	}
 
-	public static String readLine(byte[] buf, HttpMessage message) {
-		String ret=null;
-		int init = message.getPosRead();
-		int fin;
-		
-		for(int i=init; i < buf.length; i++){
-			if(buf[i] == '\n'){
-				fin = i+1;
-				message.setPosRead(fin);
-				ret = new String(buf, init, fin);
-				return ret.trim();
-			}
-		}
-		return ret;
-	}
+//	public static String readLine(byte[] buf, HttpMessage message) {
+//		String ret=null;
+//		int init = message.getPosRead();
+//		int fin;
+//		
+//		for(int i=init; i < buf.length; i++){
+//			if(buf[i] == '\n'){
+//				fin = i+1;
+//				message.setPosRead(fin);
+//				ret = new String(buf, init, fin);
+//				return ret.trim();
+//			}
+//		}
+//		return ret;
+//	}
 
 	public static String readLine(ByteBuffer buf, HttpMessage message) {
 		// TODO revisar este metodo
@@ -173,14 +173,6 @@ public class ParserUtils {
 		boolean valid = false;
 		int index;
 		
-//		if(requestLine.length != 2){
-//			return false;
-//		}
-//		if(validHeader(requestLine[0]) && validValue(requestLine[1])){
-//			message.addHeader(requestLine[0], requestLine[1]);
-//			valid = true;
-//		}
-		
 		index = line.indexOf(':');
 		if(index < 0){
 			//TODO no esta bien formado el header
@@ -189,7 +181,11 @@ public class ParserUtils {
 		}else{
 			String header = line.substring(0, index).toLowerCase();
 			String value = line.substring(index+1).trim();
-			message.addHeader(header, value);
+			if(validHeader(header) && validValue(value)){
+				valid = message.addHeader(header, value);
+			}else{
+				logs.error("invalid header");
+			}
 		}
 		
 		return valid;
@@ -220,6 +216,20 @@ public class ParserUtils {
 			return validRequestHeaders.contains(headerParts[0]) || validGeneralHeaders.contains(headerParts[0]);
 		}
 		return false;
+	}
+
+	public static boolean minHeaders(HttpMessage message) {
+		//TODO validar que esten los headers necesarios: host, content-length,...
+		boolean valid = true;
+		if(message.getHost() == null){
+			logs.error("missing host");
+			valid = false;
+		}
+		if(!message.bodyEnable()){
+			//TODO creo que si el metodo es post content-length es obligatorio
+			//sino me parece q no viene body o si?
+		}
+		return valid;
 	}
 
 }
