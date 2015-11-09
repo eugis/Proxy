@@ -141,10 +141,12 @@ public class ParserUtils {
 	
 	
 	public static boolean isValidMethod(String method){
+		System.out.println("valid method: " + validMethods.contains(method));
 		return validMethods.contains(method);
 	}
 
 	public static boolean isValidURL(String url){
+		System.out.println("isValidURL: " +  (url != null && url.length() > 0));
 		return url != null && url.length() > 0;
 	}
 
@@ -237,12 +239,13 @@ public class ParserUtils {
 			switch(state){
 			
 			case METHOD:
-				
-				if(c != ' '){
+				//TODO: fijarse de arreglar el ciclo de ifs (está horrible)
+				if(c != ' ' && i != line.length() - 1){
 					aux.append(c);
-				
-				}else {
-					
+				} else {
+					if (i == line.length() - 1) {
+						aux.append(c);
+					}
 					String method = aux.toString().trim();
 					
 					if(isValidMethod(method)){
@@ -255,22 +258,22 @@ public class ParserUtils {
 					//Reinicio el StringBuilder
 					state=RequestLineState.URL;
 					aux.setLength(0);
-					state=RequestLineState.URL;
 				}
 								
 			break;
 			
 			case URL:
 				
-				if(c!= ' '){
+				if(c != ' ' || i == line.length() - 1){
 					aux.append(c);
 				}else{
 					String url = aux.toString();
-					if (isValidURL(url)) {
+					if (isValidURL(url) && i != line.length() - 1) {
 						message.setUrl(url);
+						message.setValidMessage(true); //set it true (default: false)
 						//Reinicio el StringBuilder
 					} else {
-						invalidMessage(message);
+						invalidMessage(message); 
 						ret = false;
 					}
 					aux.setLength(0);
@@ -289,7 +292,7 @@ public class ParserUtils {
 					if (isValidVersion(version)) {
 						message.setVersion(version.substring(5));	
 					}else{
-						invalidMessage(message);
+						invalidMessage(message); //change to invalid in case the URL has setted to valid
 						ret = false;
 					}
 					aux.setLength(0);
@@ -306,40 +309,39 @@ public class ParserUtils {
 	}
 
 	public static boolean parseHeaderLine(String line, HttpMessage message) {
-
-		//TODO ver si falta chequear si me pasaron cualq mierda, además de ver si los headers son validos (ej: isValidHeader()... etc)
 		
 		HeaderLineState state = HeaderLineState.HEADER;
 		StringBuilder aux = new StringBuilder();
 		String header="", value="";
 		char c;
 		int i=0;
+		boolean dots = false;
 		
 		while(i<line.length()){
 			
 			c = line.charAt(i);
-			
+			//TODO: fijarse de arreglar el ciclo de ifs (está horrible)
 			switch(state){
 				case HEADER:
-					
-					if(c!= ' '){
-						
+					if(c!= ' ' && i != line.length() - 1){
 						if(c!=':'){
 							aux.append(c);
+						} else {
+							dots = true;
 						}
-							
-						
-					}else{
-												
+					}else{			
+						if (i == line.length() - 1) {
+							aux.append(c);
+						}
 						header = aux.toString();
-						if(isValidHeader(header)){
+						if(isValidHeader(header) && dots){
 							state = HeaderLineState.VALUE;
-							//Reseteo StringBuilder
-							aux.setLength(0);
-							
 						}else{
+							System.out.println("Invalid header 2");
 							return false;
 						}
+						//Reseteo StringBuilder
+						aux.setLength(0);
 					}
 					
 				break;
@@ -352,31 +354,26 @@ public class ParserUtils {
 					if(i==line.length()-1){
 						value = aux.toString();
 						if(isValidValue(value)){
-							
 							message.setHeader(header, value);
+							return true;
 						}
-						else{
-							return false;
-						}
-						
-							
+						aux.setLength(0);
 					}
 					
 				break;
-				
-			
 			}
 		i++;	
 		}
-		
-		return true;
+		return false;
 	}
 
 	private static boolean isValidValue(String value) {
-		return (value != null && value.length() > 0);
+		System.out.println("valid value: "+ value != null && value.length() > 0);
+		return value != null && value.length() > 0;
 	}
 
 	private static boolean isValidHeader(String header) {
+		System.out.println("isValidHeader: " + (validRequestHeaders.contains(header) || validGeneralHeaders.contains(header)));
 		return validRequestHeaders.contains(header) || validGeneralHeaders.contains(header);
 	}
 
@@ -384,6 +381,7 @@ public class ParserUtils {
 		String regex = "HTTP/1.(0|1)";
 		Pattern patt = Pattern.compile(regex);
         Matcher matcher = patt.matcher(version);
+        System.out.println("valid version: " + matcher.matches());
         return matcher.matches();
 	}
 	
