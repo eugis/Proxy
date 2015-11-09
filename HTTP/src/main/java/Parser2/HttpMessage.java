@@ -17,6 +17,7 @@ public class HttpMessage {
 	
 	//TODO aca guardo hasta que posicion leyo del buffer, cada vez que lo lees tiene q estar en 0
 	private int posRead;
+	private String method;
 	
 	public HttpMessage() {
 		this.state = StateHttp.REQUEST_LINE;
@@ -82,9 +83,7 @@ public class HttpMessage {
 	}
 
 	public void setMethod(String method) {
-		// TODO Auto-generated method stub
-		
+		this.method = method;
 	}
-	
 
 }

@@ -3,6 +3,8 @@ package Parser2;
 import java.nio.ByteBuffer;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import CarlyAdmin.manager.ConfigurationManager;
 
@@ -10,6 +12,7 @@ public class ParserUtils {
 	
 	private static final Set<String> validMethods = loadMethods();
 	private static final Set<String> validRequestHeaders = loadRequestHeaders();
+	private static final Set<String> validGeneralHeaders = loadGeneralHeaders();
 	
 	private static Set<String> loadMethods() {
 		Set<String> headers = new HashSet<String>();
@@ -40,6 +43,20 @@ public class ParserUtils {
         rh.add("Referer");
         rh.add("TE");
         rh.add("User-Agent");
+        return rh;
+	}
+	
+	private static Set<String> loadGeneralHeaders() {
+		Set<String> rh = new HashSet<String>();
+		rh.add("Cache-Control");
+		rh.add("Connection");
+		rh.add("Date");
+		rh.add("Pragma");
+        rh.add("Trailer");
+        rh.add("Transfer-Encoding");
+        rh.add("Upgrade");
+        rh.add("Via");
+        rh.add("Warning");
         return rh;
 	}
 	
@@ -127,14 +144,17 @@ public class ParserUtils {
 		return valid;
 	}
 
-	private static boolean isValidVersion(String string) {
-		// TODO Auto-generated method stub
-		return true;
+	private static boolean isValidVersion(String version) {
+		String regex = "HTTP/1.(0|1)";
+		Pattern patt = Pattern.compile(regex);
+        Matcher matcher = patt.matcher(version);
+        System.out.println("valid version: " + matcher.matches());
+        return matcher.matches();
 	}
 
-	private static boolean isValidURL(String string) {
-		// TODO Auto-generated method stub
-		return true;
+	private static boolean isValidURL(String url) {
+		System.out.println("isValidURL: " +  (url != null && url.length() > 0));
+		return url != null && url.length() > 0;
 	}
 
 	private static boolean isValidMethod(String method) {
@@ -142,8 +162,23 @@ public class ParserUtils {
 	}
 
 	public static boolean parseHeaders(String line, HttpMessage message) {
-		// TODO Auto-generated method stub
-		return true;
+		String[] requestLine = line.split("\\s");
+		boolean valid = false;
+		
+		if(requestLine.length != 2){
+			return false;
+		}
+		if(validHeader(requestLine[0]) && validValue(requestLine[1])){
+			message.addHeader(requestLine[0], requestLine[1]);
+			valid = true;
+		}
+		
+		return valid;
+	}
+
+	private static boolean validValue(String value) {
+		System.out.println("valid value: "+ value != null && value.length() > 0);
+		return value != null && value.length() > 0;
 	}
 
 	public static boolean parseData(ByteBuffer buf, HttpMessage message) {
@@ -159,8 +194,13 @@ public class ParserUtils {
 		return false;
 	}
 
-	public static boolean validHeader(String header) {
-		return validRequestHeaders.contains(header);
+	static boolean validHeader(String header) {
+		if (header.contains(":")) {
+			String[] headerParts = header.split(":");
+			System.out.println("isValidHeader: " + (validRequestHeaders.contains(headerParts[0]) || validGeneralHeaders.contains(headerParts[0])));
+			return validRequestHeaders.contains(headerParts[0]) || validGeneralHeaders.contains(headerParts[0]);
+		}
+		return false;
 	}
 
 }

@@ -9,12 +9,12 @@ public class HTTPParser {
 
 	private HttpState state; 
 	private HttpMessage message;
-	private HttpResponse serverResponse;
+//	private HttpResponse serverResponse;
 	
 	public HTTPParser(){
 		this.state = HttpState.REQUEST_LINE;
 		this.message = new HttpMessage();
-		this.serverResponse = new HttpResponse();
+//		this.serverResponse = new HttpResponse();
 	}
 	
 	public ParserResponse sendData(byte[] buf, boolean client) {
@@ -58,13 +58,12 @@ public class HTTPParser {
 		InputStreamReader in = new InputStreamReader(new ByteArrayInputStream(buf));
 		BufferedReader br = new BufferedReader(in); 
 		
-		try {
-			ParserUtils.processResponse(br, serverResponse);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+//		try {
+//			ParserUtils.processResponse(br, serverResponse);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		
 		return response;
 	}
 

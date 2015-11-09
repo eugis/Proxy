@@ -58,14 +58,14 @@ public class ClientTCPHandler implements TCPProtocol{
             	//String request = "GET / HTTP/1.1"+"/n"+"Host: www.google.com"+"/n/n";
         		//byte[] msg = request.getBytes(Charset.forName("UTF-8"));
             	
-            	NioParserResponse resp = new NioParserResponse();/*attch.getParser().sendData(msg);*/
+//            	NioParserResponse resp = new NioParserResponse();/*attch.getParser().sendData(msg);*/
             	
             	//busco si ya existe este canal (porque no termino de leer)
             	SocketChannel openChannel = this.openChannels.get(clntChan); 
 	        	if(openChannel == null){ //sino, lo creo
 		        	hostChan = SocketChannel.open();
 		        	hostChan.configureBlocking(false);
-		        	hostChan.connect(new InetSocketAddress(resp.getHost(), resp.getPort()));
+//		        	hostChan.connect(new InetSocketAddress(resp.getHost(), resp.getPort()));
 		        	//registrarme al "o connect" pq sinno queda al 100 de cpu
 		        	//while(!hostChan.finishConnect()){}
 		        	ProxyAttachment hostAttch = new ProxyAttachment(clntChan, buf, new HTTPParser());
@@ -75,9 +75,9 @@ public class ClientTCPHandler implements TCPProtocol{
 	        		ProxyAttachment hostAttch = new ProxyAttachment(clntChan, buf, new HTTPParser());
 	        		hostChan.register(key.selector(), SelectionKey.OP_WRITE, hostAttch);
 	        		
-	        		if(resp.isDoneReading()){ //si no hay mas nada para leer
+//	        		if(resp.isDoneReading()){ //si no hay mas nada para leer
 	        			
-		        	}else{ //si no termino de leer
+//		        	}else{ //si no termino de leer
 		        		/*if(openChannel == null){ //y el canal abierto es nuevo (o sea, primer leida)
 		        			this.openChannels.put(clntChan, hostChan);
 		        		}*/
@@ -99,7 +99,7 @@ public class ClientTCPHandler implements TCPProtocol{
 	        	}*/
             }
         }
-    }
+//    }
 
     public void handleWrite(SelectionKey key) throws IOException {
         /*

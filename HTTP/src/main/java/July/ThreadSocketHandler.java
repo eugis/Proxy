@@ -9,10 +9,8 @@ import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
-import Parser.HTTPParser;
-import Parser.ParserResponse;
 import Parser2.HttpParser;
-import Parser2.ReadingState;
+import Parser2.ParserResponse;
 
 public class ThreadSocketHandler implements ConnectionHandler{
 
@@ -40,18 +38,21 @@ public class ThreadSocketHandler implements ConnectionHandler{
         Socket serverSocket = null;
         ByteBuffer bBuffer;
         while (recvMsgSize != -1 /*&& !keepReading*/) {
-        	receiveBuf = new byte[BUFSIZE]; //hacer de forma elegante
+        	receiveBuf = new byte[BUFSIZE]; //TODO: hacer de forma elegante
         	recvMsgSize = in.read(receiveBuf);
         	bBuffer = ByteBuffer.wrap(receiveBuf);
         	if(recvMsgSize != -1){
         		//Harcoded receiveBuf
-            	String request = "GET / HTTP/1.1\n"+"Host: www.google.com\n\n";
-        		byte[] msg = request.getBytes(Charset.forName("UTF-8"));
-            	
+//            	String request = "GET / HTTP/1.1\n"+"Host: www.google.com\n\n";
+//        		byte[] msg = request.getBytes(Charset.forName("UTF-8"));
+//            	
             	String str = new String(receiveBuf, StandardCharsets.UTF_8);
             	System.out.print(str);
             	
-            	ReadingState state = parser.sendData(bBuffer);
+//            	ReadingState state = parser.sendData(bBuffer);
+            	resp = parser.sendData(bBuffer);
+            	System.out.println("Host:" + resp.getHost());
+            	System.out.println("Port:" + resp.getPort());
             	
             	//keepReading = resp.isDoneReading();
             	
@@ -108,7 +109,7 @@ public class ThreadSocketHandler implements ConnectionHandler{
 			recvMsgSize = inFromServer.read(responseBuf);
 
         	//resp = parser.sendData(responseBuf);
-        	keepReading = resp.isDoneReading();
+//        	keepReading = resp.isDoneReading();
 
         }
     }
