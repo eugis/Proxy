@@ -24,6 +24,7 @@ public class CarlyAdmin implements Runnable{
 	private Logger logs = CarlyLogger.getCarlyLogger();
 	
 	public CarlyAdmin() {
+		
 		InputStream is = getClass().getResourceAsStream(
 				"resources/setup.properties");
 		Properties p = new Properties();
