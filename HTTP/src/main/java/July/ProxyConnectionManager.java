@@ -11,7 +11,8 @@ public class ProxyConnectionManager {
 		ProxySocket pSocket = ProxyConnections.getInstance().getConnection(keyString);
 		if(pSocket == null){
 			System.out.println("CREA UNA NUEVA CONEXION");
-    		ProxyConnections.getInstance().saveNewConnection(keyString, generateNewSocket(host, port));    		
+			pSocket = generateNewSocket(host, port);
+    		ProxyConnections.getInstance().saveNewConnection(keyString, pSocket);    		
 		}
 		return pSocket;
 	}

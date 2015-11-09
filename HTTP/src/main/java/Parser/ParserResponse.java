@@ -41,6 +41,7 @@ public class ParserResponse {
 		return this.httpResponse;
 	}
 
+	//TODO: estos métodos hay que unirlos bien con el parser.
 	public boolean isAvailableToSend() {
 		return availableToSend;
 	}

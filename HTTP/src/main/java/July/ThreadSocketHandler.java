@@ -40,7 +40,7 @@ public class ThreadSocketHandler implements ConnectionHandler{
         	
         	if(recvMsgSize != -1){
         		//Harcoded receiveBuf
-            	String request = "GeT / HTTP/1.1\n"+"Host: www.google.com\n\n";
+            	String request = "GET / HTTP/1.1\n"+"Host: www.google.com\n\n";
         		byte[] msg = request.getBytes(Charset.forName("UTF-8"));
             	
             	String str = new String(receiveBuf, StandardCharsets.UTF_8);
@@ -50,10 +50,10 @@ public class ThreadSocketHandler implements ConnectionHandler{
             	
             	//keepReading = resp.isDoneReading();
             	
-            	//System.out.println("Host: "+resp.getHost());
+            	System.out.println("Host: "+resp.getHost());
             	
-            	//if(resp.isDoneReading()){ //Debería llamarse, puedo empezar a mandar
-            	if (resp.isAvailableToSend()) {	
+            	if(resp.isDoneReading()){ //Debería llamarse, puedo empezar a mandar
+//            	if (resp.isAvailableToSend()) {	
             		byte[] byteReq;
             		if(!resp.returnToClient()){
 	            		host2connect = resp.getHost();
@@ -73,17 +73,18 @@ public class ThreadSocketHandler implements ConnectionHandler{
         	}
         }
         System.out.println("cerrarrrrrrrrrr");
-        s.close();  // Close the socket.  We are done with this client!
+        // Close the socket.  We are done with this client!
         if (serverSocket != null) {
         	ProxyConnectionManager.closeConnection(serverSocket);	
         }
+        s.close();
 	}
 
 	private Socket writeToServer(String host, int port, byte[] byteReq) throws UnknownHostException, IOException{
 		ProxySocket pSocket = ProxyConnectionManager.getConnection(host, port);
-
 		Socket serverSocket = pSocket.getSocket();
     	if(serverSocket != null){//doble validacion, podria no ir
+    		System.out.println(serverSocket);
     		OutputStream outFromServer = serverSocket.getOutputStream();
     		outFromServer.write(byteReq);
     		outFromServer.flush();
@@ -102,7 +103,8 @@ public class ThreadSocketHandler implements ConnectionHandler{
 			recvMsgSize = inFromServer.read(responseBuf);
 			
         	resp = parser.sendData(responseBuf);
-        	keepReading = !resp.isCompleteRead();
+//        	keepReading = !resp.isCompleteRead();
+        	keepReading = true;
         	//TODO: responseBuf debería ser el que venga en el resp del parser
 			out.write(responseBuf, 0, recvMsgSize);
 			out.flush();
