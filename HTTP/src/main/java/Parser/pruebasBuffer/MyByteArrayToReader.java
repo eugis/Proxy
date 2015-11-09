@@ -1,4 +1,4 @@
-package Parser;
+package Parser.pruebasBuffer;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
