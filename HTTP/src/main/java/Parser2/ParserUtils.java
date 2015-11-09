@@ -179,7 +179,7 @@ public class ParserUtils {
 			logs.error("Request: The header field is not well formed");
 			return false;
 		}else{
-			String header = line.substring(0, index).toLowerCase();
+			String header = line.substring(0, index); /*.toLowerCase();*/
 			String value = line.substring(index+1).trim();
 			if(validHeader(header) && validValue(value)){
 				valid = message.addHeader(header, value);
@@ -210,12 +210,12 @@ public class ParserUtils {
 	}
 
 	static boolean validHeader(String header) {
-		if (header.contains(":")) {
-			String[] headerParts = header.split(":");
-			System.out.println("isValidHeader: " + (validRequestHeaders.contains(headerParts[0]) || validGeneralHeaders.contains(headerParts[0])));
-			return validRequestHeaders.contains(headerParts[0]) || validGeneralHeaders.contains(headerParts[0]);
-		}
-		return false;
+	//	if (header.contains(":")) {
+	//		String[] headerParts = header.split(":");
+			System.out.println("isValidHeader: " + (validRequestHeaders.contains(header) || validGeneralHeaders.contains(header)));
+			return validRequestHeaders.contains(header) || validGeneralHeaders.contains(header);
+	//	}
+	//	return false;
 	}
 
 	public static boolean minHeaders(HttpMessage message) {
