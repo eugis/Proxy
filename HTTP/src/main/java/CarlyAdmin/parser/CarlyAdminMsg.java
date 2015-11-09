@@ -96,7 +96,7 @@ public class CarlyAdminMsg {
 			if(!configManager.changeUser(user)){
 				return false;
 			}
-		}else if(header.startsWith("change-password: ")){
+		}else if(header.startsWith("change-pass: ")){
 			int sizeHeader = 17;
 			String pass = header.substring(sizeHeader, header.length() - 1);
 			if(!configManager.changePass(pass)){
