@@ -47,8 +47,16 @@ public class ThreadSocketHandler implements ConnectionHandler{
 //            	String request = "GET / HTTP/1.1\n"+"Host: www.google.com\n\n";
 //        		byte[] msg = request.getBytes(Charset.forName("UTF-8"));
 //            	
+        		//TODO muchos sysos para borrar!!
             	String str = new String(receiveBuf, StandardCharsets.UTF_8);
-            	System.out.print(str);
+            	//System.out.print(str);
+            	System.out.println(str.isEmpty());
+            	if(str.equals("\n")){
+            		System.out.println("viene empty line");
+            	}
+            	if(str.contains("\r\n")){
+            		System.out.println("empty line \r\n");
+            	}
             	
 //            	ReadingState state = parser.sendData(bBuffer);
             	resp = parser.sendData(bBuffer);
@@ -60,7 +68,7 @@ public class ThreadSocketHandler implements ConnectionHandler{
             	}
             	
             	System.out.println("Finished: " + resp.isFinished());
-            	System.out.println("isError" + resp.isError());
+            	System.out.println("isError: " + resp.isError());
             	
             	
             	

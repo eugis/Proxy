@@ -32,17 +32,16 @@ public enum StateHttp {
 			if(line == null){
 				return this;
 			}
-//			while(!line.trim().equals("")){
+			
+			if(!line.equals("\n")){
 				boolean valid = ParserUtils.parseHeaders(line.trim(), message);
 				if(!valid){
 					return INVALID;
 				}
-//				line = ParserUtils.readLine(buf, message);
-//				if(line == null){
-//					return this;
-//				}
-//			}		
-			if(line.isEmpty()){
+			}else
+			{
+				//TODO borrar syso!
+				System.out.println("Empty line!");
 				if(!ParserUtils.minHeaders(message)){
 					return INVALID;
 				}else{

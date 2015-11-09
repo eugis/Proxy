@@ -86,47 +86,53 @@ public class ParserUtils {
 //		return ret;
 //	}
 
-	public static String readLine(ByteBuffer buf, HttpMessage message) {
-		// TODO revisar este metodo
-		boolean crFlag = false;
-		boolean lfFlag = false;
-		if(buf.limit() == 0){
-			return null;
-		}
-		byte[] array = new byte[buf.limit()];
-		int i = 0;
-		byte b;
-		buf.flip();
-		do{
-			b = buf.get();
-			array[i++] = b;
-			if(b == '\r'){
-				crFlag = true;
-			}else if(b == '\n'){
-				lfFlag = true;
-			}			
-		}while(buf.hasRemaining() && !crFlag && !lfFlag);
-		if(!crFlag && !lfFlag){
-			return null;
-		}else{
-			if(crFlag){
-				if(buf.limit() == 0 ||
-						buf.limit() == buf.position()){
-					return null;
-				}
-				b = buf.get();
-				if(b != '\n'){
-					return null;
-				}
-				array[i] = b;
-			}
-		}
-		buf.compact();
-		int pos = buf.position();
-		buf.limit(pos);
-		return new String(array);//.trim();
-	}
+//	public static String readLine(ByteBuffer buf, HttpMessage message) {
+//		// TODO revisar este metodo
+//		boolean crFlag = false;
+//		boolean lfFlag = false;
+//		if(buf.limit() == 0){
+//			return null;
+//		}
+//		byte[] array = new byte[buf.limit()];
+//		int i = 0;
+//		byte b;
+//		buf.flip();
+//		do{
+//			b = buf.get();
+//			array[i++] = b;
+//			if(b == '\r'){
+//				crFlag = true;
+//			}else if(b == '\n'){
+//				lfFlag = true;
+//			}			
+//		}while(buf.hasRemaining() && !crFlag && !lfFlag);
+//		if(!crFlag && !lfFlag){
+//			return null;
+//		}else{
+//			if(crFlag){
+//				if(buf.limit() == 0 ||
+//						buf.limit() == buf.position()){
+//					return null;
+//				}
+//				b = buf.get();
+//				if(b != '\n'){
+//					return null;
+//				}
+//				array[i] = b;
+//			}
+//		}
+//		buf.compact();
+//		int pos = buf.position();
+//		buf.limit(pos);
+//		return new String(array);//.trim();
+//	}
 
+	public static String readLine(ByteBuffer buf, HttpMessage message){
+		
+		return null;
+	}
+	
+	
 	public static boolean parseMethod(String line, HttpMessage message) {
 		String[] requestLine = line.split("\\s");
 		boolean valid = false;
@@ -219,7 +225,7 @@ public class ParserUtils {
 	}
 
 	public static boolean minHeaders(HttpMessage message) {
-		//TODO validar que esten los headers necesarios: host, content-length,...
+		//TODO validar que esten los headers necesarios: host, content-length,...Tener en cuenta que si es un GET no hay body!!
 		boolean valid = true;
 		if(message.getHost() == null){
 			logs.error("missing host");
