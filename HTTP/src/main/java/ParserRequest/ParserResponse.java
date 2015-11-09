@@ -1,4 +1,4 @@
-package Parser2;
+package ParserRequest;
 
 public class ParserResponse {
 

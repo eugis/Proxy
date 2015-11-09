@@ -1,16 +1,12 @@
-package July;
+package ParserResponse;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.Map;
 import java.util.Set;
 
 import CarlyAdmin.manager.ConfigurationManager;
-import Parser.HttpResponse;
 
 public class ServerParserUtils {
 

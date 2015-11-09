@@ -1,8 +1,8 @@
-package Parser2;
+package ParserRequest;
 
 import java.nio.ByteBuffer;
 
-import Parser2.ParserUtils;
+import ParserRequest.ParserUtils;
 
 public enum StateHttp {
 	

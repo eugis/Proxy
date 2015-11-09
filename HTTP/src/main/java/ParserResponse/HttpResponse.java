@@ -1,9 +1,7 @@
-package Parser;
+package ParserResponse;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import July.StateResponse;
 
 public class HttpResponse {
 

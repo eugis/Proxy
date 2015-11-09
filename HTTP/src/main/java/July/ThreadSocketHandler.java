@@ -8,9 +8,9 @@ import java.net.UnknownHostException;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 
-import Parser2.HttpParser;
-import Parser2.ParserResponse;
-import Parser2.ReadingState;
+import ParserRequest.HttpParser;
+import ParserRequest.ParserResponse;
+import ParserRequest.ReadingState;
 
 public class ThreadSocketHandler implements ConnectionHandler{
 

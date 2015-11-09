@@ -1,4 +1,4 @@
-package Parser2;
+package ParserRequest;
 
 public enum ReadingState {
 	FINISHED, UNFINISHED, ERROR
