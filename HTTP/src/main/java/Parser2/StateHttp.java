@@ -1,8 +1,6 @@
 package Parser2;
 
 import java.nio.ByteBuffer;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import Parser2.ParserUtils;
 
