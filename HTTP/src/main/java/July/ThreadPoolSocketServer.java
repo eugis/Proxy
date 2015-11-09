@@ -5,6 +5,9 @@ import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import CarlyAdmin.CarlyAdmin;
+import July.ConnectionHandler;
+
 public class ThreadPoolSocketServer  {
     private ServerSocket serverSocket;
     private ConnectionHandler handler;
@@ -62,6 +65,8 @@ public class ThreadPoolSocketServer  {
 
     public static void main(String[] args) {
         try {
+    		System.out.println("Starting CarlyAdmin Server...");
+    		(new Thread(new CarlyAdmin())).start();
             ThreadPoolSocketServer server = new ThreadPoolSocketServer(20007, InetAddress.getByName("localhost"), new ThreadSocketHandler());
             server.run();
         } catch (final Exception e) {
