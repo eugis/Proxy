@@ -6,9 +6,14 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.log4j.Logger;
+
 import CarlyAdmin.manager.ConfigurationManager;
+import Logs.CarlyLogger;
 
 public class ParserUtils {
+	
+	private static Logger logs = CarlyLogger.getCarlyLogger();
 	
 	private static final Set<String> validMethods = loadMethods();
 	private static final Set<String> validRequestHeaders = loadRequestHeaders();
@@ -65,21 +70,21 @@ public class ParserUtils {
 
 	}
 
-	public static String readLine(byte[] buf, HttpMessage message) {
-		String ret=null;
-		int init = message.getPosRead();
-		int fin;
-		
-		for(int i=init; i < buf.length; i++){
-			if(buf[i] == '\n'){
-				fin = i+1;
-				message.setPosRead(fin);
-				ret = new String(buf, init, fin);
-				return ret.trim();
-			}
-		}
-		return ret;
-	}
+//	public static String readLine(byte[] buf, HttpMessage message) {
+//		String ret=null;
+//		int init = message.getPosRead();
+//		int fin;
+//		
+//		for(int i=init; i < buf.length; i++){
+//			if(buf[i] == '\n'){
+//				fin = i+1;
+//				message.setPosRead(fin);
+//				ret = new String(buf, init, fin);
+//				return ret.trim();
+//			}
+//		}
+//		return ret;
+//	}
 
 	public static String readLine(ByteBuffer buf, HttpMessage message) {
 		// TODO revisar este metodo
@@ -130,13 +135,16 @@ public class ParserUtils {
 			return false;
 		}
 		if(isValidMethod(requestLine[0])){
-			message.setMethod(requestLine[0]);
 			//TODO completar este metodo
 			
 			if(isValidURL(requestLine[1])){
 
 				if(isValidVersion(requestLine[2])){
 					valid = true;
+					message.setMethod(requestLine[0]);
+					int index = requestLine[2].indexOf("/");
+					String version = requestLine[2].substring(index+1, requestLine[2].length());
+					message.setVersion(version);
 				}
 			}
 		}
@@ -162,15 +170,22 @@ public class ParserUtils {
 	}
 
 	public static boolean parseHeaders(String line, HttpMessage message) {
-		String[] requestLine = line.split("\\s");
 		boolean valid = false;
+		int index;
 		
-		if(requestLine.length != 2){
+		index = line.indexOf(':');
+		if(index < 0){
+			//TODO no esta bien formado el header
+			logs.error("Request: The header field is not well formed");
 			return false;
-		}
-		if(validHeader(requestLine[0]) && validValue(requestLine[1])){
-			message.addHeader(requestLine[0], requestLine[1]);
-			valid = true;
+		}else{
+			String header = line.substring(0, index); /*.toLowerCase();*/
+			String value = line.substring(index+1).trim();
+			if(validHeader(header) && validValue(value)){
+				valid = message.addHeader(header, value);
+			}else{
+				logs.error("invalid header");
+			}
 		}
 		
 		return valid;
@@ -195,12 +210,26 @@ public class ParserUtils {
 	}
 
 	static boolean validHeader(String header) {
-		if (header.contains(":")) {
-			String[] headerParts = header.split(":");
-			System.out.println("isValidHeader: " + (validRequestHeaders.contains(headerParts[0]) || validGeneralHeaders.contains(headerParts[0])));
-			return validRequestHeaders.contains(headerParts[0]) || validGeneralHeaders.contains(headerParts[0]);
+	//	if (header.contains(":")) {
+	//		String[] headerParts = header.split(":");
+			System.out.println("isValidHeader: " + (validRequestHeaders.contains(header) || validGeneralHeaders.contains(header)));
+			return validRequestHeaders.contains(header) || validGeneralHeaders.contains(header);
+	//	}
+	//	return false;
+	}
+
+	public static boolean minHeaders(HttpMessage message) {
+		//TODO validar que esten los headers necesarios: host, content-length,...
+		boolean valid = true;
+		if(message.getHost() == null){
+			logs.error("missing host");
+			valid = false;
 		}
-		return false;
+		if(!message.bodyEnable()){
+			//TODO creo que si el metodo es post content-length es obligatorio
+			//sino me parece q no viene body o si?
+		}
+		return valid;
 	}
 
 }

@@ -6,11 +6,11 @@ import java.io.OutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.nio.ByteBuffer;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
 import Parser2.HttpParser;
 import Parser2.ParserResponse;
+import Parser2.ReadingState;
 
 public class ThreadSocketHandler implements ConnectionHandler{
 
@@ -29,6 +29,7 @@ public class ThreadSocketHandler implements ConnectionHandler{
         byte[] receiveBuf = new byte[BUFSIZE];  // Receive buffer
         int recvMsgSize = 0;   // Size of received message
         ParserResponse resp = null;
+        ReadingState state = null;
         //boolean keepReading = false;
         String host2connect = "";
         int port2connect = -1;
@@ -50,8 +51,17 @@ public class ThreadSocketHandler implements ConnectionHandler{
             	
 //            	ReadingState state = parser.sendData(bBuffer);
             	resp = parser.sendData(bBuffer);
-            	System.out.println("Host:" + resp.getHost());
-            	System.out.println("Port:" + resp.getPort());
+            	if(resp.isReadyToSend()){
+            		System.out.println("Host:" + resp.getHost());
+                	System.out.println("Port:" + resp.getPort());
+            	}else{
+            		System.out.println("No host yet!!");
+            	}
+            	
+            	System.out.println("Finished: " + resp.isFinished());
+            	System.out.println("isError" + resp.isError());
+            	
+            	
             	
             	//keepReading = resp.isDoneReading();
             	
