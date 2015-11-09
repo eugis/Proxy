@@ -37,6 +37,7 @@ public class ThreadSocketHandler implements ConnectionHandler{
         //boolean keepReading = false;
         String host2connect = "";
         int port2connect = -1;
+        boolean client = true;
         // Receive until client closes connection, indicated by -1 return
         Socket serverSocket = null;
         while (recvMsgSize != -1 /*&& !keepReading*/) {
@@ -49,7 +50,7 @@ public class ThreadSocketHandler implements ConnectionHandler{
             	//String str = new String(receiveBuf, StandardCharsets.UTF_8);
             	//System.out.println(str);
             	
-            	resp = parser.sendData(msg);
+            	resp = parser.sendData(receiveBuf, client);
             	
             	//keepReading = resp.isDoneReading();
             	
@@ -110,7 +111,7 @@ public class ThreadSocketHandler implements ConnectionHandler{
 			out.write(responseBuf, 0, recvMsgSize);
 			out.flush();
 			
-        	resp = parser.sendData(responseBuf);
+        	//resp = parser.sendData(responseBuf);
         	keepReading = resp.isDoneReading();
         }
     }

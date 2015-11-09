@@ -205,7 +205,6 @@ public class ParserUtils {
 		String ret=null;
     	try {
 			ret= buf.readLine();
-						
 		} catch (IOException e) {
 			
 			e.printStackTrace();
@@ -222,33 +221,6 @@ public class ParserUtils {
 	}
 
 
-	public static HttpResponse parseResponseStatusLine(String line){
-		HttpResponse response = new HttpResponse();
-		int i = 0;
-		int item = 0;
-		StringBuilder word = null;
-		char c;
-		while(i < line.length()){
-			if(item < 2){
-				word = new StringBuilder();
-				do{
-					c = line.charAt(i++);
-					word = word.append(c);
-				}while(c != ' ');
-				word.deleteCharAt(word.length()-1);
-			}
-			
-			item++;
-			switch(item){
-				case 1: response.setVersion(getVersion(word.toString())); 
-					break;
-				case 2: response.setStatusCode(Integer.valueOf(word.toString()));
-					break;
-				case 3: response.setStatusResponse(line.substring(i, line.length()));
-			}
-		}
-		return response;
-	}
 	
 	public static boolean parseRequestLine(String line, HttpMessage message) {
 		

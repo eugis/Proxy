@@ -5,7 +5,11 @@ public class HttpResponse {
 	private String version;
 	private int statusCode;
 	private String statusResponse;
+	private int length;
+	private boolean plainText;
+	private boolean gZip;
 	
+
 	public HttpResponse(){
 		
 	}
@@ -32,5 +36,29 @@ public class HttpResponse {
 
 	public void setStatusResponse(String body) {
 		this.statusResponse = body;
+	}
+	
+	public boolean isPlainText() {
+		return plainText;
+	}
+
+	public void setPlainText(boolean plainText) {
+		this.plainText = plainText;
+	}
+
+	public int getLength() {
+		return length;
+	}
+
+	public void setLength(int length) {
+		this.length = length;
+	}
+	
+	public boolean isgZip() {
+		return gZip;
+	}
+
+	public void setgZip(boolean gZip) {
+		this.gZip = gZip;
 	}
 }

@@ -9,15 +9,20 @@ public class HTTPParser {
 
 	private HttpState state; 
 	private HttpMessage message;
+	private HttpResponse serverResponse;
 	
 	public HTTPParser(){
 		this.state = HttpState.REQUEST_LINE;
 		this.message = new HttpMessage();
+		this.serverResponse = new HttpResponse();
 	}
 	
-	public ParserResponse sendData(byte[] buf) {
+	public ParserResponse sendData(byte[] buf, boolean client) {
 		
-		return parse(buf);
+		if(client){
+			return parse(buf);
+		}
+		return parseServer(buf);
 	}
 	
 	private ParserResponse parse(byte[] buf){
@@ -48,5 +53,19 @@ public class HTTPParser {
 		return response;
 	}
 	
+	private ParserResponse parseServer(byte[] buf){
+		ParserResponse response = new ParserResponse();
+		InputStreamReader in = new InputStreamReader(new ByteArrayInputStream(buf));
+		BufferedReader br = new BufferedReader(in); 
+		
+		try {
+			ParserUtils.processResponse(br, serverResponse);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return response;
+	}
 
 }

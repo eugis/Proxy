@@ -55,10 +55,10 @@ public class ClientTCPHandler implements TCPProtocol{
             	SocketChannel hostChan = null;
             	
             	//TODO: Darme el byte[] posta!
-            	String request = "GET / HTTP/1.1"+"/n"+"Host: www.google.com"+"/n/n";
-        		byte[] msg = request.getBytes(Charset.forName("UTF-8"));
+            	//String request = "GET / HTTP/1.1"+"/n"+"Host: www.google.com"+"/n/n";
+        		//byte[] msg = request.getBytes(Charset.forName("UTF-8"));
             	
-            	ParserResponse resp = attch.getParser().sendData(msg);
+            	NioParserResponse resp = new NioParserResponse();/*attch.getParser().sendData(msg);*/
             	
             	//busco si ya existe este canal (porque no termino de leer)
             	SocketChannel openChannel = this.openChannels.get(clntChan); 
@@ -66,25 +66,37 @@ public class ClientTCPHandler implements TCPProtocol{
 		        	hostChan = SocketChannel.open();
 		        	hostChan.configureBlocking(false);
 		        	hostChan.connect(new InetSocketAddress(resp.getHost(), resp.getPort()));
-		        	
 		        	//registrarme al "o connect" pq sinno queda al 100 de cpu
-		        	while(!hostChan.finishConnect()){}
+		        	//while(!hostChan.finishConnect()){}
+		        	ProxyAttachment hostAttch = new ProxyAttachment(clntChan, buf, new HTTPParser());
+		        	hostChan.register(key.selector(), SelectionKey.OP_ACCEPT, hostAttch);
 	        	}else{
 	        		hostChan = this.openChannels.get(clntChan);
+	        		ProxyAttachment hostAttch = new ProxyAttachment(clntChan, buf, new HTTPParser());
+	        		hostChan.register(key.selector(), SelectionKey.OP_WRITE, hostAttch);
+	        		
+	        		if(resp.isDoneReading()){ //si no hay mas nada para leer
+	        			
+		        	}else{ //si no termino de leer
+		        		/*if(openChannel == null){ //y el canal abierto es nuevo (o sea, primer leida)
+		        			this.openChannels.put(clntChan, hostChan);
+		        		}*/
+		        		key.interestOps(SelectionKey.OP_READ); //sigo leyendo
+		        	}
 	        	}
 	        	
 	        	//al attch le agregue con que "cliente" habla
-	        	ProxyAttachment hostAttch = new ProxyAttachment(clntChan, buf, new HTTPParser());
-        		hostChan.register(key.selector(), SelectionKey.OP_WRITE, hostAttch);
+	        	//ProxyAttachment hostAttch = new ProxyAttachment(clntChan, buf, new HTTPParser());
+        		//hostChan.register(key.selector(), SelectionKey.OP_WRITE, hostAttch);
         		
-        		if(resp.isDoneReading()){ //si no hay mas nada para leer
+        		/*if(resp.isDoneReading()){ //si no hay mas nada para leer
         			
 	        	}else{ //si no termino de leer
 	        		if(openChannel == null){ //y el canal abierto es nuevo (o sea, primer leida)
 	        			this.openChannels.put(clntChan, hostChan);
 	        		}
 	        		key.interestOps(SelectionKey.OP_READ); //sigo leyendo
-	        	}
+	        	}*/
             }
         }
     }
