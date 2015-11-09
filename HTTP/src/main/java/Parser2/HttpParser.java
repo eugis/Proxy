@@ -15,6 +15,7 @@ public class HttpParser {
 		return state;
 	}
 	
+	
 //	public ReadingState sendData(ByteBuffer buf){
 	public ParserResponse sendData(ByteBuffer buf) {
 		ParserResponse resp = new ParserResponse();
