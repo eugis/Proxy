@@ -6,9 +6,14 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.log4j.Logger;
+
 import CarlyAdmin.manager.ConfigurationManager;
+import Logs.CarlyLogger;
 
 public class ParserUtils {
+	
+	private static Logger logs = CarlyLogger.getCarlyLogger();
 	
 	private static final Set<String> validMethods = loadMethods();
 	private static final Set<String> validRequestHeaders = loadRequestHeaders();
@@ -130,13 +135,16 @@ public class ParserUtils {
 			return false;
 		}
 		if(isValidMethod(requestLine[0])){
-			message.setMethod(requestLine[0]);
 			//TODO completar este metodo
 			
 			if(isValidURL(requestLine[1])){
 
 				if(isValidVersion(requestLine[2])){
 					valid = true;
+					message.setMethod(requestLine[0]);
+					int index = requestLine[2].indexOf("/");
+					String version = requestLine[2].substring(index+1, requestLine[2].length());
+					message.setVersion(version);
 				}
 			}
 		}
@@ -162,15 +170,26 @@ public class ParserUtils {
 	}
 
 	public static boolean parseHeaders(String line, HttpMessage message) {
-		String[] requestLine = line.split("\\s");
 		boolean valid = false;
+		int index;
 		
-		if(requestLine.length != 2){
+//		if(requestLine.length != 2){
+//			return false;
+//		}
+//		if(validHeader(requestLine[0]) && validValue(requestLine[1])){
+//			message.addHeader(requestLine[0], requestLine[1]);
+//			valid = true;
+//		}
+		
+		index = line.indexOf(':');
+		if(index < 0){
+			//TODO no esta bien formado el header
+			logs.error("Request: The header field is not well formed");
 			return false;
-		}
-		if(validHeader(requestLine[0]) && validValue(requestLine[1])){
-			message.addHeader(requestLine[0], requestLine[1]);
-			valid = true;
+		}else{
+			String header = line.substring(0, index).toLowerCase();
+			String value = line.substring(index+1).trim();
+			message.addHeader(header, value);
 		}
 		
 		return valid;

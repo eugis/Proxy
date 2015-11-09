@@ -34,11 +34,18 @@ public enum StateHttp {
 			if(line == null){
 				return this;
 			}
-			boolean valid = ParserUtils.parseHeaders(line.trim(), message);
-			if(!valid){
-				return INVALID;
-			}
-			if(message.headerFinished()){
+			while(!line.trim().equals("")){
+				boolean valid = ParserUtils.parseHeaders(line.trim(), message);
+				if(!valid){
+					return INVALID;
+				}
+				line = ParserUtils.readLine(buf, message);
+				if(line == null){
+					return this;
+				}
+			}		
+			if(line.isEmpty()){
+				//TODO validar que esten los headers necesarios: host, content-line,...
 				message.state = EMPTY_LINE;
 				return message.state.process(buf, message);
 			}
@@ -50,16 +57,8 @@ public enum StateHttp {
 
 		@Override
 		public StateHttp process(ByteBuffer buf, HttpMessage message) {
-			String line = ParserUtils.readLine(buf, message);
-			if(line == null){
-				return this;
-			}
-
-			if(true){
-				message.state = BODY;
-				return message.state.process(buf, message);
-			}
-			return INVALID;
+			message.state = BODY;
+			return message.state.process(buf, message);
 		}
 		
 	},
