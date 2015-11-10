@@ -70,7 +70,7 @@ public class HttpMessage {
 	
 	public boolean addHeader(String header, String value){
 		if(ParserUtils.validHeader(header)){
-			if(header.equals("host")){
+			if(header.equals("Host")){
 				int index = value.indexOf(":");
 				if(index > 0){
 					port = Integer.parseInt(value.substring(index + 1, value.length()));
