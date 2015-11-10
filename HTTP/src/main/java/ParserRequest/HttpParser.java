@@ -2,6 +2,10 @@ package ParserRequest;
 
 import java.nio.ByteBuffer;
 
+import org.apache.log4j.Logger;
+
+import Logs.CarlyLogger;
+
 public class HttpParser {
 
 	private ReadingState state;
@@ -46,11 +50,17 @@ public class HttpParser {
 	}
 
 	public String getHttpResponse() {
-		int sCode = 405;
+		int sCode = 0;
+		if(message.isInvalidMethod()){
+			sCode = 405;
+		}else if(message.isInvalidHeader()){
+			sCode = 400;
+		}
+		
 		//TODO x como esta hecho el parserMethod esto viene en null
 //		String version = message.getVersion();
 		String version = "1.0";
-		return ResponseUtils.generateHttpResponseIM(sCode, "1.0");
+		return ResponseUtils.generateHttpResponseIM(sCode, version);
 	}
 
 	public boolean isFinished() {

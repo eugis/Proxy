@@ -86,6 +86,8 @@ public class ThreadSocketHandler implements ConnectionHandler{
 	                    port2connect = parser.getPort();
 	                    ByteBuffer request = parser.getRequest();
 	                    byteReq = request.array();
+//	                    String req = new String(byteReq);
+//	                    System.out.println(req);
 //	                    String hardCodeResp = "GET / HTTP/1.1 \n\n";
 //	                    byteReq = hardCodeResp.getBytes();
 	                    serverSocket = writeToServer(host2connect, port2connect, byteReq, serverSocket);

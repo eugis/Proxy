@@ -83,7 +83,6 @@ public class ParserUtils {
 //	}
 
 	public static String readLine(ByteBuffer buf, HttpMessage message) {
-		// TODO revisar este metodo
 		boolean crFlag = false;
 		boolean lfFlag = false;
 		if(buf.limit() == 0){
@@ -105,7 +104,7 @@ public class ParserUtils {
 			}else if(b == '\n'){
 				message.setlfFlag(true);
 				lfFlag = true;
-				if(i == 1){ //TODO quiere decir q viene solo un \n
+				if(i == 1){ //quiere decir q viene solo un \n
 					String emptyLine = "\n";
 					return emptyLine;
 				}
@@ -180,9 +179,14 @@ public class ParserUtils {
 		boolean valid = false;
 		int index;
 		
+		if(line.equals('\n')){
+			message.setHeaderFinished(true);
+			return valid;
+		}
+		
 		index = line.indexOf(':');
 		if(index < 0){
-			//TODO no esta bien formado el header
+			//no esta bien formado el header
 			logs.error("Request: The header field is not well formed");
 			return false;
 		}else{
@@ -219,6 +223,8 @@ public class ParserUtils {
 			}
 		}else{
 			ParserUtils.readLine(buf, message);
+			//Descomentar para forzar la finalizacion del request
+			//message.setFinished();
 			return message.isFinished();
 		}
 		
@@ -239,6 +245,7 @@ public class ParserUtils {
 		boolean valid = true;
 		if(message.getHost() == null){
 			logs.error("missing host");
+			message.setNoHost(true);
 			valid = false;
 		}
 		if(!message.bodyEnable()){

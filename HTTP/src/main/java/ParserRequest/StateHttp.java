@@ -41,6 +41,7 @@ public enum StateHttp {
 			}else{
 				//TODO borrar syso!
 				System.out.println("Empty line!");
+				message.setHeaderFinished(true);
 				if(!ParserUtils.minHeaders(message)){
 					//TODO si no esta el header Host que hacemos,
 					//armamos una respuesta nosotros?
@@ -90,11 +91,13 @@ public enum StateHttp {
 		public StateHttp process(ByteBuffer buf, HttpMessage message) {
 			// hay que seguir leyendo hasta que aparece \r\n
 			String line = ParserUtils.readLine(buf, message);
-			if(message.getHost() == null){
-				// Si no esta seteado el host, espero que lo cargue por mas que sea invalido el msje
+			if(/*message.getHost() == null &&*/ message.isNoHost() && !message.isHeaderFinished()){
+				// Si no esta seteado el host, y todavia no termino de parsearHeaders busco el host
 				ParserUtils.parseHeaders(line, message);
 			}
-			//untilLastLine(buf, message);
+			
+			//Descomentar para forzar la finalizacion del msje
+			//message.setFinished();
 			if(message.isFinished()){
 				return DONE;
 			}
@@ -107,8 +110,7 @@ public enum StateHttp {
 		@Override
 		public StateHttp process(ByteBuffer buf, HttpMessage message) {
 			// hay que seguir leyendo hasta que aparece \r\n
-			String line = ParserUtils.readLine(buf, message);
-			//untilLastLine(buf, message);
+			ParserUtils.readLine(buf, message);
 			
 			//Descomentar para probar la respuesta cableada
 			//message.setFinished();

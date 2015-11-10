@@ -6,14 +6,21 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.apache.log4j.Logger;
+
+import Logs.CarlyLogger;
+
 public class ResponseUtils {
 	
 	private static Map<Integer, String> msgs = loadMsgs();
 	private static Map<Integer, String> statusCode = loadStatusCode();
 	
+	private static Logger logs = CarlyLogger.getCarlyLogger();
+	
 	private static Map<Integer, String> loadMsgs() {
 		Map<Integer, String> msg = new HashMap<Integer, String>();
 		msg.put(405, "The server supports only the following method: GET, POST and HEAD");
+		//msg.put(400, "");
 		return msg;
 	}
 	
@@ -70,6 +77,8 @@ public class ResponseUtils {
 		
 		aux += firstLine + printHeaders(headerLine) + dataLine;
 		
+		logs.error(sCode + ": " + statusCode.get(sCode));
+		
 		return aux;
 	}
 	
@@ -115,7 +124,8 @@ public class ResponseUtils {
 	
 	//Prueba
 //	public static void main(String[] args) {
-//		System.out.println(ParserUtils.generateHttpResponseIM("1.0"));
+//		int sCode = 400;
+//		System.out.println(ResponseUtils.generateHttpResponseIM(sCode,"1.0"));
 //	}
 
 	

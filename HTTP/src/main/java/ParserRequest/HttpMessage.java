@@ -22,8 +22,11 @@ public class HttpMessage {
 	protected ByteBuffer buffer;
 	
 	private String method;
-	boolean crFlag;
-	boolean lfFlag;
+	private boolean crFlag;
+	private boolean lfFlag;
+	
+	private boolean noHost;
+	private boolean headerFinished;
 	
 	public HttpMessage() {
 		this.state = StateHttp.REQUEST_LINE;
@@ -32,6 +35,8 @@ public class HttpMessage {
 		this.buffer = ByteBuffer.allocate(0);
 		this.crFlag = false;
 		this.lfFlag = false;
+		this.noHost = true;
+		this.headerFinished = false;
 	}
 
 	public ReadingState parser(ByteBuffer buf) {
@@ -42,6 +47,9 @@ public class HttpMessage {
 		case INVALIDMETHOD:
 			return ReadingState.ERROR;
 		case DONE:
+			if(noHost){
+				return ReadingState.ERROR;
+			}
 			return ReadingState.FINISHED;
 		default:
 			return ReadingState.UNFINISHED;
@@ -68,6 +76,7 @@ public class HttpMessage {
 					port = Integer.parseInt(value.substring(index + 1, value.length()));
 					value = value.substring(0,index);
 				}
+				noHost = false;
 			}
 			headers.put(header, value);
 			return true;
@@ -120,6 +129,35 @@ public class HttpMessage {
 
 	public void cleanBuffer() {
 		buffer = ByteBuffer.allocate(0);
+	}
+
+	public void setNoHost(boolean value) {
+		this.noHost = value;		
+	}
+	
+	public boolean isNoHost() {
+		return noHost;
+	}
+
+	public boolean isInvalidMethod() {
+		return state.equals(StateHttp.INVALIDMETHOD);
+	}
+
+	public boolean isInvalidHeader() {
+		//TODO aca tendria que agregar si no viene el content-lenght y es necesario
+		if(noHost){
+			return true;
+		}
+		return false;
+	}
+
+	public void setHeaderFinished(boolean value) {
+		this.headerFinished = value;
+		
+	}
+	
+	public boolean isHeaderFinished() {
+		return headerFinished;
 	}
 
 }
