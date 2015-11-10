@@ -5,14 +5,19 @@ import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import org.apache.log4j.Logger;
+
 import CarlyAdmin.CarlyAdmin;
 import July.ConnectionHandler;
+import Logs.CarlyLogger;
 
 public class ThreadPoolSocketServer  {
     private ServerSocket serverSocket;
     private ConnectionHandler handler;
     private int THREAD_POOL_SIZE = 2;
 
+    private static Logger logs = CarlyLogger.getCarlyLogger();
+    
     public ThreadPoolSocketServer(final int port, final InetAddress interfaz, final ConnectionHandler handler)
             throws IOException {
         init(new ServerSocket(port, 50, interfaz), handler);
@@ -43,6 +48,7 @@ public class ThreadPoolSocketServer  {
                             
                             String s = socket.getRemoteSocketAddress().toString();
                             System.out.printf("Se conecto %s\n", s);
+                            logs.info("Se conecto " + s);
                             
                             System.out.println(ThreadPoolSocketServer.this.handler);
                             ThreadPoolSocketServer.this.handler.handle(socket);
@@ -50,11 +56,15 @@ public class ThreadPoolSocketServer  {
                             if (!socket.isClosed()) {
                                 socket.close();
                                 System.out.printf("Cerrando %s\n", s);
+                                logs.info("Cerrando" +  s);
                             }
                             System.out.printf("Se desconecto %s\n", s);
+                            logs.info("Se desconecto" +  s);
                         } catch (IOException e) {
                         	e.printStackTrace();
-                            System.err.printf("Excepcion al manejar conexion\n");
+                            System.err.printf("Excepcion al manejar conexion\n");            
+                            logs.error(e);
+                            
                         }
                     }
                 };

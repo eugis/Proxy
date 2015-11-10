@@ -62,4 +62,12 @@ public class HttpParser {
 		return message.isFinished();
 	}
 
+	public ByteBuffer getRequest() {
+		return message.buffer;
+	}
+
+	public void cleanRequest() {
+		message.cleanBuffer();		
+	}
+
 }

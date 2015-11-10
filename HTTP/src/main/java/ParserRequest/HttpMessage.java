@@ -19,44 +19,34 @@ public class HttpMessage {
 	private int port;
 	private String version;
 	//TODO creo q aca habria q ir guardando el buffer por si es mas largo y viene partido
-	private ByteBuffer buffer;
+	protected ByteBuffer buffer;
 	
-	//TODO aca guardo hasta que posicion leyo del buffer, cada vez que lo lees tiene q estar en 0
-	//private int posRead;
 	private String method;
-	boolean crFlag = false;
-	boolean lfFlag = false;
+	boolean crFlag;
+	boolean lfFlag;
 	
 	public HttpMessage() {
 		this.state = StateHttp.REQUEST_LINE;
 		this.headers = new HashMap<String, String>();
-	//	this.posRead = 0;
 		this.port = 80;
 		this.buffer = ByteBuffer.allocate(0);
+		this.crFlag = false;
+		this.lfFlag = false;
 	}
 
 	public ReadingState parser(ByteBuffer buf) {
+		//Estoy guardando en buffer todo lo q entra
+		ParserUtils.concatBuffer(buf, this);
 		state = state.process(buf, this);
 		switch(state){
 		case INVALIDMETHOD:
-			if(isFinished()){
-				return ReadingState.ERROR;
-			}
-			return ReadingState.UNFINISHED;
+			return ReadingState.ERROR;
 		case DONE:
 			return ReadingState.FINISHED;
 		default:
 			return ReadingState.UNFINISHED;
 		}
 	}
-
-//	public int getPosRead() {
-//		return posRead;
-//	}
-//
-//	public void setPosRead(int pos) {
-//		this.posRead = pos;	
-//	}
 
 	public void setVersion(String version) {
 		this.version = version;
@@ -125,6 +115,10 @@ public class HttpMessage {
 	public void setFinished() {
 		crFlag = true;
 		lfFlag = true;	
+	}
+
+	public void cleanBuffer() {
+		buffer = ByteBuffer.allocate(0);
 	}
 
 }

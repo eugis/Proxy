@@ -216,6 +216,7 @@ public class ParserUtils {
 				return true;
 			}
 		}
+		//TODO esto es false, lo puse asi para que pase
 		return true;
 	}
 
@@ -236,10 +237,22 @@ public class ParserUtils {
 			valid = false;
 		}
 		if(!message.bodyEnable()){
-			//TODO creo que si el metodo es post content-length es obligatorio
-			//sino me parece q no viene body o si?
+			if(message.getMethod().equals("POST")){
+				logs.error("length required");
+				valid = false;
+			}
 		}
 		return valid;
 	}
-
+	
+	public static void concatBuffer(ByteBuffer buf, HttpMessage message){
+		ByteBuffer aux = ByteBuffer.allocate(message.buffer.position() +
+				buf.position());
+		buf.flip();
+		message.buffer.flip();
+		aux.put(message.buffer);
+		aux.put(buf);
+		message.buffer = aux;
+	}
+	
 }
