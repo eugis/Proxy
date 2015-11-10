@@ -20,7 +20,6 @@ public class ResponseUtils {
 	private static Map<Integer, String> loadMsgs() {
 		Map<Integer, String> msg = new HashMap<Integer, String>();
 		msg.put(405, "The server supports only the following method: GET, POST and HEAD");
-		//msg.put(400, "");
 		return msg;
 	}
 	
