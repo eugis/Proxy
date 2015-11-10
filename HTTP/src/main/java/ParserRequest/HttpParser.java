@@ -17,16 +17,11 @@ public class HttpParser {
 	
 	
 	public ReadingState sendData(ByteBuffer buf){
-//	public ParserResponse sendData(ByteBuffer buf) {
-//		ParserResponse resp = new ParserResponse();
-		//TODO chequear que quede el buffer bien
 		ByteBuffer preparedBuffer = ByteBuffer.allocate(buf.capacity());
 		//buf.flip();
 		preparedBuffer.put(buf);
 		//buf.compact();
 		state = message.parser(buf);
-//		resp.setMessage(message);
-//		return resp;
 		return state;
 	}
 	

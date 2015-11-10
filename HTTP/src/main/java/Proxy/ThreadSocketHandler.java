@@ -1,4 +1,4 @@
-package July;
+package Proxy;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -75,6 +75,8 @@ public class ThreadSocketHandler implements ConnectionHandler{
 						break;
 					case FINISHED:
 						//TODO si vas vaciando el request cuando encontras el host esto no va
+						logs.info("Host: " + host2connect);
+						logs.info("Port: " + port2connect);
 						System.out.println("Host:" + parser.getHost());
 	                	System.out.println("Port:" + parser.getPort());
 	                	
