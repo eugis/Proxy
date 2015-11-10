@@ -96,9 +96,14 @@ public class ParserUtils {
 		do{
 			b = buf.get();
 			array[i++] = b;
+			if(message.isCrFlag() && b != '\n'){
+				message.setcrFlag(false);
+			}
 			if(b == '\r'){
+				message.setcrFlag(true);
 				crFlag = true;
 			}else if(b == '\n'){
+				message.setlfFlag(true);
 				lfFlag = true;
 				if(i == 1){ //TODO quiere decir q viene solo un \n
 					String emptyLine = "\n";
@@ -126,11 +131,6 @@ public class ParserUtils {
 		buf.limit(pos);
 		return new String(array);//.trim();
 	}
-
-//	public static String readLine(ByteBuffer buf, HttpMessage message){
-//		
-//		return null;
-//	}
 	
 	
 	public static boolean parseMethod(String line, HttpMessage message) {
@@ -141,11 +141,12 @@ public class ParserUtils {
 			return false;
 		}
 		if(isValidMethod(requestLine[0])){
-			//TODO completar este metodo
 			
 			if(isValidURL(requestLine[1])){
 
 				if(isValidVersion(requestLine[2])){
+					//TODO tendria que mirar esto primero, ya que es necesario tener la version
+					//para cablear la respuesta
 					valid = true;
 					message.setMethod(requestLine[0]);
 					int index = requestLine[2].indexOf("/");

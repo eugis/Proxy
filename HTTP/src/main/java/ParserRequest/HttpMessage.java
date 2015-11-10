@@ -39,7 +39,10 @@ public class HttpMessage {
 		state = state.process(buf, this);
 		switch(state){
 		case INVALIDMETHOD:
-			return ReadingState.ERROR;
+			if(isFinished()){
+				return ReadingState.ERROR;
+			}
+			return ReadingState.UNFINISHED;
 		case DONE:
 			return ReadingState.FINISHED;
 		default:
@@ -109,6 +112,10 @@ public class HttpMessage {
 
 	public void setlfFlag(boolean lf) {
 		lfFlag = lf;	
+	}
+	
+	public boolean isCrFlag() {
+		return crFlag;
 	}
 
 	public boolean isFinished() {

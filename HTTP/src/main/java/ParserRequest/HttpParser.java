@@ -30,13 +30,13 @@ public class HttpParser {
 		return state;
 	}
 	
-	public static void main(String[] args) {
-		HttpParser parser = new HttpParser();
-		String req= "GET / HTTP/1.1\nHost: www.google.com\n\n";
-		ByteBuffer buf = (ByteBuffer) ByteBuffer.allocate(1024);
-		buf.put(req.getBytes());
-		parser.sendData(buf);
-	}
+//	public static void main(String[] args) {
+//		HttpParser parser = new HttpParser();
+//		String req= "GET / HTTP/1.1\nHost: www.google.com\n\n";
+//		ByteBuffer buf = (ByteBuffer) ByteBuffer.allocate(1024);
+//		buf.put(req.getBytes());
+//		parser.sendData(buf);
+//	}
 	
 	public HttpMessage getMessage() {
 		return message;
@@ -48,6 +48,18 @@ public class HttpParser {
 
 	public int getPort() {
 		return message.getPort();
+	}
+
+	public String getHttpResponse() {
+		int sCode = 405;
+		//TODO x como esta hecho el parserMethod esto viene en null
+//		String version = message.getVersion();
+		String version = "1.0";
+		return ResponseUtils.generateHttpResponseIM(sCode, "1.0");
+	}
+
+	public boolean isFinished() {
+		return message.isFinished();
 	}
 
 }

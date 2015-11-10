@@ -77,13 +77,11 @@ public class ThreadSocketHandler implements ConnectionHandler{
 	//	                    if (resp.isCompleteRead()) {
 	                    	readFromServer(serverSocket, out);	
 	                					
-//		                if (serverSocket != null) {
-//		                	ProxyConnectionManager.closeConnection(serverSocket);	
-//		                }
-//		                s.close();
             			break;
 					case ERROR:
-						
+						byteReq = parser.getHttpResponse().getBytes();
+						out.write(byteReq);
+	              	  	out.flush();	
 						break;
 					}
         		}
