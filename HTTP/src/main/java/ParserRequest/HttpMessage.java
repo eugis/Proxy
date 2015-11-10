@@ -109,6 +109,7 @@ public class HttpMessage {
 	}
 
 	public boolean isFinished() {
+		//TODO esto no se puede probar en consola, para probarlo hay q setear
 		return crFlag && lfFlag;
 	}
 

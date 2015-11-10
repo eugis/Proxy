@@ -271,6 +271,7 @@ public class ServerParserUtils {
 		return v;
 	}
 	
+	//TODO si necesitas identificar una linea con un enter fijate como lo hice en ParserUtils
 	public static String readLine(ByteBuffer buf) {
 		// TODO revisar este metodo
 		boolean crFlag = false;

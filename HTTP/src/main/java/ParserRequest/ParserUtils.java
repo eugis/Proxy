@@ -207,17 +207,22 @@ public class ParserUtils {
 		//TODO no estoy teniendo en cuenta que le buf puede venir partido
 		//me parece q en HttpMessage habria q guardarse una instancia de buffer
 		//TODO revisar este metodo no esta bien
-		String bytes = message.getHeader("content-length");
-		if(bytes != null){
-			Integer cantbytes = Integer.parseInt(bytes);
-			if(buf.capacity() >= cantbytes){
-				//TODO fijarse si hay que hacer algo mas
-				//validar que venga bien el final del msje
-				return true;
+		if(message.bodyEnable()){
+			String bytes = message.getHeader("content-length");
+			if(bytes != null){
+				Integer cantbytes = Integer.parseInt(bytes);
+				if(buf.capacity() >= cantbytes){
+					//TODO fijarse si hay que hacer algo mas
+					//validar que venga bien el final del msje
+					return true;
+				}
 			}
+		}else{
+			ParserUtils.readLine(buf, message);
+			return message.isFinished();
 		}
-		//TODO esto es false, lo puse asi para que pase
-		return true;
+		
+		return false;
 	}
 
 	static boolean validHeader(String header) {
