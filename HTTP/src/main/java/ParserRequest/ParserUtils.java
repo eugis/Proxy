@@ -64,11 +64,7 @@ public class ParserUtils {
         rh.add("Warning");
         return rh;
 	}
-	
-	public static boolean isLeetEnabled(){
-		return ConfigurationManager.getInstance().isL33t();
 
-	}
 
 //	public static String readLine(byte[] buf, HttpMessage message) {
 //		String ret=null;
@@ -86,51 +82,55 @@ public class ParserUtils {
 //		return ret;
 //	}
 
-//	public static String readLine(ByteBuffer buf, HttpMessage message) {
-//		// TODO revisar este metodo
-//		boolean crFlag = false;
-//		boolean lfFlag = false;
-//		if(buf.limit() == 0){
-//			return null;
-//		}
-//		byte[] array = new byte[buf.limit()];
-//		int i = 0;
-//		byte b;
-//		buf.flip();
-//		do{
-//			b = buf.get();
-//			array[i++] = b;
-//			if(b == '\r'){
-//				crFlag = true;
-//			}else if(b == '\n'){
-//				lfFlag = true;
-//			}			
-//		}while(buf.hasRemaining() && !crFlag && !lfFlag);
-//		if(!crFlag && !lfFlag){
-//			return null;
-//		}else{
-//			if(crFlag){
-//				if(buf.limit() == 0 ||
-//						buf.limit() == buf.position()){
-//					return null;
-//				}
-//				b = buf.get();
-//				if(b != '\n'){
-//					return null;
-//				}
-//				array[i] = b;
-//			}
-//		}
-//		buf.compact();
-//		int pos = buf.position();
-//		buf.limit(pos);
-//		return new String(array);//.trim();
-//	}
-
-	public static String readLine(ByteBuffer buf, HttpMessage message){
-		
-		return null;
+	public static String readLine(ByteBuffer buf, HttpMessage message) {
+		// TODO revisar este metodo
+		boolean crFlag = false;
+		boolean lfFlag = false;
+		if(buf.limit() == 0){
+			return null;
+		}
+		byte[] array = new byte[buf.limit()];
+		int i = 0;
+		byte b;
+		buf.flip();
+		do{
+			b = buf.get();
+			array[i++] = b;
+			if(b == '\r'){
+				crFlag = true;
+			}else if(b == '\n'){
+				lfFlag = true;
+				if(i == 1){ //TODO quiere decir q viene solo un \n
+					String emptyLine = "\n";
+					return emptyLine;
+				}
+			}			
+		}while(buf.hasRemaining() && !crFlag && !lfFlag);
+		if(!crFlag && !lfFlag){
+			return null;
+		}else{
+			if(crFlag){
+				if(buf.limit() == 0 ||
+						buf.limit() == buf.position()){
+					return null;
+				}
+				b = buf.get();
+				if(b != '\n'){
+					return null;
+				}
+				array[i] = b;
+			}
+		}
+		buf.compact();
+		int pos = buf.position();
+		buf.limit(pos);
+		return new String(array);//.trim();
 	}
+
+//	public static String readLine(ByteBuffer buf, HttpMessage message){
+//		
+//		return null;
+//	}
 	
 	
 	public static boolean parseMethod(String line, HttpMessage message) {
@@ -205,14 +205,17 @@ public class ParserUtils {
 	public static boolean parseData(ByteBuffer buf, HttpMessage message) {
 		//TODO no estoy teniendo en cuenta que le buf puede venir partido
 		//me parece q en HttpMessage habria q guardarse una instancia de buffer
+		//TODO revisar este metodo no esta bien
 		String bytes = message.getHeader("content-length");
-		Integer cantbytes = Integer.parseInt(bytes);
-		if(buf.capacity() >= cantbytes){
-			//TODO fijarse si hay que hacer algo mas
-			//validar que venga bien el final del msje
-			return true;
+		if(bytes != null){
+			Integer cantbytes = Integer.parseInt(bytes);
+			if(buf.capacity() >= cantbytes){
+				//TODO fijarse si hay que hacer algo mas
+				//validar que venga bien el final del msje
+				return true;
+			}
 		}
-		return false;
+		return true;
 	}
 
 	static boolean validHeader(String header) {

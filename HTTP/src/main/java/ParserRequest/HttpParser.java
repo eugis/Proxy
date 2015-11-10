@@ -16,18 +16,18 @@ public class HttpParser {
 	}
 	
 	
-//	public ReadingState sendData(ByteBuffer buf){
-	public ParserResponse sendData(ByteBuffer buf) {
-		ParserResponse resp = new ParserResponse();
+	public ReadingState sendData(ByteBuffer buf){
+//	public ParserResponse sendData(ByteBuffer buf) {
+//		ParserResponse resp = new ParserResponse();
 		//TODO chequear que quede el buffer bien
 		ByteBuffer preparedBuffer = ByteBuffer.allocate(buf.capacity());
 		//buf.flip();
 		preparedBuffer.put(buf);
 		//buf.compact();
 		state = message.parser(buf);
-		resp.setMessage(message);
-		return resp;
-//		return state;
+//		resp.setMessage(message);
+//		return resp;
+		return state;
 	}
 	
 	public static void main(String[] args) {
@@ -36,6 +36,18 @@ public class HttpParser {
 		ByteBuffer buf = (ByteBuffer) ByteBuffer.allocate(1024);
 		buf.put(req.getBytes());
 		parser.sendData(buf);
+	}
+	
+	public HttpMessage getMessage() {
+		return message;
+	}
+
+	public String getHost() {
+		return message.getHost();
+	}
+
+	public int getPort() {
+		return message.getPort();
 	}
 
 }

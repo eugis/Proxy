@@ -20,7 +20,7 @@ public enum StateHttp {
 				return message.state.process(buf, message);
 			}
 			
-			return INVALID;
+			return INVALIDMETHOD;
 		}
 		
 	},
@@ -38,8 +38,7 @@ public enum StateHttp {
 				if(!valid){
 					return INVALID;
 				}
-			}else
-			{
+			}else{
 				//TODO borrar syso!
 				System.out.println("Empty line!");
 				if(!ParserUtils.minHeaders(message)){
@@ -87,7 +86,31 @@ public enum StateHttp {
 
 		@Override
 		public StateHttp process(ByteBuffer buf, HttpMessage message) {
-			// TODO me parece q aca no hay que hacer nada
+			// TODO hay que seguir leyendo hasta que aparece \r\n
+			// revisar todo esto!!
+			String line = ParserUtils.readLine(buf, message);
+			if(line.equals('\r')){
+				message.setcrFlag(true);
+			}
+			if(line.equals('\n')){
+				message.setlfFlag(true);
+			}
+			if(line.equals('\r'+'\n')){
+				message.setFinished();
+			}
+			if(message.isFinished()){
+				return DONE;
+			}
+			return this;
+		}
+		
+	},
+	INVALIDMETHOD {
+
+		@Override
+		public StateHttp process(ByteBuffer buf, HttpMessage message) {
+			// TODO hay que seguir leyendo hasta que aparece \r\n
+			String line = ParserUtils.readLine(buf, message);
 			return this;
 		}
 		

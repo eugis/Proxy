@@ -29,7 +29,7 @@ public class ThreadSocketHandler implements ConnectionHandler{
         byte[] receiveBuf = new byte[BUFSIZE];  // Receive buffer
         int recvMsgSize = 0;   // Size of received message
         ParserResponse resp = null;
-        ReadingState state = null;
+        ReadingState state = ReadingState.UNFINISHED;
         //boolean keepReading = false;
         String host2connect = "";
         int port2connect = -1;
@@ -58,50 +58,79 @@ public class ThreadSocketHandler implements ConnectionHandler{
             		System.out.println("empty line \r\n");
             	}
             	
-//            	ReadingState state = parser.sendData(bBuffer);
-            	resp = parser.sendData(bBuffer);
-            	if(resp.isReadyToSend()){
-            		System.out.println("Host:" + resp.getHost());
-                	System.out.println("Port:" + resp.getPort());
-            	}else{
-            		System.out.println("No host yet!!");
-            	}
-            	
-            	System.out.println("Finished: " + resp.isFinished());
-            	System.out.println("isError: " + resp.isError());
-            	
-            	
-            	
-            	//keepReading = resp.isDoneReading();
-            	
-            	System.out.println("Host: "+resp.getHost());
-            	
-//            	if(resp.isDoneReading()){ //Debería llamarse, puedo empezar a mandar
-//            	if (resp.isAvailableToSend()) {	
-            		byte[] byteReq;
-//            		if(!resp.returnToClient()){
-	            		host2connect = resp.getHost();
-	                    port2connect = resp.getPort();
+            	state = parser.sendData(bBuffer);
+            	switch (state) {
+					case UNFINISHED:
+						System.out.println("No termino de leer el request");
+						break;
+					case FINISHED:
+						System.out.println("Host:" + parser.getHost());
+	                	System.out.println("Port:" + parser.getPort());
+	                	
+	            		byte[] byteReq;
+	//            		if(!resp.returnToClient()){
+	            		host2connect = parser.getHost();
+	                    port2connect = parser.getPort();
 	                    String hardCodeResp = "GET / HTTP/1.1 \n\n";
 	                    byteReq = hardCodeResp.getBytes();
 	                    serverSocket = writeToServer(host2connect, port2connect, byteReq, serverSocket);
-//	                    if (resp.isCompleteRead()) {
+	//	                    if (resp.isCompleteRead()) {
 	                    	readFromServer(serverSocket, out);	
-	                    }
-//                    }else{
-//                    	byteReq = resp.getHttpResponse().getBytes();
-//                    	out.write(byteReq);
-//                  	  	out.flush();
-//                    }
-            	}
-//        	}
+	                					
+		                if (serverSocket != null) {
+		                	ProxyConnectionManager.closeConnection(serverSocket);	
+		                }
+		                s.close();
+            			break;
+					case ERROR:
+						
+						break;
+					}
+        		}
+        	}
+//            	resp = parser.sendData(bBuffer);
+//            	if(resp.isReadyToSend()){
+//            		System.out.println("Host:" + resp.getHost());
+//                	System.out.println("Port:" + resp.getPort());
+//            	}else{
+//            		System.out.println("No host yet!!");
+//            	}
+//            	
+//            	System.out.println("Finished: " + resp.isFinished());
+//            	System.out.println("isError: " + resp.isError());
+//            	
+//            	
+//            	
+//            	//keepReading = resp.isDoneReading();
+//            	
+//            	System.out.println("Host: "+resp.getHost());
+//            	
+////            	if(resp.isDoneReading()){ //Debería llamarse, puedo empezar a mandar
+////            	if (resp.isAvailableToSend()) {	
+//            		byte[] byteReq;
+////            		if(!resp.returnToClient()){
+//	            		host2connect = resp.getHost();
+//	                    port2connect = resp.getPort();
+//	                    String hardCodeResp = "GET / HTTP/1.1 \n\n";
+//	                    byteReq = hardCodeResp.getBytes();
+//	                    serverSocket = writeToServer(host2connect, port2connect, byteReq, serverSocket);
+////	                    if (resp.isCompleteRead()) {
+//	                    	readFromServer(serverSocket, out);	
+//	                    }
+////                    }else{
+////                    	byteReq = resp.getHttpResponse().getBytes();
+////                    	out.write(byteReq);
+////                  	  	out.flush();
+////                    }
+//            	}
+////        	}
+////        }
+//        System.out.println("cerrarrrrrrrrrr");
+//        // Close the socket.  We are done with this client!
+//        if (serverSocket != null) {
+//        	ProxyConnectionManager.closeConnection(serverSocket);	
 //        }
-        System.out.println("cerrarrrrrrrrrr");
-        // Close the socket.  We are done with this client!
-        if (serverSocket != null) {
-        	ProxyConnectionManager.closeConnection(serverSocket);	
-        }
-        s.close();
+//        s.close();
 	}
 
 	private Socket writeToServer(String host, int port, byte[] byteReq, Socket serverSocket) throws UnknownHostException, IOException{

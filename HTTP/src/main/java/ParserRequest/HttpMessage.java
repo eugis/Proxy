@@ -24,6 +24,8 @@ public class HttpMessage {
 	//TODO aca guardo hasta que posicion leyo del buffer, cada vez que lo lees tiene q estar en 0
 	//private int posRead;
 	private String method;
+	boolean crFlag = false;
+	boolean lfFlag = false;
 	
 	public HttpMessage() {
 		this.state = StateHttp.REQUEST_LINE;
@@ -36,7 +38,7 @@ public class HttpMessage {
 	public ReadingState parser(ByteBuffer buf) {
 		state = state.process(buf, this);
 		switch(state){
-		case INVALID:
+		case INVALIDMETHOD:
 			return ReadingState.ERROR;
 		case DONE:
 			return ReadingState.FINISHED;
@@ -87,13 +89,35 @@ public class HttpMessage {
 	public void setMethod(String method) {
 		this.method = method;
 	}
+	
+	public String getMethod() {
+		return method;
+	}
 
 	public String getHost() {
-		return headers.get("host");
+		return headers.get("Host");
 	}
 
 	public boolean bodyEnable() {
 		return headers.containsKey("content-length");
+	}
+
+	public void setcrFlag(boolean cr) {
+		crFlag = cr;
+		
+	}
+
+	public void setlfFlag(boolean lf) {
+		lfFlag = lf;	
+	}
+
+	public boolean isFinished() {
+		return crFlag && lfFlag;
+	}
+
+	public void setFinished() {
+		crFlag = true;
+		lfFlag = true;	
 	}
 
 }
