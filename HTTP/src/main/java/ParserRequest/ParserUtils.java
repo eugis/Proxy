@@ -224,7 +224,7 @@ public class ParserUtils {
 		}else{
 			ParserUtils.readLine(buf, message);
 			//Descomentar para forzar la finalizacion del request
-			//message.setFinished();
+			message.setFinished();
 			return message.isFinished();
 		}
 		

@@ -1,5 +1,6 @@
 package ParserResponse;
 
+import java.nio.ByteBuffer;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,6 +15,7 @@ public class HttpResponse {
 	private boolean closeConnection;
 	private StateResponse state;
 	Map<String, String> headers;
+	private byte[] buf;
 	
 
 	public HttpResponse(){
@@ -84,5 +86,13 @@ public class HttpResponse {
 
 	public void setState(StateResponse state) {
 		this.state = state;
+	}
+
+	public byte[] getBuf() {
+		return buf;
+	}
+
+	public void setBuf(byte[] buf) {
+		this.buf = buf;
 	}
 }
