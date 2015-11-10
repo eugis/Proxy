@@ -77,10 +77,10 @@ public class ThreadSocketHandler implements ConnectionHandler{
 	//	                    if (resp.isCompleteRead()) {
 	                    	readFromServer(serverSocket, out);	
 	                					
-		                if (serverSocket != null) {
-		                	ProxyConnectionManager.closeConnection(serverSocket);	
-		                }
-		                s.close();
+//		                if (serverSocket != null) {
+//		                	ProxyConnectionManager.closeConnection(serverSocket);	
+//		                }
+//		                s.close();
             			break;
 					case ERROR:
 						
@@ -126,11 +126,11 @@ public class ThreadSocketHandler implements ConnectionHandler{
 ////        	}
 ////        }
 //        System.out.println("cerrarrrrrrrrrr");
-//        // Close the socket.  We are done with this client!
-//        if (serverSocket != null) {
-//        	ProxyConnectionManager.closeConnection(serverSocket);	
-//        }
-//        s.close();
+        // Close the socket.  We are done with this client!
+        if (serverSocket != null) {
+        	ProxyConnectionManager.closeConnection(serverSocket);	
+        }
+        s.close();
 	}
 
 	private Socket writeToServer(String host, int port, byte[] byteReq, Socket serverSocket) throws UnknownHostException, IOException{
@@ -151,7 +151,7 @@ public class ThreadSocketHandler implements ConnectionHandler{
     	byte[] responseBuf = new byte[BUFSIZE];
     	int recvMsgSize = 0;
     	ParserResponse resp = null;
-    	boolean keepReading = false;
+    	boolean keepReading = true;
     	InputStream inFromServer = serverSocket.getInputStream();
 		while (recvMsgSize != -1 && keepReading) {
 			recvMsgSize = inFromServer.read(responseBuf);
