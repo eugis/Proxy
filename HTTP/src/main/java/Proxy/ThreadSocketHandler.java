@@ -4,9 +4,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
+import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 import java.nio.ByteBuffer;
-import java.nio.charset.StandardCharsets;
 
 import org.apache.log4j.Logger;
 
@@ -14,17 +14,21 @@ import Logs.CarlyLogger;
 import ParserRequest.HttpParser;
 import ParserRequest.ParserResponse;
 import ParserRequest.ReadingState;
+import ParserResponse.HttpResponse;
+import ParserResponse.ServerParserUtils;
 
 public class ThreadSocketHandler implements ConnectionHandler{
 
 	private static final int BUFSIZE = 1024;
 	private HttpParser parser;
+	private ServerParserUtils serverParser;
 	
 	private static Logger logs = CarlyLogger.getCarlyLogger();
 	
 	@Override
 	public void handle(Socket s) throws IOException {
 		this.parser = new HttpParser();
+		this.serverParser = new ServerParserUtils();
 		readDataFromClient(s);
 	}
 
@@ -86,14 +90,13 @@ public class ThreadSocketHandler implements ConnectionHandler{
 	                    port2connect = parser.getPort();
 	                    ByteBuffer request = parser.getRequest();
 	                    byteReq = request.array();
-//	                    String req = new String(byteReq);
-//	                    System.out.println(req);
-//	                    String hardCodeResp = "GET / HTTP/1.1 \n\n";
-//	                    byteReq = hardCodeResp.getBytes();
+	                    String req = new String(byteReq);
+	                    System.out.println("req:" + req);
+	                    String hardCodeResp = "GET / HTTP/1.1 \n\n";
+	                    byteReq = hardCodeResp.getBytes();
+	                    
 	                    serverSocket = writeToServer(host2connect, port2connect, byteReq, serverSocket);
-	//	                    if (resp.isCompleteRead()) { 
-	                    	readFromServer(serverSocket, out);	
-	                					
+	                    readFromServer(serverSocket, out);		
             			break;
 					case ERROR:
 						System.out.println("Error: No termino de leer el request");
@@ -132,17 +135,30 @@ public class ThreadSocketHandler implements ConnectionHandler{
     private void readFromServer(Socket serverSocket, OutputStream out) throws IOException{
     	byte[] responseBuf = new byte[BUFSIZE];
     	int recvMsgSize = 0;
-    	ParserResponse resp = null;
+    	HttpResponse resp = new HttpResponse();
     	boolean keepReading = true;
     	InputStream inFromServer = serverSocket.getInputStream();
+    	boolean reading = false;
+    	ByteBuffer bBuffer;
 		while (recvMsgSize != -1 && keepReading) {
-			recvMsgSize = inFromServer.read(responseBuf);
-
-        	//resp = parser.sendData(responseBuf);
-//        	keepReading = resp.isDoneReading();
-			//TODO: responseBuf debería ser el que venga en el resp del parser
-			out.write(responseBuf, 0, recvMsgSize);
-			out.flush();
+			try {
+				recvMsgSize = inFromServer.read(responseBuf);
+				bBuffer = ByteBuffer.wrap(responseBuf);
+	        	ServerParserUtils.processResponse(bBuffer, resp);
+				reading = true;
+				String res = new String(responseBuf);
+                System.out.println("req:" + res);
+				out.write(resp.getBuf(), 0, resp.getLength());
+				out.flush();
+			} catch (SocketTimeoutException e) {
+				if (reading) {
+					keepReading = false;
+				} else {
+					System.out.println("timeout");
+					//TODO: devolver un response de timeout (504? - 505?)
+				}
+			}
+			
         }
     }
 }

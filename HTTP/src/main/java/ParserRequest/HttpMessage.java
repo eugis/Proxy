@@ -119,6 +119,10 @@ public class HttpMessage {
 	public boolean isCrFlag() {
 		return crFlag;
 	}
+	
+	public boolean isLfFlag() {
+		return lfFlag;
+	}
 
 	public boolean isFinished() {
 		//TODO esto no se puede probar en consola, para probarlo hay q setear
@@ -167,9 +171,20 @@ public class HttpMessage {
 		return headerFinished;
 	}
 
+
 	public void setNoContentLength(boolean value) {
 			this.noContentLength = value;
-		
+	}		
+
+	public void closeRequest() {
+		String fin = "\r\n";
+		ByteBuffer aux = ByteBuffer.allocate(buffer.position() +
+			fin.length());
+		buffer.flip();
+		aux.put(buffer);
+		aux.put(fin.getBytes());
+		buffer = aux;
+
 	}
 
 }

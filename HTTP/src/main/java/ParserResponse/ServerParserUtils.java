@@ -16,33 +16,37 @@ public class ServerParserUtils {
 		boolean doneReadingHeaders = false;
 		int size = -1;
 		
-		StateResponse state = response.getState();
-		if(!state.getIsFinished()){
-			switch(state.onMethod()){
-			case 2:try{
-					doneReadingHeaders = getHeaders(buf, response, state.getLastLine());
+		if (!isLeetEnabled()) {
+			response.setBuf(buf.array());
+		} else {
+			StateResponse state = response.getState();
+			if(!state.getIsFinished()){
+				switch(state.onMethod()){
+				case 2:try{
+						doneReadingHeaders = getHeaders(buf, response, state.getLastLine());
+					}catch(Exception e){
+						//temita con los headers
+					}break;
+				case 3:parseBody(buf, response, state.getQueue(), state.getOpenedTags());break;
+				}
+			}else{
+				try{
+					doneReadingStLine = parseResponseStatusLine(readLine(buf), response);
+				}catch(Exception e){
+					//TODO
+				}
+				try{
+					doneReadingHeaders = getHeaders(buf, response, new StringBuilder());
 				}catch(Exception e){
 					//temita con los headers
-				}break;
-			case 3:parseBody(buf, response, state.getQueue(), state.getOpenedTags());break;
-			}
-		}else{
-			try{
-				doneReadingStLine = parseResponseStatusLine(readLine(buf), response);
-			}catch(Exception e){
-				//TODO
-			}
-			try{
-				doneReadingHeaders = getHeaders(buf, response, new StringBuilder());
-			}catch(Exception e){
-				//temita con los headers
-			}
-			//buf.flip();
-			if(doneReadingHeaders && response.isPlainText() /*&& isLeetEnabled()*/){
-				parseBody(buf, response, state.getQueue(), state.getOpenedTags());
-			}
+				}
+				//buf.flip();
+				if(doneReadingHeaders && response.isPlainText() /*&& isLeetEnabled()*/){
+					parseBody(buf, response, state.getQueue(), state.getOpenedTags());
+				}
+			}			
 		}
-		
+
 	}
 	
 	private static boolean parseResponseStatusLine(String line, HttpResponse response) throws NumberFormatException, IOException{
@@ -116,7 +120,8 @@ public class ServerParserUtils {
 	}
 	
 	private static boolean isLeetEnabled(){
-		return ConfigurationManager.getInstance().isL33t();
+		return false;
+//		return ConfigurationManager.getInstance().isL33t();
 	}
 	
 	private static boolean parseBody(ByteBuffer buf, final HttpResponse response, LinkedList<Character> queue, LinkedList<String> openedTags) throws IOException{
