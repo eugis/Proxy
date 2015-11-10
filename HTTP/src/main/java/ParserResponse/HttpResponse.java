@@ -95,4 +95,8 @@ public class HttpResponse {
 	public void setBuf(byte[] buf) {
 		this.buf = buf;
 	}
+	
+	public int getBufLength() {
+		return buf.length;
+	}
 }

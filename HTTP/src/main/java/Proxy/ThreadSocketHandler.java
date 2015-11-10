@@ -92,8 +92,8 @@ public class ThreadSocketHandler implements ConnectionHandler{
 	                    byteReq = request.array();
 	                    String req = new String(byteReq);
 	                    System.out.println("req:" + req);
-	                    String hardCodeResp = "GET / HTTP/1.1 \n\n";
-	                    byteReq = hardCodeResp.getBytes();
+//	                    String hardCodeResp = "GET / HTTP/1.1\nHost: www.google.com\n\n";
+//	                    byteReq = hardCodeResp.getBytes();
 	                    
 	                    serverSocket = writeToServer(host2connect, port2connect, byteReq, serverSocket);
 	                    readFromServer(serverSocket, out);		
@@ -148,7 +148,7 @@ public class ThreadSocketHandler implements ConnectionHandler{
 				reading = true;
 				String res = new String(responseBuf);
                 System.out.println("req:" + res);
-				out.write(resp.getBuf(), 0, resp.getLength());
+				out.write(resp.getBuf(), 0, resp.getBufLength());
 				out.flush();
 			} catch (SocketTimeoutException e) {
 				if (reading) {

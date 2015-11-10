@@ -50,7 +50,9 @@ public class HttpMessage {
 		case INVALIDMETHOD:
 			return ReadingState.ERROR;
 		case DONE:
-			if(noHost || (noContentLength && method.equals("POST"))){
+
+			if(noHost || (isNoContentLength() && method.equals("POST"))){
+
 				return ReadingState.ERROR;
 			}
 			return ReadingState.FINISHED;
