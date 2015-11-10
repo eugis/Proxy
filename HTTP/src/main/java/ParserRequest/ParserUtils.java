@@ -166,7 +166,7 @@ public class ParserUtils {
 	}
 
 	private static boolean isValidVersion(String version) {
-		String regex = "HTTP/1.(0|1)";
+		String regex = "HTTP/1.1";
 		Pattern patt = Pattern.compile(regex);
         Matcher matcher = patt.matcher(version);
         System.out.println("valid version: " + matcher.matches());
@@ -255,9 +255,11 @@ public class ParserUtils {
 			message.setNoHost(true);
 			valid = false;
 		}
+		
 		if(!message.bodyEnable()){
 			if(message.getMethod().equals("POST")){
 				logs.error("length required");
+				message.setNoContentLength(true);
 				valid = false;
 			}
 		}

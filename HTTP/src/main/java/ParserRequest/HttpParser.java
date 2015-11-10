@@ -55,12 +55,13 @@ public class HttpParser {
 			sCode = 405;
 		}else if(message.isInvalidHeader()){
 			sCode = 400;
+			
 		}
 		
 		//TODO x como esta hecho el parserMethod esto viene en null
 //		String version = message.getVersion();
-		String version = "1.0";
-		return ResponseUtils.generateHttpResponseIM(sCode, version);
+		String version = "1.1";
+		return ResponseUtils.generateHttpResponseIM(sCode, version, message);
 	}
 
 	public boolean isFinished() {

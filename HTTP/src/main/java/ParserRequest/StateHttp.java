@@ -91,13 +91,15 @@ public enum StateHttp {
 		public StateHttp process(ByteBuffer buf, HttpMessage message) {
 			// hay que seguir leyendo hasta que aparece \r\n
 			String line = ParserUtils.readLine(buf, message);
-			if(/*message.getHost() == null &&*/ message.isNoHost() && !message.isHeaderFinished()){
+//			TODO: agregar que no hay content-lenght y el method es post siga parseando!
+			
+			if(message.isNoHost() && message.isNoContentLength() && !message.isHeaderFinished()){
 				// Si no esta seteado el host, y todavia no termino de parsearHeaders busco el host
 				ParserUtils.parseHeaders(line, message);
 			}
 			
 			//Descomentar para forzar la finalizacion del msje
-			//message.setFinished();
+			message.setFinished();
 			if(message.isFinished()){
 				message.state = DONE;
 				return message.state.process(buf, message);

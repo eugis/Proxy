@@ -27,6 +27,8 @@ public class HttpMessage {
 	
 	private boolean noHost;
 	private boolean headerFinished;
+
+	private boolean noContentLength;
 	
 	public HttpMessage() {
 		this.state = StateHttp.REQUEST_LINE;
@@ -36,6 +38,7 @@ public class HttpMessage {
 		this.crFlag = false;
 		this.lfFlag = false;
 		this.noHost = true;
+		this.noContentLength = true;
 		this.headerFinished = false;
 	}
 
@@ -47,7 +50,7 @@ public class HttpMessage {
 		case INVALIDMETHOD:
 			return ReadingState.ERROR;
 		case DONE:
-			if(noHost){
+			if(noHost || (isNoContentLength() && method.equals("POST"))){
 				return ReadingState.ERROR;
 			}
 			return ReadingState.FINISHED;
@@ -142,6 +145,10 @@ public class HttpMessage {
 	public boolean isNoHost() {
 		return noHost;
 	}
+	
+	public boolean isNoContentLength() {
+		return noContentLength;
+	}
 
 	public boolean isInvalidMethod() {
 		return state.equals(StateHttp.INVALIDMETHOD);
@@ -149,7 +156,7 @@ public class HttpMessage {
 
 	public boolean isInvalidHeader() {
 		//TODO aca tendria que agregar si no viene el content-lenght y es necesario
-		if(noHost){
+		if(noHost || (method!=null && method.equals("POST") && noContentLength)){
 			return true;
 		}
 		return false;
@@ -164,6 +171,11 @@ public class HttpMessage {
 		return headerFinished;
 	}
 
+
+	public void setNoContentLength(boolean value) {
+			this.noContentLength = value;
+	}		
+
 	public void closeRequest() {
 		String fin = "\r\n";
 		ByteBuffer aux = ByteBuffer.allocate(buffer.position() +
@@ -172,6 +184,7 @@ public class HttpMessage {
 		aux.put(buffer);
 		aux.put(fin.getBytes());
 		buffer = aux;
+
 	}
 
 }
