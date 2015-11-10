@@ -95,7 +95,7 @@ public class ResponseUtils {
 		
 		html = "<html><body>";
 		html += "<h1>" + error + ": " + statusCode.get(error) + "</h1>";
-		loadMessages(message);		
+		reloadMessages(message);		
 		String msg = msgs.get(error);
 		if(msg != null){
 			html += msgs.get(error);
@@ -105,7 +105,7 @@ public class ResponseUtils {
 		return html;
 	}
 	
-	private static void loadMessages(HttpMessage message) {
+	private static void reloadMessages(HttpMessage message) {
 		String value="";
 		if (message.isNoHost()){
 			value= "Host required";

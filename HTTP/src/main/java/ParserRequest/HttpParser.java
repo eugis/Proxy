@@ -56,6 +56,8 @@ public class HttpParser {
 		}else if(message.isInvalidHeader()){
 			sCode = 400;
 			
+		}else if(false /*EL SERVER HACE TIME OUT*/){
+			sCode = 504;
 		}
 		
 		//TODO x como esta hecho el parserMethod esto viene en null
