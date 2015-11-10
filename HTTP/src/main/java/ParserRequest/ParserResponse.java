@@ -49,21 +49,7 @@ public class ParserResponse {
 		}
 	}
 
-	public String getHost() {
-//		if (this.readyToSend) {
-//			return this.message.getHeader("Host");
-//		} 
-//		return null;
-		return "www.google.com";
-	}
 
-	public int getPort() {
-//		if (this.readyToSend) {
-//			return this.message.getPort();
-//		}
-//		return -1;
-		return 80;
-	}
 	
 	private void setStatus(){
 		switch (this.message.state) {

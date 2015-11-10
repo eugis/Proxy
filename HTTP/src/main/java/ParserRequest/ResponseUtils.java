@@ -69,10 +69,10 @@ public class ResponseUtils {
 		return result;
 	}
 	
-	public static String generateHttpResponseIM(int sCode, String version){
+	public static String generateHttpResponseIM(int sCode, String version, HttpMessage message){
 		String aux = "";
 		String firstLine = generateFirstLine(version, aux, sCode);
-		String dataLine = generateHTMLData(sCode);
+		String dataLine = generateHTMLData(sCode, message);
 		Map<String,String> headerLine = generateHeaders(dataLine.length());
 		
 		aux += firstLine + printHeaders(headerLine) + dataLine;
@@ -91,11 +91,12 @@ public class ResponseUtils {
 		return headers;
 	}
 
-	private static String generateHTMLData(Integer error) {
+	private static String generateHTMLData(Integer error, HttpMessage message) {
 		String html = "";
 		
 		html = "<html><body>";
 		html += "<h1>" + error + ": " + statusCode.get(error) + "</h1>";
+		loadMessages(message);		
 		String msg = msgs.get(error);
 		if(msg != null){
 			html += msgs.get(error);
@@ -105,6 +106,20 @@ public class ResponseUtils {
 		return html;
 	}
 	
+	private static void loadMessages(HttpMessage message) {
+		String value="";
+		if (message.isNoHost()){
+			value= "Host required";
+		}else if (message.isNoContentLength()){
+			value= "Content-Length required";
+		}
+				
+		
+		msgs.put(400, value);
+		
+		
+	}
+
 	private static String generateFirstLine(String version, String aux,
 			Integer sCode) {
 		//HTTP/1.0 200 OK
