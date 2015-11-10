@@ -99,10 +99,17 @@ public class ParserUtils {
 				message.setcrFlag(false);
 			}
 			if(b == '\r'){
-				message.setcrFlag(true);
+				if(message.isHeaderFinished()){
+					message.setcrFlag(true);
+				}
 				crFlag = true;
 			}else if(b == '\n'){
-				message.setlfFlag(true);
+				if(message.isLfFlag()){
+					message.setFinished();
+				}
+				if(message.isHeaderFinished()){
+					message.setlfFlag(true);
+				}
 				lfFlag = true;
 				if(i == 1){ //quiere decir q viene solo un \n
 					String emptyLine = "\n";

@@ -43,8 +43,6 @@ public enum StateHttp {
 				System.out.println("Empty line!");
 				message.setHeaderFinished(true);
 				if(!ParserUtils.minHeaders(message)){
-					//TODO si no esta el header Host que hacemos,
-					//armamos una respuesta nosotros?
 					return INVALID;
 				}else{
 					message.state = EMPTY_LINE;
@@ -70,7 +68,8 @@ public enum StateHttp {
 		public StateHttp process(ByteBuffer buf, HttpMessage message) {
 			boolean finished = ParserUtils.parseData(buf, message);
 			if(finished){
-				return DONE;
+				message.state = DONE;
+				return message.state.process(buf, message);
 			}
 			return this;
 		}
@@ -80,7 +79,8 @@ public enum StateHttp {
 
 		@Override
 		public StateHttp process(ByteBuffer buf, HttpMessage message) {
-			// TODO me parece q aca no hay q hacer nada
+			//agrego las lineas de cierre al message
+//			message.closeRequest();
 			return this;
 		}
 		
@@ -99,7 +99,8 @@ public enum StateHttp {
 			//Descomentar para forzar la finalizacion del msje
 			//message.setFinished();
 			if(message.isFinished()){
-				return DONE;
+				message.state = DONE;
+				return message.state.process(buf, message);
 			}
 			return this;
 		}
