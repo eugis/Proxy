@@ -101,7 +101,16 @@ public class ThreadSocketHandler implements ConnectionHandler{
 //	                    System.out.println("iguales:" + req.equals(hardCodeResp));
 //	                    byteReq = hardCodeResp.getBytes();
 //	                    parser = new HttpParser();
-	                    serverSocket = writeToServer(host2connect, port2connect, byteReq, serverSocket);
+	                    try{
+	                    	serverSocket = writeToServer(host2connect, port2connect, byteReq, serverSocket);
+	                    }catch(UnknownHostException e){
+	        				logs.error(e);
+	        				
+	        				int sCode = 112;
+	        				byteReq = parser.getHttpResponse(sCode).getBytes();
+	        				out.write(byteReq, 0, byteReq.length);
+	        				out.flush();
+	                    }
 	                    readFromServer(serverSocket, out);		
             			break;
 					case ERROR:
