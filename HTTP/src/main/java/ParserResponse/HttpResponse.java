@@ -15,7 +15,7 @@ public class HttpResponse {
 	private boolean closeConnection;
 	private StateResponse state;
 	Map<String, String> headers;
-	private byte[] buf;
+	//private byte[] buf;
 	
 
 	public HttpResponse(){
@@ -88,7 +88,7 @@ public class HttpResponse {
 		this.state = state;
 	}
 
-	public byte[] getBuf() {
+	/*public byte[] getBuf() {
 		return buf;
 	}
 
@@ -98,5 +98,5 @@ public class HttpResponse {
 	
 	public int getBufLength() {
 		return buf.length;
-	}
+	}*/
 }

@@ -10,21 +10,29 @@ import CarlyAdmin.manager.ConfigurationManager;
 
 public class ServerParserUtils {
 
-	public static void processResponse(ByteBuffer buf, HttpResponse response) throws IOException{
+	public static byte[] processResponse(ByteBuffer buf, HttpResponse response) throws IOException{
 		String line = null;
 		boolean doneReadingStLine = false;
 		boolean doneReadingHeaders = false;
 		boolean doneReading = false;
 		int size = -1;
 
-		if (!isLeetEnabled()) {
-			response.setBuf(buf.array());
-		}else{ 
+		if (!!isLeetEnabled()) {
+			//response.setBuf(buf.array());
+			return buf.array();
+		}else{
+			ByteBuffer respBuf = ByteBuffer.allocate(buf.capacity());
+			
 			StateResponse state = response.getState();
 			if(!state.getIsFinished()){
 				switch(state.onMethod()){
+				case 1: try{
+							doneReadingStLine = parseResponseStatusLine(buf,response, state.getLastLine(), respBuf);
+						}catch(Exception e){
+							//TO DO
+						}
 				case 2:try{
-						doneReadingHeaders = getHeaders(buf, response, state.getLastLine());
+						doneReadingHeaders = getHeaders(buf, response, state.getLastLine(), respBuf);
 					}catch(Exception e){
 						//temita con los headers
 					}break;
@@ -32,18 +40,20 @@ public class ServerParserUtils {
 				}
 			}else{
 				try{
-					doneReadingStLine = parseResponseStatusLine(readLine(buf), response);
+					doneReadingStLine = parseResponseStatusLine(buf, response, new StringBuilder(), respBuf);
 				}catch(Exception e){
 					//TODO
 				}
 				try{
-					doneReadingHeaders = getHeaders(buf, response, new StringBuilder());
+					if(doneReadingStLine){
+						doneReadingHeaders = getHeaders(buf, response, new StringBuilder(), respBuf);
+					}
 				}catch(Exception e){
 					//temita con los headers
 				}
 				//buf.flip();
 				if(doneReadingHeaders && response.isPlainText() /*&& isLeetEnabled()*/){
-					doneReading = parseBody(buf, response, state.getQueue(), state.getOpenedTags());
+					doneReading = true;//parseBody(buf, response, state.getQueue(), state.getOpenedTags());
 					if(!doneReading){
 						state.setOnMethod(3);
 						state.setIsFinished(false);
@@ -52,11 +62,35 @@ public class ServerParserUtils {
 					}
 				}
 			}
+			return respBuf.array();
 		}
 	}
 	
-	private static boolean parseResponseStatusLine(String line, HttpResponse response) throws NumberFormatException, IOException{
-		int item = 0;
+	private static boolean parseResponseStatusLine(ByteBuffer buf, HttpResponse response, StringBuilder genLine, ByteBuffer respBuf) throws NumberFormatException, IOException{
+		boolean doneReading = false;
+		StateResponse state = response.getState();
+		char c;
+		int b;
+		
+		while(buf.hasRemaining() && !doneReading && (b = buf.get())!= -1){
+			c = (char)b;
+			respBuf.put((byte) b);
+			if(c == '\n'){
+				doneReading = parseStLine(genLine.toString().trim(), response);
+			}else{
+				genLine.append(c);
+			}
+		}
+		if(!doneReading){
+			state = response.getState();
+			state.setIsFinished(false);
+			state.setOnMethod(1);
+			state.setLastLine(genLine);
+		}
+		return doneReading;
+	}
+	
+	private static boolean parseStLine(String line, HttpResponse response){
 		int last = line.indexOf(" ");
 		int next = 0;
 		String version = line.substring(0, last);
@@ -73,7 +107,7 @@ public class ServerParserUtils {
 	}
 	
 	
-	private static boolean getHeaders(ByteBuffer buf, HttpResponse response, StringBuilder genLine) throws IOException{
+	private static boolean getHeaders(ByteBuffer buf, HttpResponse response, StringBuilder genLine, ByteBuffer respBuf) throws IOException{
 		boolean doneReading = false;		
 		//StringBuilder genLine = new StringBuilder();
 		StateResponse state = response.getState();
@@ -82,6 +116,7 @@ public class ServerParserUtils {
 
 		while(buf.hasRemaining() && !doneReading && (b = buf.get())!= -1){
 			c = (char)b;
+			respBuf.put((byte) b);
 			if(c == '\n'){
 				if(genLine.toString().trim().equals("")){
 					doneReading = true;
