@@ -214,5 +214,8 @@ public class HttpMessage {
 		this.noContentLength = true;
 		this.headerFinished = false;
 		pos = 0;
+		if(lastLine == null){
+			lastLine = new StringBuilder();
+		}
 	}
 }
