@@ -15,10 +15,10 @@ public class ServerParserUtils {
 		boolean doneReadingHeaders = false;
 		boolean doneReading = false;
 
-		if (!isLeetEnabled()) {
-			//response.setBuf(buf.array());
-			return buf.array();
-		}else{
+//		if (!isLeetEnabled()) {
+//			//response.setBuf(buf.array());
+//			return buf.array();
+//		}else{
 			ByteBuffer respBuf = ByteBuffer.allocate(buf.capacity());
 			
 			StateResponse state = response.getState();
@@ -34,7 +34,7 @@ public class ServerParserUtils {
 					}catch(Exception e){
 						//temita con los headers
 					}break;
-				case 3:parseBody(buf, response, state.getQueue(), state.getOpenedTags());break;
+				case 3:parseBody(buf, response, state.getQueue(), state.getOpenedTags(), respBuf);break;
 				}
 			}else{
 				try{
@@ -61,7 +61,7 @@ public class ServerParserUtils {
 				}
 			}
 			return respBuf.array();
-		}
+//		}
 	}
 	
 	private static boolean parseResponseStatusLine(ByteBuffer buf, HttpResponse response, StringBuilder genLine, ByteBuffer respBuf) throws NumberFormatException, IOException{
@@ -163,11 +163,12 @@ public class ServerParserUtils {
 //		return ConfigurationManager.getInstance().isL33t();
 	}
 	
-	private static boolean parseBody(ByteBuffer buf, final HttpResponse response, LinkedList<Character> queue, LinkedList<String> openedTags) throws IOException{
+	private static boolean parseBody(ByteBuffer buf, final HttpResponse response, LinkedList<Character> queue, LinkedList<String> openedTags, ByteBuffer respBuf) throws IOException{
 		StringBuilder resp = new StringBuilder();
 		Set<String> tags = loadHtmlTags(); 
 		char c;
 		int b = 0;
+		int lenghtRead = 0;
 		boolean finished = false;
 		boolean onComment = response.getState().getOnComment();
 		while(buf.hasRemaining() && (b = buf.get()) != -1 && !finished){
@@ -175,7 +176,8 @@ public class ServerParserUtils {
 				finished = true;
 			}else{
 				c = (char)b;
-				switch(c){
+				if (isLeetEnabled()) {
+					switch(c){
 					case '<': add2Queue(queue, c);break;
 					case '>': if(onComment){
 								queue.removeLast();
@@ -194,10 +196,19 @@ public class ServerParserUtils {
 								}
 							  }
 								break;
+					}
+				} else {
+					lenghtRead ++;
+					if (lenghtRead ==  response.getLength()) {
+						response.getState().setIsFinished(true);
+						response.getState().setOnMethod(3);
+						finished = true;
+					}
 				}
 				response.getState().setOnComment(onComment);
 				resp.append(c);
-			}	
+				respBuf.put((byte)b); //TODO: revisar si esto sería adecuado de poner acá
+			} 
 		}
 		return finished;
 	}

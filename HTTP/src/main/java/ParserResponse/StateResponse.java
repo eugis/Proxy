@@ -8,12 +8,15 @@ public class StateResponse {
 	private LinkedList<Character> queue;
 	private LinkedList<String> openedTags;
 	private int onMethod; //1-statusline; 2-headers; 3-body
+	private int amountReaded; //para la lectura del body
 	private StringBuilder lastLine;
 	private boolean onComment;
 	
 	
 	public StateResponse(){
+		this.setAmountReaded(0);
 		this.isFinished = true;
+//		this.isFinished = false;
 		this.onMethod = 0;
 		this.setOpenedTags(new LinkedList<String>());
 		this.setQueue(new LinkedList<Character>());
@@ -72,6 +75,14 @@ public class StateResponse {
 
 	public void setOnComment(boolean onTag) {
 		this.onComment = onTag;
+	}
+
+	public int getAmountReaded() {
+		return amountReaded;
+	}
+
+	public void setAmountReaded(int amountReaded) {
+		this.amountReaded = amountReaded;
 	}
 	
 }

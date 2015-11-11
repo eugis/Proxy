@@ -51,6 +51,7 @@ public class ThreadSocketHandler implements ConnectionHandler{
         while (recvMsgSize != -1 /*&& !keepReading*/) {
         	receiveBuf = new byte[BUFSIZE]; //TODO: hacer de forma elegante
         	recvMsgSize = in.read(receiveBuf);
+        	System.out.println("request sin parsear" + new String(receiveBuf));
         	bBuffer = ByteBuffer.wrap(receiveBuf);
         	if(recvMsgSize != -1){
         		//Harcoded receiveBuf
@@ -92,12 +93,14 @@ public class ThreadSocketHandler implements ConnectionHandler{
 
 	                    byteReq = parser.getRequest();
 	                    System.out.println("long request: " + byteReq.length);
+	                    
+	                    System.out.println("request: " + new String(byteReq));
 //	                    String req = new String(byteReq);
 //	                    System.out.println("req:" + req);
 //	                    String hardCodeResp = "GET / HTTP/1.1\nHost: www.google.com\n\n\n";
 //	                    System.out.println("iguales:" + req.equals(hardCodeResp));
 //	                    byteReq = hardCodeResp.getBytes();
-	                    
+//	                    parser = new HttpParser();
 	                    serverSocket = writeToServer(host2connect, port2connect, byteReq, serverSocket);
 	                    readFromServer(serverSocket, out);		
             			break;
@@ -144,24 +147,25 @@ public class ThreadSocketHandler implements ConnectionHandler{
     	boolean reading = false;
     	ByteBuffer bBuffer;
     	try {
-    		while ((recvMsgSize = inFromServer.read(responseBuf)) != -1) {
+    		while ((recvMsgSize = inFromServer.read(responseBuf)) != -1  && !resp.isResponseFinished() /*&& keepReading*/) {
 				bBuffer = ByteBuffer.wrap(responseBuf);
 				responseBuf = ServerParserUtils.processResponse(bBuffer, resp);
-				reading = true;
+//				reading = true;
 				String res = new String(responseBuf);
                 System.out.println("req:" + res);
 				out.write(responseBuf, 0, responseBuf.length);
 				out.flush();
     		}
 		} catch (SocketTimeoutException e) {
-				if (reading) {
-					keepReading = false;
-				} else {
+//				if (reading) {
+//					keepReading = false;
+//				} else {
 					System.out.println("timeout");
 					//TODO: devolver un response de timeout (504? - 505?)
-				}
+//				}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 			
-        //}
     }
 }

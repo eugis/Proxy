@@ -17,7 +17,6 @@ public class HttpResponse {
 	Map<String, String> headers;
 	//private byte[] buf;
 	//private boolean hasRead;
-	
 
 	public HttpResponse(){
 		this.closeConnection = false;
@@ -88,6 +87,17 @@ public class HttpResponse {
 
 	public void setState(StateResponse state) {
 		this.state = state;
+	}
+
+	public boolean isResponseFinished() {
+		if (state.onMethod() > 2) {
+			if (headers.get("Content-Length") != null) {
+				return state.getIsFinished();	
+			} else {
+				return true;
+			}	
+		} 
+		return false;
 	}
 
 	/*public byte[] getBuf() {
