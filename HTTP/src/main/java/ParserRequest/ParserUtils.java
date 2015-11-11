@@ -96,8 +96,8 @@ public class ParserUtils {
 			b = buf.get();
 			array[i++] = b;
 			if(b != 0){
-				System.out.println(b);
-				System.out.println("pos: " + message.pos);
+//				System.out.println(b);
+//				System.out.println("pos: " + message.pos);
 				message.buffer.put(message.pos, b);
 				message.pos++;
 			}
@@ -105,17 +105,17 @@ public class ParserUtils {
 				message.setcrFlag(false);
 			}
 			if(b == '\r'){
-				if(message.isHeaderFinished()){
+//				if(message.isHeaderFinished()){
 					message.setcrFlag(true);
-				}
+//				}
 				crFlag = true;
 			}else if(b == '\n'){
 				if(message.isLfFlag()){
 					message.setFinished();
 				}
-				if(message.isHeaderFinished()){
+//				if(message.isHeaderFinished()){
 					message.setlfFlag(true);
-				}
+//				}
 				lfFlag = true;
 				if(i == 1){ //quiere decir q viene solo un \n
 					String emptyLine = "\n";

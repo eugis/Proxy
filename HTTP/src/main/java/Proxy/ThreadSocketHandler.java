@@ -90,9 +90,9 @@ public class ThreadSocketHandler implements ConnectionHandler{
 	            		host2connect = parser.getHost();
 	                    port2connect = parser.getPort();
 	                    ByteBuffer request = parser.getRequest();
-	                    ParserUtils.printBuffer(request);
+//	                    ParserUtils.printBuffer(request);
 	                    byteReq = request.array();
-	                    System.out.println("long: " + byteReq.length);
+	                    System.out.println("long request: " + byteReq.length);
 //	                    String req = new String(byteReq);
 //	                    System.out.println("req:" + req);
 //	                    String hardCodeResp = "GET / HTTP/1.1\nHost: www.google.com\n\n\n";
