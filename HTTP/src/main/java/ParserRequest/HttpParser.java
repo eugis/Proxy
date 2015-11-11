@@ -75,6 +75,8 @@ public class HttpParser {
 		System.out.println("Long request: "+ request);
 		System.out.println(new String(request));
 		
+		message.reset();
+		
 		return request;
 		
 	}

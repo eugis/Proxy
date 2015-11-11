@@ -50,6 +50,7 @@ public class HttpMessage {
 	public ReadingState parser(ByteBuffer buf) {
 		//Estoy guardando en buffer todo lo q entra
 //		ParserUtils.concatBuffer(buf, this);
+
 		state = state.process(buf, this);
 		switch(state){
 		case INVALIDMETHOD:
@@ -200,5 +201,18 @@ public class HttpMessage {
 
 	public StringBuilder getLastLine() {
 		return lastLine;
+	}
+
+	public void reset() {
+		this.state = StateHttp.REQUEST_LINE;
+		this.headers = new HashMap<String, String>();
+		this.port = 80;
+		this.buffer = ByteBuffer.allocate(2048);
+		this.crFlag = false;
+		this.lfFlag = false;
+		this.noHost = true;
+		this.noContentLength = true;
+		this.headerFinished = false;
+		pos = 0;
 	}
 }
