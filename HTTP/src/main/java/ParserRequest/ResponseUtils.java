@@ -20,7 +20,6 @@ public class ResponseUtils {
 	private static Map<Integer, String> loadMsgs() {
 		Map<Integer, String> msg = new HashMap<Integer, String>();
 		msg.put(405, "The server supports only the following method: GET, POST and HEAD");
-		//msg.put(400, "");
 		return msg;
 	}
 	
@@ -96,7 +95,7 @@ public class ResponseUtils {
 		
 		html = "<html><body>";
 		html += "<h1>" + error + ": " + statusCode.get(error) + "</h1>";
-		loadMessages(message);		
+		reloadMessages(message);		
 		String msg = msgs.get(error);
 		if(msg != null){
 			html += msgs.get(error);
@@ -106,7 +105,7 @@ public class ResponseUtils {
 		return html;
 	}
 	
-	private static void loadMessages(HttpMessage message) {
+	private static void reloadMessages(HttpMessage message) {
 		String value="";
 		if (message.isNoHost()){
 			value= "Host required";
