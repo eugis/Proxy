@@ -20,7 +20,7 @@ import ParserResponse.ServerParserUtils;
 
 public class ThreadSocketHandler implements ConnectionHandler{
 
-	private static final int BUFSIZE = 1024;
+	private static final int BUFSIZE = 4096;
 	private HttpParser parser;
 	private ServerParserUtils serverParser;
 	
@@ -51,6 +51,7 @@ public class ThreadSocketHandler implements ConnectionHandler{
         while (recvMsgSize != -1 /*&& !keepReading*/) {
         	receiveBuf = new byte[BUFSIZE]; //TODO: hacer de forma elegante
         	recvMsgSize = in.read(receiveBuf);
+        	System.out.println("request sin parsear" + new String(receiveBuf));
         	bBuffer = ByteBuffer.wrap(receiveBuf);
         	if(recvMsgSize != -1){
         		//Harcoded receiveBuf
@@ -89,17 +90,29 @@ public class ThreadSocketHandler implements ConnectionHandler{
 	//            		if(!resp.returnToClient()){
 	            		host2connect = parser.getHost();
 	                    port2connect = parser.getPort();
-//	                    ByteBuffer request = parser.getRequest();
-//	                    ParserUtils.printBuffer(request);
-//	                    byteReq = request.array();
-//	                    System.out.println("long: " + byteReq.length);
+
+	                    byteReq = parser.getRequest();
+	                    System.out.println("long request: " + byteReq.length);
+	                    
+	                    System.out.println("request: " + new String(byteReq));
+
 //	                    String req = new String(byteReq);
 //	                    System.out.println("req:" + req);
 	                    String hardCodeResp = "GET / HTTP/1.1\nHost: www.google.com\n\n\n";
 //	                    System.out.println("iguales:" + req.equals(hardCodeResp));
-	                    byteReq = hardCodeResp.getBytes();
-	                    
-	                    serverSocket = writeToServer(host2connect, port2connect, byteReq, serverSocket);
+//	                    byteReq = hardCodeResp.getBytes();
+//	                    parser = new HttpParser();
+	                    try{
+	                    	serverSocket = writeToServer(host2connect, port2connect, byteReq, serverSocket);
+	                    }catch(UnknownHostException e){
+	        				logs.error(e);
+	        				
+	        				int sCode = 112;
+	        				byteReq = parser.getHttpResponse(sCode).getBytes();
+	        				out.write(byteReq, 0, byteReq.length);
+	        				out.flush();
+	                    }
+
 	                    readFromServer(serverSocket, out);		
             			break;
 					case ERROR:
@@ -126,6 +139,7 @@ public class ThreadSocketHandler implements ConnectionHandler{
 		if (serverSocket == null ){
 			ProxySocket pSocket = ProxyConnectionManager.getConnection(host, port);
 			serverSocket = pSocket.getSocket();	
+			System.out.println("Socket nuevo!!");
 		}
 		//TODO: remover syso
     	System.out.println(serverSocket);
@@ -138,35 +152,40 @@ public class ThreadSocketHandler implements ConnectionHandler{
 	//TODO: Agregar el parser de respuesta al contenido del servidor
     private void readFromServer(Socket serverSocket, OutputStream out) throws IOException{
     	byte[] responseBuf = new byte[BUFSIZE];
-    	int recvMsgSize = 0;
+//    	int recvMsgSize = 0;
     	HttpResponse resp = new HttpResponse();
     	boolean keepReading = true;
     	InputStream inFromServer = serverSocket.getInputStream();
-    	boolean reading = false;
+//    	boolean reading = false;
     	ByteBuffer bBuffer;
-		while (recvMsgSize != -1 && keepReading) {
-			try {
-				recvMsgSize = inFromServer.read(responseBuf);
+    	try {
+    		while ((/* recvMsgSize = */inFromServer.read(responseBuf)) != -1 /* && !resp.isResponseFinished()*/ && keepReading) {
 				bBuffer = ByteBuffer.wrap(responseBuf);
-	        	ServerParserUtils.processResponse(bBuffer, resp);
-				reading = true;
+				responseBuf = ServerParserUtils.processResponse(bBuffer, resp);
+//				reading = true;
 				String res = new String(responseBuf);
                 System.out.println("req:" + res);
-				out.write(resp.getBuf(), 0, resp.getBufLength());
+				out.write(responseBuf, 0, responseBuf.length);
 				out.flush();
-			} catch (SocketTimeoutException e) {
-				if (reading) {
-					keepReading = false;
-				} else {
+				System.out.println("Escribiendo en el cliente ... ");
+    		}
+		} catch (SocketTimeoutException e) {
+//				if (reading) {
+//					keepReading = false;
+//				} else {
 					System.out.println("timeout");
-					
-					//TODO: devolver un response de timeout (504)
-//					byteReq = parser.getHttpResponse().getBytes();
-//					out.write(byteReq);
-//              	out.flush();
-				}
-			}
+					logs.error("timeout");
+
+					int sCode = 504;
+					byte[] byteReq = parser.getHttpResponse(sCode).getBytes();
+					out.write(byteReq, 0, byteReq.length);
+					out.flush();
+					keepReading = false;
+//				}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 			
-        }
     }
 }

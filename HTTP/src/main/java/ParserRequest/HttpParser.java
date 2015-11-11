@@ -49,33 +49,44 @@ public class HttpParser {
 		return message.getPort();
 	}
 
+	public boolean isFinished() {
+		return message.isFinished();
+	}
+
+	public byte[] getRequest() {
+		byte[] request = new byte[message.pos];
+		message.buffer.get(request, 0, message.pos);
+		
+		System.out.println("Long request: "+ request.length);
+		System.out.println(new String(request));
+		
+		message.reset();
+		
+		return request;
+		
+	}
+
+	public void cleanRequest() {
+		message.cleanBuffer();		
+	}
+
+	public String getHttpResponse(int sCode) {
+		String version = "1.1";
+		return ResponseUtils.generateHttpResponseIM(sCode, version, message);
+	}
+	
 	public String getHttpResponse() {
 		int sCode = 0;
 		if(message.isInvalidMethod()){
 			sCode = 405;
 		}else if(message.isInvalidHeader()){
-			sCode = 400;
-			
-		}else if(false /*EL SERVER HACE TIME OUT*/){
-			sCode = 504;
+			sCode = 400;	
 		}
 		
-		//TODO x como esta hecho el parserMethod esto viene en null
-//		String version = message.getVersion();
-		String version = "1.1";
-		return ResponseUtils.generateHttpResponseIM(sCode, version, message);
-	}
-
-	public boolean isFinished() {
-		return message.isFinished();
-	}
-
-	public ByteBuffer getRequest() {
-		return message.buffer;
-	}
-
-	public void cleanRequest() {
-		message.cleanBuffer();		
+//		String version = "1.1";
+//		return ResponseUtils.generateHttpResponseIM(sCode, version, message);
+		
+		return getHttpResponse(sCode);
 	}
 
 }

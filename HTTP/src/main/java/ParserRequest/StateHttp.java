@@ -28,19 +28,18 @@ public enum StateHttp {
 
 		@Override
 		public StateHttp process(ByteBuffer buf, HttpMessage message) {
-			String line = ParserUtils.readLine(buf, message);
-			if(line == null){
-				return this;
-			}
-			
-			if(!line.equals("\n")){
-				boolean valid = ParserUtils.parseHeaders(line.trim(), message);
-				if(!valid){
-					return INVALID;
-				}
-			}else{
-				//TODO borrar syso!
-				System.out.println("Empty line!");
+			boolean finishedReading = ParserUtils.setHeaders(buf, message, message.getLastLine());
+//				String line = ParserUtils.readLine(buf, message);
+//				if(line == null){
+//					return this;
+//				}
+//				if(!line.equals("\n")){
+//					boolean valid = ParserUtils.parseHeaders(line.trim(), message);
+//					if(!valid){
+//						return INVALID;
+//					}
+//				}else{
+			if(finishedReading){
 				message.setHeaderFinished(true);
 				if(!ParserUtils.minHeaders(message)){
 					return INVALID;
@@ -49,6 +48,7 @@ public enum StateHttp {
 					return message.state.process(buf, message);
 				}
 			}
+//				}
 			return this;
 		}
 		
@@ -57,8 +57,13 @@ public enum StateHttp {
 
 		@Override
 		public StateHttp process(ByteBuffer buf, HttpMessage message) {
-			message.state = BODY;
-			return message.state.process(buf, message);
+			if(message.getMethod().equals("POST")){
+				message.state = BODY;
+				return message.state.process(buf, message);
+			}else{
+				message.state = DONE;
+				return message.state.process(buf, message);
+			}
 		}
 		
 	},
@@ -98,8 +103,6 @@ public enum StateHttp {
 				ParserUtils.parseHeaders(line, message);
 			}
 			
-			//Descomentar para forzar la finalizacion del msje
-			message.setFinished();
 			if(message.isFinished()){
 				message.state = DONE;
 				return message.state.process(buf, message);
@@ -115,8 +118,6 @@ public enum StateHttp {
 			// hay que seguir leyendo hasta que aparece \r\n
 			ParserUtils.readLine(buf, message);
 			
-			//Descomentar para probar la respuesta cableada
-			//message.setFinished();
 			return this;
 		}
 		
@@ -124,19 +125,4 @@ public enum StateHttp {
 	
 	public abstract StateHttp process(final ByteBuffer buf, final HttpMessage message);
 	
-	private static void untilLastLine(ByteBuffer buf, HttpMessage message) {
-		String line = ParserUtils.readLine(buf, message);
-		if(message.isCrFlag() && !line.equals('\n')){
-			message.setcrFlag(false);
-		}
-		if(line.equals('\r')){
-			message.setcrFlag(true);
-		}
-		if(line.equals('\n')){
-			message.setlfFlag(true);
-		}
-		if(line.equals('\r'+'\n')){
-			message.setFinished();
-		}
-	}
 }

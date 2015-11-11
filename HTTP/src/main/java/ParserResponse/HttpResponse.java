@@ -15,13 +15,14 @@ public class HttpResponse {
 	private boolean closeConnection;
 	private StateResponse state;
 	Map<String, String> headers;
-	private byte[] buf;
-	
+	//private byte[] buf;
+	//private boolean hasRead;
 
 	public HttpResponse(){
 		this.closeConnection = false;
 		setState(new StateResponse());
 		headers = new HashMap<String, String>();
+		//this.hasRead = false;
 	}
 
 	public String getVersion() {
@@ -88,7 +89,19 @@ public class HttpResponse {
 		this.state = state;
 	}
 
-	public byte[] getBuf() {
+	public boolean isResponseFinished() {
+		
+		if (state.onMethod() == State.BODY) {
+			if (headers.get("Content-Length") != null) {
+				return state.getIsFinished();	
+			} else {
+				return true;
+			}	
+		} 
+		return false;
+	}
+
+	/*public byte[] getBuf() {
 		return buf;
 	}
 
@@ -99,4 +112,12 @@ public class HttpResponse {
 	public int getBufLength() {
 		return buf.length;
 	}
+
+	public boolean hasRead() {
+		return hasRead;
+	}
+
+	public void setReaded(boolean hasRead) {
+		this.hasRead = hasRead;
+	}*/
 }

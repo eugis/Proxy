@@ -26,6 +26,7 @@ public class ResponseUtils {
 	private static Map<Integer, String> loadStatusCode() {
 		Map<Integer, String> result = new HashMap<Integer, String>();
 		result.put(100, "Continue");
+		result.put(112, "Conexion Error");
 		result.put(200, "OK");
 		result.put(201, "Created");
 		result.put(202, "Accepted");
