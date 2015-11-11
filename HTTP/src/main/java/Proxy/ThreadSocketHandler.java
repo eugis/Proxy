@@ -89,9 +89,8 @@ public class ThreadSocketHandler implements ConnectionHandler{
 	//            		if(!resp.returnToClient()){
 	            		host2connect = parser.getHost();
 	                    port2connect = parser.getPort();
-	                    ByteBuffer request = parser.getRequest();
-//	                    ParserUtils.printBuffer(request);
-	                    byteReq = request.array();
+
+	                    byteReq = parser.getRequest();
 	                    System.out.println("long request: " + byteReq.length);
 //	                    String req = new String(byteReq);
 //	                    System.out.println("req:" + req);

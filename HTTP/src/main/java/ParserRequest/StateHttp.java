@@ -57,8 +57,13 @@ public enum StateHttp {
 
 		@Override
 		public StateHttp process(ByteBuffer buf, HttpMessage message) {
-			message.state = BODY;
-			return message.state.process(buf, message);
+			if(message.getMethod().equals("POST")){
+				message.state = BODY;
+				return message.state.process(buf, message);
+			}else{
+				message.state = DONE;
+				return message.state.process(buf, message);
+			}
 		}
 		
 	},

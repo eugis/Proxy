@@ -157,8 +157,6 @@ public class ParserUtils {
 			if(isValidURL(requestLine[1])){
 
 				if(isValidVersion(requestLine[2])){
-					//TODO tendria que mirar esto primero, ya que es necesario tener la version
-					//para cablear la respuesta
 					valid = true;
 					message.setMethod(requestLine[0]);
 					int index = requestLine[2].indexOf("/");
@@ -234,12 +232,12 @@ public class ParserUtils {
 					return true;
 				}
 			}
-		}else{
+		}/*TODO else{
 			ParserUtils.readLine(buf, message);
 			//Descomentar para forzar la finalizacion del request
 //			message.setFinished();
 			return message.isFinished();
-		}
+		}*/
 		
 		return false;
 	}

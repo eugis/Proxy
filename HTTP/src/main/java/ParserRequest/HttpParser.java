@@ -70,8 +70,15 @@ public class HttpParser {
 		return message.isFinished();
 	}
 
-	public ByteBuffer getRequest() {
-		return message.buffer;
+	public byte[] getRequest() {
+		byte[] request = new byte[message.pos];
+		message.buffer.get(request, 0, message.pos);
+		
+		System.out.println("Long request: "+ request);
+		System.out.println(new String(request));
+		
+		return request;
+		
 	}
 
 	public void cleanRequest() {
