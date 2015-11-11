@@ -128,6 +128,7 @@ public class ThreadSocketHandler implements ConnectionHandler{
 		if (serverSocket == null ){
 			ProxySocket pSocket = ProxyConnectionManager.getConnection(host, port);
 			serverSocket = pSocket.getSocket();	
+			System.out.println("Socket nuevo!!");
 		}
 		//TODO: remover syso
     	System.out.println(serverSocket);
@@ -140,14 +141,14 @@ public class ThreadSocketHandler implements ConnectionHandler{
 	//TODO: Agregar el parser de respuesta al contenido del servidor
     private void readFromServer(Socket serverSocket, OutputStream out) throws IOException{
     	byte[] responseBuf = new byte[BUFSIZE];
-    	int recvMsgSize = 0;
+//    	int recvMsgSize = 0;
     	HttpResponse resp = new HttpResponse();
     	boolean keepReading = true;
     	InputStream inFromServer = serverSocket.getInputStream();
-    	boolean reading = false;
+//    	boolean reading = false;
     	ByteBuffer bBuffer;
     	try {
-    		while ((recvMsgSize = inFromServer.read(responseBuf)) != -1  && !resp.isResponseFinished() /*&& keepReading*/) {
+    		while ((/* recvMsgSize = */inFromServer.read(responseBuf)) != -1 /* && !resp.isResponseFinished()*/ && keepReading) {
 				bBuffer = ByteBuffer.wrap(responseBuf);
 				responseBuf = ServerParserUtils.processResponse(bBuffer, resp);
 //				reading = true;
@@ -155,6 +156,7 @@ public class ThreadSocketHandler implements ConnectionHandler{
                 System.out.println("req:" + res);
 				out.write(responseBuf, 0, responseBuf.length);
 				out.flush();
+				System.out.println("Escribiendo en el cliente ... ");
     		}
 		} catch (SocketTimeoutException e) {
 //				if (reading) {
@@ -162,9 +164,12 @@ public class ThreadSocketHandler implements ConnectionHandler{
 //				} else {
 					System.out.println("timeout");
 					logs.error("timeout");
-					//TODO: devolver un response de timeout (504? - 505?)
+
 					int sCode = 504;
 					byte[] byteReq = parser.getHttpResponse(sCode).getBytes();
+					out.write(byteReq, 0, byteReq.length);
+					out.flush();
+					keepReading = false;
 //				}
 		} catch (Exception e) {
 			e.printStackTrace();
