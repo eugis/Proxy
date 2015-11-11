@@ -95,6 +95,12 @@ public class ParserUtils {
 		do{
 			b = buf.get();
 			array[i++] = b;
+			if(b != 0){
+				System.out.println(b);
+				System.out.println("pos: " + message.pos);
+				message.buffer.put(message.pos, b);
+				message.pos++;
+			}
 			if(message.isCrFlag() && b != '\n'){
 				message.setcrFlag(false);
 			}
@@ -274,6 +280,19 @@ public class ParserUtils {
 		aux.put(message.buffer);
 		aux.put(buf);
 		message.buffer = aux;
+//		message.buffer.compact();
+	}
+	
+	public static void printBuffer(ByteBuffer buf){
+//		buf.flip();	
+		byte[] array = new byte[buf.limit()];
+		int i = 0;
+		byte b;
+		do{
+			b = buf.get();
+			System.out.println(String.valueOf(b));
+			array[i++] = b;		
+		}while(buf.hasRemaining());
 	}
 	
 }

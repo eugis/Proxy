@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 import Logs.CarlyLogger;
 import ParserRequest.HttpParser;
 import ParserRequest.ParserResponse;
+import ParserRequest.ParserUtils;
 import ParserRequest.ReadingState;
 import ParserResponse.HttpResponse;
 import ParserResponse.ServerParserUtils;
@@ -89,10 +90,13 @@ public class ThreadSocketHandler implements ConnectionHandler{
 	            		host2connect = parser.getHost();
 	                    port2connect = parser.getPort();
 	                    ByteBuffer request = parser.getRequest();
+	                    ParserUtils.printBuffer(request);
 	                    byteReq = request.array();
-	                    String req = new String(byteReq);
-	                    System.out.println("req:" + req);
-//	                    String hardCodeResp = "GET / HTTP/1.1\nHost: www.google.com\n\n";
+	                    System.out.println("long: " + byteReq.length);
+//	                    String req = new String(byteReq);
+//	                    System.out.println("req:" + req);
+//	                    String hardCodeResp = "GET / HTTP/1.1\nHost: www.google.com\n\n\n";
+//	                    System.out.println("iguales:" + req.equals(hardCodeResp));
 //	                    byteReq = hardCodeResp.getBytes();
 	                    
 	                    serverSocket = writeToServer(host2connect, port2connect, byteReq, serverSocket);

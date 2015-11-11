@@ -30,21 +30,24 @@ public class HttpMessage {
 
 	private boolean noContentLength;
 	
+	protected int pos;
+	
 	public HttpMessage() {
 		this.state = StateHttp.REQUEST_LINE;
 		this.headers = new HashMap<String, String>();
 		this.port = 80;
-		this.buffer = ByteBuffer.allocate(0);
+		this.buffer = ByteBuffer.allocate(1024);
 		this.crFlag = false;
 		this.lfFlag = false;
 		this.noHost = true;
 		this.noContentLength = true;
 		this.headerFinished = false;
+		pos = 0;
 	}
 
 	public ReadingState parser(ByteBuffer buf) {
 		//Estoy guardando en buffer todo lo q entra
-		ParserUtils.concatBuffer(buf, this);
+//		ParserUtils.concatBuffer(buf, this);
 		state = state.process(buf, this);
 		switch(state){
 		case INVALIDMETHOD:
