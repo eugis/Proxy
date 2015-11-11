@@ -1,8 +1,8 @@
-package Parser2;
+package ParserRequest;
 
 import java.nio.ByteBuffer;
 
-import Parser2.ParserUtils;
+import ParserRequest.ParserUtils;
 
 public enum StateHttp {
 	
@@ -20,7 +20,7 @@ public enum StateHttp {
 				return message.state.process(buf, message);
 			}
 			
-			return INVALID;
+			return INVALIDMETHOD;
 		}
 		
 	},
@@ -38,10 +38,10 @@ public enum StateHttp {
 				if(!valid){
 					return INVALID;
 				}
-			}else
-			{
+			}else{
 				//TODO borrar syso!
 				System.out.println("Empty line!");
+				message.setHeaderFinished(true);
 				if(!ParserUtils.minHeaders(message)){
 					return INVALID;
 				}else{
@@ -68,7 +68,8 @@ public enum StateHttp {
 		public StateHttp process(ByteBuffer buf, HttpMessage message) {
 			boolean finished = ParserUtils.parseData(buf, message);
 			if(finished){
-				return DONE;
+				message.state = DONE;
+				return message.state.process(buf, message);
 			}
 			return this;
 		}
@@ -78,7 +79,8 @@ public enum StateHttp {
 
 		@Override
 		public StateHttp process(ByteBuffer buf, HttpMessage message) {
-			// TODO me parece q aca no hay q hacer nada
+			//agrego las lineas de cierre al message
+//			message.closeRequest();
 			return this;
 		}
 		
@@ -87,11 +89,54 @@ public enum StateHttp {
 
 		@Override
 		public StateHttp process(ByteBuffer buf, HttpMessage message) {
-			// TODO me parece q aca no hay que hacer nada
+			// hay que seguir leyendo hasta que aparece \r\n
+			String line = ParserUtils.readLine(buf, message);
+//			TODO: agregar que no hay content-lenght y el method es post siga parseando!
+			
+			if(message.isNoHost() && message.isNoContentLength() && !message.isHeaderFinished()){
+				// Si no esta seteado el host, y todavia no termino de parsearHeaders busco el host
+				ParserUtils.parseHeaders(line, message);
+			}
+			
+			//Descomentar para forzar la finalizacion del msje
+			message.setFinished();
+			if(message.isFinished()){
+				message.state = DONE;
+				return message.state.process(buf, message);
+			}
+			return this;
+		}
+		
+	},
+	INVALIDMETHOD {
+
+		@Override
+		public StateHttp process(ByteBuffer buf, HttpMessage message) {
+			// hay que seguir leyendo hasta que aparece \r\n
+			ParserUtils.readLine(buf, message);
+			
+			//Descomentar para probar la respuesta cableada
+			//message.setFinished();
 			return this;
 		}
 		
 	};
 	
 	public abstract StateHttp process(final ByteBuffer buf, final HttpMessage message);
+	
+	private static void untilLastLine(ByteBuffer buf, HttpMessage message) {
+		String line = ParserUtils.readLine(buf, message);
+		if(message.isCrFlag() && !line.equals('\n')){
+			message.setcrFlag(false);
+		}
+		if(line.equals('\r')){
+			message.setcrFlag(true);
+		}
+		if(line.equals('\n')){
+			message.setlfFlag(true);
+		}
+		if(line.equals('\r'+'\n')){
+			message.setFinished();
+		}
+	}
 }

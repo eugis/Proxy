@@ -1,16 +1,12 @@
-package July;
+package ParserResponse;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.Map;
 import java.util.Set;
 
 import CarlyAdmin.manager.ConfigurationManager;
-import Parser.HttpResponse;
 
 public class ServerParserUtils {
 
@@ -20,40 +16,43 @@ public class ServerParserUtils {
 		boolean doneReadingHeaders = false;
 		boolean doneReading = false;
 		int size = -1;
-		StateResponse state = response.getState();
-		if(!state.getIsFinished()){
-			switch(state.onMethod()){
-			case 2:try{
-					doneReadingHeaders = getHeaders(buf, response, state.getLastLine());
+
+		if (!isLeetEnabled()) {
+			response.setBuf(buf.array());
+		}else{ 
+			StateResponse state = response.getState();
+			if(!state.getIsFinished()){
+				switch(state.onMethod()){
+				case 2:try{
+						doneReadingHeaders = getHeaders(buf, response, state.getLastLine());
+					}catch(Exception e){
+						//temita con los headers
+					}break;
+				case 3:parseBody(buf, response, state.getQueue(), state.getOpenedTags());break;
+				}
+			}else{
+				try{
+					doneReadingStLine = parseResponseStatusLine(readLine(buf), response);
+				}catch(Exception e){
+					//TODO
+				}
+				try{
+					doneReadingHeaders = getHeaders(buf, response, new StringBuilder());
 				}catch(Exception e){
 					//temita con los headers
-				}break;
-			case 3:parseBody(buf, response, state.getQueue(), state.getOpenedTags());break;
-			}
-		}else{
-			try{
-				doneReadingStLine = parseResponseStatusLine(readLine(buf), response);
-			}catch(Exception e){
-				//TODO
-			}
-			try{
-				doneReadingHeaders = getHeaders(buf, response, new StringBuilder());
-			}catch(Exception e){
-				//temita con los headers
-			}
-			//buf.flip();
-			if(doneReadingHeaders && response.isPlainText() /*&& isLeetEnabled()*/){
-				doneReading = parseBody(buf, response, state.getQueue(), state.getOpenedTags());
-				if(!doneReading){
-					state.setOnMethod(3);
-					state.setIsFinished(false);
-				}else{
-					state.setIsFinished(true);
+				}
+				//buf.flip();
+				if(doneReadingHeaders && response.isPlainText() /*&& isLeetEnabled()*/){
+					doneReading = parseBody(buf, response, state.getQueue(), state.getOpenedTags());
+					if(!doneReading){
+						state.setOnMethod(3);
+						state.setIsFinished(false);
+					}else{
+						state.setIsFinished(true);
+					}
 				}
 			}
-			
 		}
-		
 	}
 	
 	private static boolean parseResponseStatusLine(String line, HttpResponse response) throws NumberFormatException, IOException{
@@ -127,7 +126,8 @@ public class ServerParserUtils {
 	}
 	
 	private static boolean isLeetEnabled(){
-		return ConfigurationManager.getInstance().isL33t();
+		return false;
+//		return ConfigurationManager.getInstance().isL33t();
 	}
 	
 	private static boolean parseBody(ByteBuffer buf, final HttpResponse response, LinkedList<Character> queue, LinkedList<String> openedTags) throws IOException{
@@ -314,6 +314,7 @@ public class ServerParserUtils {
 		return v;
 	}
 	
+	//TODO si necesitas identificar una linea con un enter fijate como lo hice en ParserUtils
 	public static String readLine(ByteBuffer buf) {
 		// TODO revisar este metodo
 		boolean crFlag = false;

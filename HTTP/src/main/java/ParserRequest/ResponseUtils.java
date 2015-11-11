@@ -1,4 +1,4 @@
-package Parser2;
+package ParserRequest;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -6,10 +6,16 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.apache.log4j.Logger;
+
+import Logs.CarlyLogger;
+
 public class ResponseUtils {
 	
 	private static Map<Integer, String> msgs = loadMsgs();
 	private static Map<Integer, String> statusCode = loadStatusCode();
+	
+	private static Logger logs = CarlyLogger.getCarlyLogger();
 	
 	private static Map<Integer, String> loadMsgs() {
 		Map<Integer, String> msg = new HashMap<Integer, String>();
@@ -62,13 +68,15 @@ public class ResponseUtils {
 		return result;
 	}
 	
-	public static String generateHttpResponseIM(int sCode, String version){
+	public static String generateHttpResponseIM(int sCode, String version, HttpMessage message){
 		String aux = "";
 		String firstLine = generateFirstLine(version, aux, sCode);
-		String dataLine = generateHTMLData(sCode);
+		String dataLine = generateHTMLData(sCode, message);
 		Map<String,String> headerLine = generateHeaders(dataLine.length());
 		
 		aux += firstLine + printHeaders(headerLine) + dataLine;
+		
+		logs.error(sCode + ": " + statusCode.get(sCode));
 		
 		return aux;
 	}
@@ -82,11 +90,12 @@ public class ResponseUtils {
 		return headers;
 	}
 
-	private static String generateHTMLData(Integer error) {
+	private static String generateHTMLData(Integer error, HttpMessage message) {
 		String html = "";
 		
 		html = "<html><body>";
 		html += "<h1>" + error + ": " + statusCode.get(error) + "</h1>";
+		reloadMessages(message);		
 		String msg = msgs.get(error);
 		if(msg != null){
 			html += msgs.get(error);
@@ -96,6 +105,20 @@ public class ResponseUtils {
 		return html;
 	}
 	
+	private static void reloadMessages(HttpMessage message) {
+		String value="";
+		if (message.isNoHost()){
+			value= "Host required";
+		}else if (message.isNoContentLength()){
+			value= "Content-Length required";
+		}
+				
+		
+		msgs.put(400, value);
+		
+		
+	}
+
 	private static String generateFirstLine(String version, String aux,
 			Integer sCode) {
 		//HTTP/1.0 200 OK
@@ -115,7 +138,8 @@ public class ResponseUtils {
 	
 	//Prueba
 //	public static void main(String[] args) {
-//		System.out.println(ParserUtils.generateHttpResponseIM("1.0"));
+//		int sCode = 400;
+//		System.out.println(ResponseUtils.generateHttpResponseIM(sCode,"1.0"));
 //	}
 
 	

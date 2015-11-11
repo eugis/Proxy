@@ -1,4 +1,4 @@
-package Parser2;
+package ParserRequest;
 
 import java.nio.ByteBuffer;
 import java.util.HashSet;
@@ -64,11 +64,7 @@ public class ParserUtils {
         rh.add("Warning");
         return rh;
 	}
-	
-	public static boolean isLeetEnabled(){
-		return ConfigurationManager.getInstance().isL33t();
 
-	}
 
 //	public static String readLine(byte[] buf, HttpMessage message) {
 //		String ret=null;
@@ -86,50 +82,66 @@ public class ParserUtils {
 //		return ret;
 //	}
 
-//	public static String readLine(ByteBuffer buf, HttpMessage message) {
-//		// TODO revisar este metodo
-//		boolean crFlag = false;
-//		boolean lfFlag = false;
-//		if(buf.limit() == 0){
-//			return null;
-//		}
-//		byte[] array = new byte[buf.limit()];
-//		int i = 0;
-//		byte b;
-//		buf.flip();
-//		do{
-//			b = buf.get();
-//			array[i++] = b;
-//			if(b == '\r'){
-//				crFlag = true;
-//			}else if(b == '\n'){
-//				lfFlag = true;
-//			}			
-//		}while(buf.hasRemaining() && !crFlag && !lfFlag);
-//		if(!crFlag && !lfFlag){
-//			return null;
-//		}else{
-//			if(crFlag){
-//				if(buf.limit() == 0 ||
-//						buf.limit() == buf.position()){
-//					return null;
-//				}
-//				b = buf.get();
-//				if(b != '\n'){
-//					return null;
-//				}
-//				array[i] = b;
-//			}
-//		}
-//		buf.compact();
-//		int pos = buf.position();
-//		buf.limit(pos);
-//		return new String(array);//.trim();
-//	}
-
-	public static String readLine(ByteBuffer buf, HttpMessage message){
-		
-		return null;
+	public static String readLine(ByteBuffer buf, HttpMessage message) {
+		boolean crFlag = false;
+		boolean lfFlag = false;
+		if(buf.limit() == 0){
+			return null;
+		}
+		byte[] array = new byte[buf.limit()];
+		int i = 0;
+		byte b;
+		buf.flip();
+		do{
+			b = buf.get();
+			array[i++] = b;
+			if(b != 0){
+				System.out.println(b);
+				System.out.println("pos: " + message.pos);
+				message.buffer.put(message.pos, b);
+				message.pos++;
+			}
+			if(message.isCrFlag() && b != '\n'){
+				message.setcrFlag(false);
+			}
+			if(b == '\r'){
+				if(message.isHeaderFinished()){
+					message.setcrFlag(true);
+				}
+				crFlag = true;
+			}else if(b == '\n'){
+				if(message.isLfFlag()){
+					message.setFinished();
+				}
+				if(message.isHeaderFinished()){
+					message.setlfFlag(true);
+				}
+				lfFlag = true;
+				if(i == 1){ //quiere decir q viene solo un \n
+					String emptyLine = "\n";
+					return emptyLine;
+				}
+			}			
+		}while(buf.hasRemaining() && !crFlag && !lfFlag);
+		if(!crFlag && !lfFlag){
+			return null;
+		}else{
+			if(crFlag){
+				if(buf.limit() == 0 ||
+						buf.limit() == buf.position()){
+					return null;
+				}
+				b = buf.get();
+				if(b != '\n'){
+					return null;
+				}
+				array[i] = b;
+			}
+		}
+		buf.compact();
+		int pos = buf.position();
+		buf.limit(pos);
+		return new String(array);//.trim();
 	}
 	
 	
@@ -141,11 +153,12 @@ public class ParserUtils {
 			return false;
 		}
 		if(isValidMethod(requestLine[0])){
-			//TODO completar este metodo
 			
 			if(isValidURL(requestLine[1])){
 
 				if(isValidVersion(requestLine[2])){
+					//TODO tendria que mirar esto primero, ya que es necesario tener la version
+					//para cablear la respuesta
 					valid = true;
 					message.setMethod(requestLine[0]);
 					int index = requestLine[2].indexOf("/");
@@ -159,7 +172,7 @@ public class ParserUtils {
 	}
 
 	private static boolean isValidVersion(String version) {
-		String regex = "HTTP/1.(0|1)";
+		String regex = "HTTP/1.1";
 		Pattern patt = Pattern.compile(regex);
         Matcher matcher = patt.matcher(version);
         System.out.println("valid version: " + matcher.matches());
@@ -179,9 +192,14 @@ public class ParserUtils {
 		boolean valid = false;
 		int index;
 		
+		if(line.equals('\n')){
+			message.setHeaderFinished(true);
+			return valid;
+		}
+		
 		index = line.indexOf(':');
 		if(index < 0){
-			//TODO no esta bien formado el header
+			//no esta bien formado el header
 			logs.error("Request: The header field is not well formed");
 			return false;
 		}else{
@@ -205,13 +223,24 @@ public class ParserUtils {
 	public static boolean parseData(ByteBuffer buf, HttpMessage message) {
 		//TODO no estoy teniendo en cuenta que le buf puede venir partido
 		//me parece q en HttpMessage habria q guardarse una instancia de buffer
-		String bytes = message.getHeader("content-length");
-		Integer cantbytes = Integer.parseInt(bytes);
-		if(buf.capacity() >= cantbytes){
-			//TODO fijarse si hay que hacer algo mas
-			//validar que venga bien el final del msje
-			return true;
+		//TODO revisar este metodo no esta bien
+		if(message.bodyEnable()){
+			String bytes = message.getHeader("content-length");
+			if(bytes != null){
+				Integer cantbytes = Integer.parseInt(bytes);
+				if(buf.capacity() >= cantbytes){
+					//TODO fijarse si hay que hacer algo mas
+					//validar que venga bien el final del msje
+					return true;
+				}
+			}
+		}else{
+			ParserUtils.readLine(buf, message);
+			//Descomentar para forzar la finalizacion del request
+//			message.setFinished();
+			return message.isFinished();
 		}
+		
 		return false;
 	}
 
@@ -229,13 +258,41 @@ public class ParserUtils {
 		boolean valid = true;
 		if(message.getHost() == null){
 			logs.error("missing host");
+			message.setNoHost(true);
 			valid = false;
 		}
+		
 		if(!message.bodyEnable()){
-			//TODO creo que si el metodo es post content-length es obligatorio
-			//sino me parece q no viene body o si?
+			if(message.getMethod().equals("POST")){
+				logs.error("length required");
+				message.setNoContentLength(true);
+				valid = false;
+			}
 		}
 		return valid;
 	}
-
+	
+	public static void concatBuffer(ByteBuffer buf, HttpMessage message){
+		ByteBuffer aux = ByteBuffer.allocate(message.buffer.position() +
+				buf.position());
+		buf.flip();
+		message.buffer.flip();
+		aux.put(message.buffer);
+		aux.put(buf);
+		message.buffer = aux;
+//		message.buffer.compact();
+	}
+	
+	public static void printBuffer(ByteBuffer buf){
+//		buf.flip();	
+		byte[] array = new byte[buf.limit()];
+		int i = 0;
+		byte b;
+		do{
+			b = buf.get();
+			System.out.println(String.valueOf(b));
+			array[i++] = b;		
+		}while(buf.hasRemaining());
+	}
+	
 }
