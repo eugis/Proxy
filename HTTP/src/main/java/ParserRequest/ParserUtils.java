@@ -1,6 +1,5 @@
 package ParserRequest;
 
-import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.HashSet;
 import java.util.Set;
@@ -9,10 +8,7 @@ import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
 
-import CarlyAdmin.manager.ConfigurationManager;
 import Logs.CarlyLogger;
-import ParserResponse.HttpResponse;
-import ParserResponse.StateResponse;
 
 public class ParserUtils {
 	
@@ -67,23 +63,6 @@ public class ParserUtils {
         rh.add("Warning");
         return rh;
 	}
-
-
-//	public static String readLine(byte[] buf, HttpMessage message) {
-//		String ret=null;
-//		int init = message.getPosRead();
-//		int fin;
-//		
-//		for(int i=init; i < buf.length; i++){
-//			if(buf[i] == '\n'){
-//				fin = i+1;
-//				message.setPosRead(fin);
-//				ret = new String(buf, init, fin);
-//				return ret.trim();
-//			}
-//		}
-//		return ret;
-//	}
 
 	public static String readLine(ByteBuffer buf, HttpMessage message) {
 		boolean crFlag = false;
@@ -147,10 +126,8 @@ public class ParserUtils {
 		return new String(array);//.trim();
 	}
 	
-	public static boolean setHeaders(ByteBuffer buf, HttpMessage message, StringBuilder genLine) throws IOException{
+	public static boolean setHeaders(ByteBuffer buf, HttpMessage message, StringBuilder genLine) {
 		boolean doneReading = false;		
-		//StringBuilder genLine = new StringBuilder();
-//		StateResponse state = response.getState();
 		char c;
 		byte b;
 		buf.flip();
@@ -207,12 +184,11 @@ public class ParserUtils {
 		String regex = "HTTP/1.1";
 		Pattern patt = Pattern.compile(regex);
         Matcher matcher = patt.matcher(version);
-        System.out.println("valid version: " + matcher.matches());
         return matcher.matches();
 	}
 
 	private static boolean isValidURL(String url) {
-		System.out.println("isValidURL: " +  (url != null && url.length() > 0));
+//		System.out.println("isValidURL: " +  (url != null && url.length() > 0));
 		return url != null && url.length() > 0;
 	}
 
@@ -248,14 +224,11 @@ public class ParserUtils {
 	}
 
 	private static boolean validValue(String value) {
-		System.out.println("valid value: "+ value != null && value.length() > 0);
+//		System.out.println("valid value: "+ value != null && value.length() > 0);
 		return value != null && value.length() > 0;
 	}
 
 	public static boolean parseData(ByteBuffer buf, HttpMessage message) {
-		//TODO no estoy teniendo en cuenta que le buf puede venir partido
-		//me parece q en HttpMessage habria q guardarse una instancia de buffer
-		//TODO revisar este metodo no esta bien
 		if(message.bodyEnable()){
 			String bytes = message.getHeader("content-length");
 			if(bytes != null){
@@ -279,14 +252,14 @@ public class ParserUtils {
 	static boolean validHeader(String header) {
 	//	if (header.contains(":")) {
 	//		String[] headerParts = header.split(":");
-			System.out.println("isValidHeader: " + (validRequestHeaders.contains(header) || validGeneralHeaders.contains(header)));
+//			System.out.println("isValidHeader: " + (validRequestHeaders.contains(header) || validGeneralHeaders.contains(header)));
 			return validRequestHeaders.contains(header) || validGeneralHeaders.contains(header);
 	//	}
 	//	return false;
 	}
 
 	public static boolean minHeaders(HttpMessage message) {
-		//TODO validar que esten los headers necesarios: host, content-length,...Tener en cuenta que si es un GET no hay body!!
+		// validar que esten los headers necesarios: host, content-length,...Tener en cuenta que si es un GET no hay body!!
 		boolean valid = true;
 		if(message.getHost() == null){
 			logs.error("missing host");

@@ -60,8 +60,6 @@ public class HttpParser {
 			sCode = 504;
 		}
 		
-		//TODO x como esta hecho el parserMethod esto viene en null
-//		String version = message.getVersion();
 		String version = "1.1";
 		return ResponseUtils.generateHttpResponseIM(sCode, version, message);
 	}

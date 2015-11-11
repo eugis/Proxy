@@ -20,7 +20,7 @@ import ParserResponse.ServerParserUtils;
 
 public class ThreadSocketHandler implements ConnectionHandler{
 
-	private static final int BUFSIZE = 1024;
+	private static final int BUFSIZE = 4096;
 	private HttpParser parser;
 	private ServerParserUtils serverParser;
 	
