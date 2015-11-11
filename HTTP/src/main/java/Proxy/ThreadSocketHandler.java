@@ -141,25 +141,25 @@ public class ThreadSocketHandler implements ConnectionHandler{
     	HttpResponse resp = new HttpResponse();
     	boolean keepReading = true;
     	InputStream inFromServer = serverSocket.getInputStream();
-    	//boolean reading = false;
+    	boolean reading = false;
     	ByteBuffer bBuffer;
     	try {
     		while ((recvMsgSize = inFromServer.read(responseBuf)) != -1) {
 				bBuffer = ByteBuffer.wrap(responseBuf);
 	        	ServerParserUtils.processResponse(bBuffer, resp);
-				//reading = true;
+				reading = true;
 				String res = new String(responseBuf);
                 System.out.println("req:" + res);
 				out.write(resp.getBuf(), 0, resp.getBufLength());
 				out.flush();
     		}
 		} catch (SocketTimeoutException e) {
-				//if (reading) {
-					//keepReading = false;
-				//} else {
+				if (reading) {
+					keepReading = false;
+				} else {
 					System.out.println("timeout");
 					//TODO: devolver un response de timeout (504? - 505?)
-				//}
+				}
 		}
 			
         //}

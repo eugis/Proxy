@@ -19,6 +19,7 @@ public class ServerParserUtils {
 
 		if (!isLeetEnabled()) {
 			response.setBuf(buf.array());
+			response.setReaded(true);
 		}else{ 
 			StateResponse state = response.getState();
 			if(!state.getIsFinished()){
