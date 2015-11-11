@@ -7,14 +7,14 @@ public class StateResponse {
 	private boolean isFinished;
 	private LinkedList<Character> queue;
 	private LinkedList<String> openedTags;
-	private int onMethod; //1-statusline; 2-headers; 3-body
+	private State onMethod; 
 	private StringBuilder lastLine;
 	private boolean onComment;
 	
 	
 	public StateResponse(){
 		this.isFinished = true;
-		this.onMethod = 0;
+		this.onMethod = State.START;
 		this.setOpenedTags(new LinkedList<String>());
 		this.setQueue(new LinkedList<Character>());
 		this.setOnComment(false);
@@ -23,7 +23,7 @@ public class StateResponse {
 	public void setIsFinished(boolean value){
 		this.isFinished = value;
 		if(value){
-			this.onMethod = 0;
+			this.onMethod = State.START;
 			this.setOpenedTags(new LinkedList<String>());
 			this.setQueue(new LinkedList<Character>());
 			this.setOnComment(false);
@@ -34,11 +34,11 @@ public class StateResponse {
 		return this.isFinished;
 	}
 	
-	public void setOnMethod(int method){
+	public void setOnMethod(State method){
 		this.onMethod = method;
 	}
 	
-	public int onMethod(){
+	public State onMethod(){
 		return this.onMethod;
 	}
 

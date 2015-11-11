@@ -16,19 +16,26 @@ public class ServerParserUtils {
 		boolean doneReadingHeaders = false;
 		boolean doneReading = false;
 		int size = -1;
-
-		if (!isLeetEnabled()) {
+		
+//		if (!isLeetEnabled()) {
 			response.setBuf(buf.array());
-		}else{ 
+//		}else{ 
 			StateResponse state = response.getState();
+			
 			if(!state.getIsFinished()){
 				switch(state.onMethod()){
-				case 2:try{
+				case HEADERS:
+					
+					try{
 						doneReadingHeaders = getHeaders(buf, response, state.getLastLine());
 					}catch(Exception e){
 						//temita con los headers
-					}break;
-				case 3:parseBody(buf, response, state.getQueue(), state.getOpenedTags());break;
+					}
+					break;
+					
+				case BODY:
+					parseBody(buf, response, state.getOpenedTags());
+					break;
 				}
 			}else{
 				try{
@@ -43,9 +50,9 @@ public class ServerParserUtils {
 				}
 				//buf.flip();
 				if(doneReadingHeaders && response.isPlainText() /*&& isLeetEnabled()*/){
-					doneReading = parseBody(buf, response, state.getQueue(), state.getOpenedTags());
+					doneReading = parseBody(buf, response, state.getOpenedTags());
 					if(!doneReading){
-						state.setOnMethod(3);
+						state.setOnMethod(State.BODY);
 						state.setIsFinished(false);
 					}else{
 						state.setIsFinished(true);
@@ -53,7 +60,7 @@ public class ServerParserUtils {
 				}
 			}
 		}
-	}
+//	}
 	
 	private static boolean parseResponseStatusLine(String line, HttpResponse response) throws NumberFormatException, IOException{
 		int item = 0;
@@ -96,7 +103,7 @@ public class ServerParserUtils {
 		if(!doneReading){
 			state = response.getState();
 			state.setIsFinished(false);
-			state.setOnMethod(2);
+			state.setOnMethod(State.HEADERS);
 			state.setLastLine(genLine);
 		}else{
 			state.setLastLine(null);
@@ -126,46 +133,76 @@ public class ServerParserUtils {
 	}
 	
 	private static boolean isLeetEnabled(){
-		return false;
+		return true;
 //		return ConfigurationManager.getInstance().isL33t();
 	}
 	
-	private static boolean parseBody(ByteBuffer buf, final HttpResponse response, LinkedList<Character> queue, LinkedList<String> openedTags) throws IOException{
+	private static boolean parseBody(ByteBuffer buf, final HttpResponse response, LinkedList<String> openedTags) throws IOException{
 		StringBuilder resp = new StringBuilder();
 		Set<String> tags = loadHtmlTags(); 
+		LinkedList<Character> queue = response.getState().getQueue();
 		char c;
 		int b = 0;
 		boolean finished = false;
 		boolean onComment = response.getState().getOnComment();
 		while(buf.hasRemaining() && (b = buf.get()) != -1 && !finished){
+			String string = new String(buf.array());
+			System.out.println(string);
 			if(b == 0){
 				finished = true;
 			}else{
 				c = (char)b;
 				switch(c){
-					case '<': add2Queue(queue, c);break;
-					case '>': if(onComment){
-								queue.removeLast();
-								onComment = false;
+					case '<': 
+						
+						add2Queue(queue, c);
+					
+					break;
+					
+					/*si la > ya la perdí donde entra a getTag a sacar todo el tag comment???? para mi en vez de removeLast()
+					 * hay que poner getTag.. para q saque todo para atrás!! 
+					 */
+					case '>': 
+						
+						if(onComment){
+								//Si es el tag malo q no reconocemos (puede ser solo meta????)
+								queue.removeLast();//borrá la anterior
+								
+								onComment = false;//ESTAS BORRANDO NADA MÁS QUE LA ULTIMA??? Y LA PROX NO BORRAS NADA MAS?
+								//Yo seguiria eliminando hasta q encuentre <
 								}else{
-									getTag(response.getState(), queue, openedTags, tags);break;
+									//saca el tag terminado tipo <HTML>
+									getTag(response.getState(), queue, openedTags, tags);
 								}
-					case ' ': if(!onComment){
-									onComment = addSpace2Queue(queue, c);break;
-								}
-					case '/': finishedTag(queue, c); break;
-					default:  if(!onComment){
+						break;
+						
+					case ' ': 
+						if(!onComment){
+									onComment = addSpace2Queue(queue, c);
+						}
+						break;
+						
+					case '/': 
+						finishedTag(queue, c); 
+					break;
+					
+					default: 
+						
+						if(!onComment){
 								onComment = onComment(queue, c);
 								if(!onComment && isLetter(c) && !addLetterInQueue(queue, c)){
 									c = applyLeet(c);
 								}
 							  }
-								break;
+						break;
 				}
 				response.getState().setOnComment(onComment);
 				resp.append(c);
+				
 			}	
 		}
+		
+		System.out.println(resp.toString());
 		return finished;
 	}
 	
@@ -201,13 +238,14 @@ public class ServerParserUtils {
 			queue.removeLast();
 		}
 		if(!queue.isEmpty()){
-			queue.removeLast();
+			queue.removeLast();//saca el <
 			name = tag.toString();
 			tag = new StringBuilder();
+			//para que esto??
 			for(int i=name.length()-1; i>=0; i--){
 				tag.append(name.charAt(i));
 			}
-
+			//porque no equals(name)
 			if(name.contains("/")){
 				if(!openedTags.isEmpty() && openedTags.getLast().equals(tag.toString())){
 					openedTags.removeLast();

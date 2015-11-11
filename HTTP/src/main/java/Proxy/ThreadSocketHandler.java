@@ -59,7 +59,7 @@ public class ThreadSocketHandler implements ConnectionHandler{
 //            	
 
             	state = parser.sendData(bBuffer);
-            	switch (state) {
+            		switch (state) {
 					case UNFINISHED:
 						System.out.println("UNFINISHED: No termino de leer el request");
 						//TODO con esto empieza a escribir mientras va leyendo una vez que tiene el host
@@ -89,15 +89,15 @@ public class ThreadSocketHandler implements ConnectionHandler{
 	//            		if(!resp.returnToClient()){
 	            		host2connect = parser.getHost();
 	                    port2connect = parser.getPort();
-	                    ByteBuffer request = parser.getRequest();
-	                    ParserUtils.printBuffer(request);
-	                    byteReq = request.array();
-	                    System.out.println("long: " + byteReq.length);
+//	                    ByteBuffer request = parser.getRequest();
+//	                    ParserUtils.printBuffer(request);
+//	                    byteReq = request.array();
+//	                    System.out.println("long: " + byteReq.length);
 //	                    String req = new String(byteReq);
 //	                    System.out.println("req:" + req);
-//	                    String hardCodeResp = "GET / HTTP/1.1\nHost: www.google.com\n\n\n";
+	                    String hardCodeResp = "GET / HTTP/1.1\nHost: www.google.com\n\n\n";
 //	                    System.out.println("iguales:" + req.equals(hardCodeResp));
-//	                    byteReq = hardCodeResp.getBytes();
+	                    byteReq = hardCodeResp.getBytes();
 	                    
 	                    serverSocket = writeToServer(host2connect, port2connect, byteReq, serverSocket);
 	                    readFromServer(serverSocket, out);		
@@ -159,7 +159,11 @@ public class ThreadSocketHandler implements ConnectionHandler{
 					keepReading = false;
 				} else {
 					System.out.println("timeout");
-					//TODO: devolver un response de timeout (504? - 505?)
+					
+					//TODO: devolver un response de timeout (504)
+//					byteReq = parser.getHttpResponse().getBytes();
+//					out.write(byteReq);
+//              	out.flush();
 				}
 			}
 			
