@@ -9,7 +9,7 @@ public class StateResponse {
 	private LinkedList<String> openedTags;
 	private int onMethod; //1-statusline; 2-headers; 3-body
 	private StringBuilder lastLine;
-	private boolean onTag;
+	private boolean onComment;
 	
 	
 	public StateResponse(){
@@ -17,11 +17,17 @@ public class StateResponse {
 		this.onMethod = 0;
 		this.setOpenedTags(new LinkedList<String>());
 		this.setQueue(new LinkedList<Character>());
-		this.setOnTag(false);
+		this.setOnComment(false);
 	}
 	
 	public void setIsFinished(boolean value){
 		this.isFinished = value;
+		if(value){
+			this.onMethod = 0;
+			this.setOpenedTags(new LinkedList<String>());
+			this.setQueue(new LinkedList<Character>());
+			this.setOnComment(false);
+		}
 	}
 	
 	public boolean getIsFinished(){
@@ -60,12 +66,12 @@ public class StateResponse {
 		this.queue = queue;
 	}
 
-	public boolean getOnTag() {
-		return onTag;
+	public boolean getOnComment() {
+		return onComment;
 	}
 
-	public void setOnTag(boolean onTag) {
-		this.onTag = onTag;
+	public void setOnComment(boolean onTag) {
+		this.onComment = onTag;
 	}
 	
 }

@@ -18,8 +18,8 @@ public class ServerParserUtils {
 		String line = null;
 		boolean doneReadingStLine = false;
 		boolean doneReadingHeaders = false;
+		boolean doneReading = false;
 		int size = -1;
-		
 		StateResponse state = response.getState();
 		if(!state.getIsFinished()){
 			switch(state.onMethod()){
@@ -43,8 +43,15 @@ public class ServerParserUtils {
 			}
 			//buf.flip();
 			if(doneReadingHeaders && response.isPlainText() /*&& isLeetEnabled()*/){
-				parseBody(buf, response, state.getQueue(), state.getOpenedTags());
+				doneReading = parseBody(buf, response, state.getQueue(), state.getOpenedTags());
+				if(!doneReading){
+					state.setOnMethod(3);
+					state.setIsFinished(false);
+				}else{
+					state.setIsFinished(true);
+				}
 			}
+			
 		}
 		
 	}
@@ -129,32 +136,51 @@ public class ServerParserUtils {
 		char c;
 		int b = 0;
 		boolean finished = false;
-		boolean setOnTag = false;
-		
+		boolean onComment = response.getState().getOnComment();
 		while(buf.hasRemaining() && (b = buf.get()) != -1 && !finished){
-			c = (char)b;
-			switch(c){
-				case '<': add2Queue(queue, c);break;
-				case '>': getTag(response.getState(), queue, openedTags, tags);break;
-				case ' ': if(inTag(queue, openedTags)){
-							response.getState().setOnTag(true);
-						}break;
-				case '/': finishedTag(queue, c); break;
-				default:  if(isLetter(c)){
-							if(!response.getState().getOnTag() && !addLetterInQueue(queue, c)){
-								c = applyLeet(c);
-							}
-						}break;
-			}
-			resp.append(c);
+			if(b == 0){
+				finished = true;
+			}else{
+				c = (char)b;
+				switch(c){
+					case '<': add2Queue(queue, c);break;
+					case '>': if(onComment){
+								queue.removeLast();
+								onComment = false;
+								}else{
+									getTag(response.getState(), queue, openedTags, tags);break;
+								}
+					case ' ': if(!onComment){
+									onComment = addSpace2Queue(queue, c);break;
+								}
+					case '/': finishedTag(queue, c); break;
+					default:  if(!onComment){
+								onComment = onComment(queue, c);
+								if(!onComment && isLetter(c) && !addLetterInQueue(queue, c)){
+									c = applyLeet(c);
+								}
+							  }
+								break;
+				}
+				response.getState().setOnComment(onComment);
+				resp.append(c);
+			}	
 		}
 		return finished;
 	}
 	
 	private static void add2Queue(LinkedList<Character> queue, Character c){
-		if(queue.isEmpty() || queue.getLast() == '>'){
+		if(queue.isEmpty()){
 			queue.addLast(c);
 		}
+	}
+	
+	private static boolean addSpace2Queue(LinkedList<Character> queue, Character c){
+		if(!queue.isEmpty() && isLetter(queue.getLast())){
+			queue.addLast(c);
+			return true;
+		}
+		return false;
 	}
 	
 	private static void getTag(StateResponse status, LinkedList<Character> queue, LinkedList<String> openedTags, Set<String> tags){
@@ -162,11 +188,12 @@ public class ServerParserUtils {
 		String name = "";
 		char c;
 		if(queue.isEmpty() || queue.getLast() == '>'){
-			if(!tags.contains(openedTags.getLast().toUpperCase())){
+			/*if(!tags.contains(openedTags.getLast().toUpperCase())){
 				openedTags.removeLast();
 				status.setOnTag(false);
 				return;
-			}
+			}*/
+			return;
 		}
 		
 		while(!queue.isEmpty() && (c = queue.getLast()) != '<'){
@@ -186,16 +213,22 @@ public class ServerParserUtils {
 					openedTags.removeLast();
 				}
 			}else{
+				if(!tags.contains(tag.toString())){
+					openedTags.removeLast();
+				}
 				openedTags.addLast(tag.toString());
 			}
 		}
 	}
 	
-	private static boolean inTag(LinkedList<Character> queue, LinkedList<String> openedTags){
-		char c;
+	private static boolean onComment(LinkedList<Character> queue, char c){
+		char last;
 		if(!queue.isEmpty()){
-			c = queue.getLast();
-			if(isLetter(c)){
+			last = queue.getLast();
+			if(last == '<' && c != ' ' && !isLetter(c)){
+				return true;
+			}
+			/*if(isLetter(c)){
 				//repite codigo
 				StringBuilder tag = new StringBuilder();
 				String name;
@@ -220,23 +253,29 @@ public class ServerParserUtils {
 						return true;
 					}
 				}
-			}
+			}*/
 		}
 		return false;
 	}
 	
 	private static void finishedTag(LinkedList<Character> queue, char c){
 		char last;
-		if(!queue.isEmpty() && (last = queue.getLast()) == '<' && last != '>'){
+		if(!queue.isEmpty() && ((last = queue.getLast()) == '<' || last == ' ')){
+			if(last == ' '){
+				queue.removeLast();
+			}
 			queue.addLast(c);
 		}
 	}
 	
 	private static boolean addLetterInQueue(LinkedList<Character> queue, char c){
 		char last;
-		if(!queue.isEmpty() && ((last = queue.getLast()) == '<' || isLetter(last))){
-			queue.addLast(c);
-			return true;
+		if(!queue.isEmpty()){
+			last = queue.getLast();
+			if(last == '<' || isLetter(last)){
+					queue.addLast(c);
+					return true;
+			}
 		}
 		return false;
 	}
