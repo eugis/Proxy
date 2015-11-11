@@ -161,7 +161,10 @@ public class ThreadSocketHandler implements ConnectionHandler{
 //					keepReading = false;
 //				} else {
 					System.out.println("timeout");
+					logs.error("timeout");
 					//TODO: devolver un response de timeout (504? - 505?)
+					int sCode = 504;
+					byte[] byteReq = parser.getHttpResponse(sCode).getBytes();
 //				}
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -49,21 +49,6 @@ public class HttpParser {
 		return message.getPort();
 	}
 
-	public String getHttpResponse() {
-		int sCode = 0;
-		if(message.isInvalidMethod()){
-			sCode = 405;
-		}else if(message.isInvalidHeader()){
-			sCode = 400;
-			
-		}else if(false /*EL SERVER HACE TIME OUT*/){
-			sCode = 504;
-		}
-		
-		String version = "1.1";
-		return ResponseUtils.generateHttpResponseIM(sCode, version, message);
-	}
-
 	public boolean isFinished() {
 		return message.isFinished();
 	}
@@ -83,6 +68,25 @@ public class HttpParser {
 
 	public void cleanRequest() {
 		message.cleanBuffer();		
+	}
+
+	public String getHttpResponse(int sCode) {
+		String version = "1.1";
+		return ResponseUtils.generateHttpResponseIM(sCode, version, message);
+	}
+	
+	public String getHttpResponse() {
+		int sCode = 0;
+		if(message.isInvalidMethod()){
+			sCode = 405;
+		}else if(message.isInvalidHeader()){
+			sCode = 400;	
+		}
+		
+//		String version = "1.1";
+//		return ResponseUtils.generateHttpResponseIM(sCode, version, message);
+		
+		return getHttpResponse(sCode);
 	}
 
 }
