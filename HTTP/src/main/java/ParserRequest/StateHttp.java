@@ -1,5 +1,6 @@
 package ParserRequest;
 
+import java.io.IOException;
 import java.nio.ByteBuffer;
 
 import ParserRequest.ParserUtils;
@@ -28,26 +29,31 @@ public enum StateHttp {
 
 		@Override
 		public StateHttp process(ByteBuffer buf, HttpMessage message) {
-			String line = ParserUtils.readLine(buf, message);
-			if(line == null){
-				return this;
-			}
-			
-			if(!line.equals("\n")){
-				boolean valid = ParserUtils.parseHeaders(line.trim(), message);
-				if(!valid){
-					return INVALID;
+			try {
+				boolean finishedReading = ParserUtils.setHeaders(buf, message, message.getLastLine());
+//				String line = ParserUtils.readLine(buf, message);
+//				if(line == null){
+//					return this;
+//				}
+//				if(!line.equals("\n")){
+//					boolean valid = ParserUtils.parseHeaders(line.trim(), message);
+//					if(!valid){
+//						return INVALID;
+//					}
+//				}else{
+				if(finishedReading){
+					message.setHeaderFinished(true);
+					if(!ParserUtils.minHeaders(message)){
+						return INVALID;
+					}else{
+						message.state = EMPTY_LINE;
+						return message.state.process(buf, message);
+					}
 				}
-			}else{
-				//TODO borrar syso!
-				System.out.println("Empty line!");
-				message.setHeaderFinished(true);
-				if(!ParserUtils.minHeaders(message)){
-					return INVALID;
-				}else{
-					message.state = EMPTY_LINE;
-					return message.state.process(buf, message);
-				}
+//				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 			return this;
 		}

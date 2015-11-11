@@ -1,0 +1,91 @@
+INFO: 00:15:30 --> Starting CarlyAdmin Server...
+INFO: 00:15:32 --> Se conecto /127.0.0.1:49380
+INFO: 00:26:27 --> Starting CarlyAdmin Server...
+INFO: 00:26:29 --> Se conecto /127.0.0.1:49415
+INFO: 00:26:48 --> Host: 
+INFO: 00:26:48 --> Port: -1
+INFO: 00:33:22 --> Se desconecto/127.0.0.1:49415
+INFO: 00:33:33 --> Starting CarlyAdmin Server...
+INFO: 00:34:14 --> Se conecto /127.0.0.1:49431
+INFO: 00:35:50 --> Starting CarlyAdmin Server...
+INFO: 00:35:53 --> Se conecto /127.0.0.1:49440
+INFO: 00:38:28 --> Host: 
+INFO: 00:38:28 --> Port: -1
+INFO: 00:43:29 --> Starting CarlyAdmin Server...
+INFO: 00:43:32 --> Se conecto /127.0.0.1:49460
+INFO: 00:45:40 --> Host: 
+INFO: 00:45:41 --> Port: -1
+INFO: 00:52:57 --> Starting CarlyAdmin Server...
+INFO: 00:53:03 --> Se conecto /127.0.0.1:49471
+INFO: 00:54:05 --> Host: 
+INFO: 00:54:06 --> Port: -1
+INFO: 02:51:20 --> Starting CarlyAdmin Server...
+INFO: 02:51:28 --> Se conecto /127.0.0.1:49732
+INFO: 02:52:12 --> Host: 
+INFO: 02:52:12 --> Port: -1
+INFO: 02:54:37 --> Starting CarlyAdmin Server...
+INFO: 02:54:41 --> Se conecto /127.0.0.1:49740
+INFO: 02:55:30 --> Host: 
+INFO: 02:55:30 --> Port: -1
+INFO: 02:58:13 --> Starting CarlyAdmin Server...
+INFO: 02:58:16 --> Se conecto /127.0.0.1:49751
+INFO: 02:58:47 --> Host: 
+INFO: 02:58:47 --> Port: -1
+INFO: 03:02:21 --> Starting CarlyAdmin Server...
+INFO: 03:02:23 --> Se conecto /127.0.0.1:49756
+INFO: 03:02:45 --> Host: 
+INFO: 03:02:45 --> Port: -1
+INFO: 03:05:53 --> Starting CarlyAdmin Server...
+INFO: 03:05:56 --> Se conecto /127.0.0.1:49774
+INFO: 03:06:08 --> Host: 
+INFO: 03:06:08 --> Port: -1
+INFO: 03:08:39 --> Starting CarlyAdmin Server...
+INFO: 03:08:42 --> Se conecto /127.0.0.1:49782
+INFO: 03:08:53 --> Host: 
+INFO: 03:08:53 --> Port: -1
+INFO: 03:11:42 --> Starting CarlyAdmin Server...
+INFO: 03:11:46 --> Se conecto /127.0.0.1:49787
+INFO: 03:12:17 --> Host: 
+INFO: 03:12:17 --> Port: -1
+INFO: 03:15:23 --> Starting CarlyAdmin Server...
+INFO: 03:15:26 --> Se conecto /127.0.0.1:49794
+ERROR: 03:15:52 --> 405: Method Not Allowed
+INFO: 03:16:50 --> Starting CarlyAdmin Server...
+INFO: 03:16:52 --> Se conecto /127.0.0.1:49799
+INFO: 03:17:19 --> Host: 
+INFO: 03:17:19 --> Port: -1
+INFO: 03:18:13 --> Starting CarlyAdmin Server...
+INFO: 03:18:15 --> Se conecto /127.0.0.1:49807
+INFO: 03:18:36 --> Host: 
+INFO: 03:18:36 --> Port: -1
+INFO: 03:19:42 --> Starting CarlyAdmin Server...
+INFO: 03:19:44 --> Se conecto /127.0.0.1:49812
+INFO: 03:20:05 --> Host: 
+INFO: 03:20:05 --> Port: -1
+INFO: 03:32:51 --> Starting CarlyAdmin Server...
+INFO: 03:32:53 --> Se conecto /127.0.0.1:49825
+INFO: 03:33:15 --> Host: 
+INFO: 03:33:15 --> Port: -1
+INFO: 03:34:12 --> Starting CarlyAdmin Server...
+INFO: 03:34:14 --> Se conecto /127.0.0.1:49829
+INFO: 03:34:36 --> Host: 
+INFO: 03:34:36 --> Port: -1
+INFO: 03:36:35 --> Starting CarlyAdmin Server...
+INFO: 03:36:38 --> Se conecto /127.0.0.1:49836
+INFO: 03:37:03 --> Host: 
+INFO: 03:37:03 --> Port: -1
+INFO: 03:48:03 --> Starting CarlyAdmin Server...
+INFO: 03:48:11 --> Se conecto /127.0.0.1:49853
+INFO: 03:48:21 --> Host: 
+INFO: 03:48:21 --> Port: -1
+INFO: 03:48:42 --> Host: www.google.com
+INFO: 03:48:42 --> Port: 80
+INFO: 03:48:54 --> Se desconecto/127.0.0.1:49853
+INFO: 03:48:56 --> Se conecto /127.0.0.1:49855
+INFO: 03:49:11 --> Host: 
+INFO: 03:49:11 --> Port: -1
+INFO: 03:51:15 --> Host: www.infobae.com
+INFO: 03:51:15 --> Port: 80
+INFO: 03:51:20 --> Host: www.infobae.com
+INFO: 03:51:20 --> Port: 80
+INFO: 03:51:25 --> Se desconecto/127.0.0.1:49855

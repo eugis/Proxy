@@ -11,13 +11,11 @@ import CarlyAdmin.manager.ConfigurationManager;
 public class ServerParserUtils {
 
 	public static byte[] processResponse(ByteBuffer buf, HttpResponse response) throws IOException{
-		String line = null;
 		boolean doneReadingStLine = false;
 		boolean doneReadingHeaders = false;
 		boolean doneReading = false;
-		int size = -1;
 
-		if (!!isLeetEnabled()) {
+		if (!isLeetEnabled()) {
 			//response.setBuf(buf.array());
 			return buf.array();
 		}else{

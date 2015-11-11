@@ -1,5 +1,6 @@
 package ParserRequest;
 
+import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.HashSet;
 import java.util.Set;
@@ -10,6 +11,8 @@ import org.apache.log4j.Logger;
 
 import CarlyAdmin.manager.ConfigurationManager;
 import Logs.CarlyLogger;
+import ParserResponse.HttpResponse;
+import ParserResponse.StateResponse;
 
 public class ParserUtils {
 	
@@ -142,6 +145,37 @@ public class ParserUtils {
 		int pos = buf.position();
 		buf.limit(pos);
 		return new String(array);//.trim();
+	}
+	
+	public static boolean setHeaders(ByteBuffer buf, HttpMessage message, StringBuilder genLine) throws IOException{
+		boolean doneReading = false;		
+		//StringBuilder genLine = new StringBuilder();
+//		StateResponse state = response.getState();
+		char c;
+		byte b;
+		buf.flip();
+
+		while(buf.hasRemaining() && !doneReading && (b = buf.get())!= -1 && b != 0){
+			c = (char)b;
+			message.buffer.put(message.pos, b);
+			message.pos++;
+			if(c == '\n'){
+				if(genLine.toString().trim().equals("")){
+					doneReading = true;
+				}else{
+					parseHeaders(genLine.toString().trim(), message);
+					genLine = new StringBuilder();
+				}
+			}else{
+				genLine.append(c);
+			}
+		}
+		if(!doneReading){
+			message.setLastLine(genLine);
+		}else{
+			message.setLastLine(null);
+		}
+		return doneReading;
 	}
 	
 	
