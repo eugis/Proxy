@@ -36,6 +36,7 @@ public class ServerParserUtils {
 					break;
 					
 				case BODY:
+					
 					parseBody(buf, response, state.getOpenedTags(), respBuf);
 					break;
 
@@ -169,6 +170,7 @@ public class ServerParserUtils {
 	
 	private static boolean parseBody(ByteBuffer buf, final HttpResponse response, LinkedList<String> openedTags, ByteBuffer respBuf) throws IOException{
 
+		System.out.println("Entra parseBodyy");
 		StringBuilder resp = new StringBuilder();
 		Set<String> tags = loadHtmlTags(); 
 		LinkedList<Character> queue = response.getState().getQueue();
@@ -194,19 +196,15 @@ public class ServerParserUtils {
 					
 					break;
 					
-					/*si la > ya la perdí donde entra a getTag a sacar todo el tag comment???? para mi en vez de removeLast()
-					 * hay que poner getTag.. para q saque todo para atrás!! 
-					 */
 					case '>': 
 						
 						if(onComment){
-								//Si es el tag malo q no reconocemos (puede ser solo meta????)
-								queue.removeLast();//borrá la anterior
+					
+								queue.removeLast();
 								
-								onComment = false;//ESTAS BORRANDO NADA MÁS QUE LA ULTIMA??? Y LA PROX NO BORRAS NADA MAS?
-								//Yo seguiria eliminando hasta q encuentre <
+								onComment = false;
 								}else{
-									//saca el tag terminado tipo <HTML>
+									
 									getTag(response.getState(), queue, openedTags, tags);
 								}
 						break;
