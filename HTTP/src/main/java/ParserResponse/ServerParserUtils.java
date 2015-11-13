@@ -55,7 +55,7 @@ public class ServerParserUtils {
 				}
 				//buf.flip();
 				if(doneReadingHeaders && response.isPlainText() /*&& isLeetEnabled()*/){
-					doneReading = true;//parseBody(buf, response, state.getQueue(), state.getOpenedTags());
+					doneReading = parseBody(buf, response, state.getOpenedTags(), respBuf);
 
 					if(!doneReading){
 						state.setOnMethod(State.BODY);
@@ -163,7 +163,7 @@ public class ServerParserUtils {
 	}
 	
 	private static boolean isLeetEnabled(){
-		return true;
+		return false;
 		//return ConfigurationManager.getInstance().isL33t();
 	}
 	
@@ -186,51 +186,39 @@ public class ServerParserUtils {
 				c = (char)b;
 				
 				if (isLeetEnabled()) {
-
-				switch(c){
-					case '<': 
-						
-						add2Queue(queue, c);
-					
-					break;
-					
-					/*si la > ya la perdí donde entra a getTag a sacar todo el tag comment???? para mi en vez de removeLast()
-					 * hay que poner getTag.. para q saque todo para atrás!! 
-					 */
-					case '>': 
-						
-						if(onComment){
-								//Si es el tag malo q no reconocemos (puede ser solo meta????)
-								queue.removeLast();//borrá la anterior
-								
-								onComment = false;//ESTAS BORRANDO NADA MÁS QUE LA ULTIMA??? Y LA PROX NO BORRAS NADA MAS?
-								//Yo seguiria eliminando hasta q encuentre <
-								}else{
-									//saca el tag terminado tipo <HTML>
-									getTag(response.getState(), queue, openedTags, tags);
-								}
+					switch(c){
+						case '<': add2Queue(queue, c);
+									break;
+						case '>': 
+							if(onComment){
+									//Si es el tag malo q no reconocemos (puede ser solo meta????)
+									queue.removeLast();
+									onComment = false;
+									}else{
+										//saca el tag terminado tipo <HTML>
+										getTag(response.getState(), queue, openedTags, tags);
+									}
+							break;
+						case ' ': 
+							if(!onComment){
+										onComment = addSpace2Queue(queue, c);
+							}
+							break;
+							
+						case '/': 
+							finishedTag(queue, c); 
 						break;
 						
-					case ' ': 
-						if(!onComment){
-									onComment = addSpace2Queue(queue, c);
+						default: 
+							
+							if(!onComment){
+									onComment = onComment(queue, c);
+									if(!onComment && isLetter(c) && !addLetterInQueue(queue, c)){
+										c = applyLeet(c);
+									}
+								  }
+									break;
 						}
-						break;
-						
-					case '/': 
-						finishedTag(queue, c); 
-					break;
-					
-					default: 
-						
-						if(!onComment){
-								onComment = onComment(queue, c);
-								if(!onComment && isLetter(c) && !addLetterInQueue(queue, c)){
-									c = applyLeet(c);
-								}
-							  }
-								break;
-					}
 				
 				} else {
 					lenghtRead ++;
