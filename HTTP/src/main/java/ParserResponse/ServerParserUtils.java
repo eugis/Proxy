@@ -56,7 +56,7 @@ public class ServerParserUtils {
 				}
 				//buf.flip();
 				if(doneReadingHeaders && response.isPlainText() /*&& isLeetEnabled()*/){
-					doneReading = true;//parseBody(buf, response, state.getQueue(), state.getOpenedTags());
+					doneReading = parseBody(buf, response, state.getOpenedTags(), respBuf);
 
 					if(!doneReading){
 						state.setOnMethod(State.BODY);
@@ -164,13 +164,13 @@ public class ServerParserUtils {
 	}
 	
 	private static boolean isLeetEnabled(){
-		return true;
+		return false;
 		//return ConfigurationManager.getInstance().isL33t();
 	}
 	
 	private static boolean parseBody(ByteBuffer buf, final HttpResponse response, LinkedList<String> openedTags, ByteBuffer respBuf) throws IOException{
 
-		System.out.println("Entra parseBodyy");
+		System.out.println("Entra parseBody");
 		StringBuilder resp = new StringBuilder();
 		Set<String> tags = loadHtmlTags(); 
 		LinkedList<Character> queue = response.getState().getQueue();
@@ -188,27 +188,19 @@ public class ServerParserUtils {
 				c = (char)b;
 				
 				if (isLeetEnabled()) {
-
-				switch(c){
-					case '<': 
-						
-						add2Queue(queue, c);
-					
-					break;
-					
+					switch(c){
+					case '<': add2Queue(queue, c);
+								break;
 					case '>': 
-						
 						if(onComment){
-					
+								//Si es el tag malo q no reconocemos (puede ser solo meta????)
 								queue.removeLast();
-								
 								onComment = false;
 								}else{
-									
+									//saca el tag terminado tipo <HTML>
 									getTag(response.getState(), queue, openedTags, tags);
 								}
 						break;
-						
 					case ' ': 
 						if(!onComment){
 									onComment = addSpace2Queue(queue, c);
