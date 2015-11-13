@@ -48,12 +48,12 @@ public class ThreadSocketHandler implements ConnectionHandler{
         Socket serverSocket = null;
         ByteBuffer bBuffer;
         byte[] byteReq;
-        while (recvMsgSize != -1 /*&& !keepReading*/) {
-        	receiveBuf = new byte[BUFSIZE]; //TODO: hacer de forma elegante
-        	recvMsgSize = in.read(receiveBuf);
+        while ((recvMsgSize = in.read(receiveBuf)) != -1 /*&& !keepReading*/) {
+        	//receiveBuf = new byte[BUFSIZE]; //TODO: hacer de forma elegante
+        	//recvMsgSize = in.read(receiveBuf);
         	System.out.println("request sin parsear" + new String(receiveBuf));
         	bBuffer = ByteBuffer.wrap(receiveBuf);
-        	if(recvMsgSize != -1){
+        	//if(recvMsgSize != -1){
         		//Harcoded receiveBuf
 //            	String request = "GET / HTTP/1.1\n"+"Host: www.google.com\n\n";
 //        		byte[] msg = request.getBytes(Charset.forName("UTF-8"));
@@ -124,7 +124,8 @@ public class ThreadSocketHandler implements ConnectionHandler{
 						}
 						break;
 					}
-        		}
+        		//}
+            		receiveBuf = new byte[BUFSIZE];
         	}
 
 //        System.out.println("cerrarrrrrrrrrr");
@@ -159,12 +160,13 @@ public class ThreadSocketHandler implements ConnectionHandler{
 //    	boolean reading = false;
     	ByteBuffer bBuffer;
     	try {
-    		while ((/* recvMsgSize = */inFromServer.read(responseBuf)) != -1 /* && !resp.isResponseFinished()*/ && keepReading) {
+    		while (keepReading && (/* recvMsgSize = */inFromServer.read(responseBuf)) != -1 /* && !resp.isResponseFinished()*/ ) {
 				bBuffer = ByteBuffer.wrap(responseBuf);
 				responseBuf = ServerParserUtils.processResponse(bBuffer, resp);
 //				reading = true;
 				String res = new String(responseBuf);
                 System.out.println("req:" + res);
+                keepReading = !resp.getState().getIsFinished();
 				out.write(responseBuf, 0, responseBuf.length);
 				out.flush();
 				System.out.println("Escribiendo en el cliente ... ");
