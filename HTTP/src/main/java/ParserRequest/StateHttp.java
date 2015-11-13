@@ -14,10 +14,13 @@ public enum StateHttp {
 			if(line == null){
 				return this;
 			}
-			boolean valid = ParserUtils.parseMethod(line.trim(), message);
-			if(valid){
+			RequestLine valid = ParserUtils.parseMethod(line.trim(), message);
+			switch (valid) {
+			case OK:
 				message.state = HEADER;
 				return message.state.process(buf, message);
+			case INVALIDVERSION: case INVALIDURL: case ERROR:
+				return INVALID;
 			}
 			
 			return INVALIDMETHOD;
@@ -95,8 +98,9 @@ public enum StateHttp {
 		@Override
 		public StateHttp process(ByteBuffer buf, HttpMessage message) {
 			// hay que seguir leyendo hasta que aparece \r\n
+			//TODO esto esta mal deberiamos usar el setHeaders, habria que primero hacer el if
+			// y despues hacer el parser.
 			String line = ParserUtils.readLine(buf, message);
-//			TODO: agregar que no hay content-lenght y el method es post siga parseando!
 			
 			if(message.isNoHost() && message.isNoContentLength() && !message.isHeaderFinished()){
 				// Si no esta seteado el host, y todavia no termino de parsearHeaders busco el host

@@ -155,29 +155,40 @@ public class ParserUtils {
 		return doneReading;
 	}
 	
-	
-	public static boolean parseMethod(String line, HttpMessage message) {
+	/**
+	 * 
+	 * @param line
+	 * @param message
+	 * @return 
+	 */
+	public static RequestLine parseMethod(String line, HttpMessage message) {
 		String[] requestLine = line.split("\\s");
-		boolean valid = false;
+		RequestLine resp = RequestLine.ERROR;
 		
 		if(requestLine.length != 3){
-			return false;
+			return RequestLine.ERROR;
 		}
 		if(isValidMethod(requestLine[0])){
 			
 			if(isValidURL(requestLine[1])){
 
 				if(isValidVersion(requestLine[2])){
-					valid = true;
+					resp = RequestLine.OK;
 					message.setMethod(requestLine[0]);
 					int index = requestLine[2].indexOf("/");
 					String version = requestLine[2].substring(index+1, requestLine[2].length());
 					message.setVersion(version);
+				}else{
+					resp = RequestLine.INVALIDVERSION;
 				}
+			}else{
+				resp = RequestLine.INVALIDURL;
 			}
+		}else{
+			resp = RequestLine.INVALIDMETHOD;
 		}
 		
-		return valid;
+		return resp;
 	}
 
 	private static boolean isValidVersion(String version) {
