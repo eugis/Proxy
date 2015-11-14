@@ -141,9 +141,15 @@ public class ThreadSocketHandler implements ConnectionHandler{
 			ProxySocket pSocket = ProxyConnectionManager.getConnection(host, port);
 			serverSocket = pSocket.getSocket();	
 			System.out.println("Socket nuevo!!");
+		}else if (!serverSocket.getInetAddress().getHostName().equals(host)){
+			ProxyConnectionManager.closeConnection(serverSocket);
+			ProxySocket pSocket = ProxyConnectionManager.getConnection(host, port);
+			serverSocket = pSocket.getSocket();	
+			System.out.println("Cambio de socketh!!");
 		}
 		//TODO: remover syso
     	System.out.println(serverSocket);
+    	System.out.println("lo que escribo en el server" + new String(byteReq));
     	OutputStream outFromServer = serverSocket.getOutputStream();
     	outFromServer.write(byteReq);
     	outFromServer.flush();
