@@ -98,13 +98,14 @@ public enum StateHttp {
 		@Override
 		public StateHttp process(ByteBuffer buf, HttpMessage message) {
 			// hay que seguir leyendo hasta que aparece \r\n
-			//TODO esto esta mal deberiamos usar el setHeaders, habria que primero hacer el if
-			// y despues hacer el parser.
-			String line = ParserUtils.readLine(buf, message);
-			
+			// Si no esta seteado el host, y todavia no termino de parsearHeaders busco el host
 			if(message.isNoHost() && message.isNoContentLength() && !message.isHeaderFinished()){
-				// Si no esta seteado el host, y todavia no termino de parsearHeaders busco el host
-				ParserUtils.parseHeaders(line, message);
+				boolean finishedReading = ParserUtils.setHeaders(buf, message, message.getLastLine());
+				if(finishedReading){
+					message.setHeaderFinished(true);
+				}
+			}else{
+				ParserUtils.readLine(buf, message);
 			}
 			
 			if(message.isFinished()){

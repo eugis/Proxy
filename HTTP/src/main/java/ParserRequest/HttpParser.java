@@ -60,8 +60,8 @@ public class HttpParser {
 		byte[] request = new byte[message.pos];
 		message.buffer.get(request, 0, message.pos);
 		
-		System.out.println("Long request: "+ request.length);
-		System.out.println(new String(request));
+//		System.out.println("Long request: "+ request.length);
+//		System.out.println(new String(request));
 		
 		message.reset();
 		
