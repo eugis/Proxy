@@ -12,8 +12,6 @@ import org.apache.log4j.Logger;
 
 import Logs.CarlyLogger;
 import ParserRequest.HttpParser;
-import ParserRequest.ParserResponse;
-import ParserRequest.ParserUtils;
 import ParserRequest.ReadingState;
 import ParserResponse.HttpResponse;
 import ParserResponse.ServerParserUtils;
@@ -22,14 +20,12 @@ public class ThreadSocketHandler implements ConnectionHandler{
 
 	private static final int BUFSIZE = 4096;
 	private HttpParser parser;
-	private ServerParserUtils serverParser;
 	
 	private static Logger logs = CarlyLogger.getCarlyLogger();
 	
 	@Override
 	public void handle(Socket s) throws IOException {
 		this.parser = new HttpParser();
-		this.serverParser = new ServerParserUtils();
 		readDataFromClient(s);
 	}
 
@@ -37,35 +33,25 @@ public class ThreadSocketHandler implements ConnectionHandler{
 		InputStream in = s.getInputStream();
         OutputStream out = s.getOutputStream();
         byte[] receiveBuf = new byte[BUFSIZE];  // Receive buffer
-        int recvMsgSize = 0;   // Size of received message
-        ParserResponse resp = null;
+//        int recvMsgSize = 0;   // Size of received message
         ReadingState state = ReadingState.UNFINISHED;
-        //boolean keepReading = false;
         String host2connect = "";
         int port2connect = -1;
-        boolean client = true;
         // Receive until client closes connection, indicated by -1 return
         Socket serverSocket = null;
         ByteBuffer bBuffer;
         byte[] byteReq;
-        while ((recvMsgSize = in.read(receiveBuf)) != -1 /*&& !keepReading*/) {
-        	//receiveBuf = new byte[BUFSIZE]; //TODO: hacer de forma elegante
-        	//recvMsgSize = in.read(receiveBuf);
+        while ((/*recvMsgSize = */in.read(receiveBuf)) != -1 /*&& !keepReading*/) {      
         	System.out.println("request sin parsear" + new String(receiveBuf));
         	bBuffer = ByteBuffer.wrap(receiveBuf);
-        	//if(recvMsgSize != -1){
-        		//Harcoded receiveBuf
-//            	String request = "GET / HTTP/1.1\n"+"Host: www.google.com\n\n";
-//        		byte[] msg = request.getBytes(Charset.forName("UTF-8"));
-//            	
-
-            	state = parser.sendData(bBuffer);
-            		switch (state) {
-					case UNFINISHED:
-						System.out.println("UNFINISHED: No termino de leer el request");
-						//TODO con esto empieza a escribir mientras va leyendo una vez que tiene el host
-						/*if(parser.getHost() != null){	
-		            		host2connect = parser.getHost();
+        	
+            state = parser.sendData(bBuffer);
+            switch (state) {
+				case UNFINISHED:
+					System.out.println("UNFINISHED: No termino de leer el request");
+					//TODO con esto empieza a escribir mientras va leyendo una vez que tiene el host
+					/*if(parser.getHost() != null){	
+	            		host2connect = parser.getHost();
 		                    port2connect = parser.getPort();
 		                    
 							logs.info("Host: " + host2connect);
@@ -78,55 +64,49 @@ public class ThreadSocketHandler implements ConnectionHandler{
 		                    parser.cleanRequest();
 						}*/
 						
-						break;
-					case FINISHED:
-						//TODO si vas vaciando el request cuando encontras el host esto no va
-						logs.info("Host: " + host2connect);
-						logs.info("Port: " + port2connect);
-						System.out.println("Host:" + parser.getHost());
-	                	System.out.println("Port:" + parser.getPort());
+					break;
+				case FINISHED:
+					//TODO si vas vaciando el request cuando encontras el host esto no va
+					System.out.println("Host:" + parser.getHost());
+	                System.out.println("Port:" + parser.getPort());
 	                	
-	            		
-	//            		if(!resp.returnToClient()){
-	            		host2connect = parser.getHost();
-	                    port2connect = parser.getPort();
-
-	                    byteReq = parser.getRequest();
-	                    System.out.println("long request: " + byteReq.length);
+	            	host2connect = parser.getHost();
+	                port2connect = parser.getPort();
+	                logs.info("Host: " + host2connect);
+					logs.info("Port: " + port2connect);
+					
+	                byteReq = parser.getRequest();
+	                System.out.println("long request: " + byteReq.length);
 	                    
-	                    System.out.println("request: " + new String(byteReq));
+	                System.out.println("request: " + new String(byteReq));
 
 //	                    String req = new String(byteReq);
 //	                    System.out.println("req:" + req);
-	                    String hardCodeResp = "GET / HTTP/1.1\nHost: www.google.com\n\n\n";
-//	                    System.out.println("iguales:" + req.equals(hardCodeResp));
-//	                    byteReq = hardCodeResp.getBytes();
-//	                    parser = new HttpParser();
-	                    try{
-	                    	serverSocket = writeToServer(host2connect, port2connect, byteReq, serverSocket);
-	                    }catch(UnknownHostException e){
-	        				logs.error(e);
-	        				
-	        				int sCode = 112;
-	        				byteReq = parser.getHttpResponse(sCode).getBytes();
-	        				out.write(byteReq, 0, byteReq.length);
-	        				out.flush();
-	                    }
-
-	                    readFromServer(serverSocket, out);		
-            			break;
-					case ERROR:
-						System.out.println("Error: No termino de leer el request");
-						if(parser.isFinished()){
-							byteReq = parser.getHttpResponse().getBytes();
-							out.write(byteReq);
-		              	  	out.flush();	
-						}
-						break;
+	                try{
+	                  	parser.resetParser();
+	                   	serverSocket = writeToServer(host2connect, port2connect, byteReq, serverSocket);
+		                readFromServer(serverSocket, s);
+	                }catch(UnknownHostException e){
+	       				logs.error(e);
+	        			serverSocket = null;
+        				int sCode = 112;
+        				byteReq = parser.getHttpResponse(sCode).getBytes();
+	        			out.write(byteReq, 0, byteReq.length);
+	        			out.flush();
+	                }		
+           			break;
+				case ERROR:
+					System.out.println("Error: No termino de leer el request");
+					if(parser.isFinished()){
+						byteReq = parser.getHttpResponse().getBytes();
+						out.write(byteReq);
+						out.flush();	
 					}
+					break;
+				}
         		//}
-            		receiveBuf = new byte[BUFSIZE];
-        	}
+           		receiveBuf = new byte[BUFSIZE];
+        }
 
 //        System.out.println("cerrarrrrrrrrrr");
         // Close the socket.  We are done with this client!
@@ -148,7 +128,8 @@ public class ThreadSocketHandler implements ConnectionHandler{
 			System.out.println("Cambio de socketh!!");
 		}
 		//TODO: remover syso
-    	System.out.println(serverSocket);
+//    	System.out.println(serverSocket);
+		System.out.println(" ");
     	System.out.println("lo que escribo en el server" + new String(byteReq));
     	OutputStream outFromServer = serverSocket.getOutputStream();
     	outFromServer.write(byteReq);
@@ -157,43 +138,45 @@ public class ThreadSocketHandler implements ConnectionHandler{
 	}
     
 	//TODO: Agregar el parser de respuesta al contenido del servidor
-    private void readFromServer(Socket serverSocket, OutputStream out) throws IOException{
+    private void readFromServer(Socket serverSocket, /*OutputStream out*/Socket s) throws IOException{
     	byte[] responseBuf = new byte[BUFSIZE];
-//    	int recvMsgSize = 0;
+    	if (s.isClosed()) {
+            if (serverSocket != null) {
+            	ProxyConnectionManager.closeConnection(serverSocket);	
+            }
+            return; //TODO: evitar pipeline?? ver si funciona.
+    	}
     	HttpResponse resp = new HttpResponse();
     	boolean keepReading = true;
     	InputStream inFromServer = serverSocket.getInputStream();
-//    	boolean reading = false;
     	ByteBuffer bBuffer;
     	try {
-    		while (keepReading && (/* recvMsgSize = */inFromServer.read(responseBuf)) != -1 /* && !resp.isResponseFinished()*/ ) {
+    		while (keepReading && (inFromServer.read(responseBuf) != -1) /* && !resp.isResponseFinished()*/ ) {
 				bBuffer = ByteBuffer.wrap(responseBuf);
 				responseBuf = ServerParserUtils.processResponse(bBuffer, resp);
-//				reading = true;
-				String res = new String(responseBuf);
-                System.out.println("req:" + res);
+//				String res = new String(responseBuf);
+//                System.out.println("req:" + res);
                 keepReading = !resp.getState().getIsFinished();
-				out.write(responseBuf, 0, responseBuf.length);
-				out.flush();
+//				out.write(responseBuf, 0, responseBuf.length);
+//				out.flush();
+                System.out.println("después de leet" + new String(responseBuf));
+                s.getOutputStream().write(responseBuf, 0, responseBuf.length);
+				s.getOutputStream().flush();
 				System.out.println("Escribiendo en el cliente ... ");
     		}
 		} catch (SocketTimeoutException e) {
-//				if (reading) {
-//					keepReading = false;
-//				} else {
 					System.out.println("timeout");
 					logs.error("timeout");
 
 					int sCode = 504;
 					byte[] byteReq = parser.getHttpResponse(sCode).getBytes();
-					out.write(byteReq, 0, byteReq.length);
-					out.flush();
+//					out.write(byteReq, 0, byteReq.length);
+//					out.flush();
+					s.getOutputStream().write(byteReq, 0, byteReq.length);
+					s.getOutputStream().flush();
 					keepReading = false;
-//				}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-			
     }
 }

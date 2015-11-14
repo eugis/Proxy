@@ -19,6 +19,9 @@ public class HttpParser {
 		return state;
 	}
 	
+	public void resetParser(){
+		message = new HttpMessage();
+	}
 	
 	public ReadingState sendData(ByteBuffer buf){
 		ByteBuffer preparedBuffer = ByteBuffer.allocate(buf.capacity());
