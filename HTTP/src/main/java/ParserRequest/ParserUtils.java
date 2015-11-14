@@ -192,7 +192,7 @@ public class ParserUtils {
 	}
 
 	private static boolean isValidVersion(String version) {
-		String regex = "HTTP/1.1";
+		String regex = "HTTP/1.(1|0)";
 		Pattern patt = Pattern.compile(regex);
         Matcher matcher = patt.matcher(version);
         return matcher.matches();
