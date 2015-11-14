@@ -16,12 +16,11 @@ public class ConfigurationManager {
 	private ConcurrentHashMap<String, String> authorization;
 	
 	private AtomicBoolean l33t;
-	
 	private Logger logs = CarlyLogger.getCarlyLogger();
 	
 	public ConfigurationManager() {
 		this.authorization = new ConcurrentHashMap<String, String>();
-		this.l33t = new AtomicBoolean(true);
+		this.l33t = new AtomicBoolean(false);
 		InputStream is = getClass().getResourceAsStream(
 				"../resources/setup.properties");
 		Properties p = new Properties();

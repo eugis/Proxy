@@ -164,8 +164,7 @@ public class ServerParserUtils {
 	}
 	
 	private static boolean isLeetEnabled(){
-		return false;
-		//return ConfigurationManager.getInstance().isL33t();
+		return ConfigurationManager.getInstance().isL33t();
 	}
 	
 	private static boolean parseBody(ByteBuffer buf, final HttpResponse response, LinkedList<String> openedTags, ByteBuffer respBuf) throws IOException{
