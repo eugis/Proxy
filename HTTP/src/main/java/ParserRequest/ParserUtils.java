@@ -162,8 +162,7 @@ public class ParserUtils {
 		}else{
 			message.setLastLine(null);
 		}
-		System.out.println("message.buffer al terminar setHeaders: ");
-		System.out.println(new String (message.buffer.array()));
+		
 		return doneReading;
 	}
 	
