@@ -43,6 +43,7 @@ public class ParserUtils {
         rh.add("If-Unmodified-Since");
         rh.add("Max-Forwards");
         rh.add("Proxy-Authorization");
+        //rh.add("Proxy-Connection");
         rh.add("Range");
         rh.add("Referer");
         rh.add("TE");
@@ -78,14 +79,14 @@ public class ParserUtils {
 			b = buf.get();
 			array[i++] = b;
 			if(b != 0){
-//				System.out.println(b);
-//				System.out.println("pos: " + message.pos);
 				message.buffer.put(message.pos, b);
 				message.pos++;
 			}
+ 
 			if(message.isCrFlag() && b != '\n'){
 				message.setcrFlag(false);
 			}
+			
 			if(b == '\r'){
 //				if(message.isHeaderFinished()){
 					message.setcrFlag(true);
@@ -118,11 +119,19 @@ public class ParserUtils {
 					return null;
 				}
 				array[i] = b;
+				
+				message.buffer.put(message.pos, (byte)'\n');
+				message.pos++;
+				
 			}
 		}
 		buf.compact();
 		int pos = buf.position();
 		buf.limit(pos);
+		
+		
+		
+		
 		return new String(array);//.trim();
 	}
 	
@@ -131,11 +140,12 @@ public class ParserUtils {
 		char c;
 		byte b;
 		buf.flip();
-
+		
 		while(buf.hasRemaining() && !doneReading && (b = buf.get())!= -1 && b != 0){
 			c = (char)b;
 			message.buffer.put(message.pos, b);
 			message.pos++;
+			
 			if(c == '\n'){
 				if(genLine.toString().trim().equals("")){
 					doneReading = true;
@@ -152,6 +162,7 @@ public class ParserUtils {
 		}else{
 			message.setLastLine(null);
 		}
+		
 		return doneReading;
 	}
 	
