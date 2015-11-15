@@ -1,0 +1,2858 @@
+INFO: 00:57:03 --> Starting CarlyAdmin Server...
+INFO: 00:57:12 --> Se conecto /127.0.0.1:52858
+INFO: 00:57:25 --> Host: www.adidas.com.ar
+INFO: 00:57:25 --> Port: 80
+INFO: 00:58:03 --> Host: www.google.com
+INFO: 00:58:03 --> Port: 80
+INFO: 00:58:33 --> Host: www.infobae.com
+INFO: 00:58:33 --> Port: 80
+INFO: 00:59:01 --> Starting CarlyAdmin Server...
+INFO: 00:59:28 --> Se conecto /127.0.0.1:52875
+INFO: 00:59:28 --> Se conecto /127.0.0.1:52876
+ERROR: 00:59:29 --> invalid header
+ERROR: 00:59:29 --> invalid header
+INFO: 00:59:29 --> Host: www.example.com
+INFO: 00:59:29 --> Port: 80
+ERROR: 00:59:50 --> invalid header
+INFO: 00:59:50 --> Host: www.example.com
+INFO: 00:59:50 --> Port: 80
+INFO: 00:59:56 --> Se desconecto/127.0.0.1:52876
+INFO: 00:59:56 --> Se conecto /127.0.0.1:52880
+ERROR: 00:59:56 --> invalid header
+ERROR: 00:59:56 --> invalid header
+ERROR: 00:59:56 --> invalid header
+INFO: 00:59:56 --> Host: www.adidas.com.ar
+INFO: 00:59:56 --> Port: 80
+ERROR: 01:00:10 --> java.net.SocketException: Connection reset
+INFO: 01:00:10 --> Se conecto /127.0.0.1:52882
+ERROR: 01:00:10 --> invalid header
+ERROR: 01:00:10 --> invalid header
+ERROR: 01:00:10 --> invalid header
+INFO: 01:00:10 --> Host: www.adidas.com.ar
+INFO: 01:00:10 --> Port: 80
+INFO: 01:00:36 --> Se desconecto/127.0.0.1:52882
+INFO: 01:00:36 --> Se conecto /127.0.0.1:52886
+ERROR: 01:00:36 --> invalid header
+ERROR: 01:00:36 --> invalid header
+ERROR: 01:00:36 --> invalid header
+INFO: 01:00:36 --> Host: www.adidas.com.ar
+INFO: 01:00:36 --> Port: 80
+INFO: 01:00:58 --> Se desconecto/127.0.0.1:52886
+INFO: 01:00:58 --> Se conecto /127.0.0.1:52889
+ERROR: 01:00:58 --> invalid header
+ERROR: 01:00:58 --> invalid header
+ERROR: 01:00:58 --> invalid header
+INFO: 01:00:58 --> Host: www.adidas.com.ar
+INFO: 01:00:58 --> Port: 80
+INFO: 01:01:18 --> Se desconecto/127.0.0.1:52889
+INFO: 01:01:36 --> Se conecto /127.0.0.1:52895
+ERROR: 01:01:37 --> invalid header
+ERROR: 01:01:37 --> invalid header
+ERROR: 01:01:37 --> invalid header
+INFO: 01:01:37 --> Host: infobae.com
+INFO: 01:01:37 --> Port: 80
+ERROR: 01:01:49 --> java.net.SocketException: Connection reset
+INFO: 01:01:49 --> Se conecto /127.0.0.1:52896
+ERROR: 01:01:49 --> invalid header
+ERROR: 01:01:49 --> invalid header
+ERROR: 01:01:49 --> invalid header
+INFO: 01:01:49 --> Host: infobae.com
+INFO: 01:01:49 --> Port: 80
+INFO: 01:02:03 --> Se desconecto/127.0.0.1:52896
+INFO: 01:02:03 --> Se conecto /127.0.0.1:52897
+INFO: 01:02:03 --> Se desconecto/127.0.0.1:52897
+INFO: 01:02:03 --> Se conecto /127.0.0.1:52931
+INFO: 01:06:21 --> Starting CarlyAdmin Server...
+INFO: 01:06:45 --> Se conecto /127.0.0.1:52983
+INFO: 01:06:45 --> Se conecto /127.0.0.1:52984
+ERROR: 01:06:45 --> invalid header
+INFO: 01:06:45 --> Host: www.example.com
+INFO: 01:06:45 --> Port: 80
+ERROR: 01:06:51 --> timeout
+ERROR: 01:06:51 --> 504: Gateway Timeout
+INFO: 01:06:51 --> Se desconecto/127.0.0.1:52983
+INFO: 01:06:51 --> Se conecto /127.0.0.1:52985
+INFO: 01:07:46 --> Starting CarlyAdmin Server...
+INFO: 01:07:49 --> Se conecto /127.0.0.1:52990
+INFO: 01:08:03 --> Host: www.example.com
+INFO: 01:08:03 --> Port: 80
+ERROR: 01:08:08 --> timeout
+ERROR: 01:08:08 --> 504: Gateway Timeout
+INFO: 01:08:16 --> Se conecto /127.0.0.1:52997
+INFO: 01:08:36 --> Se desconecto/127.0.0.1:52990
+INFO: 01:08:36 --> Se conecto /127.0.0.1:52998
+INFO: 01:08:43 --> Se desconecto/127.0.0.1:52998
+INFO: 01:08:43 --> Se desconecto/127.0.0.1:52997
+INFO: 01:08:43 --> Se conecto /127.0.0.1:53001
+INFO: 01:08:43 --> Se conecto /127.0.0.1:52999
+INFO: 01:08:43 --> Se desconecto/127.0.0.1:52999
+INFO: 01:08:43 --> Se conecto /127.0.0.1:53004
+ERROR: 01:08:43 --> invalid header
+ERROR: 01:08:43 --> invalid header
+INFO: 01:08:43 --> Host: null
+INFO: 01:08:43 --> Port: 80
+ERROR: 01:08:43 --> java.net.ConnectException: Connection refused
+INFO: 01:08:43 --> Se conecto /127.0.0.1:53005
+INFO: 01:08:58 --> Starting CarlyAdmin Server...
+INFO: 01:09:01 --> Se conecto /127.0.0.1:53012
+ERROR: 01:09:01 --> invalid header
+ERROR: 01:09:01 --> invalid header
+INFO: 01:09:01 --> Host: www.example.com
+INFO: 01:09:01 --> Port: 80
+INFO: 01:09:03 --> Se conecto /127.0.0.1:53015
+ERROR: 01:09:06 --> timeout
+ERROR: 01:09:06 --> 504: Gateway Timeout
+ERROR: 01:09:06 --> invalid header
+ERROR: 01:09:06 --> invalid header
+INFO: 01:09:06 --> Host: www.example.com
+INFO: 01:09:06 --> Port: 80
+ERROR: 01:09:11 --> timeout
+ERROR: 01:09:11 --> 504: Gateway Timeout
+INFO: 01:09:16 --> Starting CarlyAdmin Server...
+INFO: 01:09:21 --> Se conecto /127.0.0.1:53018
+INFO: 01:09:21 --> Se conecto /127.0.0.1:53045
+INFO: 01:10:06 --> Starting CarlyAdmin Server...
+INFO: 01:10:08 --> Se conecto /127.0.0.1:53095
+ERROR: 01:10:08 --> invalid header
+ERROR: 01:10:08 --> invalid header
+INFO: 01:10:08 --> Host: www.example.com
+INFO: 01:10:08 --> Port: 80
+INFO: 01:10:12 --> Se conecto /127.0.0.1:53100
+ERROR: 01:10:14 --> timeout
+ERROR: 01:10:14 --> 504: Gateway Timeout
+INFO: 01:10:14 --> Se desconecto/127.0.0.1:53095
+INFO: 01:10:14 --> Se conecto /127.0.0.1:53101
+ERROR: 01:10:14 --> invalid header
+ERROR: 01:10:14 --> invalid header
+ERROR: 01:10:14 --> invalid header
+INFO: 01:10:14 --> Host: www.infobae.com
+INFO: 01:10:14 --> Port: 80
+ERROR: 01:10:14 --> java.net.SocketException: Connection reset
+INFO: 01:10:14 --> Se conecto /127.0.0.1:53102
+ERROR: 01:10:14 --> invalid header
+ERROR: 01:10:14 --> invalid header
+ERROR: 01:10:14 --> invalid header
+INFO: 01:10:14 --> Host: www.infobae.com
+INFO: 01:10:14 --> Port: 80
+INFO: 01:10:14 --> Se desconecto/127.0.0.1:53102
+INFO: 01:10:14 --> Se conecto /127.0.0.1:53114
+ERROR: 01:10:14 --> invalid header
+ERROR: 01:10:14 --> invalid header
+INFO: 01:10:14 --> Host: cdn01.ib.infobae.com
+INFO: 01:10:14 --> Port: 80
+ERROR: 01:10:14 --> java.net.SocketException: Connection reset
+INFO: 01:10:14 --> Se conecto /127.0.0.1:53115
+INFO: 01:13:14 --> Starting CarlyAdmin Server...
+INFO: 01:13:19 --> Se conecto /127.0.0.1:53248
+INFO: 01:13:19 --> Se conecto /127.0.0.1:53247
+ERROR: 01:13:19 --> invalid header
+ERROR: 01:13:19 --> invalid header
+ERROR: 01:13:19 --> invalid header
+INFO: 01:13:19 --> Host: infobae.com
+INFO: 01:13:19 --> Port: 80
+ERROR: 01:13:25 --> timeout
+ERROR: 01:13:25 --> 504: Gateway Timeout
+ERROR: 01:13:25 --> java.net.SocketException: Broken pipe
+INFO: 01:13:25 --> Se conecto /127.0.0.1:53249
+INFO: 01:13:35 --> Se desconecto/127.0.0.1:53248
+INFO: 01:13:35 --> Se conecto /127.0.0.1:53251
+INFO: 01:13:35 --> Se desconecto/127.0.0.1:53249
+ERROR: 01:13:35 --> invalid header
+ERROR: 01:13:35 --> invalid header
+ERROR: 01:13:35 --> invalid header
+INFO: 01:13:35 --> Host: infobae.com
+INFO: 01:13:35 --> Port: 80
+INFO: 01:13:35 --> Se conecto /127.0.0.1:53278
+ERROR: 01:13:40 --> timeout
+ERROR: 01:13:40 --> 504: Gateway Timeout
+INFO: 01:13:47 --> Se desconecto/127.0.0.1:53278
+INFO: 01:13:47 --> Se conecto /127.0.0.1:53279
+INFO: 01:13:47 --> Se desconecto/127.0.0.1:53251
+INFO: 01:13:47 --> Se conecto /127.0.0.1:53280
+INFO: 01:13:47 --> Se desconecto/127.0.0.1:53280
+INFO: 01:13:47 --> Se conecto /127.0.0.1:53281
+INFO: 01:13:47 --> Se desconecto/127.0.0.1:53279
+INFO: 01:13:47 --> Se conecto /127.0.0.1:53282
+INFO: 01:13:47 --> Se desconecto/127.0.0.1:53282
+INFO: 01:13:47 --> Se desconecto/127.0.0.1:53281
+INFO: 01:13:47 --> Se conecto /127.0.0.1:53284
+INFO: 01:13:47 --> Se desconecto/127.0.0.1:53284
+INFO: 01:13:47 --> Se conecto /127.0.0.1:53285
+INFO: 01:13:47 --> Se desconecto/127.0.0.1:53285
+INFO: 01:13:47 --> Se conecto /127.0.0.1:53286
+INFO: 01:13:47 --> Se desconecto/127.0.0.1:53286
+INFO: 01:13:47 --> Se conecto /127.0.0.1:53283
+INFO: 01:13:47 --> Se conecto /127.0.0.1:53287
+INFO: 01:13:47 --> Se desconecto/127.0.0.1:53287
+INFO: 01:13:47 --> Se conecto /127.0.0.1:53288
+INFO: 01:13:47 --> Se desconecto/127.0.0.1:53288
+INFO: 01:13:47 --> Se conecto /127.0.0.1:53289
+INFO: 01:13:47 --> Se desconecto/127.0.0.1:53289
+INFO: 01:13:47 --> Se conecto /127.0.0.1:53290
+INFO: 01:13:47 --> Se desconecto/127.0.0.1:53290
+INFO: 01:13:47 --> Se conecto /127.0.0.1:53291
+INFO: 01:13:47 --> Se desconecto/127.0.0.1:53283
+INFO: 01:13:47 --> Se conecto /127.0.0.1:53292
+INFO: 01:13:47 --> Se desconecto/127.0.0.1:53292
+INFO: 01:13:47 --> Se desconecto/127.0.0.1:53291
+INFO: 01:13:47 --> Se conecto /127.0.0.1:53293
+INFO: 01:13:47 --> Se conecto /127.0.0.1:53294
+INFO: 01:13:47 --> Se desconecto/127.0.0.1:53293
+INFO: 01:13:47 --> Se conecto /127.0.0.1:53295
+INFO: 01:13:47 --> Se desconecto/127.0.0.1:53295
+INFO: 01:13:47 --> Se conecto /127.0.0.1:53296
+ERROR: 01:13:47 --> invalid header
+ERROR: 01:13:47 --> invalid header
+ERROR: 01:13:47 --> invalid header
+INFO: 01:13:47 --> Host: www.infobae.com
+INFO: 01:13:47 --> Port: 80
+INFO: 01:13:47 --> Se desconecto/127.0.0.1:53294
+INFO: 01:13:47 --> Se conecto /127.0.0.1:53297
+INFO: 01:13:47 --> Se desconecto/127.0.0.1:53297
+INFO: 01:13:47 --> Se conecto /127.0.0.1:53298
+INFO: 01:13:47 --> Se desconecto/127.0.0.1:53298
+INFO: 01:13:47 --> Se conecto /127.0.0.1:53299
+INFO: 01:13:47 --> Se desconecto/127.0.0.1:53299
+INFO: 01:13:47 --> Se conecto /127.0.0.1:53300
+INFO: 01:13:47 --> Se desconecto/127.0.0.1:53300
+INFO: 01:13:47 --> Se conecto /127.0.0.1:53301
+INFO: 01:13:47 --> Se desconecto/127.0.0.1:53301
+INFO: 01:13:47 --> Se conecto /127.0.0.1:53303
+ERROR: 01:13:47 --> java.net.SocketException: Connection reset
+INFO: 01:13:47 --> Se conecto /127.0.0.1:53305
+ERROR: 01:13:47 --> invalid header
+ERROR: 01:13:47 --> invalid header
+ERROR: 01:13:47 --> invalid header
+INFO: 01:13:47 --> Host: www.infobae.com
+INFO: 01:13:47 --> Port: 80
+ERROR: 01:13:47 --> java.net.SocketException: Connection reset
+INFO: 01:13:47 --> Se conecto /127.0.0.1:53323
+INFO: 01:13:55 --> Starting CarlyAdmin Server...
+INFO: 01:13:59 --> Se conecto /127.0.0.1:53342
+INFO: 01:13:59 --> Se conecto /127.0.0.1:53343
+ERROR: 01:13:59 --> invalid header
+ERROR: 01:13:59 --> invalid header
+ERROR: 01:13:59 --> invalid header
+INFO: 01:13:59 --> Host: www.infobae.com
+INFO: 01:13:59 --> Port: 80
+ERROR: 01:14:00 --> java.net.SocketException: Connection reset
+INFO: 01:14:00 --> Se conecto /127.0.0.1:53351
+INFO: 01:14:16 --> Starting CarlyAdmin Server...
+INFO: 01:14:19 --> Se conecto /127.0.0.1:53366
+INFO: 01:14:19 --> Se conecto /127.0.0.1:53368
+ERROR: 01:14:19 --> invalid header
+ERROR: 01:14:19 --> invalid header
+ERROR: 01:14:19 --> invalid header
+INFO: 01:14:19 --> Host: www.adidas.com.ar
+INFO: 01:14:19 --> Port: 80
+ERROR: 01:14:19 --> java.net.SocketException: Connection reset
+ERROR: 01:14:20 --> invalid header
+ERROR: 01:14:20 --> invalid header
+ERROR: 01:14:20 --> invalid header
+INFO: 01:14:20 --> Host: www.adidas.com.ar
+INFO: 01:14:20 --> Port: 80
+INFO: 01:14:20 --> Se conecto /127.0.0.1:53373
+ERROR: 01:14:20 --> invalid header
+ERROR: 01:14:20 --> invalid header
+INFO: 01:14:20 --> Host: www.adidas.com.ar
+INFO: 01:14:20 --> Port: 80
+ERROR: 01:14:20 --> java.net.SocketException: Connection reset
+INFO: 01:14:20 --> Se conecto /127.0.0.1:53374
+ERROR: 01:14:20 --> invalid header
+INFO: 01:14:20 --> Host: demandware.edgesuite.net
+INFO: 01:14:20 --> Port: 80
+INFO: 01:14:20 --> Se desconecto/127.0.0.1:53373
+INFO: 01:14:20 --> Se conecto /127.0.0.1:53376
+ERROR: 01:14:20 --> invalid header
+INFO: 01:14:20 --> Host: demandware.edgesuite.net
+INFO: 01:14:20 --> Port: 80
+ERROR: 01:14:20 --> java.net.SocketException: Connection reset
+INFO: 01:14:20 --> Se conecto /127.0.0.1:53378
+ERROR: 01:14:20 --> invalid header
+INFO: 01:14:20 --> Host: demandware.edgesuite.net
+INFO: 01:14:20 --> Port: 80
+INFO: 01:14:20 --> Se desconecto/127.0.0.1:53376
+INFO: 01:14:20 --> Se conecto /127.0.0.1:53380
+ERROR: 01:14:20 --> invalid header
+INFO: 01:14:20 --> Host: demandware.edgesuite.net
+INFO: 01:14:20 --> Port: 80
+ERROR: 01:14:20 --> java.net.SocketException: Connection reset
+INFO: 01:14:20 --> Se conecto /127.0.0.1:53384
+ERROR: 01:14:20 --> invalid header
+INFO: 01:14:20 --> Host: demandware.edgesuite.net
+INFO: 01:14:20 --> Port: 80
+INFO: 01:14:20 --> Se desconecto/127.0.0.1:53384
+INFO: 01:14:20 --> Se conecto /127.0.0.1:53385
+ERROR: 01:14:20 --> invalid header
+INFO: 01:14:20 --> Host: demandware.edgesuite.net
+INFO: 01:14:20 --> Port: 80
+ERROR: 01:14:20 --> java.net.SocketException: Connection reset
+INFO: 01:14:20 --> Se conecto /127.0.0.1:53387
+ERROR: 01:14:20 --> invalid header
+ERROR: 01:14:20 --> invalid header
+INFO: 01:14:20 --> Host: tags.tiqcdn.com
+INFO: 01:14:20 --> Port: 80
+INFO: 01:14:21 --> Se desconecto/127.0.0.1:53385
+INFO: 01:14:21 --> Se desconecto/127.0.0.1:53387
+INFO: 01:14:21 --> Se conecto /127.0.0.1:53396
+ERROR: 01:14:21 --> invalid header
+INFO: 01:14:21 --> Host: cdn.optimizely.com
+INFO: 01:14:21 --> Port: 80
+INFO: 01:14:21 --> Se conecto /127.0.0.1:53399
+ERROR: 01:14:21 --> invalid header
+ERROR: 01:14:21 --> invalid header
+ERROR: 01:14:21 --> invalid header
+INFO: 01:14:21 --> Host: 312570988.log.optimizely.com
+INFO: 01:14:21 --> Port: 80
+ERROR: 01:14:26 --> timeout
+ERROR: 01:14:26 --> 504: Gateway Timeout
+ERROR: 01:14:27 --> timeout
+ERROR: 01:14:27 --> 504: Gateway Timeout
+INFO: 01:16:00 --> Se desconecto/127.0.0.1:53399
+INFO: 01:16:00 --> Se desconecto/127.0.0.1:53396
+INFO: 01:16:00 --> Se conecto /127.0.0.1:53406
+INFO: 01:16:00 --> Se conecto /127.0.0.1:53408
+ERROR: 01:16:00 --> invalid header
+ERROR: 01:16:00 --> invalid header
+ERROR: 01:16:00 --> invalid header
+INFO: 01:16:00 --> Host: www.infobae.com
+INFO: 01:16:00 --> Port: 80
+INFO: 01:16:00 --> Se desconecto/127.0.0.1:53408
+INFO: 01:16:00 --> Se conecto /127.0.0.1:53413
+ERROR: 01:16:01 --> invalid header
+ERROR: 01:16:01 --> invalid header
+ERROR: 01:16:01 --> invalid header
+INFO: 01:16:01 --> Host: www.infobae.com
+INFO: 01:16:01 --> Port: 80
+INFO: 01:17:43 --> Starting CarlyAdmin Server...
+INFO: 01:17:50 --> Se conecto /127.0.0.1:53425
+ERROR: 01:17:50 --> invalid header
+ERROR: 01:17:50 --> invalid header
+INFO: 01:17:50 --> Host: www.hola.com
+INFO: 01:17:50 --> Port: 80
+ERROR: 01:17:51 --> java.net.SocketException: Connection reset
+INFO: 01:18:35 --> Starting CarlyAdmin Server...
+INFO: 01:18:41 --> Se conecto /127.0.0.1:53437
+INFO: 01:18:41 --> Se conecto /127.0.0.1:53436
+ERROR: 01:18:41 --> invalid header
+ERROR: 01:18:41 --> invalid header
+ERROR: 01:18:41 --> invalid header
+INFO: 01:18:41 --> Host: www.windguru.cz
+INFO: 01:18:41 --> Port: 80
+ERROR: 01:18:43 --> java.net.SocketException: Connection reset
+INFO: 01:18:43 --> Se conecto /127.0.0.1:53438
+INFO: 01:19:33 --> Starting CarlyAdmin Server...
+INFO: 01:19:38 --> Se conecto /127.0.0.1:53454
+INFO: 01:19:38 --> Se conecto /127.0.0.1:53453
+ERROR: 01:19:39 --> invalid header
+ERROR: 01:19:39 --> invalid header
+ERROR: 01:19:39 --> invalid header
+INFO: 01:19:39 --> Host: www.windguru.cz
+INFO: 01:19:39 --> Port: 80
+ERROR: 01:19:40 --> java.net.SocketException: Connection reset
+INFO: 01:19:40 --> Se conecto /127.0.0.1:53455
+INFO: 01:19:52 --> Starting CarlyAdmin Server...
+INFO: 01:19:59 --> Se conecto /127.0.0.1:53464
+INFO: 01:19:59 --> Se conecto /127.0.0.1:53466
+ERROR: 01:19:59 --> invalid header
+ERROR: 01:19:59 --> invalid header
+INFO: 01:19:59 --> Host: www.hola.com
+INFO: 01:19:59 --> Port: 80
+ERROR: 01:19:59 --> java.net.SocketException: Connection reset
+INFO: 01:23:33 --> Starting CarlyAdmin Server...
+INFO: 01:23:38 --> Se conecto /127.0.0.1:53545
+INFO: 01:23:38 --> Se conecto /127.0.0.1:53564
+ERROR: 01:23:38 --> invalid header
+ERROR: 01:23:38 --> invalid header
+ERROR: 01:23:38 --> invalid header
+INFO: 01:23:38 --> Host: www.adidas.com.ar
+INFO: 01:23:38 --> Port: 80
+ERROR: 01:23:39 --> java.net.SocketException: Connection reset
+INFO: 01:23:39 --> Se conecto /127.0.0.1:53565
+INFO: 01:23:57 --> Starting CarlyAdmin Server...
+INFO: 01:24:01 --> Se conecto /127.0.0.1:53605
+INFO: 01:24:01 --> Se conecto /127.0.0.1:53606
+ERROR: 01:24:01 --> invalid header
+ERROR: 01:24:01 --> invalid header
+ERROR: 01:24:01 --> invalid header
+INFO: 01:24:01 --> Host: www.adidas.com.ar
+INFO: 01:24:01 --> Port: 80
+INFO: 01:25:51 --> Starting CarlyAdmin Server...
+INFO: 01:25:57 --> Se conecto /127.0.0.1:53629
+INFO: 01:26:05 --> Host: adidas.com.ar
+INFO: 01:26:05 --> Port: 80
+INFO: 01:26:13 --> Se conecto /127.0.0.1:53632
+ERROR: 01:26:13 --> invalid header
+ERROR: 01:26:13 --> invalid header
+ERROR: 01:26:13 --> invalid header
+INFO: 01:26:13 --> Host: www.adidas.com.ar
+INFO: 01:26:13 --> Port: 80
+INFO: 01:26:14 --> Se desconecto/127.0.0.1:53632
+INFO: 01:26:45 --> Host: www.example.com
+INFO: 01:26:45 --> Port: 80
+INFO: 01:26:58 --> Se desconecto/127.0.0.1:53629
+INFO: 01:27:02 --> Starting CarlyAdmin Server...
+INFO: 01:27:09 --> Se conecto /127.0.0.1:53641
+INFO: 01:27:09 --> Se conecto /127.0.0.1:53642
+ERROR: 01:27:09 --> invalid header
+ERROR: 01:27:09 --> invalid header
+ERROR: 01:27:09 --> invalid header
+INFO: 01:27:09 --> Host: www.adidas.com.ar
+INFO: 01:27:09 --> Port: 80
+ERROR: 01:27:10 --> java.net.SocketException: Connection reset
+INFO: 01:27:10 --> Se conecto /127.0.0.1:53643
+INFO: 01:27:19 --> Starting CarlyAdmin Server...
+INFO: 01:27:23 --> Se conecto /127.0.0.1:53653
+ERROR: 01:27:31 --> invalid header
+ERROR: 01:27:31 --> invalid header
+INFO: 01:27:31 --> Host: www.example.com
+INFO: 01:27:31 --> Port: 80
+INFO: 01:27:38 --> Se conecto /127.0.0.1:53658
+ERROR: 01:27:38 --> invalid header
+ERROR: 01:27:38 --> invalid header
+ERROR: 01:27:38 --> invalid header
+INFO: 01:27:38 --> Host: infobae.com
+INFO: 01:27:38 --> Port: 80
+ERROR: 01:27:39 --> java.net.SocketException: Connection reset
+INFO: 01:27:39 --> Se conecto /127.0.0.1:53660
+INFO: 01:28:28 --> Starting CarlyAdmin Server...
+INFO: 01:28:31 --> Se conecto /127.0.0.1:53682
+INFO: 01:28:31 --> Se conecto /127.0.0.1:53681
+ERROR: 01:28:31 --> invalid header
+ERROR: 01:28:31 --> invalid header
+ERROR: 01:28:31 --> invalid header
+INFO: 01:28:31 --> Host: www.adidas.com.ar
+INFO: 01:28:31 --> Port: 80
+ERROR: 01:28:31 --> invalid header
+ERROR: 01:28:31 --> invalid header
+ERROR: 01:28:31 --> invalid header
+INFO: 01:28:31 --> Host: www.adidas.com.ar
+INFO: 01:28:31 --> Port: 80
+ERROR: 01:28:32 --> java.net.SocketException: Connection reset
+INFO: 01:28:32 --> Se desconecto/127.0.0.1:53682
+INFO: 01:28:32 --> Se conecto /127.0.0.1:53686
+ERROR: 01:28:32 --> invalid header
+ERROR: 01:28:32 --> invalid header
+ERROR: 01:28:32 --> invalid header
+INFO: 01:28:32 --> Host: www.adidas.com.ar
+INFO: 01:28:32 --> Port: 80
+INFO: 01:28:32 --> Se desconecto/127.0.0.1:53686
+INFO: 01:28:37 --> Se conecto /127.0.0.1:53689
+ERROR: 01:28:37 --> invalid header
+ERROR: 01:28:37 --> invalid header
+ERROR: 01:28:37 --> invalid header
+INFO: 01:28:37 --> Host: www.adidas.com.ar
+INFO: 01:28:37 --> Port: 80
+INFO: 01:28:37 --> Se desconecto/127.0.0.1:53689
+INFO: 01:28:44 --> Se conecto /127.0.0.1:53695
+INFO: 01:28:44 --> Se conecto /127.0.0.1:53697
+ERROR: 01:28:44 --> invalid header
+ERROR: 01:28:44 --> invalid header
+ERROR: 01:28:44 --> invalid header
+INFO: 01:28:44 --> Host: infobae.com
+INFO: 01:28:44 --> Port: 80
+ERROR: 01:28:45 --> invalid header
+ERROR: 01:28:45 --> invalid header
+ERROR: 01:28:45 --> invalid header
+INFO: 01:28:45 --> Host: infobae.com
+INFO: 01:28:45 --> Port: 80
+ERROR: 01:28:45 --> java.net.SocketException: Connection reset
+INFO: 01:28:45 --> Se conecto /127.0.0.1:53702
+ERROR: 01:28:45 --> invalid header
+ERROR: 01:28:45 --> invalid header
+ERROR: 01:28:45 --> invalid header
+INFO: 01:28:45 --> Host: www.infobae.com
+INFO: 01:28:45 --> Port: 80
+INFO: 01:28:46 --> Se desconecto/127.0.0.1:53702
+INFO: 01:28:46 --> Se conecto /127.0.0.1:53703
+ERROR: 01:28:46 --> invalid header
+ERROR: 01:28:46 --> invalid header
+ERROR: 01:28:46 --> invalid header
+INFO: 01:28:46 --> Host: www.infobae.com
+INFO: 01:28:46 --> Port: 80
+INFO: 01:29:21 --> Starting CarlyAdmin Server...
+INFO: 01:29:29 --> Se conecto /127.0.0.1:53715
+INFO: 01:29:29 --> Se conecto /127.0.0.1:53717
+ERROR: 01:29:29 --> invalid header
+ERROR: 01:29:29 --> invalid header
+INFO: 01:29:29 --> Host: example.com
+INFO: 01:29:29 --> Port: 80
+ERROR: 01:29:32 --> invalid header
+INFO: 01:29:32 --> Host: example.com
+INFO: 01:29:32 --> Port: 80
+INFO: 01:29:48 --> Se desconecto/127.0.0.1:53717
+INFO: 01:29:48 --> Se conecto /127.0.0.1:53720
+ERROR: 01:29:48 --> invalid header
+ERROR: 01:29:48 --> invalid header
+ERROR: 01:29:48 --> invalid header
+INFO: 01:29:48 --> Host: www.adidas.com.ar
+INFO: 01:29:48 --> Port: 80
+ERROR: 01:29:49 --> java.net.SocketException: Connection reset
+INFO: 01:29:49 --> Se conecto /127.0.0.1:53722
+ERROR: 01:29:49 --> invalid header
+ERROR: 01:29:49 --> invalid header
+ERROR: 01:29:49 --> invalid header
+INFO: 01:29:49 --> Host: www.adidas.com.ar
+INFO: 01:29:49 --> Port: 80
+INFO: 01:29:49 --> Se desconecto/127.0.0.1:53722
+INFO: 01:29:49 --> Se conecto /127.0.0.1:53726
+ERROR: 01:29:49 --> invalid header
+ERROR: 01:29:49 --> invalid header
+ERROR: 01:29:49 --> invalid header
+INFO: 01:29:49 --> Host: www.adidas.com.ar
+INFO: 01:29:49 --> Port: 80
+INFO: 01:29:49 --> Se desconecto/127.0.0.1:53726
+INFO: 01:29:51 --> Se conecto /127.0.0.1:53729
+INFO: 01:29:53 --> Se desconecto/127.0.0.1:53715
+INFO: 01:29:53 --> Se conecto /127.0.0.1:53733
+ERROR: 01:29:53 --> invalid header
+ERROR: 01:29:53 --> invalid header
+ERROR: 01:29:53 --> invalid header
+INFO: 01:29:53 --> Host: www.infobae.com
+INFO: 01:29:53 --> Port: 80
+ERROR: 01:29:54 --> java.net.SocketException: Connection reset
+INFO: 01:29:54 --> Se conecto /127.0.0.1:53734
+ERROR: 01:29:54 --> invalid header
+ERROR: 01:29:54 --> invalid header
+ERROR: 01:29:54 --> invalid header
+INFO: 01:29:54 --> Host: www.infobae.com
+INFO: 01:29:54 --> Port: 80
+INFO: 01:29:54 --> Se desconecto/127.0.0.1:53734
+INFO: 01:29:54 --> Se conecto /127.0.0.1:53735
+ERROR: 01:29:54 --> invalid header
+ERROR: 01:29:54 --> invalid header
+ERROR: 01:29:54 --> invalid header
+INFO: 01:29:54 --> Host: www.infobae.com
+INFO: 01:29:54 --> Port: 80
+INFO: 01:29:54 --> Se desconecto/127.0.0.1:53735
+INFO: 01:29:59 --> Se conecto /127.0.0.1:53740
+ERROR: 01:29:59 --> invalid header
+ERROR: 01:29:59 --> invalid header
+ERROR: 01:29:59 --> invalid header
+INFO: 01:29:59 --> Host: www.infobae.com
+INFO: 01:29:59 --> Port: 80
+INFO: 01:29:59 --> Se desconecto/127.0.0.1:53740
+INFO: 01:30:12 --> Se desconecto/127.0.0.1:53729
+INFO: 01:30:12 --> Se conecto /127.0.0.1:53744
+INFO: 01:30:12 --> Se conecto /127.0.0.1:53745
+ERROR: 01:30:12 --> invalid header
+ERROR: 01:30:12 --> invalid header
+INFO: 01:30:12 --> Host: www.stamboulian.com.ar
+INFO: 01:30:12 --> Port: 80
+ERROR: 01:30:13 --> invalid header
+ERROR: 01:30:13 --> invalid header
+ERROR: 01:30:13 --> invalid header
+INFO: 01:30:13 --> Host: www.stamboulian.com.ar
+INFO: 01:30:13 --> Port: 80
+INFO: 01:30:18 --> Se desconecto/127.0.0.1:53744
+INFO: 01:30:18 --> Se desconecto/127.0.0.1:53745
+INFO: 01:30:18 --> Se conecto /127.0.0.1:53749
+ERROR: 01:30:18 --> invalid header
+ERROR: 01:30:18 --> invalid header
+ERROR: 01:30:18 --> invalid header
+INFO: 01:30:18 --> Host: www.stamboulian.com.ar
+INFO: 01:30:18 --> Port: 80
+INFO: 01:30:23 --> Starting CarlyAdmin Server...
+INFO: 01:30:25 --> Se conecto /127.0.0.1:53752
+INFO: 01:30:25 --> Se conecto /127.0.0.1:53753
+ERROR: 01:30:25 --> invalid header
+ERROR: 01:30:25 --> invalid header
+ERROR: 01:30:25 --> invalid header
+INFO: 01:30:25 --> Host: www.stamboulian.com.ar
+INFO: 01:30:25 --> Port: 80
+INFO: 01:30:30 --> Se desconecto/127.0.0.1:53752
+INFO: 01:30:38 --> Se desconecto/127.0.0.1:53753
+INFO: 01:30:38 --> Se conecto /127.0.0.1:53757
+INFO: 01:30:38 --> Se conecto /127.0.0.1:53758
+ERROR: 01:30:39 --> invalid header
+ERROR: 01:30:39 --> invalid header
+INFO: 01:30:39 --> Host: www.hola.com
+INFO: 01:30:39 --> Port: 80
+INFO: 01:30:39 --> Se desconecto/127.0.0.1:53757
+ERROR: 01:30:39 --> invalid header
+ERROR: 01:30:39 --> invalid header
+INFO: 01:30:39 --> Host: www.hola.com
+INFO: 01:30:39 --> Port: 80
+INFO: 01:30:55 --> Starting CarlyAdmin Server...
+INFO: 01:31:01 --> Se conecto /127.0.0.1:53763
+INFO: 01:31:01 --> Se conecto /127.0.0.1:53762
+ERROR: 01:31:01 --> invalid header
+ERROR: 01:31:01 --> invalid header
+INFO: 01:31:01 --> Host: www.hola.com
+INFO: 01:31:01 --> Port: 80
+INFO: 01:31:02 --> Se desconecto/127.0.0.1:53762
+ERROR: 01:31:02 --> invalid header
+ERROR: 01:31:02 --> invalid header
+INFO: 01:31:02 --> Host: www.hola.com
+INFO: 01:31:02 --> Port: 80
+INFO: 01:36:24 --> Starting CarlyAdmin Server...
+INFO: 01:36:29 --> Se conecto /127.0.0.1:53769
+INFO: 01:36:49 --> Host: www.adidas.com.ar
+INFO: 01:36:49 --> Port: 80
+INFO: 01:37:00 --> Host: www.hola.com
+INFO: 01:37:00 --> Port: 80
+ERROR: 01:37:20 --> 400: Bad Request
+ERROR: 01:37:21 --> 400: Bad Request
+ERROR: 01:37:22 --> 400: Bad Request
+ERROR: 01:37:22 --> 400: Bad Request
+ERROR: 01:37:23 --> 400: Bad Request
+ERROR: 01:37:23 --> 400: Bad Request
+ERROR: 01:37:23 --> 400: Bad Request
+ERROR: 01:37:23 --> 400: Bad Request
+ERROR: 01:37:23 --> 400: Bad Request
+ERROR: 01:37:24 --> 400: Bad Request
+ERROR: 01:37:24 --> 400: Bad Request
+INFO: 01:37:26 --> Se desconecto/127.0.0.1:53769
+INFO: 01:37:28 --> Se conecto /127.0.0.1:53773
+INFO: 01:37:39 --> Host: infobae.com
+INFO: 01:37:39 --> Port: 80
+INFO: 01:37:54 --> Host: www.infobae.com
+INFO: 01:37:54 --> Port: 80
+INFO: 01:38:00 --> Se desconecto/127.0.0.1:53773
+INFO: 01:38:21 --> Starting CarlyAdmin Server...
+ERROR: 01:38:21 --> XMPPC: run - Error inesperado en el Managers
+java.net.BindException: Address already in use
+	at sun.nio.ch.Net.bind0(Native Method)
+	at sun.nio.ch.Net.bind(Net.java:437)
+	at sun.nio.ch.Net.bind(Net.java:429)
+	at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:223)
+	at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74)
+	at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:67)
+	at CarlyAdmin.CarlyAdmin.run(CarlyAdmin.java:55)
+	at java.lang.Thread.run(Thread.java:745)
+ERROR: 01:38:21 --> Proxy: Proxy - Missing configuration file
+java.net.BindException: Address already in use
+	at java.net.PlainSocketImpl.socketBind(Native Method)
+	at java.net.AbstractPlainSocketImpl.bind(AbstractPlainSocketImpl.java:382)
+	at java.net.ServerSocket.bind(ServerSocket.java:375)
+	at java.net.ServerSocket.<init>(ServerSocket.java:237)
+	at Proxy.ThreadPoolSocketServer.<init>(ThreadPoolSocketServer.java:45)
+	at Proxy.ThreadPoolSocketServer.main(ThreadPoolSocketServer.java:113)
+ERROR: 01:38:21 --> java.lang.RuntimeException: Missing configuration file...
+INFO: 01:38:26 --> Starting CarlyAdmin Server...
+INFO: 01:38:28 --> Se conecto /127.0.0.1:53777
+INFO: 01:38:39 --> Host: www.hola.com
+INFO: 01:38:39 --> Port: 80
+ERROR: 01:38:45 --> timeout
+ERROR: 01:38:45 --> 504: Gateway Timeout
+INFO: 01:38:59 --> Se desconecto/127.0.0.1:53777
+INFO: 01:39:01 --> Se conecto /127.0.0.1:53779
+INFO: 01:39:12 --> Host: www.adidas.com.ar
+INFO: 01:39:12 --> Port: 80
+INFO: 01:39:25 --> Host: www.infobae.com.ar
+INFO: 01:39:25 --> Port: 80
+ERROR: 01:39:30 --> timeout
+ERROR: 01:39:30 --> 504: Gateway Timeout
+INFO: 01:39:33 --> Se desconecto/127.0.0.1:53779
+INFO: 01:39:34 --> Se conecto /127.0.0.1:53782
+INFO: 01:39:45 --> Host: www.stackoverflow.com
+INFO: 01:39:45 --> Port: 80
+ERROR: 01:39:50 --> timeout
+ERROR: 01:39:50 --> 504: Gateway Timeout
+INFO: 01:39:52 --> Se desconecto/127.0.0.1:53782
+INFO: 01:39:53 --> Se conecto /127.0.0.1:53784
+INFO: 01:40:05 --> Host: www.google.com
+INFO: 01:40:05 --> Port: 80
+ERROR: 01:40:10 --> timeout
+ERROR: 01:40:10 --> 504: Gateway Timeout
+INFO: 01:41:08 --> Starting CarlyAdmin Server...
+INFO: 01:41:28 --> Se conecto /127.0.0.1:53825
+INFO: 01:41:28 --> Se conecto /127.0.0.1:53827
+ERROR: 01:41:28 --> invalid header
+ERROR: 01:41:28 --> invalid header
+INFO: 01:41:28 --> Host: www.hola.com
+INFO: 01:41:28 --> Port: 80
+ERROR: 01:41:28 --> invalid header
+INFO: 01:41:28 --> Host: www.hola.com
+INFO: 01:41:28 --> Port: 80
+ERROR: 01:41:28 --> java.net.SocketException: Connection reset
+INFO: 01:41:29 --> Se desconecto/127.0.0.1:53827
+INFO: 01:42:27 --> Se conecto /127.0.0.1:53835
+INFO: 01:42:27 --> Se conecto /127.0.0.1:53836
+ERROR: 01:42:27 --> invalid header
+ERROR: 01:42:27 --> invalid header
+ERROR: 01:42:27 --> invalid header
+INFO: 01:42:27 --> Host: www.adidas.com.ar
+INFO: 01:42:27 --> Port: 80
+ERROR: 01:42:28 --> java.net.SocketException: Connection reset
+ERROR: 01:42:28 --> invalid header
+ERROR: 01:42:28 --> invalid header
+INFO: 01:42:28 --> Host: www.adidas.com.ar
+INFO: 01:42:28 --> Port: 80
+INFO: 01:42:28 --> Se conecto /127.0.0.1:53839
+ERROR: 01:42:28 --> invalid header
+INFO: 01:42:28 --> Host: demandware.edgesuite.net
+INFO: 01:42:28 --> Port: 80
+INFO: 01:42:28 --> Se desconecto/127.0.0.1:53836
+INFO: 01:42:28 --> Se conecto /127.0.0.1:53841
+ERROR: 01:42:28 --> invalid header
+INFO: 01:42:28 --> Host: demandware.edgesuite.net
+INFO: 01:42:28 --> Port: 80
+ERROR: 01:42:28 --> java.net.SocketException: Connection reset
+INFO: 01:42:28 --> Se desconecto/127.0.0.1:53841
+INFO: 01:43:18 --> Starting CarlyAdmin Server...
+INFO: 01:43:24 --> Se conecto /127.0.0.1:53854
+ERROR: 01:43:24 --> invalid header
+ERROR: 01:43:24 --> invalid header
+INFO: 01:43:24 --> Host: www.hola.com
+INFO: 01:43:24 --> Port: 80
+INFO: 01:43:24 --> Se conecto /127.0.0.1:53856
+ERROR: 01:43:24 --> invalid header
+ERROR: 01:43:24 --> invalid header
+INFO: 01:43:24 --> Host: www.hola.com
+INFO: 01:43:24 --> Port: 80
+ERROR: 01:43:24 --> java.net.SocketException: Connection reset
+ERROR: 01:43:24 --> java.net.SocketException: Connection reset
+INFO: 01:43:29 --> Se conecto /127.0.0.1:53860
+ERROR: 01:43:29 --> invalid header
+ERROR: 01:43:29 --> invalid header
+INFO: 01:43:29 --> Host: www.adidas.com.ar
+INFO: 01:43:29 --> Port: 80
+INFO: 01:43:29 --> Se conecto /127.0.0.1:53863
+ERROR: 01:43:29 --> invalid header
+ERROR: 01:43:29 --> invalid header
+INFO: 01:43:29 --> Host: www.adidas.com.ar
+INFO: 01:43:29 --> Port: 80
+ERROR: 01:43:29 --> java.net.SocketException: Connection reset
+ERROR: 01:43:30 --> java.net.SocketException: Connection reset
+INFO: 01:43:30 --> Se conecto /127.0.0.1:53866
+ERROR: 01:43:30 --> invalid header
+ERROR: 01:43:30 --> invalid header
+INFO: 01:43:30 --> Host: www.adidas.com.ar
+INFO: 01:43:30 --> Port: 80
+INFO: 01:43:30 --> Se desconecto/127.0.0.1:53866
+INFO: 01:43:43 --> Starting CarlyAdmin Server...
+INFO: 01:43:46 --> Se conecto /127.0.0.1:53869
+ERROR: 01:43:46 --> invalid header
+ERROR: 01:43:46 --> invalid header
+INFO: 01:43:46 --> Host: infobae.com
+INFO: 01:43:46 --> Port: 80
+INFO: 01:43:47 --> Se conecto /127.0.0.1:53872
+ERROR: 01:43:47 --> invalid header
+ERROR: 01:43:47 --> invalid header
+INFO: 01:43:47 --> Host: infobae.com
+INFO: 01:43:47 --> Port: 80
+ERROR: 01:43:52 --> timeout
+ERROR: 01:43:52 --> 504: Gateway Timeout
+ERROR: 01:43:52 --> java.net.SocketException: Broken pipe
+INFO: 01:43:52 --> Se conecto /127.0.0.1:53875
+ERROR: 01:43:52 --> invalid header
+ERROR: 01:43:52 --> invalid header
+INFO: 01:43:52 --> Host: www.infobae.com
+INFO: 01:43:52 --> Port: 80
+ERROR: 01:43:52 --> java.net.SocketException: Connection reset
+INFO: 01:43:52 --> Se conecto /127.0.0.1:53882
+ERROR: 01:43:52 --> invalid header
+INFO: 01:43:52 --> Host: www.infobae.com
+INFO: 01:43:52 --> Port: 80
+INFO: 01:43:52 --> Se desconecto/127.0.0.1:53882
+INFO: 01:43:52 --> Se conecto /127.0.0.1:53883
+ERROR: 01:43:52 --> invalid header
+INFO: 01:43:52 --> Host: www.infobae.com
+INFO: 01:43:52 --> Port: 80
+ERROR: 01:43:52 --> java.net.SocketException: Connection reset
+INFO: 01:43:52 --> Se conecto /127.0.0.1:53884
+ERROR: 01:43:52 --> invalid header
+INFO: 01:43:52 --> Host: www.infobae.com
+INFO: 01:43:52 --> Port: 80
+ERROR: 01:43:52 --> java.net.SocketException: Connection reset
+INFO: 01:43:52 --> Se conecto /127.0.0.1:53885
+ERROR: 01:43:52 --> invalid header
+INFO: 01:43:52 --> Host: www.infobae.com
+INFO: 01:43:52 --> Port: 80
+ERROR: 01:43:52 --> java.net.SocketException: Connection reset
+INFO: 01:43:52 --> Se conecto /127.0.0.1:53886
+ERROR: 01:43:52 --> invalid header
+INFO: 01:43:52 --> Host: www.infobae.com
+INFO: 01:43:52 --> Port: 80
+ERROR: 01:43:52 --> timeout
+ERROR: 01:43:52 --> 504: Gateway Timeout
+ERROR: 01:43:52 --> java.net.SocketException: Connection reset
+INFO: 01:43:52 --> Se conecto /127.0.0.1:53888
+ERROR: 01:43:52 --> invalid header
+INFO: 01:43:52 --> Host: www.infobae.com
+INFO: 01:43:52 --> Port: 80
+ERROR: 01:43:52 --> java.net.SocketException: Connection reset
+INFO: 01:43:52 --> Se conecto /127.0.0.1:53891
+ERROR: 01:43:52 --> invalid header
+INFO: 01:43:52 --> Host: www.infobae.com
+INFO: 01:43:52 --> Port: 80
+INFO: 01:43:52 --> Se desconecto/127.0.0.1:53891
+INFO: 01:44:02 --> Se desconecto/127.0.0.1:53872
+INFO: 01:44:02 --> Se conecto /127.0.0.1:53900
+ERROR: 01:44:02 --> invalid header
+ERROR: 01:44:02 --> invalid header
+INFO: 01:44:02 --> Host: www.infobae.com
+INFO: 01:44:02 --> Port: 80
+ERROR: 01:44:02 --> java.net.SocketException: Connection reset
+INFO: 01:44:09 --> Starting CarlyAdmin Server...
+INFO: 01:44:18 --> Se conecto /127.0.0.1:53904
+ERROR: 01:44:18 --> invalid header
+ERROR: 01:44:18 --> invalid header
+INFO: 01:44:18 --> Host: www.stackoverflow.com
+INFO: 01:44:18 --> Port: 80
+INFO: 01:44:18 --> Se conecto /127.0.0.1:53907
+ERROR: 01:44:18 --> invalid header
+ERROR: 01:44:18 --> invalid header
+ERROR: 01:44:18 --> invalid header
+INFO: 01:44:18 --> Host: stackoverflow.com
+INFO: 01:44:18 --> Port: 80
+ERROR: 01:44:23 --> timeout
+ERROR: 01:44:23 --> 504: Gateway Timeout
+ERROR: 01:44:24 --> timeout
+ERROR: 01:44:24 --> 504: Gateway Timeout
+INFO: 01:44:42 --> Starting CarlyAdmin Server...
+INFO: 01:44:45 --> Se conecto /127.0.0.1:53918
+ERROR: 01:44:45 --> invalid header
+ERROR: 01:44:45 --> invalid header
+INFO: 01:44:45 --> Host: www.infobae.com
+INFO: 01:44:45 --> Port: 80
+INFO: 01:44:45 --> Se conecto /127.0.0.1:53920
+ERROR: 01:44:45 --> invalid header
+ERROR: 01:44:45 --> invalid header
+INFO: 01:44:45 --> Host: www.infobae.com
+INFO: 01:44:45 --> Port: 80
+ERROR: 01:44:45 --> java.net.SocketException: Connection reset
+ERROR: 01:44:45 --> java.net.SocketException: Connection reset
+INFO: 01:44:54 --> Starting CarlyAdmin Server...
+INFO: 01:44:58 --> Se conecto /127.0.0.1:53924
+ERROR: 01:44:58 --> invalid header
+ERROR: 01:44:58 --> invalid header
+ERROR: 01:44:58 --> invalid header
+INFO: 01:44:58 --> Host: www.adidas.com.ar
+INFO: 01:44:58 --> Port: 80
+INFO: 01:44:58 --> Se conecto /127.0.0.1:53927
+ERROR: 01:44:58 --> invalid header
+ERROR: 01:44:58 --> invalid header
+ERROR: 01:44:58 --> invalid header
+INFO: 01:44:58 --> Host: www.adidas.com.ar
+INFO: 01:44:58 --> Port: 80
+ERROR: 01:44:59 --> java.net.SocketException: Connection reset
+ERROR: 01:44:59 --> java.net.SocketException: Connection reset
+INFO: 01:44:59 --> Se conecto /127.0.0.1:53932
+INFO: 01:44:59 --> Se conecto /127.0.0.1:53933
+ERROR: 01:44:59 --> invalid header
+ERROR: 01:44:59 --> invalid header
+ERROR: 01:44:59 --> invalid header
+INFO: 01:44:59 --> Host: www.adidas.com.ar
+INFO: 01:44:59 --> Port: 80
+INFO: 01:44:59 --> Host: null
+INFO: 01:44:59 --> Port: 80
+ERROR: 01:44:59 --> java.net.ConnectException: Connection refused
+INFO: 01:44:59 --> Se conecto /127.0.0.1:53934
+ERROR: 01:44:59 --> invalid header
+INFO: 01:44:59 --> Host: demandware.edgesuite.net
+INFO: 01:44:59 --> Port: 80
+INFO: 01:44:59 --> Se desconecto/127.0.0.1:53932
+INFO: 01:44:59 --> Se desconecto/127.0.0.1:53934
+INFO: 01:45:08 --> Se conecto /127.0.0.1:53939
+ERROR: 01:45:08 --> invalid header
+INFO: 01:45:08 --> Host: ho
+INFO: 01:45:08 --> Port: 80
+ERROR: 01:45:08 --> java.net.UnknownHostException: ho
+ERROR: 01:45:08 --> 112: Conexion Error
+INFO: 01:45:08 --> Se desconecto/127.0.0.1:53939
+INFO: 01:45:09 --> Se conecto /127.0.0.1:53946
+ERROR: 01:45:09 --> invalid header
+ERROR: 01:45:09 --> invalid header
+INFO: 01:45:09 --> Host: www.hola.com.ar
+INFO: 01:45:09 --> Port: 80
+INFO: 01:45:09 --> Se conecto /127.0.0.1:53949
+ERROR: 01:45:09 --> invalid header
+INFO: 01:45:09 --> Host: www.hola.com.ar
+INFO: 01:45:09 --> Port: 80
+ERROR: 01:45:14 --> timeout
+ERROR: 01:45:14 --> 504: Gateway Timeout
+ERROR: 01:45:14 --> java.net.SocketException: Connection reset
+INFO: 01:45:14 --> Se conecto /127.0.0.1:53952
+ERROR: 01:45:14 --> invalid header
+INFO: 01:45:14 --> Host: www.hola.com.ar
+INFO: 01:45:14 --> Port: 80
+INFO: 01:45:14 --> Se desconecto/127.0.0.1:53949
+INFO: 01:45:14 --> Se conecto /127.0.0.1:53953
+ERROR: 01:45:14 --> invalid header
+INFO: 01:45:14 --> Host: www.hola.com.ar
+INFO: 01:45:14 --> Port: 80
+ERROR: 01:45:15 --> java.net.SocketException: Connection reset
+INFO: 01:45:15 --> Se conecto /127.0.0.1:53956
+ERROR: 01:45:15 --> invalid header
+INFO: 01:45:15 --> Host: www.hola.com.ar
+INFO: 01:45:15 --> Port: 80
+ERROR: 01:45:19 --> timeout
+ERROR: 01:45:19 --> 504: Gateway Timeout
+ERROR: 01:45:20 --> timeout
+ERROR: 01:45:20 --> 504: Gateway Timeout
+INFO: 01:45:48 --> Starting CarlyAdmin Server...
+INFO: 01:45:58 --> Se conecto /127.0.0.1:53971
+ERROR: 01:45:58 --> invalid header
+ERROR: 01:45:58 --> invalid header
+ERROR: 01:45:58 --> invalid header
+INFO: 01:45:58 --> Host: www.stackoverflow.com
+INFO: 01:45:58 --> Port: 80
+INFO: 01:45:59 --> Se conecto /127.0.0.1:53974
+ERROR: 01:45:59 --> invalid header
+ERROR: 01:45:59 --> invalid header
+ERROR: 01:45:59 --> invalid header
+INFO: 01:45:59 --> Host: stackoverflow.com
+INFO: 01:45:59 --> Port: 80
+ERROR: 01:46:04 --> timeout
+ERROR: 01:46:04 --> 504: Gateway Timeout
+ERROR: 01:46:04 --> timeout
+ERROR: 01:46:04 --> 504: Gateway Timeout
+INFO: 01:46:19 --> Se desconecto/127.0.0.1:53971
+INFO: 01:46:19 --> Se desconecto/127.0.0.1:53974
+INFO: 01:46:19 --> Se conecto /127.0.0.1:53979
+INFO: 01:46:19 --> Se conecto /127.0.0.1:53980
+ERROR: 01:46:19 --> invalid header
+ERROR: 01:46:19 --> invalid header
+INFO: 01:46:19 --> Host: cdn.sstatic.net
+INFO: 01:46:19 --> Host: cdn.sstatic.net
+INFO: 01:46:19 --> Port: 80
+INFO: 01:46:19 --> Port: 80
+ERROR: 01:46:19 --> java.net.SocketException: Connection reset
+INFO: 01:46:19 --> Se conecto /127.0.0.1:53981
+ERROR: 01:46:19 --> invalid header
+INFO: 01:46:19 --> Host: cdn.sstatic.net
+INFO: 01:46:19 --> Port: 80
+ERROR: 01:46:19 --> java.net.SocketException: Connection reset
+INFO: 01:46:19 --> Se conecto /127.0.0.1:53984
+ERROR: 01:46:19 --> invalid header
+ERROR: 01:46:19 --> invalid header
+INFO: 01:46:19 --> Host: www.example.com
+INFO: 01:46:19 --> Port: 80
+ERROR: 01:46:25 --> timeout
+ERROR: 01:46:25 --> 504: Gateway Timeout
+ERROR: 01:46:25 --> java.net.SocketException: Connection reset
+INFO: 01:46:25 --> Se conecto /127.0.0.1:53989
+ERROR: 01:46:25 --> invalid header
+INFO: 01:46:25 --> Host: www.example.com
+INFO: 01:46:25 --> Port: 80
+ERROR: 01:46:30 --> timeout
+ERROR: 01:46:30 --> 504: Gateway Timeout
+ERROR: 01:46:30 --> invalid header
+ERROR: 01:46:30 --> invalid header
+INFO: 01:46:30 --> Host: www.example.com
+INFO: 01:46:30 --> Port: 80
+ERROR: 01:46:35 --> timeout
+ERROR: 01:46:35 --> 504: Gateway Timeout
+INFO: 01:47:06 --> Starting CarlyAdmin Server...
+INFO: 01:47:18 --> Se conecto /127.0.0.1:53992
+ERROR: 01:47:18 --> invalid header
+ERROR: 01:47:18 --> invalid header
+INFO: 01:47:18 --> Host: www.example.com
+INFO: 01:47:18 --> Port: 80
+ERROR: 01:47:18 --> java.net.SocketException: Connection reset
+INFO: 01:47:18 --> Se conecto /127.0.0.1:53995
+ERROR: 01:47:18 --> invalid header
+ERROR: 01:47:18 --> invalid header
+INFO: 01:47:18 --> Host: www.example.com
+INFO: 01:47:18 --> Port: 80
+ERROR: 01:47:23 --> timeout
+ERROR: 01:47:23 --> 504: Gateway Timeout
+INFO: 01:47:29 --> Starting CarlyAdmin Server...
+INFO: 01:47:32 --> Se conecto /127.0.0.1:53998
+ERROR: 01:47:32 --> invalid header
+ERROR: 01:47:32 --> invalid header
+ERROR: 01:47:32 --> invalid header
+INFO: 01:47:32 --> Host: www.adidas.com.ar
+INFO: 01:47:32 --> Port: 80
+INFO: 01:47:33 --> Se conecto /127.0.0.1:54001
+ERROR: 01:47:33 --> invalid header
+ERROR: 01:47:33 --> invalid header
+ERROR: 01:47:33 --> invalid header
+INFO: 01:47:33 --> Host: www.adidas.com.ar
+INFO: 01:47:33 --> Port: 80
+ERROR: 01:47:33 --> java.net.SocketException: Connection reset
+ERROR: 01:47:33 --> java.net.SocketException: Connection reset
+INFO: 01:47:33 --> Se conecto /127.0.0.1:54004
+ERROR: 01:47:33 --> invalid header
+INFO: 01:47:33 --> Host: demandware.edgesuite.net
+INFO: 01:47:33 --> Port: 80
+ERROR: 01:47:34 --> java.net.SocketException: Connection reset
+INFO: 01:48:03 --> Starting CarlyAdmin Server...
+INFO: 01:48:08 --> Se conecto /127.0.0.1:54007
+ERROR: 01:48:08 --> invalid header
+ERROR: 01:48:08 --> invalid header
+ERROR: 01:48:08 --> invalid header
+INFO: 01:48:08 --> Host: www.adidas.com.ar
+INFO: 01:48:08 --> Port: 80
+INFO: 01:48:08 --> Se conecto /127.0.0.1:54010
+ERROR: 01:48:08 --> invalid header
+ERROR: 01:48:08 --> invalid header
+ERROR: 01:48:08 --> invalid header
+INFO: 01:48:08 --> Host: www.adidas.com.ar
+INFO: 01:48:08 --> Port: 80
+ERROR: 01:48:09 --> java.net.SocketException: Connection reset
+ERROR: 01:48:09 --> java.net.SocketException: Connection reset
+INFO: 01:48:09 --> Se conecto /127.0.0.1:54013
+ERROR: 01:48:09 --> invalid header
+INFO: 01:48:09 --> Host: demandware.edgesuite.net
+INFO: 01:48:09 --> Port: 80
+INFO: 01:48:09 --> Se desconecto/127.0.0.1:54013
+INFO: 01:48:19 --> Starting CarlyAdmin Server...
+INFO: 01:48:22 --> Se conecto /127.0.0.1:54016
+ERROR: 01:48:22 --> invalid header
+ERROR: 01:48:22 --> invalid header
+INFO: 01:48:22 --> Host: www.infobae.com
+INFO: 01:48:22 --> Port: 80
+ERROR: 01:48:23 --> java.net.SocketException: Connection reset
+INFO: 01:48:23 --> Se conecto /127.0.0.1:54019
+ERROR: 01:48:23 --> invalid header
+ERROR: 01:48:23 --> invalid header
+INFO: 01:48:23 --> Host: www.infobae.com
+INFO: 01:48:23 --> Port: 80
+ERROR: 01:48:23 --> java.net.SocketException: Connection reset
+INFO: 01:48:27 --> Se conecto /127.0.0.1:54022
+ERROR: 01:48:27 --> invalid header
+ERROR: 01:48:27 --> invalid header
+INFO: 01:48:27 --> Host: www.infobae.com
+INFO: 01:48:27 --> Port: 80
+INFO: 01:48:27 --> Se conecto /127.0.0.1:54029
+ERROR: 01:48:27 --> java.net.SocketException: Connection reset
+INFO: 01:48:27 --> Se conecto /127.0.0.1:54030
+ERROR: 01:48:27 --> invalid header
+INFO: 01:48:27 --> Host: www.infobae.com
+INFO: 01:48:27 --> Port: 80
+ERROR: 01:48:27 --> invalid header
+INFO: 01:48:27 --> Host: null
+INFO: 01:48:27 --> Port: 80
+ERROR: 01:48:27 --> java.net.ConnectException: Connection refused
+INFO: 01:48:27 --> Se conecto /127.0.0.1:54031
+ERROR: 01:48:27 --> invalid header
+INFO: 01:48:27 --> Host: www.infobae.com
+INFO: 01:48:27 --> Port: 80
+INFO: 01:48:27 --> Se desconecto/127.0.0.1:54030
+INFO: 01:48:27 --> Se conecto /127.0.0.1:54032
+ERROR: 01:48:27 --> invalid header
+INFO: 01:48:27 --> Host: www.infobae.com
+INFO: 01:48:27 --> Port: 80
+INFO: 01:48:27 --> Se desconecto/127.0.0.1:54031
+INFO: 01:48:27 --> Se conecto /127.0.0.1:54033
+ERROR: 01:48:27 --> invalid header
+INFO: 01:48:27 --> Host: www.infobae.com
+INFO: 01:48:27 --> Port: 80
+INFO: 01:48:27 --> Se desconecto/127.0.0.1:54032
+INFO: 01:48:27 --> Se conecto /127.0.0.1:54035
+ERROR: 01:48:27 --> invalid header
+INFO: 01:48:27 --> Host: www.infobae.com
+INFO: 01:48:27 --> Port: 80
+INFO: 01:48:27 --> Se desconecto/127.0.0.1:54033
+INFO: 01:48:27 --> Se conecto /127.0.0.1:54040
+ERROR: 01:48:27 --> invalid header
+INFO: 01:48:27 --> Host: www.infobae.com
+INFO: 01:48:27 --> Port: 80
+INFO: 01:48:27 --> Se desconecto/127.0.0.1:54035
+INFO: 01:48:27 --> Se desconecto/127.0.0.1:54040
+INFO: 01:48:46 --> Starting CarlyAdmin Server...
+INFO: 01:48:57 --> Se conecto /127.0.0.1:54046
+ERROR: 01:48:57 --> invalid header
+ERROR: 01:48:57 --> invalid header
+INFO: 01:48:57 --> Host: hola.com
+INFO: 01:48:57 --> Port: 80
+INFO: 01:48:58 --> Se conecto /127.0.0.1:54049
+ERROR: 01:48:58 --> invalid header
+ERROR: 01:48:58 --> invalid header
+INFO: 01:48:58 --> Host: www.hola.com
+INFO: 01:48:58 --> Port: 80
+ERROR: 01:48:58 --> java.net.SocketException: Connection reset
+INFO: 01:48:58 --> Se conecto /127.0.0.1:54052
+ERROR: 01:48:58 --> invalid header
+INFO: 01:48:58 --> Host: www.hola.com
+INFO: 01:48:58 --> Port: 80
+ERROR: 01:48:58 --> java.net.SocketException: Connection reset
+INFO: 01:48:58 --> Se conecto /127.0.0.1:54055
+ERROR: 01:48:58 --> invalid header
+INFO: 01:48:58 --> Host: www.googleadservices.com
+INFO: 01:48:58 --> Port: 80
+ERROR: 01:49:03 --> timeout
+ERROR: 01:49:03 --> 504: Gateway Timeout
+ERROR: 01:49:04 --> timeout
+ERROR: 01:49:04 --> 504: Gateway Timeout
+ERROR: 01:49:04 --> java.net.SocketException: Connection reset
+INFO: 01:49:04 --> Se conecto /127.0.0.1:54058
+ERROR: 01:49:04 --> invalid header
+ERROR: 01:49:04 --> invalid header
+INFO: 01:49:04 --> Host: www.hola.com
+INFO: 01:49:04 --> Port: 80
+INFO: 01:49:04 --> Se desconecto/127.0.0.1:54058
+INFO: 01:49:13 --> Starting CarlyAdmin Server...
+INFO: 01:49:23 --> Se conecto /127.0.0.1:54061
+ERROR: 01:49:23 --> invalid header
+ERROR: 01:49:23 --> invalid header
+ERROR: 01:49:23 --> invalid header
+INFO: 01:49:23 --> Host: www.adidas.com.ar
+INFO: 01:49:23 --> Port: 80
+INFO: 01:49:23 --> Se conecto /127.0.0.1:54064
+ERROR: 01:49:23 --> invalid header
+ERROR: 01:49:23 --> invalid header
+ERROR: 01:49:23 --> invalid header
+INFO: 01:49:23 --> Host: www.adidas.com.ar
+INFO: 01:49:23 --> Port: 80
+ERROR: 01:49:23 --> java.net.SocketException: Connection reset
+INFO: 01:49:24 --> Se conecto /127.0.0.1:54067
+ERROR: 01:49:24 --> invalid header
+INFO: 01:49:24 --> Host: demandware.edgesuite.net
+INFO: 01:49:24 --> Port: 80
+ERROR: 01:49:24 --> java.net.SocketException: Connection reset
+INFO: 01:49:24 --> Se desconecto/127.0.0.1:54067
+INFO: 01:49:42 --> Starting CarlyAdmin Server...
+INFO: 01:49:50 --> Se conecto /127.0.0.1:54070
+ERROR: 01:49:50 --> invalid header
+ERROR: 01:49:50 --> invalid header
+ERROR: 01:49:50 --> invalid header
+INFO: 01:49:50 --> Host: stackoverflow.com
+INFO: 01:49:50 --> Port: 80
+INFO: 01:49:51 --> Se conecto /127.0.0.1:54073
+ERROR: 01:49:51 --> invalid header
+ERROR: 01:49:51 --> invalid header
+ERROR: 01:49:51 --> invalid header
+INFO: 01:49:51 --> Host: stackoverflow.com
+INFO: 01:49:51 --> Port: 80
+ERROR: 01:49:51 --> java.net.SocketException: Connection reset
+ERROR: 01:49:51 --> java.net.SocketException: Connection reset
+INFO: 01:49:58 --> Starting CarlyAdmin Server...
+INFO: 01:50:08 --> Se conecto /127.0.0.1:54076
+ERROR: 01:50:08 --> invalid header
+ERROR: 01:50:08 --> invalid header
+INFO: 01:50:08 --> Host: www.hola.com
+INFO: 01:50:08 --> Port: 80
+INFO: 01:50:08 --> Se conecto /127.0.0.1:54078
+ERROR: 01:50:08 --> invalid header
+INFO: 01:50:08 --> Host: www.googleadservices.com
+INFO: 01:50:08 --> Port: 80
+ERROR: 01:50:09 --> java.net.SocketException: Connection reset
+ERROR: 01:50:14 --> timeout
+ERROR: 01:50:14 --> 504: Gateway Timeout
+INFO: 01:50:18 --> Se conecto /127.0.0.1:54082
+INFO: 01:50:18 --> Se desconecto/127.0.0.1:54078
+ERROR: 01:50:18 --> invalid header
+ERROR: 01:50:18 --> invalid header
+INFO: 01:50:18 --> Host: www.infobae.com
+INFO: 01:50:18 --> Port: 80
+ERROR: 01:50:18 --> java.net.SocketException: Connection reset
+INFO: 01:50:18 --> Se conecto /127.0.0.1:54085
+ERROR: 01:50:18 --> invalid header
+ERROR: 01:50:18 --> invalid header
+INFO: 01:50:18 --> Host: www.infobae.com
+INFO: 01:50:18 --> Port: 80
+ERROR: 01:50:18 --> java.net.SocketException: Connection reset
+INFO: 01:50:21 --> Se conecto /127.0.0.1:54088
+ERROR: 01:50:21 --> invalid header
+ERROR: 01:50:21 --> invalid header
+INFO: 01:50:21 --> Host: www.infobae.com
+INFO: 01:50:21 --> Port: 80
+ERROR: 01:50:21 --> java.net.SocketException: Connection reset
+INFO: 01:50:24 --> Se conecto /127.0.0.1:54091
+ERROR: 01:50:24 --> invalid header
+ERROR: 01:50:24 --> invalid header
+INFO: 01:50:24 --> Host: www.infobae.com
+INFO: 01:50:24 --> Port: 80
+ERROR: 01:50:24 --> java.net.SocketException: Connection reset
+INFO: 01:50:24 --> Se conecto /127.0.0.1:54099
+INFO: 01:50:24 --> Se conecto /127.0.0.1:54100
+ERROR: 01:50:24 --> invalid header
+INFO: 01:50:24 --> Host: www.infobae.com
+INFO: 01:50:24 --> Port: 80
+ERROR: 01:50:24 --> invalid header
+ERROR: 01:50:24 --> missing host
+ERROR: 01:50:29 --> timeout
+ERROR: 01:50:29 --> 504: Gateway Timeout
+ERROR: 01:50:29 --> invalid header
+ERROR: 01:50:29 --> invalid header
+INFO: 01:50:29 --> Host: www.infobae.com
+INFO: 01:50:29 --> Port: 80
+INFO: 01:50:29 --> Se desconecto/127.0.0.1:54100
+INFO: 01:50:29 --> Se conecto /127.0.0.1:54101
+ERROR: 01:50:29 --> invalid header
+INFO: 01:50:29 --> Host: www.infobae.com
+INFO: 01:50:29 --> Port: 80
+INFO: 01:50:29 --> Se desconecto/127.0.0.1:54099
+INFO: 01:50:29 --> Se conecto /127.0.0.1:54102
+ERROR: 01:50:29 --> invalid header
+INFO: 01:50:29 --> Host: www.infobae.com
+INFO: 01:50:29 --> Port: 80
+ERROR: 01:50:29 --> java.net.SocketException: Connection reset
+INFO: 01:50:29 --> Se conecto /127.0.0.1:54103
+ERROR: 01:50:29 --> invalid header
+INFO: 01:50:29 --> Host: www.infobae.com
+INFO: 01:50:29 --> Port: 80
+ERROR: 01:50:29 --> java.net.SocketException: Connection reset
+INFO: 01:50:29 --> Se conecto /127.0.0.1:54104
+ERROR: 01:50:29 --> invalid header
+INFO: 01:50:29 --> Host: www.infobae.com
+INFO: 01:50:29 --> Port: 80
+ERROR: 01:50:29 --> java.net.SocketException: Connection reset
+INFO: 01:50:29 --> Se conecto /127.0.0.1:54108
+ERROR: 01:50:29 --> invalid header
+INFO: 01:50:29 --> Host: www.infobae.com
+INFO: 01:50:29 --> Port: 80
+ERROR: 01:50:29 --> java.net.SocketException: Connection reset
+ERROR: 01:50:29 --> java.net.SocketException: Connection reset
+INFO: 01:50:35 --> Se conecto /127.0.0.1:54115
+ERROR: 01:50:35 --> invalid header
+ERROR: 01:50:35 --> invalid header
+INFO: 01:50:35 --> Host: www.infobae.com
+INFO: 01:50:35 --> Port: 80
+ERROR: 01:50:35 --> java.net.SocketException: Connection reset
+INFO: 01:50:37 --> Se conecto /127.0.0.1:54118
+ERROR: 01:50:37 --> invalid header
+ERROR: 01:50:37 --> invalid header
+INFO: 01:50:37 --> Host: www.infobae.com
+INFO: 01:50:37 --> Port: 80
+ERROR: 01:50:37 --> java.net.SocketException: Connection reset
+INFO: 01:50:39 --> Se conecto /127.0.0.1:54121
+ERROR: 01:50:39 --> invalid header
+ERROR: 01:50:39 --> invalid header
+INFO: 01:50:39 --> Host: www.infobae.com
+INFO: 01:50:39 --> Port: 80
+ERROR: 01:50:39 --> java.net.SocketException: Connection reset
+INFO: 01:50:46 --> Starting CarlyAdmin Server...
+INFO: 01:50:49 --> Se conecto /127.0.0.1:54124
+ERROR: 01:50:49 --> invalid header
+ERROR: 01:50:49 --> invalid header
+INFO: 01:50:49 --> Host: www.infobae.com
+INFO: 01:50:49 --> Port: 80
+INFO: 01:50:49 --> Se conecto /127.0.0.1:54126
+ERROR: 01:50:49 --> invalid header
+ERROR: 01:50:49 --> invalid header
+INFO: 01:50:49 --> Host: www.infobae.com
+INFO: 01:50:49 --> Port: 80
+ERROR: 01:50:49 --> java.net.SocketException: Connection reset
+ERROR: 01:50:49 --> java.net.SocketException: Connection reset
+INFO: 01:50:51 --> Se conecto /127.0.0.1:54130
+ERROR: 01:50:51 --> invalid header
+ERROR: 01:50:51 --> invalid header
+INFO: 01:50:51 --> Host: www.infobae.com
+INFO: 01:50:51 --> Port: 80
+ERROR: 01:50:51 --> java.net.SocketException: Connection reset
+INFO: 01:50:53 --> Se conecto /127.0.0.1:54133
+ERROR: 01:50:53 --> invalid header
+ERROR: 01:50:53 --> invalid header
+INFO: 01:50:53 --> Host: www.infobae.com
+INFO: 01:50:53 --> Port: 80
+INFO: 01:50:53 --> Se conecto /127.0.0.1:54136
+ERROR: 01:50:53 --> invalid header
+INFO: 01:50:53 --> Host: www.infobae.com
+INFO: 01:50:53 --> Port: 80
+ERROR: 01:50:53 --> java.net.SocketException: Connection reset
+INFO: 01:50:53 --> Se conecto /127.0.0.1:54142
+ERROR: 01:50:53 --> invalid header
+INFO: 01:50:53 --> Host: www.infobae.com
+INFO: 01:50:53 --> Port: 80
+INFO: 01:50:53 --> Se desconecto/127.0.0.1:54136
+INFO: 01:50:53 --> Se conecto /127.0.0.1:54143
+ERROR: 01:50:53 --> invalid header
+INFO: 01:50:53 --> Host: www.infobae.com
+INFO: 01:50:53 --> Port: 80
+ERROR: 01:50:53 --> java.net.SocketException: Connection reset
+INFO: 01:50:53 --> Se conecto /127.0.0.1:54144
+ERROR: 01:50:53 --> invalid header
+INFO: 01:50:53 --> Host: www.infobae.com
+INFO: 01:50:53 --> Port: 80
+INFO: 01:50:53 --> Se desconecto/127.0.0.1:54143
+INFO: 01:50:53 --> Se conecto /127.0.0.1:54145
+ERROR: 01:50:53 --> invalid header
+INFO: 01:50:53 --> Host: www.infobae.com
+INFO: 01:50:53 --> Port: 80
+ERROR: 01:50:53 --> java.net.SocketException: Connection reset
+INFO: 01:50:53 --> Se conecto /127.0.0.1:54146
+ERROR: 01:50:53 --> invalid header
+INFO: 01:50:53 --> Host: www.infobae.com
+INFO: 01:50:53 --> Port: 80
+ERROR: 01:50:53 --> java.net.SocketException: Connection reset
+INFO: 01:50:53 --> Se conecto /127.0.0.1:54150
+ERROR: 01:50:53 --> invalid header
+INFO: 01:50:53 --> Host: www.infobae.com
+INFO: 01:50:53 --> Port: 80
+ERROR: 01:50:53 --> java.net.SocketException: Connection reset
+ERROR: 01:50:53 --> java.net.SocketException: Connection reset
+INFO: 01:50:57 --> Se conecto /127.0.0.1:54157
+ERROR: 01:50:57 --> invalid header
+ERROR: 01:50:57 --> invalid header
+INFO: 01:50:57 --> Host: www.infobae.com
+INFO: 01:50:57 --> Port: 80
+ERROR: 01:50:57 --> java.net.SocketException: Connection reset
+INFO: 01:51:02 --> Starting CarlyAdmin Server...
+INFO: 01:51:17 --> Se conecto /127.0.0.1:54161
+ERROR: 01:51:17 --> invalid header
+ERROR: 01:51:17 --> invalid header
+ERROR: 01:51:17 --> invalid header
+INFO: 01:51:17 --> Host: www.adidas.com.ar
+INFO: 01:51:17 --> Port: 80
+INFO: 01:51:18 --> Se conecto /127.0.0.1:54164
+INFO: 01:51:18 --> Se desconecto/127.0.0.1:54161
+ERROR: 01:51:18 --> invalid header
+INFO: 01:51:18 --> Host: demandware.edgesuite.net
+INFO: 01:51:18 --> Port: 80
+INFO: 01:51:18 --> Se desconecto/127.0.0.1:54164
+INFO: 01:51:25 --> Se conecto /127.0.0.1:54167
+ERROR: 01:51:25 --> invalid header
+ERROR: 01:51:25 --> invalid header
+ERROR: 01:51:25 --> invalid header
+INFO: 01:51:25 --> Host: www.adidas.com.ar
+INFO: 01:51:25 --> Port: 80
+INFO: 01:51:37 --> Se desconecto/127.0.0.1:54167
+INFO: 01:51:37 --> Se conecto /127.0.0.1:54169
+ERROR: 01:51:37 --> invalid header
+ERROR: 01:51:37 --> invalid header
+ERROR: 01:51:37 --> invalid header
+INFO: 01:51:37 --> Host: www.adidas.com.ar
+INFO: 01:51:37 --> Port: 80
+ERROR: 01:51:37 --> java.net.SocketException: Broken pipe
+INFO: 01:51:41 --> Se conecto /127.0.0.1:54171
+ERROR: 01:51:41 --> invalid header
+ERROR: 01:51:41 --> invalid header
+ERROR: 01:51:41 --> invalid header
+INFO: 01:51:41 --> Host: www.adidas.com.ar
+INFO: 01:51:41 --> Port: 80
+ERROR: 01:51:41 --> java.net.SocketException: Broken pipe
+INFO: 01:51:41 --> Se conecto /127.0.0.1:54173
+ERROR: 01:51:41 --> invalid header
+ERROR: 01:51:41 --> invalid header
+ERROR: 01:51:41 --> invalid header
+INFO: 01:51:41 --> Host: www.adidas.com.ar
+INFO: 01:51:41 --> Port: 80
+ERROR: 01:51:41 --> java.net.SocketException: Broken pipe
+INFO: 01:52:24 --> Starting CarlyAdmin Server...
+INFO: 01:52:43 --> Se conecto /127.0.0.1:54187
+ERROR: 01:52:43 --> invalid header
+ERROR: 01:52:43 --> invalid header
+ERROR: 01:52:43 --> invalid header
+INFO: 01:52:43 --> Host: www.hola.com
+INFO: 01:52:43 --> Port: 80
+INFO: 01:52:44 --> Se conecto /127.0.0.1:54190
+ERROR: 01:52:44 --> invalid header
+ERROR: 01:52:44 --> invalid header
+ERROR: 01:52:44 --> invalid header
+INFO: 01:52:44 --> Host: www.hola.com
+INFO: 01:52:44 --> Port: 80
+ERROR: 01:52:44 --> java.net.SocketException: Connection reset
+INFO: 01:52:44 --> Se desconecto/127.0.0.1:54190
+INFO: 01:52:44 --> Se conecto /127.0.0.1:54202
+INFO: 01:52:44 --> Se conecto /127.0.0.1:54203
+ERROR: 01:52:44 --> invalid header
+ERROR: 01:52:44 --> invalid header
+INFO: 01:52:44 --> Host: www.hola.com
+INFO: 01:52:44 --> Port: 80
+INFO: 01:52:44 --> Se desconecto/127.0.0.1:54203
+INFO: 01:52:44 --> Se conecto /127.0.0.1:54204
+ERROR: 01:52:44 --> invalid header
+INFO: 01:52:44 --> Host: www.himgs.com
+INFO: 01:52:44 --> Port: 80
+INFO: 01:52:44 --> Se desconecto/127.0.0.1:54204
+INFO: 01:52:44 --> Se conecto /127.0.0.1:54205
+ERROR: 01:52:44 --> invalid header
+INFO: 01:52:44 --> Host: www.himgs.com
+INFO: 01:52:44 --> Port: 80
+INFO: 01:53:26 --> Starting CarlyAdmin Server...
+INFO: 01:53:34 --> Se conecto /127.0.0.1:54248
+ERROR: 01:53:34 --> invalid header
+ERROR: 01:53:34 --> invalid header
+ERROR: 01:53:34 --> invalid header
+INFO: 01:53:34 --> Host: hola.com
+INFO: 01:53:34 --> Port: 80
+INFO: 01:53:34 --> Se conecto /127.0.0.1:54251
+ERROR: 01:53:34 --> invalid header
+ERROR: 01:53:34 --> invalid header
+INFO: 01:53:34 --> Host: www.hola.com
+INFO: 01:53:34 --> Port: 80
+INFO: 01:53:35 --> Se desconecto/127.0.0.1:54251
+INFO: 01:53:35 --> Se conecto /127.0.0.1:54259
+ERROR: 01:53:35 --> invalid header
+INFO: 01:53:35 --> Host: www.himgs.com
+INFO: 01:53:35 --> Port: 80
+INFO: 01:53:35 --> Se desconecto/127.0.0.1:54259
+INFO: 01:53:35 --> Se conecto /127.0.0.1:54260
+ERROR: 01:53:35 --> invalid header
+INFO: 01:53:35 --> Host: www.himgs.com
+INFO: 01:53:35 --> Port: 80
+ERROR: 01:53:39 --> timeout
+ERROR: 01:53:39 --> 504: Gateway Timeout
+INFO: 01:53:45 --> Se desconecto/127.0.0.1:54260
+INFO: 01:53:45 --> Se conecto /127.0.0.1:54261
+ERROR: 01:53:45 --> invalid header
+INFO: 01:53:45 --> Host: www.himgs.com
+INFO: 01:53:45 --> Port: 80
+INFO: 01:53:45 --> Se desconecto/127.0.0.1:54261
+INFO: 01:53:45 --> Se conecto /127.0.0.1:54262
+ERROR: 01:53:45 --> invalid header
+ERROR: 01:53:45 --> invalid header
+INFO: 01:53:45 --> Host: www.hola.com
+INFO: 01:53:45 --> Port: 80
+INFO: 01:53:45 --> Se desconecto/127.0.0.1:54262
+INFO: 01:53:45 --> Se conecto /127.0.0.1:54263
+ERROR: 01:53:45 --> invalid header
+INFO: 01:53:45 --> Host: www.googletagservices.com
+INFO: 01:53:45 --> Port: 80
+INFO: 01:53:45 --> Se desconecto/127.0.0.1:54248
+INFO: 01:53:45 --> Se conecto /127.0.0.1:54264
+ERROR: 01:53:45 --> invalid header
+ERROR: 01:53:45 --> invalid header
+INFO: 01:53:45 --> Host: www.hola.com
+INFO: 01:53:45 --> Port: 80
+INFO: 01:53:45 --> Se desconecto/127.0.0.1:54264
+INFO: 01:53:45 --> Se conecto /127.0.0.1:54265
+ERROR: 01:53:45 --> invalid header
+INFO: 01:53:45 --> Host: www.himgs.com
+INFO: 01:53:45 --> Port: 80
+INFO: 01:53:45 --> Se desconecto/127.0.0.1:54265
+INFO: 01:53:45 --> Se conecto /127.0.0.1:54270
+ERROR: 01:53:45 --> invalid header
+INFO: 01:53:45 --> Host: www.googleadservices.com
+INFO: 01:53:45 --> Port: 80
+ERROR: 01:53:46 --> java.net.SocketException: Connection reset
+INFO: 01:53:46 --> Se conecto /127.0.0.1:54271
+ERROR: 01:53:46 --> invalid header
+ERROR: 01:53:46 --> invalid header
+INFO: 01:53:46 --> Host: www.hola.com
+INFO: 01:53:46 --> Port: 80
+INFO: 01:53:46 --> Se desconecto/127.0.0.1:54271
+INFO: 01:53:46 --> Se conecto /127.0.0.1:54272
+ERROR: 01:53:46 --> invalid header
+INFO: 01:53:46 --> Host: www.himgs.com
+INFO: 01:53:46 --> Port: 80
+INFO: 01:53:46 --> Se desconecto/127.0.0.1:54272
+INFO: 01:53:46 --> Se conecto /127.0.0.1:54273
+ERROR: 01:53:46 --> invalid header
+ERROR: 01:53:46 --> invalid header
+INFO: 01:53:46 --> Host: www.hola.com
+INFO: 01:53:46 --> Port: 80
+INFO: 01:53:46 --> Se desconecto/127.0.0.1:54273
+INFO: 01:53:46 --> Se conecto /127.0.0.1:54276
+ERROR: 01:53:46 --> invalid header
+INFO: 01:53:46 --> Host: www.himgs.com
+INFO: 01:53:46 --> Port: 80
+INFO: 01:53:46 --> Se desconecto/127.0.0.1:54276
+INFO: 01:53:46 --> Se conecto /127.0.0.1:54280
+ERROR: 01:53:46 --> invalid header
+ERROR: 01:53:46 --> invalid header
+ERROR: 01:53:46 --> invalid header
+INFO: 01:53:46 --> Host: www.hola.com
+INFO: 01:53:46 --> Port: 80
+ERROR: 01:53:50 --> timeout
+ERROR: 01:53:50 --> 504: Gateway Timeout
+ERROR: 01:53:50 --> java.net.SocketException: Connection reset
+INFO: 01:53:54 --> Starting CarlyAdmin Server...
+INFO: 01:53:56 --> Se conecto /127.0.0.1:54285
+ERROR: 01:53:56 --> invalid header
+ERROR: 01:53:56 --> invalid header
+ERROR: 01:53:56 --> invalid header
+INFO: 01:53:56 --> Host: www.hola.com
+INFO: 01:53:56 --> Port: 80
+INFO: 01:53:56 --> Se conecto /127.0.0.1:54288
+ERROR: 01:53:56 --> invalid header
+INFO: 01:53:56 --> Host: www.himgs.com
+INFO: 01:53:56 --> Port: 80
+INFO: 01:53:57 --> Se desconecto/127.0.0.1:54285
+INFO: 01:53:57 --> Se conecto /127.0.0.1:54292
+ERROR: 01:53:57 --> invalid header
+INFO: 01:53:57 --> Host: www.himgs.com
+INFO: 01:53:57 --> Port: 80
+INFO: 01:53:57 --> Se desconecto/127.0.0.1:54288
+INFO: 01:53:57 --> Se conecto /127.0.0.1:54293
+ERROR: 01:53:57 --> invalid header
+ERROR: 01:53:57 --> invalid header
+INFO: 01:53:57 --> Host: www.hola.com
+INFO: 01:53:57 --> Port: 80
+INFO: 01:53:57 --> Se desconecto/127.0.0.1:54292
+INFO: 01:53:57 --> Se conecto /127.0.0.1:54294
+ERROR: 01:53:57 --> invalid header
+INFO: 01:53:57 --> Host: www.googletagservices.com
+INFO: 01:53:57 --> Port: 80
+ERROR: 01:54:02 --> timeout
+ERROR: 01:54:02 --> 504: Gateway Timeout
+INFO: 01:54:16 --> Se desconecto/127.0.0.1:54294
+INFO: 01:54:16 --> Se conecto /127.0.0.1:54296
+ERROR: 01:54:16 --> invalid header
+INFO: 01:54:16 --> Host: www.himgs.com
+INFO: 01:54:16 --> Port: 80
+INFO: 01:54:19 --> Se desconecto/127.0.0.1:54293
+INFO: 01:54:19 --> Se desconecto/127.0.0.1:54296
+INFO: 01:54:19 --> Se conecto /127.0.0.1:54300
+INFO: 01:54:19 --> Se conecto /127.0.0.1:54299
+ERROR: 01:54:19 --> invalid header
+INFO: 01:54:19 --> Host: null
+INFO: 01:54:19 --> Port: 80
+ERROR: 01:54:19 --> invalid header
+ERROR: 01:54:19 --> invalid header
+INFO: 01:54:19 --> Host: null
+INFO: 01:54:19 --> Port: 80
+INFO: 01:54:19 --> Se desconecto/127.0.0.1:54300
+INFO: 01:54:19 --> Se desconecto/127.0.0.1:54299
+INFO: 01:54:19 --> Se conecto /127.0.0.1:54305
+INFO: 01:54:19 --> Se conecto /127.0.0.1:54306
+ERROR: 01:54:19 --> invalid header
+INFO: 01:54:19 --> Host: null
+INFO: 01:54:19 --> Port: 80
+ERROR: 01:54:19 --> invalid header
+ERROR: 01:54:19 --> invalid header
+INFO: 01:54:19 --> Host: null
+INFO: 01:54:19 --> Port: 80
+INFO: 01:54:19 --> Se desconecto/127.0.0.1:54305
+INFO: 01:54:19 --> Se conecto /127.0.0.1:54307
+ERROR: 01:54:19 --> invalid header
+INFO: 01:54:19 --> Host: www.himgs.com
+INFO: 01:54:19 --> Port: 80
+INFO: 01:54:19 --> Se desconecto/127.0.0.1:54306
+INFO: 01:54:19 --> Se conecto /127.0.0.1:54308
+ERROR: 01:54:19 --> invalid header
+ERROR: 01:54:19 --> invalid header
+INFO: 01:54:19 --> Host: www.hola.com
+INFO: 01:54:19 --> Port: 80
+INFO: 01:54:19 --> Se desconecto/127.0.0.1:54307
+INFO: 01:54:19 --> Se conecto /127.0.0.1:54313
+INFO: 01:54:19 --> Se desconecto/127.0.0.1:54308
+INFO: 01:54:19 --> Se conecto /127.0.0.1:54322
+ERROR: 01:54:19 --> invalid header
+ERROR: 01:54:19 --> invalid header
+ERROR: 01:54:19 --> invalid header
+INFO: 01:54:19 --> Host: www.hola.com
+INFO: 01:54:19 --> Port: 80
+INFO: 01:54:19 --> Se desconecto/127.0.0.1:54313
+INFO: 01:54:19 --> Se conecto /127.0.0.1:54323
+INFO: 01:54:37 --> Starting CarlyAdmin Server...
+INFO: 01:54:55 --> Starting CarlyAdmin Server...
+INFO: 01:55:07 --> Se conecto /127.0.0.1:54339
+ERROR: 01:55:07 --> invalid header
+ERROR: 01:55:07 --> invalid header
+ERROR: 01:55:07 --> invalid header
+INFO: 01:55:07 --> Host: stackoverflow.com
+INFO: 01:55:07 --> Port: 80
+INFO: 01:55:07 --> Se conecto /127.0.0.1:54341
+ERROR: 01:55:07 --> invalid header
+ERROR: 01:55:07 --> invalid header
+ERROR: 01:55:07 --> invalid header
+INFO: 01:55:07 --> Host: stackoverflow.com
+INFO: 01:55:07 --> Port: 80
+ERROR: 01:55:08 --> java.net.SocketException: Connection reset
+INFO: 01:55:08 --> Se conecto /127.0.0.1:54347
+ERROR: 01:55:08 --> invalid header
+INFO: 01:55:08 --> Host: ajax.googleapis.com
+INFO: 01:55:08 --> Port: 80
+ERROR: 01:55:13 --> timeout
+ERROR: 01:55:13 --> 504: Gateway Timeout
+ERROR: 01:55:13 --> timeout
+ERROR: 01:55:13 --> 504: Gateway Timeout
+INFO: 01:55:37 --> Se desconecto/127.0.0.1:54347
+INFO: 01:55:37 --> Se desconecto/127.0.0.1:54341
+INFO: 01:55:37 --> Se conecto /127.0.0.1:54348
+INFO: 01:55:37 --> Se conecto /127.0.0.1:54349
+ERROR: 01:55:37 --> invalid header
+INFO: 01:55:37 --> Host: null
+INFO: 01:55:37 --> Port: 80
+ERROR: 01:55:37 --> invalid header
+INFO: 01:55:37 --> Host: null
+INFO: 01:55:37 --> Port: 80
+INFO: 01:55:42 --> Se desconecto/127.0.0.1:54349
+INFO: 01:55:42 --> Se desconecto/127.0.0.1:54348
+INFO: 01:55:42 --> Se conecto /127.0.0.1:54351
+INFO: 01:55:42 --> Se conecto /127.0.0.1:54355
+ERROR: 01:55:42 --> invalid header
+ERROR: 01:55:42 --> invalid header
+ERROR: 01:55:42 --> invalid header
+ERROR: 01:55:42 --> invalid header
+INFO: 01:55:42 --> Host: i.stack.imgur.com
+INFO: 01:55:42 --> Port: 80
+INFO: 01:55:42 --> Host: i.stack.imgur.com
+INFO: 01:55:42 --> Port: 80
+ERROR: 01:55:48 --> timeout
+ERROR: 01:55:48 --> 504: Gateway Timeout
+INFO: 01:55:48 --> Se desconecto/127.0.0.1:54351
+INFO: 01:55:48 --> Se conecto /127.0.0.1:54362
+ERROR: 01:55:48 --> timeout
+ERROR: 01:55:48 --> 504: Gateway Timeout
+ERROR: 01:55:48 --> java.net.SocketException: Connection reset
+INFO: 01:55:48 --> Se conecto /127.0.0.1:54363
+INFO: 01:55:55 --> Se desconecto/127.0.0.1:54362
+INFO: 01:55:55 --> Se conecto /127.0.0.1:54364
+INFO: 01:55:55 --> Se desconecto/127.0.0.1:54363
+INFO: 01:55:55 --> Se conecto /127.0.0.1:54365
+INFO: 01:55:55 --> Se desconecto/127.0.0.1:54364
+INFO: 01:55:55 --> Se conecto /127.0.0.1:54370
+INFO: 01:55:55 --> Se desconecto/127.0.0.1:54365
+ERROR: 01:55:55 --> invalid header
+ERROR: 01:55:55 --> invalid header
+INFO: 01:55:55 --> Host: www.vaso.com
+INFO: 01:55:55 --> Port: 80
+INFO: 01:55:56 --> Se conecto /127.0.0.1:54373
+ERROR: 01:55:56 --> invalid header
+ERROR: 01:55:56 --> invalid header
+INFO: 01:55:56 --> Host: www.vaso.com
+INFO: 01:55:56 --> Port: 80
+ERROR: 01:56:01 --> timeout
+ERROR: 01:56:01 --> 504: Gateway Timeout
+ERROR: 01:56:01 --> invalid header
+ERROR: 01:56:01 --> invalid header
+ERROR: 01:56:01 --> invalid header
+INFO: 01:56:01 --> Host: www.vaso.com
+INFO: 01:56:01 --> Port: 80
+ERROR: 01:56:01 --> timeout
+ERROR: 01:56:01 --> 504: Gateway Timeout
+INFO: 01:56:06 --> Starting CarlyAdmin Server...
+INFO: 01:56:07 --> Se conecto /127.0.0.1:54376
+ERROR: 01:56:07 --> invalid header
+ERROR: 01:56:07 --> invalid header
+ERROR: 01:56:07 --> invalid header
+INFO: 01:56:07 --> Host: www.vaso.com
+INFO: 01:56:07 --> Port: 80
+INFO: 01:56:08 --> Se conecto /127.0.0.1:54379
+ERROR: 01:56:08 --> invalid header
+INFO: 01:56:08 --> Host: return.uk.domainnamesales.com
+INFO: 01:56:08 --> Port: 80
+INFO: 01:56:08 --> Se desconecto/127.0.0.1:54379
+ERROR: 01:56:13 --> timeout
+ERROR: 01:56:13 --> 504: Gateway Timeout
+ERROR: 01:56:13 --> invalid header
+ERROR: 01:56:13 --> invalid header
+INFO: 01:56:13 --> Host: www.vaso.com
+INFO: 01:56:13 --> Port: 80
+INFO: 01:56:13 --> Se conecto /127.0.0.1:54382
+ERROR: 01:56:13 --> invalid header
+ERROR: 01:56:13 --> invalid header
+ERROR: 01:56:13 --> invalid header
+INFO: 01:56:13 --> Host: www.vaso.com
+INFO: 01:56:13 --> Port: 80
+ERROR: 01:56:18 --> timeout
+ERROR: 01:56:18 --> 504: Gateway Timeout
+ERROR: 01:56:18 --> invalid header
+ERROR: 01:56:18 --> invalid header
+ERROR: 01:56:18 --> invalid header
+INFO: 01:56:18 --> Host: www.vaso.com
+INFO: 01:56:18 --> Port: 80
+ERROR: 01:56:18 --> timeout
+ERROR: 01:56:18 --> 504: Gateway Timeout
+ERROR: 01:56:24 --> timeout
+ERROR: 01:56:24 --> 504: Gateway Timeout
+INFO: 01:56:33 --> Starting CarlyAdmin Server...
+INFO: 01:56:37 --> Se conecto /127.0.0.1:54391
+ERROR: 01:56:37 --> invalid header
+ERROR: 01:56:37 --> invalid header
+INFO: 01:56:37 --> Host: dedos.com
+INFO: 01:56:37 --> Port: 80
+INFO: 01:56:38 --> Se conecto /127.0.0.1:54398
+ERROR: 01:56:38 --> invalid header
+INFO: 01:56:38 --> Host: www.google.com
+INFO: 01:56:38 --> Port: 80
+ERROR: 01:56:43 --> timeout
+ERROR: 01:56:43 --> 504: Gateway Timeout
+ERROR: 01:56:43 --> timeout
+ERROR: 01:56:43 --> 504: Gateway Timeout
+INFO: 01:56:48 --> Starting CarlyAdmin Server...
+INFO: 01:57:06 --> Se conecto /127.0.0.1:54413
+ERROR: 01:57:06 --> invalid header
+ERROR: 01:57:06 --> invalid header
+ERROR: 01:57:06 --> invalid header
+INFO: 01:57:06 --> Host: www.adidas.com.ar
+INFO: 01:57:06 --> Port: 80
+INFO: 01:57:06 --> Se conecto /127.0.0.1:54416
+INFO: 01:57:06 --> Se desconecto/127.0.0.1:54413
+INFO: 01:57:06 --> Se conecto /127.0.0.1:54420
+ERROR: 01:57:06 --> invalid header
+INFO: 01:57:06 --> Host: demandware.edgesuite.net
+INFO: 01:57:06 --> Port: 80
+ERROR: 01:57:06 --> invalid header
+INFO: 01:57:06 --> Host: demandware.edgesuite.net
+INFO: 01:57:06 --> Port: 80
+INFO: 01:57:07 --> Se desconecto/127.0.0.1:54416
+INFO: 01:57:07 --> Se conecto /127.0.0.1:54421
+ERROR: 01:57:07 --> invalid header
+INFO: 01:57:07 --> Host: demandware.edgesuite.net
+INFO: 01:57:07 --> Port: 80
+INFO: 01:57:07 --> Se desconecto/127.0.0.1:54420
+INFO: 01:57:07 --> Se conecto /127.0.0.1:54422
+ERROR: 01:57:07 --> invalid header
+INFO: 01:57:07 --> Host: demandware.edgesuite.net
+INFO: 01:57:07 --> Port: 80
+INFO: 01:57:07 --> Se desconecto/127.0.0.1:54421
+INFO: 01:57:07 --> Se conecto /127.0.0.1:54424
+ERROR: 01:57:07 --> invalid header
+INFO: 01:57:07 --> Host: demandware.edgesuite.net
+INFO: 01:57:07 --> Port: 80
+INFO: 01:57:07 --> Se desconecto/127.0.0.1:54422
+INFO: 01:57:07 --> Se conecto /127.0.0.1:54427
+ERROR: 01:57:07 --> invalid header
+INFO: 01:57:07 --> Host: tags.tiqcdn.com
+INFO: 01:57:07 --> Port: 80
+INFO: 01:57:07 --> Se desconecto/127.0.0.1:54424
+INFO: 01:57:07 --> Se conecto /127.0.0.1:54428
+ERROR: 01:57:07 --> invalid header
+INFO: 01:57:07 --> Host: demandware.edgesuite.net
+INFO: 01:57:07 --> Port: 80
+INFO: 01:57:07 --> Se desconecto/127.0.0.1:54427
+INFO: 01:57:07 --> Se conecto /127.0.0.1:54432
+ERROR: 01:57:07 --> invalid header
+INFO: 01:57:07 --> Host: demandware.edgesuite.net
+INFO: 01:57:07 --> Port: 80
+INFO: 01:57:21 --> Starting CarlyAdmin Server...
+INFO: 01:57:43 --> Se conecto /127.0.0.1:54465
+ERROR: 01:57:43 --> invalid header
+ERROR: 01:57:43 --> invalid header
+INFO: 01:57:43 --> Host: www.mapa.interactivo.com
+INFO: 01:57:43 --> Port: 80
+INFO: 01:57:44 --> Se conecto /127.0.0.1:54469
+ERROR: 01:57:44 --> invalid header
+ERROR: 01:57:44 --> invalid header
+INFO: 01:57:44 --> Host: www.mapa.interactivo.com
+INFO: 01:57:44 --> Port: 80
+ERROR: 01:57:49 --> timeout
+ERROR: 01:57:49 --> 504: Gateway Timeout
+ERROR: 01:57:49 --> timeout
+ERROR: 01:57:49 --> 504: Gateway Timeout
+INFO: 01:57:54 --> Starting CarlyAdmin Server...
+INFO: 01:58:09 --> Se conecto /127.0.0.1:54496
+ERROR: 01:58:09 --> invalid header
+ERROR: 01:58:09 --> invalid header
+INFO: 01:58:09 --> Host: www.buenosairesciudad.gov.ar
+INFO: 01:58:09 --> Port: 80
+ERROR: 01:58:09 --> java.net.UnknownHostException: www.buenosairesciudad.gov.ar
+ERROR: 01:58:09 --> 112: Conexion Error
+INFO: 01:58:17 --> Starting CarlyAdmin Server...
+INFO: 01:58:32 --> Se conecto /127.0.0.1:54500
+ERROR: 01:58:32 --> invalid header
+ERROR: 01:58:32 --> invalid header
+INFO: 01:58:32 --> Host: www.reef.com.ar
+INFO: 01:58:32 --> Port: 80
+INFO: 01:58:33 --> Se conecto /127.0.0.1:54509
+ERROR: 01:58:33 --> invalid header
+INFO: 01:58:33 --> Host: fonts.googleapis.com
+INFO: 01:58:33 --> Port: 80
+ERROR: 01:58:38 --> timeout
+ERROR: 01:58:38 --> 504: Gateway Timeout
+ERROR: 01:58:38 --> invalid header
+INFO: 01:58:38 --> Host: www.reef.com.ar
+INFO: 01:58:38 --> Port: 80
+ERROR: 01:58:38 --> timeout
+ERROR: 01:58:38 --> 504: Gateway Timeout
+ERROR: 01:58:43 --> timeout
+ERROR: 01:58:43 --> 504: Gateway Timeout
+ERROR: 01:58:43 --> invalid header
+INFO: 01:58:43 --> Host: www.reef.com.ar
+INFO: 01:58:43 --> Port: 80
+ERROR: 01:58:48 --> timeout
+ERROR: 01:58:48 --> 504: Gateway Timeout
+ERROR: 01:58:48 --> invalid header
+INFO: 01:58:48 --> Host: www.reef.com.ar
+INFO: 01:58:48 --> Port: 80
+ERROR: 01:58:53 --> timeout
+ERROR: 01:58:53 --> 504: Gateway Timeout
+ERROR: 01:58:53 --> invalid header
+INFO: 01:58:53 --> Host: www.reef.com.ar
+INFO: 01:58:53 --> Port: 80
+ERROR: 01:58:58 --> timeout
+ERROR: 01:58:58 --> 504: Gateway Timeout
+ERROR: 01:58:58 --> invalid header
+INFO: 01:58:58 --> Host: www.reef.com.ar
+INFO: 01:58:58 --> Port: 80
+ERROR: 01:59:03 --> timeout
+ERROR: 01:59:03 --> 504: Gateway Timeout
+ERROR: 01:59:03 --> invalid header
+INFO: 01:59:03 --> Host: www.reef.com.ar
+INFO: 01:59:03 --> Port: 80
+ERROR: 01:59:08 --> timeout
+ERROR: 01:59:08 --> 504: Gateway Timeout
+ERROR: 01:59:08 --> invalid header
+INFO: 01:59:08 --> Host: www.reef.com.ar
+INFO: 01:59:08 --> Port: 80
+ERROR: 01:59:13 --> timeout
+ERROR: 01:59:13 --> 504: Gateway Timeout
+ERROR: 01:59:13 --> invalid header
+INFO: 01:59:13 --> Host: www.reef.com.ar
+INFO: 01:59:13 --> Port: 80
+ERROR: 01:59:18 --> timeout
+ERROR: 01:59:18 --> 504: Gateway Timeout
+ERROR: 01:59:18 --> invalid header
+INFO: 01:59:18 --> Host: www.reef.com.ar
+INFO: 01:59:18 --> Port: 80
+ERROR: 01:59:23 --> timeout
+ERROR: 01:59:23 --> 504: Gateway Timeout
+ERROR: 01:59:23 --> invalid header
+INFO: 01:59:23 --> Host: www.reef.com.ar
+INFO: 01:59:23 --> Port: 80
+ERROR: 01:59:28 --> timeout
+ERROR: 01:59:28 --> 504: Gateway Timeout
+ERROR: 01:59:28 --> invalid header
+INFO: 01:59:28 --> Host: www.reef.com.ar
+INFO: 01:59:28 --> Port: 80
+ERROR: 01:59:33 --> timeout
+ERROR: 01:59:33 --> 504: Gateway Timeout
+ERROR: 01:59:33 --> invalid header
+INFO: 01:59:33 --> Host: www.reef.com.ar
+INFO: 01:59:33 --> Port: 80
+ERROR: 01:59:38 --> timeout
+ERROR: 01:59:38 --> 504: Gateway Timeout
+ERROR: 01:59:38 --> invalid header
+INFO: 01:59:38 --> Host: www.reef.com.ar
+INFO: 01:59:38 --> Port: 80
+ERROR: 01:59:43 --> timeout
+ERROR: 01:59:43 --> 504: Gateway Timeout
+ERROR: 01:59:43 --> invalid header
+INFO: 01:59:43 --> Host: www.reef.com.ar
+INFO: 01:59:43 --> Port: 80
+ERROR: 01:59:48 --> timeout
+ERROR: 01:59:48 --> 504: Gateway Timeout
+ERROR: 01:59:48 --> invalid header
+INFO: 01:59:48 --> Host: www.reef.com.ar
+INFO: 01:59:48 --> Port: 80
+ERROR: 01:59:53 --> timeout
+ERROR: 01:59:53 --> 504: Gateway Timeout
+ERROR: 01:59:53 --> invalid header
+INFO: 01:59:53 --> Host: www.reef.com.ar
+INFO: 01:59:53 --> Port: 80
+ERROR: 01:59:58 --> timeout
+ERROR: 01:59:58 --> 504: Gateway Timeout
+ERROR: 01:59:58 --> invalid header
+INFO: 01:59:58 --> Host: www.reef.com.ar
+INFO: 01:59:58 --> Port: 80
+ERROR: 02:00:03 --> timeout
+ERROR: 02:00:03 --> 504: Gateway Timeout
+ERROR: 02:00:03 --> invalid header
+INFO: 02:00:03 --> Host: www.reef.com.ar
+INFO: 02:00:03 --> Port: 80
+ERROR: 02:00:08 --> timeout
+ERROR: 02:00:08 --> 504: Gateway Timeout
+ERROR: 02:00:08 --> invalid header
+INFO: 02:00:08 --> Host: www.reef.com.ar
+INFO: 02:00:08 --> Port: 80
+ERROR: 02:00:13 --> timeout
+ERROR: 02:00:13 --> 504: Gateway Timeout
+ERROR: 02:00:13 --> invalid header
+INFO: 02:00:13 --> Host: www.reef.com.ar
+INFO: 02:00:13 --> Port: 80
+ERROR: 02:00:18 --> timeout
+ERROR: 02:00:18 --> 504: Gateway Timeout
+ERROR: 02:00:18 --> invalid header
+INFO: 02:00:18 --> Host: www.reef.com.ar
+INFO: 02:00:18 --> Port: 80
+ERROR: 02:00:23 --> timeout
+ERROR: 02:00:23 --> 504: Gateway Timeout
+ERROR: 02:00:23 --> invalid header
+INFO: 02:00:23 --> Host: www.reef.com.ar
+INFO: 02:00:23 --> Port: 80
+ERROR: 02:00:28 --> timeout
+ERROR: 02:00:28 --> 504: Gateway Timeout
+INFO: 02:00:39 --> Starting CarlyAdmin Server...
+INFO: 02:02:56 --> Starting CarlyAdmin Server...
+INFO: 02:02:59 --> Se conecto /127.0.0.1:54624
+ERROR: 02:02:59 --> invalid header
+ERROR: 02:02:59 --> invalid header
+INFO: 02:02:59 --> Host: www.reef.com.ar
+INFO: 02:02:59 --> Port: 80
+INFO: 02:03:01 --> Se conecto /127.0.0.1:54627
+ERROR: 02:03:01 --> invalid header
+INFO: 02:03:01 --> Host: www.reef.com.ar
+INFO: 02:03:01 --> Port: 80
+ERROR: 02:03:06 --> timeout
+ERROR: 02:03:06 --> 504: Gateway Timeout
+ERROR: 02:03:06 --> timeout
+ERROR: 02:03:06 --> 504: Gateway Timeout
+INFO: 02:03:21 --> Starting CarlyAdmin Server...
+INFO: 02:03:25 --> Se conecto /127.0.0.1:54634
+ERROR: 02:03:25 --> invalid header
+ERROR: 02:03:25 --> invalid header
+INFO: 02:03:25 --> Host: www.reef.com.ar
+INFO: 02:03:25 --> Port: 80
+INFO: 02:03:43 --> Se desconecto/127.0.0.1:54634
+INFO: 02:03:47 --> Starting CarlyAdmin Server...
+INFO: 02:04:00 --> Se conecto /127.0.0.1:54638
+ERROR: 02:04:00 --> invalid header
+ERROR: 02:04:00 --> invalid header
+ERROR: 02:04:00 --> invalid header
+INFO: 02:04:00 --> Host: www.hola.com
+INFO: 02:04:00 --> Port: 80
+INFO: 02:04:01 --> Se desconecto/127.0.0.1:54638
+INFO: 02:04:01 --> Se conecto /127.0.0.1:54641
+ERROR: 02:04:01 --> invalid header
+ERROR: 02:04:01 --> invalid header
+ERROR: 02:04:01 --> invalid header
+INFO: 02:04:01 --> Host: www.hola.com
+INFO: 02:04:01 --> Port: 80
+INFO: 02:04:14 --> Starting CarlyAdmin Server...
+INFO: 02:04:17 --> Se conecto /127.0.0.1:54644
+ERROR: 02:04:17 --> invalid header
+ERROR: 02:04:17 --> invalid header
+ERROR: 02:04:17 --> invalid header
+INFO: 02:04:17 --> Host: www.hola.com
+INFO: 02:04:17 --> Port: 80
+INFO: 02:04:17 --> Se desconecto/127.0.0.1:54644
+INFO: 02:04:20 --> Se conecto /127.0.0.1:54648
+ERROR: 02:04:20 --> invalid header
+ERROR: 02:04:20 --> invalid header
+ERROR: 02:04:20 --> invalid header
+INFO: 02:04:20 --> Host: www.hola.com
+INFO: 02:04:20 --> Port: 80
+INFO: 02:04:51 --> Starting CarlyAdmin Server...
+INFO: 02:04:56 --> Se conecto /127.0.0.1:54652
+ERROR: 02:04:56 --> invalid header
+ERROR: 02:04:56 --> invalid header
+ERROR: 02:04:56 --> invalid header
+INFO: 02:04:56 --> Host: www.hola.com
+INFO: 02:04:56 --> Port: 80
+INFO: 02:05:00 --> Se conecto /127.0.0.1:54657
+ERROR: 02:05:00 --> invalid header
+ERROR: 02:05:00 --> invalid header
+INFO: 02:05:00 --> Host: www.hola.com
+INFO: 02:05:00 --> Port: 80
+INFO: 02:05:23 --> Se desconecto/127.0.0.1:54657
+INFO: 02:05:23 --> Se conecto /127.0.0.1:54658
+ERROR: 02:05:23 --> invalid header
+ERROR: 02:05:23 --> invalid header
+INFO: 02:05:23 --> Host: www.hola.com
+INFO: 02:05:23 --> Port: 80
+INFO: 02:05:38 --> Se desconecto/127.0.0.1:54658
+INFO: 02:05:38 --> Se conecto /127.0.0.1:54659
+ERROR: 02:05:38 --> invalid header
+INFO: 02:05:38 --> Host: www.himgs.com
+INFO: 02:05:38 --> Port: 80
+INFO: 02:05:47 --> Se desconecto/127.0.0.1:54659
+INFO: 02:05:47 --> Se conecto /127.0.0.1:54662
+ERROR: 02:05:47 --> invalid header
+INFO: 02:05:47 --> Host: www.himgs.com
+INFO: 02:05:47 --> Port: 80
+INFO: 02:05:50 --> Se desconecto/127.0.0.1:54652
+INFO: 02:05:50 --> Se conecto /127.0.0.1:54666
+ERROR: 02:05:50 --> invalid header
+INFO: 02:05:50 --> Host: www.himgs.com
+INFO: 02:05:50 --> Port: 80
+INFO: 02:06:36 --> Starting CarlyAdmin Server...
+INFO: 02:06:39 --> Se conecto /127.0.0.1:54768
+ERROR: 02:06:39 --> invalid header
+ERROR: 02:06:39 --> invalid header
+INFO: 02:06:39 --> Host: www.infobae.com
+INFO: 02:06:39 --> Port: 80
+INFO: 02:06:39 --> Se conecto /127.0.0.1:54773
+INFO: 02:06:39 --> Se desconecto/127.0.0.1:54768
+INFO: 02:06:39 --> Se conecto /127.0.0.1:54774
+ERROR: 02:06:39 --> invalid header
+INFO: 02:06:39 --> Host: www.infobae.com
+INFO: 02:06:39 --> Port: 80
+ERROR: 02:06:39 --> invalid header
+INFO: 02:06:39 --> Host: fonts.googleapis.com
+INFO: 02:06:39 --> Port: 80
+ERROR: 02:06:44 --> timeout
+ERROR: 02:06:44 --> 504: Gateway Timeout
+INFO: 02:06:47 --> Se desconecto/127.0.0.1:54773
+INFO: 02:06:47 --> Se conecto /127.0.0.1:54775
+ERROR: 02:06:47 --> invalid header
+INFO: 02:06:47 --> Host: www.infobae.com
+INFO: 02:06:47 --> Port: 80
+INFO: 02:07:07 --> Starting CarlyAdmin Server...
+INFO: 02:07:17 --> Se conecto /127.0.0.1:54994
+ERROR: 02:07:17 --> invalid header
+ERROR: 02:07:17 --> invalid header
+INFO: 02:07:17 --> Host: www.hola.com
+INFO: 02:07:17 --> Port: 80
+INFO: 02:07:17 --> Se conecto /127.0.0.1:55006
+INFO: 02:07:17 --> Se desconecto/127.0.0.1:54994
+INFO: 02:07:17 --> Se conecto /127.0.0.1:55007
+ERROR: 02:07:17 --> invalid header
+INFO: 02:07:17 --> Host: www.hola.com
+INFO: 02:07:17 --> Port: 80
+INFO: 02:07:28 --> Starting CarlyAdmin Server...
+INFO: 02:07:40 --> Se conecto /127.0.0.1:55050
+ERROR: 02:07:40 --> invalid header
+ERROR: 02:07:40 --> invalid header
+INFO: 02:07:40 --> Host: hola.com
+INFO: 02:07:40 --> Port: 80
+INFO: 02:07:40 --> Se conecto /127.0.0.1:55062
+ERROR: 02:07:40 --> invalid header
+INFO: 02:07:40 --> Host: www.hola.com
+INFO: 02:07:40 --> Port: 80
+INFO: 02:07:41 --> Se desconecto/127.0.0.1:55062
+INFO: 02:07:41 --> Se conecto /127.0.0.1:55063
+ERROR: 02:07:41 --> invalid header
+INFO: 02:07:41 --> Host: www.hola.com
+INFO: 02:07:41 --> Port: 80
+ERROR: 02:07:45 --> timeout
+ERROR: 02:07:45 --> 504: Gateway Timeout
+INFO: 02:08:13 --> Se desconecto/127.0.0.1:55050
+INFO: 02:08:13 --> Se conecto /127.0.0.1:55064
+ERROR: 02:08:13 --> invalid header
+INFO: 02:08:13 --> Host: www.himgs.com
+INFO: 02:08:13 --> Port: 80
+INFO: 02:08:14 --> Se desconecto/127.0.0.1:55064
+INFO: 02:08:14 --> Se conecto /127.0.0.1:55065
+ERROR: 02:08:14 --> invalid header
+INFO: 02:08:14 --> Host: www.himgs.com
+INFO: 02:08:14 --> Port: 80
+INFO: 02:08:47 --> Starting CarlyAdmin Server...
+INFO: 02:08:50 --> Se conecto /127.0.0.1:55148
+ERROR: 02:08:50 --> invalid header
+ERROR: 02:08:50 --> invalid header
+INFO: 02:08:50 --> Host: infobae.com
+INFO: 02:08:50 --> Port: 80
+INFO: 02:08:50 --> Se conecto /127.0.0.1:55151
+ERROR: 02:08:50 --> invalid header
+ERROR: 02:08:50 --> invalid header
+INFO: 02:08:50 --> Host: www.infobae.com
+INFO: 02:08:50 --> Port: 80
+INFO: 02:08:51 --> Se desconecto/127.0.0.1:55151
+INFO: 02:08:51 --> Se conecto /127.0.0.1:55159
+ERROR: 02:08:51 --> invalid header
+INFO: 02:08:51 --> Host: www.infobae.com
+INFO: 02:08:51 --> Port: 80
+ERROR: 02:08:55 --> timeout
+ERROR: 02:08:55 --> 504: Gateway Timeout
+INFO: 02:09:11 --> Se desconecto/127.0.0.1:55159
+INFO: 02:09:11 --> Se conecto /127.0.0.1:55160
+INFO: 02:09:11 --> Se desconecto/127.0.0.1:55148
+INFO: 02:09:11 --> Se conecto /127.0.0.1:55161
+ERROR: 02:09:11 --> invalid header
+INFO: 02:09:11 --> Host: www.infobae.com
+INFO: 02:09:11 --> Port: 80
+ERROR: 02:09:11 --> invalid header
+INFO: 02:09:11 --> Host: null
+INFO: 02:09:11 --> Port: 80
+INFO: 02:09:11 --> Se desconecto/127.0.0.1:55161
+INFO: 02:09:11 --> Se desconecto/127.0.0.1:55160
+INFO: 02:09:11 --> Se conecto /127.0.0.1:55163
+ERROR: 02:09:11 --> invalid header
+INFO: 02:09:11 --> Host: www.infobae.com
+INFO: 02:09:11 --> Port: 80
+INFO: 02:09:11 --> Se desconecto/127.0.0.1:55163
+INFO: 02:09:11 --> Se conecto /127.0.0.1:55164
+INFO: 02:09:11 --> Se conecto /127.0.0.1:55162
+ERROR: 02:09:11 --> invalid header
+INFO: 02:09:11 --> Host: www.infobae.com
+INFO: 02:09:11 --> Port: 80
+INFO: 02:09:11 --> Se desconecto/127.0.0.1:55162
+INFO: 02:09:11 --> Se conecto /127.0.0.1:55166
+ERROR: 02:09:11 --> invalid header
+INFO: 02:09:11 --> Host: www.infobae.com
+INFO: 02:09:11 --> Port: 80
+INFO: 02:09:11 --> Se desconecto/127.0.0.1:55166
+INFO: 02:09:11 --> Se conecto /127.0.0.1:55168
+ERROR: 02:09:11 --> invalid header
+INFO: 02:09:11 --> Host: cdn01.ib.infobae.com
+INFO: 02:09:11 --> Port: 80
+ERROR: 02:09:11 --> invalid header
+INFO: 02:09:11 --> Host: null
+INFO: 02:09:11 --> Port: 80
+INFO: 02:09:11 --> Se desconecto/127.0.0.1:55164
+INFO: 02:09:11 --> Se conecto /127.0.0.1:55170
+ERROR: 02:09:11 --> invalid header
+INFO: 02:09:11 --> Host: www.google.com
+INFO: 02:09:11 --> Port: 80
+ERROR: 02:09:11 --> java.net.SocketException: Connection reset
+INFO: 02:09:11 --> Se conecto /127.0.0.1:55172
+ERROR: 02:09:11 --> invalid header
+INFO: 02:09:11 --> Host: 79423.analytics.edgesuite.net
+INFO: 02:09:11 --> Port: 80
+ERROR: 02:09:11 --> java.net.SocketException: Connection reset
+INFO: 02:09:11 --> Se conecto /127.0.0.1:55174
+ERROR: 02:09:11 --> invalid header
+INFO: 02:09:11 --> Host: b.scorecardresearch.com
+INFO: 02:09:11 --> Port: 80
+ERROR: 02:09:11 --> java.net.SocketException: Connection reset
+INFO: 02:09:11 --> Se conecto /127.0.0.1:55189
+ERROR: 02:09:12 --> java.net.SocketException: Connection reset
+INFO: 02:09:12 --> Se conecto /127.0.0.1:55190
+INFO: 02:09:23 --> Se desconecto/127.0.0.1:55189
+INFO: 02:09:23 --> Se conecto /127.0.0.1:55191
+INFO: 02:09:23 --> Se desconecto/127.0.0.1:55190
+INFO: 02:09:23 --> Se conecto /127.0.0.1:55192
+INFO: 02:09:23 --> Se desconecto/127.0.0.1:55191
+INFO: 02:09:23 --> Se conecto /127.0.0.1:55193
+INFO: 02:09:23 --> Se desconecto/127.0.0.1:55192
+INFO: 02:09:23 --> Se desconecto/127.0.0.1:55193
+INFO: 02:09:23 --> Se conecto /127.0.0.1:55194
+INFO: 02:09:23 --> Se conecto /127.0.0.1:55195
+INFO: 02:09:23 --> Se desconecto/127.0.0.1:55195
+INFO: 02:09:23 --> Se conecto /127.0.0.1:55196
+INFO: 02:09:23 --> Se desconecto/127.0.0.1:55194
+INFO: 02:09:23 --> Se conecto /127.0.0.1:55197
+INFO: 02:09:23 --> Se desconecto/127.0.0.1:55196
+INFO: 02:09:23 --> Se conecto /127.0.0.1:55198
+INFO: 02:09:23 --> Se desconecto/127.0.0.1:55198
+INFO: 02:09:23 --> Se conecto /127.0.0.1:55199
+INFO: 02:09:23 --> Se desconecto/127.0.0.1:55199
+INFO: 02:09:23 --> Se conecto /127.0.0.1:55200
+INFO: 02:09:23 --> Se desconecto/127.0.0.1:55200
+INFO: 02:09:23 --> Se conecto /127.0.0.1:55208
+INFO: 02:09:23 --> Se desconecto/127.0.0.1:55197
+INFO: 02:09:23 --> Se conecto /127.0.0.1:55210
+ERROR: 02:09:23 --> invalid header
+ERROR: 02:09:23 --> invalid header
+ERROR: 02:09:23 --> invalid header
+ERROR: 02:09:23 --> invalid header
+INFO: 02:09:23 --> Host: www.adidas.com.ar
+INFO: 02:09:23 --> Port: 80
+INFO: 02:09:23 --> Host: null
+INFO: 02:09:23 --> Port: 80
+INFO: 02:09:24 --> Se desconecto/127.0.0.1:55210
+INFO: 02:09:24 --> Se conecto /127.0.0.1:55217
+ERROR: 02:09:24 --> invalid header
+ERROR: 02:09:24 --> invalid header
+INFO: 02:09:24 --> Host: www.adidas.com.ar
+INFO: 02:09:24 --> Port: 80
+INFO: 02:09:44 --> Se desconecto/127.0.0.1:55217
+INFO: 02:09:44 --> Se conecto /127.0.0.1:55218
+ERROR: 02:09:44 --> invalid header
+INFO: 02:09:44 --> Host: demandware.edgesuite.net
+INFO: 02:09:44 --> Port: 80
+ERROR: 02:09:44 --> java.net.SocketException: Connection reset
+INFO: 02:09:44 --> Se conecto /127.0.0.1:55219
+ERROR: 02:09:44 --> invalid header
+INFO: 02:09:44 --> Host: demandware.edgesuite.net
+INFO: 02:09:44 --> Port: 80
+ERROR: 02:09:44 --> java.net.SocketException: Connection reset
+INFO: 02:09:44 --> Se conecto /127.0.0.1:55220
+ERROR: 02:09:44 --> invalid header
+INFO: 02:09:44 --> Host: demandware.edgesuite.net
+INFO: 02:09:44 --> Port: 80
+ERROR: 02:09:44 --> java.net.SocketException: Connection reset
+INFO: 02:09:44 --> Se conecto /127.0.0.1:55223
+ERROR: 02:09:44 --> invalid header
+INFO: 02:09:44 --> Host: demandware.edgesuite.net
+INFO: 02:09:44 --> Port: 80
+ERROR: 02:09:44 --> java.net.SocketException: Connection reset
+INFO: 02:09:44 --> Se conecto /127.0.0.1:55224
+ERROR: 02:09:44 --> invalid header
+INFO: 02:09:44 --> Host: demandware.edgesuite.net
+INFO: 02:09:44 --> Port: 80
+ERROR: 02:09:44 --> java.net.SocketException: Connection reset
+INFO: 02:09:44 --> Se conecto /127.0.0.1:55227
+ERROR: 02:09:44 --> invalid header
+INFO: 02:09:44 --> Host: demandware.edgesuite.net
+INFO: 02:09:44 --> Port: 80
+ERROR: 02:09:44 --> java.net.SocketException: Connection reset
+INFO: 02:09:44 --> Se conecto /127.0.0.1:55228
+ERROR: 02:09:44 --> invalid header
+INFO: 02:09:44 --> Host: tags.tiqcdn.com
+INFO: 02:09:44 --> Port: 80
+ERROR: 02:09:45 --> java.net.SocketException: Connection reset
+INFO: 02:09:45 --> Se conecto /127.0.0.1:55230
+ERROR: 02:09:45 --> invalid header
+ERROR: 02:09:45 --> invalid header
+INFO: 02:09:45 --> Host: www.example.com
+INFO: 02:09:45 --> Port: 80
+ERROR: 02:09:50 --> timeout
+ERROR: 02:09:50 --> 504: Gateway Timeout
+INFO: 02:09:53 --> Se desconecto/127.0.0.1:55208
+INFO: 02:09:53 --> Se conecto /127.0.0.1:55237
+INFO: 02:09:59 --> Se desconecto/127.0.0.1:55237
+INFO: 02:09:59 --> Se conecto /127.0.0.1:55238
+INFO: 02:09:59 --> Se desconecto/127.0.0.1:55230
+INFO: 02:09:59 --> Se conecto /127.0.0.1:55239
+INFO: 02:09:59 --> Se desconecto/127.0.0.1:55238
+INFO: 02:09:59 --> Se conecto /127.0.0.1:55240
+INFO: 02:09:59 --> Se desconecto/127.0.0.1:55239
+INFO: 02:09:59 --> Se desconecto/127.0.0.1:55240
+INFO: 02:09:59 --> Se conecto /127.0.0.1:55241
+INFO: 02:09:59 --> Se conecto /127.0.0.1:55242
+INFO: 02:09:59 --> Se desconecto/127.0.0.1:55242
+INFO: 02:09:59 --> Se conecto /127.0.0.1:55252
+INFO: 02:09:59 --> Se desconecto/127.0.0.1:55241
+ERROR: 02:09:59 --> invalid header
+ERROR: 02:09:59 --> invalid header
+INFO: 02:09:59 --> Host: www.vaso.com
+INFO: 02:09:59 --> Port: 80
+INFO: 02:10:00 --> Se conecto /127.0.0.1:55256
+ERROR: 02:10:00 --> invalid header
+ERROR: 02:10:00 --> invalid header
+INFO: 02:10:00 --> Host: www.vaso.com
+INFO: 02:10:00 --> Port: 80
+ERROR: 02:10:04 --> timeout
+ERROR: 02:10:04 --> 504: Gateway Timeout
+ERROR: 02:10:04 --> invalid header
+ERROR: 02:10:04 --> invalid header
+ERROR: 02:10:04 --> invalid header
+INFO: 02:10:04 --> Host: www.vaso.com
+INFO: 02:10:04 --> Port: 80
+ERROR: 02:10:05 --> timeout
+ERROR: 02:10:05 --> 504: Gateway Timeout
+INFO: 02:10:14 --> Starting CarlyAdmin Server...
+INFO: 02:10:20 --> Se conecto /127.0.0.1:55259
+ERROR: 02:10:20 --> invalid header
+ERROR: 02:10:20 --> invalid header
+INFO: 02:10:20 --> Host: www.despegar.com
+INFO: 02:10:20 --> Port: 80
+ERROR: 02:10:25 --> timeout
+ERROR: 02:10:25 --> 504: Gateway Timeout
+ERROR: 02:10:25 --> invalid header
+ERROR: 02:10:25 --> invalid header
+ERROR: 02:10:25 --> invalid header
+INFO: 02:10:25 --> Host: www.despegar.com
+INFO: 02:10:25 --> Port: 80
+INFO: 02:10:26 --> Se conecto /127.0.0.1:55262
+ERROR: 02:10:26 --> invalid header
+ERROR: 02:10:26 --> invalid header
+INFO: 02:10:26 --> Host: www.despegar.com
+INFO: 02:10:26 --> Port: 80
+ERROR: 02:10:31 --> timeout
+ERROR: 02:10:31 --> 504: Gateway Timeout
+INFO: 02:10:31 --> Se desconecto/127.0.0.1:55259
+ERROR: 02:10:31 --> timeout
+ERROR: 02:10:31 --> 504: Gateway Timeout
+INFO: 02:10:35 --> Se desconecto/127.0.0.1:55262
+INFO: 02:10:35 --> Se conecto /127.0.0.1:55265
+ERROR: 02:10:35 --> invalid header
+ERROR: 02:10:35 --> invalid header
+ERROR: 02:10:35 --> invalid header
+INFO: 02:10:35 --> Host: www.despegar.com
+INFO: 02:10:35 --> Port: 80
+INFO: 02:10:35 --> Se conecto /127.0.0.1:55267
+ERROR: 02:10:35 --> invalid header
+ERROR: 02:10:35 --> invalid header
+INFO: 02:10:35 --> Host: www.despegar.com
+INFO: 02:10:35 --> Port: 80
+ERROR: 02:10:40 --> timeout
+ERROR: 02:10:40 --> 504: Gateway Timeout
+ERROR: 02:10:40 --> timeout
+ERROR: 02:10:40 --> 504: Gateway Timeout
+ERROR: 02:10:40 --> invalid header
+ERROR: 02:10:40 --> invalid header
+INFO: 02:10:40 --> Host: www.despegar.com
+INFO: 02:10:40 --> Port: 80
+ERROR: 02:10:45 --> timeout
+ERROR: 02:10:45 --> 504: Gateway Timeout
+INFO: 02:10:51 --> Se desconecto/127.0.0.1:55265
+INFO: 02:10:51 --> Se conecto /127.0.0.1:55270
+ERROR: 02:10:51 --> invalid header
+INFO: 02:10:51 --> Host: ajax.googleapis.com
+INFO: 02:10:51 --> Port: 80
+ERROR: 02:10:51 --> java.net.SocketException: Connection reset
+INFO: 02:10:51 --> Se conecto /127.0.0.1:55271
+ERROR: 02:10:51 --> invalid header
+ERROR: 02:10:51 --> invalid header
+INFO: 02:10:51 --> Host: www.despegar.com
+INFO: 02:10:51 --> Port: 80
+ERROR: 02:10:51 --> java.net.SocketException: Connection reset
+INFO: 02:10:51 --> Se conecto /127.0.0.1:55273
+ERROR: 02:10:51 --> invalid header
+ERROR: 02:10:51 --> invalid header
+INFO: 02:10:51 --> Host: www.despegar.com
+INFO: 02:10:51 --> Port: 80
+INFO: 02:10:55 --> Se desconecto/127.0.0.1:55273
+INFO: 02:10:55 --> Se conecto /127.0.0.1:55275
+ERROR: 02:10:55 --> invalid header
+ERROR: 02:10:55 --> invalid header
+INFO: 02:10:55 --> Host: www.atrapalo.com
+INFO: 02:10:55 --> Port: 80
+INFO: 02:20:42 --> Starting CarlyAdmin Server...
+INFO: 02:20:48 --> Se conecto /127.0.0.1:55356
+ERROR: 02:20:48 --> invalid header
+ERROR: 02:20:48 --> invalid header
+INFO: 02:20:48 --> Host: www.hola.com
+INFO: 02:20:48 --> Port: 80
+INFO: 02:20:48 --> Se conecto /127.0.0.1:55359
+ERROR: 02:20:48 --> invalid header
+INFO: 02:20:48 --> Host: www.hola.com
+INFO: 02:20:48 --> Port: 80
+INFO: 02:20:48 --> Se desconecto/127.0.0.1:55356
+INFO: 02:20:48 --> Se conecto /127.0.0.1:55361
+ERROR: 02:20:48 --> invalid header
+INFO: 02:20:48 --> Host: www.himgs.com
+INFO: 02:20:48 --> Port: 80
+INFO: 02:20:48 --> Se desconecto/127.0.0.1:55359
+INFO: 02:20:48 --> Se conecto /127.0.0.1:55363
+ERROR: 02:20:48 --> invalid header
+INFO: 02:20:48 --> Host: www.himgs.com
+INFO: 02:20:48 --> Port: 80
+INFO: 02:20:48 --> Se desconecto/127.0.0.1:55361
+INFO: 02:20:48 --> Se conecto /127.0.0.1:55365
+ERROR: 02:20:48 --> invalid header
+INFO: 02:20:48 --> Host: www.himgs.com
+INFO: 02:20:48 --> Port: 80
+INFO: 02:20:48 --> Se desconecto/127.0.0.1:55363
+INFO: 02:20:48 --> Se conecto /127.0.0.1:55367
+ERROR: 02:20:48 --> invalid header
+INFO: 02:20:48 --> Host: www.hola.com
+INFO: 02:20:48 --> Port: 80
+INFO: 02:20:48 --> Se desconecto/127.0.0.1:55365
+INFO: 02:20:48 --> Se conecto /127.0.0.1:55369
+ERROR: 02:20:48 --> invalid header
+INFO: 02:20:48 --> Host: www.googletagservices.com
+INFO: 02:20:48 --> Port: 80
+ERROR: 02:20:53 --> timeout
+ERROR: 02:20:53 --> 504: Gateway Timeout
+INFO: 02:21:53 --> Starting CarlyAdmin Server...
+INFO: 02:21:58 --> Se conecto /127.0.0.1:55483
+INFO: 02:21:58 --> Se conecto /127.0.0.1:55484
+ERROR: 02:21:58 --> invalid header
+INFO: 02:21:58 --> Host: www.hola.com
+INFO: 02:21:58 --> Port: 80
+INFO: 02:21:59 --> Se desconecto/127.0.0.1:55483
+INFO: 02:22:04 --> Se conecto /127.0.0.1:55489
+ERROR: 02:22:04 --> invalid header
+ERROR: 02:22:04 --> invalid header
+INFO: 02:22:04 --> Host: www.infobae.com
+INFO: 02:22:04 --> Port: 80
+INFO: 02:22:04 --> Se desconecto/127.0.0.1:55489
+INFO: 02:22:05 --> Se conecto /127.0.0.1:55492
+ERROR: 02:22:05 --> invalid header
+ERROR: 02:22:05 --> invalid header
+INFO: 02:22:05 --> Host: www.infobae.com
+INFO: 02:22:05 --> Port: 80
+INFO: 02:22:24 --> Starting CarlyAdmin Server...
+INFO: 02:22:30 --> Se conecto /127.0.0.1:55498
+INFO: 02:22:30 --> Se conecto /127.0.0.1:55500
+ERROR: 02:22:30 --> invalid header
+ERROR: 02:22:30 --> invalid header
+ERROR: 02:22:30 --> invalid header
+ERROR: 02:22:30 --> invalid header
+ERROR: 02:22:30 --> missing host
+ERROR: 02:22:30 --> missing host
+INFO: 02:22:41 --> Starting CarlyAdmin Server...
+INFO: 02:22:51 --> Se conecto /127.0.0.1:55607
+INFO: 02:22:51 --> Se conecto /127.0.0.1:55608
+ERROR: 02:22:51 --> invalid header
+ERROR: 02:22:51 --> invalid header
+ERROR: 02:22:51 --> invalid header
+ERROR: 02:22:51 --> invalid header
+ERROR: 02:22:51 --> invalid header
+ERROR: 02:22:51 --> invalid header
+ERROR: 02:22:51 --> missing host
+ERROR: 02:22:51 --> missing host
+INFO: 02:23:16 --> Starting CarlyAdmin Server...
+INFO: 02:23:28 --> Se conecto /127.0.0.1:55646
+INFO: 02:23:28 --> Se conecto /127.0.0.1:55648
+ERROR: 02:23:28 --> invalid header
+INFO: 02:23:28 --> Host: www.hola.com
+INFO: 02:23:28 --> Port: 80
+INFO: 02:23:31 --> Se desconecto/127.0.0.1:55646
+INFO: 02:23:31 --> Se conecto /127.0.0.1:55650
+ERROR: 02:23:31 --> invalid header
+INFO: 02:23:31 --> Host: www.himgs.com
+INFO: 02:23:31 --> Port: 80
+INFO: 02:23:40 --> Se desconecto/127.0.0.1:55650
+INFO: 02:23:40 --> Se conecto /127.0.0.1:55652
+ERROR: 02:23:40 --> invalid header
+INFO: 02:23:40 --> Host: www.himgs.com
+INFO: 02:23:40 --> Port: 80
+ERROR: 02:23:40 --> java.net.SocketException: Connection reset
+INFO: 02:23:40 --> Se conecto /127.0.0.1:55654
+ERROR: 02:23:40 --> invalid header
+INFO: 02:23:40 --> Host: www.himgs.com
+INFO: 02:23:40 --> Port: 80
+INFO: 02:23:40 --> Se desconecto/127.0.0.1:55654
+INFO: 02:23:40 --> Se conecto /127.0.0.1:55656
+ERROR: 02:23:40 --> invalid header
+INFO: 02:23:40 --> Host: www.himgs.com
+INFO: 02:23:40 --> Port: 80
+INFO: 02:23:40 --> Se desconecto/127.0.0.1:55656
+INFO: 02:23:40 --> Se conecto /127.0.0.1:55659
+ERROR: 02:23:41 --> invalid header
+INFO: 02:23:41 --> Host: www.hola.com
+INFO: 02:23:41 --> Port: 80
+INFO: 02:23:41 --> Se desconecto/127.0.0.1:55659
+INFO: 02:23:41 --> Se conecto /127.0.0.1:55660
+ERROR: 02:23:41 --> invalid header
+INFO: 02:23:41 --> Host: www.hola.com
+INFO: 02:23:41 --> Port: 80
+INFO: 02:23:41 --> Se desconecto/127.0.0.1:55660
+INFO: 02:23:41 --> Se conecto /127.0.0.1:55662
+ERROR: 02:23:41 --> invalid header
+INFO: 02:23:41 --> Host: www.hola.com
+INFO: 02:23:41 --> Port: 80
+INFO: 02:23:41 --> Se desconecto/127.0.0.1:55662
+INFO: 02:23:41 --> Se conecto /127.0.0.1:55664
+ERROR: 02:23:41 --> invalid header
+INFO: 02:23:41 --> Host: www.hola.com
+INFO: 02:23:41 --> Port: 80
+INFO: 02:23:41 --> Se desconecto/127.0.0.1:55664
+INFO: 02:23:41 --> Se conecto /127.0.0.1:55667
+ERROR: 02:23:41 --> invalid header
+INFO: 02:23:41 --> Host: www.himgs.com
+INFO: 02:23:41 --> Port: 80
+INFO: 02:23:41 --> Se desconecto/127.0.0.1:55667
+INFO: 02:23:41 --> Se conecto /127.0.0.1:55675
+INFO: 02:23:44 --> Starting CarlyAdmin Server...
+INFO: 02:23:50 --> Se conecto /127.0.0.1:55689
+INFO: 02:23:50 --> Se conecto /127.0.0.1:55690
+ERROR: 02:23:50 --> invalid header
+ERROR: 02:23:50 --> invalid header
+ERROR: 02:23:50 --> invalid header
+ERROR: 02:23:50 --> invalid header
+ERROR: 02:23:50 --> invalid header
+ERROR: 02:23:50 --> missing host
+ERROR: 02:23:50 --> invalid header
+ERROR: 02:23:50 --> missing host
+INFO: 02:24:25 --> Starting CarlyAdmin Server...
+INFO: 02:24:29 --> Se conecto /127.0.0.1:55729
+ERROR: 02:24:29 --> invalid header
+ERROR: 02:24:29 --> invalid header
+ERROR: 02:24:29 --> invalid header
+INFO: 02:24:29 --> Host: www.adidas.com.ar
+INFO: 02:24:29 --> Port: 80
+INFO: 02:24:30 --> Se conecto /127.0.0.1:55732
+ERROR: 02:24:30 --> invalid header
+ERROR: 02:24:30 --> invalid header
+ERROR: 02:24:30 --> invalid header
+INFO: 02:24:30 --> Host: www.adidas.com.ar
+INFO: 02:24:30 --> Port: 80
+ERROR: 02:24:30 --> java.net.SocketException: Connection reset
+INFO: 02:24:30 --> Se desconecto/127.0.0.1:55732
+INFO: 02:24:30 --> Se conecto /127.0.0.1:55735
+ERROR: 02:24:30 --> invalid header
+ERROR: 02:24:30 --> invalid header
+ERROR: 02:24:30 --> invalid header
+INFO: 02:24:30 --> Host: www.adidas.com.ar
+INFO: 02:24:30 --> Port: 80
+INFO: 02:24:30 --> Se desconecto/127.0.0.1:55735
+INFO: 02:24:35 --> Se conecto /127.0.0.1:55738
+ERROR: 02:24:35 --> invalid header
+ERROR: 02:24:35 --> invalid header
+ERROR: 02:24:35 --> invalid header
+INFO: 02:24:35 --> Host: www.adidas.com.ar
+INFO: 02:24:35 --> Port: 80
+INFO: 02:24:36 --> Se desconecto/127.0.0.1:55738
+INFO: 02:25:06 --> Se conecto /127.0.0.1:55741
+ERROR: 02:25:06 --> invalid header
+ERROR: 02:25:06 --> invalid header
+ERROR: 02:25:06 --> invalid header
+INFO: 02:25:06 --> Host: www.adidas.com.ar
+INFO: 02:25:06 --> Port: 80
+INFO: 02:25:06 --> Se desconecto/127.0.0.1:55741
+INFO: 02:25:15 --> Se conecto /127.0.0.1:55744
+ERROR: 02:25:15 --> invalid header
+ERROR: 02:25:15 --> invalid header
+ERROR: 02:25:15 --> invalid header
+INFO: 02:25:15 --> Host: www.adidas.com.ar
+INFO: 02:25:15 --> Port: 80
+INFO: 02:25:15 --> Se desconecto/127.0.0.1:55744
+INFO: 02:25:25 --> Starting CarlyAdmin Server...
+INFO: 02:25:28 --> Se conecto /127.0.0.1:55747
+ERROR: 02:25:28 --> invalid header
+ERROR: 02:25:28 --> invalid header
+INFO: 02:25:28 --> Host: www.infobae.com
+INFO: 02:25:28 --> Port: 80
+INFO: 02:25:28 --> Se desconecto/127.0.0.1:55747
+INFO: 02:25:28 --> Se conecto /127.0.0.1:55750
+ERROR: 02:25:28 --> invalid header
+ERROR: 02:25:28 --> invalid header
+INFO: 02:25:28 --> Host: www.infobae.com
+INFO: 02:25:28 --> Port: 80
+INFO: 02:25:36 --> Starting CarlyAdmin Server...
+INFO: 02:25:39 --> Se conecto /127.0.0.1:55752
+ERROR: 02:25:39 --> invalid header
+ERROR: 02:25:39 --> invalid header
+ERROR: 02:25:39 --> invalid header
+INFO: 02:25:39 --> Host: www.adidas.com.ar
+INFO: 02:25:39 --> Port: 80
+INFO: 02:25:39 --> Se desconecto/127.0.0.1:55752
+INFO: 02:25:40 --> Se conecto /127.0.0.1:55755
+ERROR: 02:25:40 --> invalid header
+ERROR: 02:25:40 --> invalid header
+ERROR: 02:25:40 --> invalid header
+INFO: 02:25:40 --> Host: www.adidas.com.ar
+INFO: 02:25:40 --> Port: 80
+INFO: 02:25:51 --> Starting CarlyAdmin Server...
+INFO: 02:26:07 --> Se conecto /127.0.0.1:55757
+ERROR: 02:26:07 --> invalid header
+ERROR: 02:26:07 --> invalid header
+ERROR: 02:26:07 --> invalid header
+INFO: 02:26:07 --> Host: www.despegar.com
+INFO: 02:26:07 --> Port: 80
+INFO: 02:26:08 --> Se desconecto/127.0.0.1:55757
+INFO: 02:26:08 --> Se conecto /127.0.0.1:55760
+ERROR: 02:26:08 --> invalid header
+ERROR: 02:26:08 --> invalid header
+ERROR: 02:26:08 --> invalid header
+INFO: 02:26:08 --> Host: www.despegar.com
+INFO: 02:26:08 --> Port: 80
+INFO: 02:26:09 --> Se desconecto/127.0.0.1:55760
+INFO: 02:26:14 --> Se conecto /127.0.0.1:55762
+ERROR: 02:26:14 --> invalid header
+ERROR: 02:26:14 --> invalid header
+ERROR: 02:26:14 --> invalid header
+INFO: 02:26:14 --> Host: www.despegar.com
+INFO: 02:26:14 --> Port: 80
+INFO: 02:26:14 --> Se desconecto/127.0.0.1:55762
+INFO: 02:26:26 --> Starting CarlyAdmin Server...
+INFO: 02:26:38 --> Se conecto /127.0.0.1:55765
+ERROR: 02:26:38 --> invalid header
+ERROR: 02:26:38 --> invalid header
+INFO: 02:26:38 --> Host: www.afip.gov.ar
+INFO: 02:26:38 --> Port: 80
+INFO: 02:27:38 --> Se conecto /127.0.0.1:55769
+ERROR: 02:27:38 --> invalid header
+ERROR: 02:27:38 --> invalid header
+INFO: 02:27:38 --> Host: www.recetas.com
+INFO: 02:27:38 --> Port: 80
+INFO: 02:27:44 --> Se desconecto/127.0.0.1:55769
+INFO: 02:27:44 --> Se conecto /127.0.0.1:55772
+ERROR: 02:27:44 --> invalid header
+ERROR: 02:27:44 --> invalid header
+ERROR: 02:27:44 --> invalid header
+INFO: 02:27:44 --> Host: www.recetas.com
+INFO: 02:27:44 --> Port: 80
+INFO: 02:28:09 --> Starting CarlyAdmin Server...
+INFO: 02:28:14 --> Se conecto /127.0.0.1:55778
+ERROR: 02:28:14 --> invalid header
+ERROR: 02:28:14 --> invalid header
+INFO: 02:28:14 --> Host: fibertel.com
+INFO: 02:28:14 --> Port: 80
+INFO: 02:28:15 --> Se desconecto/127.0.0.1:55778
+INFO: 02:28:15 --> Se conecto /127.0.0.1:55781
+ERROR: 02:28:15 --> invalid header
+ERROR: 02:28:15 --> invalid header
+ERROR: 02:28:15 --> invalid header
+INFO: 02:28:15 --> Host: fibertel.com
+INFO: 02:28:15 --> Port: 80
+INFO: 02:28:34 --> Se conecto /127.0.0.1:55784
+ERROR: 02:28:34 --> invalid header
+ERROR: 02:28:34 --> invalid header
+INFO: 02:28:34 --> Host: www.vuenozaires.com
+INFO: 02:28:34 --> Port: 80
+ERROR: 02:28:34 --> java.net.UnknownHostException: www.vuenozaires.com
+ERROR: 02:28:34 --> 112: Conexion Error
+INFO: 02:28:39 --> Se desconecto/127.0.0.1:55784
+INFO: 02:28:46 --> Se conecto /127.0.0.1:55786
+ERROR: 02:28:46 --> invalid header
+ERROR: 02:28:46 --> invalid header
+INFO: 02:28:46 --> Host: www.cabelvision.com
+INFO: 02:28:46 --> Port: 80
+INFO: 02:28:56 --> Starting CarlyAdmin Server...
+INFO: 02:29:01 --> Se conecto /127.0.0.1:55791
+ERROR: 02:29:01 --> invalid header
+ERROR: 02:29:01 --> invalid header
+INFO: 02:29:01 --> Host: www.azatej.com
+INFO: 02:29:01 --> Port: 80
+INFO: 02:29:02 --> Se conecto /127.0.0.1:55794
+ERROR: 02:29:02 --> invalid header
+ERROR: 02:29:02 --> invalid header
+ERROR: 02:29:02 --> invalid header
+INFO: 02:29:02 --> Host: www.azatej.com
+INFO: 02:29:02 --> Port: 80
+INFO: 02:29:07 --> Se desconecto/127.0.0.1:55791
+INFO: 02:29:08 --> Se desconecto/127.0.0.1:55794
+INFO: 02:29:12 --> Starting CarlyAdmin Server...
+INFO: 02:29:19 --> Se conecto /127.0.0.1:55797
+ERROR: 02:29:19 --> invalid header
+ERROR: 02:29:19 --> invalid header
+INFO: 02:29:19 --> Host: www.itba.edu.ar
+INFO: 02:29:19 --> Port: 80
+INFO: 02:29:19 --> Se conecto /127.0.0.1:55800
+INFO: 02:29:19 --> Se desconecto/127.0.0.1:55797
+ERROR: 02:29:19 --> invalid header
+ERROR: 02:29:19 --> invalid header
+INFO: 02:29:19 --> Host: itba.edu.ar
+INFO: 02:29:19 --> Port: 80
+INFO: 02:29:19 --> Se desconecto/127.0.0.1:55800
+INFO: 02:29:19 --> Se conecto /127.0.0.1:55803
+ERROR: 02:29:19 --> invalid header
+ERROR: 02:29:19 --> invalid header
+INFO: 02:29:19 --> Host: itba.edu.ar
+INFO: 02:29:19 --> Port: 80
+INFO: 02:29:25 --> Se desconecto/127.0.0.1:55803
+INFO: 02:29:31 --> Se conecto /127.0.0.1:55805
+ERROR: 02:29:31 --> invalid header
+ERROR: 02:29:31 --> invalid header
+INFO: 02:29:31 --> Host: www.chau.com
+INFO: 02:29:31 --> Port: 80
+INFO: 02:29:32 --> Se conecto /127.0.0.1:55808
+ERROR: 02:29:32 --> invalid header
+ERROR: 02:29:32 --> invalid header
+INFO: 02:29:32 --> Host: www.chau.com
+INFO: 02:29:32 --> Port: 80
+INFO: 02:29:37 --> Starting CarlyAdmin Server...
+INFO: 02:29:38 --> Se conecto /127.0.0.1:55811
+ERROR: 02:29:38 --> invalid header
+ERROR: 02:29:38 --> invalid header
+INFO: 02:29:38 --> Host: www.chau.com
+INFO: 02:29:38 --> Port: 80
+INFO: 02:29:46 --> Starting CarlyAdmin Server...
+INFO: 02:29:56 --> Se conecto /127.0.0.1:55816
+ERROR: 02:29:56 --> invalid header
+ERROR: 02:29:56 --> invalid header
+INFO: 02:29:56 --> Host: www.adidas.com.ar
+INFO: 02:29:56 --> Port: 80
+INFO: 02:30:44 --> Se desconecto/127.0.0.1:55816
+INFO: 02:30:44 --> Se conecto /127.0.0.1:55819
+ERROR: 02:30:44 --> invalid header
+ERROR: 02:30:44 --> invalid header
+ERROR: 02:30:44 --> invalid header
+INFO: 02:30:44 --> Host: www.adidas.com.ar
+INFO: 02:30:44 --> Port: 80
+INFO: 02:31:58 --> Starting CarlyAdmin Server...
+INFO: 02:32:09 --> Se conecto /127.0.0.1:55825
+ERROR: 02:32:09 --> invalid header
+INFO: 02:32:09 --> Host: www.exam
+INFO: 02:32:09 --> Port: 80
+ERROR: 02:32:10 --> java.net.UnknownHostException: www.exam
+ERROR: 02:32:10 --> 112: Conexion Error
+INFO: 02:32:10 --> Se desconecto/127.0.0.1:55825
+INFO: 02:32:16 --> Se conecto /127.0.0.1:55833
+ERROR: 02:32:16 --> invalid header
+ERROR: 02:32:16 --> invalid header
+INFO: 02:32:16 --> Host: www.example.com
+INFO: 02:32:16 --> Port: 80
+INFO: 02:32:53 --> Starting CarlyAdmin Server...
+INFO: 02:32:58 --> Se conecto /127.0.0.1:55837
+ERROR: 02:32:58 --> invalid header
+ERROR: 02:32:58 --> invalid header
+INFO: 02:32:58 --> Host: www.example.com
+INFO: 02:32:58 --> Port: 80
+ERROR: 02:32:58 --> java.net.SocketException: Connection reset
+INFO: 02:32:58 --> Se conecto /127.0.0.1:55840
+ERROR: 02:32:58 --> invalid header
+ERROR: 02:32:58 --> invalid header
+INFO: 02:32:58 --> Host: www.example.com
+INFO: 02:32:58 --> Port: 80
+INFO: 02:33:25 --> Se conecto /127.0.0.1:55843
+ERROR: 02:33:25 --> invalid header
+ERROR: 02:33:25 --> invalid header
+INFO: 02:33:25 --> Host: www.atrapalo.com
+INFO: 02:33:25 --> Port: 80
+INFO: 02:33:32 --> Starting CarlyAdmin Server...
+INFO: 02:33:35 --> Se conecto /127.0.0.1:55848
+ERROR: 02:33:35 --> invalid header
+ERROR: 02:33:35 --> invalid header
+ERROR: 02:33:35 --> invalid header
+INFO: 02:33:35 --> Host: www.atrapalo.com
+INFO: 02:33:35 --> Port: 80
+INFO: 02:33:44 --> Starting CarlyAdmin Server...
+INFO: 02:33:49 --> Se conecto /127.0.0.1:55851
+ERROR: 02:33:49 --> invalid header
+ERROR: 02:33:49 --> invalid header
+ERROR: 02:33:49 --> invalid header
+INFO: 02:33:49 --> Host: www.atrapalo.com
+INFO: 02:33:49 --> Port: 80
+INFO: 02:33:49 --> Se conecto /127.0.0.1:55854
+ERROR: 02:33:49 --> invalid header
+ERROR: 02:33:49 --> invalid header
+ERROR: 02:33:49 --> invalid header
+INFO: 02:33:49 --> Host: www.atrapalo.com
+INFO: 02:33:49 --> Port: 80
+INFO: 02:33:54 --> Se desconecto/127.0.0.1:55851
+INFO: 02:33:55 --> Se desconecto/127.0.0.1:55854
+INFO: 02:33:55 --> Se conecto /127.0.0.1:55857
+ERROR: 02:33:55 --> invalid header
+ERROR: 02:33:55 --> invalid header
+ERROR: 02:33:55 --> invalid header
+INFO: 02:33:55 --> Host: www.atrapalo.com
+INFO: 02:33:55 --> Port: 80
+INFO: 02:34:04 --> Starting CarlyAdmin Server...
+INFO: 02:34:12 --> Se conecto /127.0.0.1:55860
+ERROR: 02:34:12 --> invalid header
+ERROR: 02:34:12 --> invalid header
+INFO: 02:34:12 --> Host: www.despegar.com
+INFO: 02:34:12 --> Port: 80
+ERROR: 02:34:13 --> invalid header
+ERROR: 02:34:13 --> invalid header
+ERROR: 02:34:13 --> invalid header
+INFO: 02:34:13 --> Host: www.despegar.com
+INFO: 02:34:13 --> Port: 80
+INFO: 02:34:48 --> Starting CarlyAdmin Server...
+INFO: 02:34:55 --> Se conecto /127.0.0.1:55867
+ERROR: 02:34:55 --> invalid header
+ERROR: 02:34:55 --> invalid header
+ERROR: 02:34:55 --> invalid header
+INFO: 02:34:55 --> Host: www.despegar.com
+INFO: 02:34:55 --> Port: 80
+INFO: 02:35:15 --> Starting CarlyAdmin Server...
+INFO: 02:35:18 --> Se conecto /127.0.0.1:55870
+ERROR: 02:35:18 --> invalid header
+ERROR: 02:35:18 --> invalid header
+INFO: 02:35:18 --> Host: www.example.com
+INFO: 02:35:18 --> Port: 80
+INFO: 02:35:30 --> Se conecto /127.0.0.1:55873
+ERROR: 02:35:30 --> invalid header
+ERROR: 02:35:30 --> invalid header
+INFO: 02:35:30 --> Host: www.adidas.com.ar
+INFO: 02:35:30 --> Port: 80
+INFO: 02:35:31 --> Se desconecto/127.0.0.1:55873
+INFO: 02:35:31 --> Se conecto /127.0.0.1:55876
+ERROR: 02:35:31 --> invalid header
+ERROR: 02:35:31 --> invalid header
+ERROR: 02:35:31 --> invalid header
+INFO: 02:35:31 --> Host: www.adidas.com.ar
+INFO: 02:35:31 --> Port: 80
+INFO: 02:35:38 --> Starting CarlyAdmin Server...
+INFO: 02:35:45 --> Se conecto /127.0.0.1:55880
+ERROR: 02:35:45 --> invalid header
+ERROR: 02:35:45 --> invalid header
+INFO: 02:35:45 --> Host: www.infobae.com
+INFO: 02:35:45 --> Port: 80
+INFO: 02:35:48 --> Se desconecto/127.0.0.1:55880
+INFO: 02:35:48 --> Se conecto /127.0.0.1:55883
+ERROR: 02:35:48 --> invalid header
+ERROR: 02:35:48 --> invalid header
+INFO: 02:35:48 --> Host: www.infobae.com
+INFO: 02:35:48 --> Port: 80
+INFO: 02:36:18 --> Starting CarlyAdmin Server...
+INFO: 02:36:24 --> Se conecto /127.0.0.1:55885
+ERROR: 02:36:24 --> invalid header
+ERROR: 02:36:24 --> invalid header
+INFO: 02:36:24 --> Host: www.yahoo.com
+INFO: 02:36:24 --> Port: 80
+INFO: 02:36:54 --> Se conecto /127.0.0.1:55920
+ERROR: 02:36:54 --> invalid header
+ERROR: 02:36:54 --> invalid header
+INFO: 02:36:54 --> Host: www.avanttrip.com
+INFO: 02:36:54 --> Port: 80
+INFO: 02:37:00 --> Se desconecto/127.0.0.1:55920
+INFO: 02:37:00 --> Se conecto /127.0.0.1:55923
+ERROR: 02:37:00 --> invalid header
+ERROR: 02:37:00 --> invalid header
+ERROR: 02:37:00 --> invalid header
+INFO: 02:37:00 --> Host: www.avanttrip.com
+INFO: 02:37:00 --> Port: 80
+INFO: 02:45:05 --> Starting CarlyAdmin Server...
+INFO: 02:45:29 --> Se conecto /127.0.0.1:55931
+ERROR: 02:45:29 --> invalid header
+ERROR: 02:45:29 --> invalid header
+INFO: 02:45:29 --> Host: www.hola.com
+INFO: 02:45:29 --> Port: 80
+INFO: 02:45:29 --> Se desconecto/127.0.0.1:55931
+INFO: 02:45:29 --> Se conecto /127.0.0.1:55934
+ERROR: 02:45:29 --> invalid header
+ERROR: 02:45:29 --> invalid header
+INFO: 02:45:29 --> Host: www.hola.com
+INFO: 02:45:29 --> Port: 80
+INFO: 02:45:45 --> Starting CarlyAdmin Server...
+INFO: 02:45:51 --> Se conecto /127.0.0.1:55937
+ERROR: 02:45:51 --> invalid header
+ERROR: 02:45:51 --> invalid header
+ERROR: 02:45:51 --> invalid header
+INFO: 02:45:51 --> Host: www.adidas.com.ar
+INFO: 02:45:51 --> Port: 80
+INFO: 02:45:52 --> Se desconecto/127.0.0.1:55937
+INFO: 02:45:52 --> Se conecto /127.0.0.1:55940
+ERROR: 02:45:52 --> invalid header
+ERROR: 02:45:52 --> invalid header
+ERROR: 02:45:52 --> invalid header
+INFO: 02:45:52 --> Host: www.adidas.com.ar
+INFO: 02:45:52 --> Port: 80
+INFO: 02:46:05 --> Starting CarlyAdmin Server...
+INFO: 02:46:13 --> Se conecto /127.0.0.1:55942
+ERROR: 02:46:13 --> invalid header
+ERROR: 02:46:13 --> invalid header
+INFO: 02:46:13 --> Host: www.hola.com
+INFO: 02:46:13 --> Port: 80
+INFO: 02:46:13 --> Se desconecto/127.0.0.1:55942
+INFO: 02:46:13 --> Se conecto /127.0.0.1:55945
+ERROR: 02:46:13 --> invalid header
+ERROR: 02:46:13 --> invalid header
+INFO: 02:46:13 --> Host: www.hola.com
+INFO: 02:46:13 --> Port: 80
+INFO: 02:46:24 --> Starting CarlyAdmin Server...
+INFO: 02:46:37 --> Se conecto /127.0.0.1:55949
+ERROR: 02:46:37 --> invalid header
+ERROR: 02:46:37 --> invalid header
+INFO: 02:46:37 --> Host: www.despegar.com
+INFO: 02:46:37 --> Port: 80
+ERROR: 02:46:38 --> invalid header
+ERROR: 02:46:38 --> invalid header
+ERROR: 02:46:38 --> invalid header
+INFO: 02:46:38 --> Host: www.despegar.com
+INFO: 02:46:38 --> Port: 80
+INFO: 02:46:52 --> Starting CarlyAdmin Server...
+INFO: 02:46:55 --> Se conecto /127.0.0.1:55954
+ERROR: 02:46:55 --> invalid header
+ERROR: 02:46:55 --> invalid header
+ERROR: 02:46:55 --> invalid header
+INFO: 02:46:55 --> Host: www.despegar.com
+INFO: 02:46:55 --> Port: 80
+INFO: 02:46:58 --> Se desconecto/127.0.0.1:55954
+INFO: 02:47:02 --> Starting CarlyAdmin Server...
+INFO: 02:47:08 --> Se conecto /127.0.0.1:55957
+ERROR: 02:47:08 --> invalid header
+ERROR: 02:47:08 --> invalid header
+ERROR: 02:47:08 --> invalid header
+INFO: 02:47:08 --> Host: www.adidas.com.ar
+INFO: 02:47:08 --> Port: 80
+INFO: 02:47:09 --> Se desconecto/127.0.0.1:55957
+INFO: 02:47:09 --> Se conecto /127.0.0.1:55960
+ERROR: 02:47:09 --> invalid header
+ERROR: 02:47:09 --> invalid header
+ERROR: 02:47:09 --> invalid header
+INFO: 02:47:09 --> Host: www.adidas.com.ar
+INFO: 02:47:09 --> Port: 80
+INFO: 02:47:42 --> Starting CarlyAdmin Server...
+INFO: 02:47:48 --> Se conecto /127.0.0.1:55968
+ERROR: 02:47:48 --> invalid header
+ERROR: 02:47:48 --> invalid header
+INFO: 02:47:48 --> Host: infobae.com
+INFO: 02:47:48 --> Port: 80
+INFO: 02:47:48 --> Se conecto /127.0.0.1:55971
+ERROR: 02:47:49 --> invalid header
+ERROR: 02:47:49 --> invalid header
+INFO: 02:47:49 --> Host: infobae.com
+INFO: 02:47:49 --> Port: 80
+ERROR: 02:47:49 --> java.net.SocketException: Connection reset
+INFO: 02:47:49 --> Se conecto /127.0.0.1:55974
+ERROR: 02:47:49 --> invalid header
+ERROR: 02:47:49 --> invalid header
+INFO: 02:47:49 --> Host: www.infobae.com
+INFO: 02:47:49 --> Port: 80
+INFO: 02:47:50 --> Se desconecto/127.0.0.1:55974
+INFO: 02:47:50 --> Se conecto /127.0.0.1:55977
+ERROR: 02:47:50 --> invalid header
+ERROR: 02:47:50 --> invalid header
+INFO: 02:47:50 --> Host: www.infobae.com
+INFO: 02:47:50 --> Port: 80
+INFO: 02:47:59 --> Starting CarlyAdmin Server...
+INFO: 02:48:05 --> Se conecto /127.0.0.1:55979
+ERROR: 02:48:05 --> invalid header
+ERROR: 02:48:05 --> invalid header
+INFO: 02:48:05 --> Host: www.afip.gov.ar
+INFO: 02:48:05 --> Port: 80
+INFO: 02:48:34 --> Se conecto /127.0.0.1:55982
+ERROR: 02:48:34 --> invalid header
+ERROR: 02:48:34 --> invalid header
+INFO: 02:48:34 --> Host: www.stackoverflow.com
+INFO: 02:48:34 --> Port: 80
+INFO: 02:49:34 --> Starting CarlyAdmin Server...
+INFO: 02:50:21 --> Starting CarlyAdmin Server...
+INFO: 02:50:30 --> Se conecto /127.0.0.1:55991
+ERROR: 02:50:30 --> invalid header
+ERROR: 02:50:30 --> invalid header
+ERROR: 02:50:30 --> invalid header
+INFO: 02:50:30 --> Host: www.adidas.com.ar
+INFO: 02:50:30 --> Port: 80
+INFO: 02:50:31 --> Se desconecto/127.0.0.1:55991
+INFO: 02:50:31 --> Se conecto /127.0.0.1:55994
+ERROR: 02:50:31 --> invalid header
+ERROR: 02:50:31 --> invalid header
+ERROR: 02:50:31 --> invalid header
+INFO: 02:50:31 --> Host: www.adidas.com.ar
+INFO: 02:50:31 --> Port: 80
+INFO: 02:51:20 --> Starting CarlyAdmin Server...
+INFO: 02:51:41 --> Se conecto /127.0.0.1:55997
+ERROR: 02:51:41 --> invalid header
+ERROR: 02:51:41 --> invalid header
+INFO: 02:51:41 --> Host: www.example.com
+INFO: 02:51:41 --> Port: 80
+ERROR: 02:51:57 --> invalid header
+ERROR: 02:51:57 --> invalid header
+INFO: 02:51:57 --> Host: www.example.com
+INFO: 02:51:57 --> Port: 80
+INFO: 02:52:07 --> Se conecto /127.0.0.1:56000
+INFO: 02:52:07 --> Se desconecto/127.0.0.1:55997
+ERROR: 02:52:07 --> invalid header
+ERROR: 02:52:07 --> invalid header
+INFO: 02:52:07 --> Host: www.example.com
+INFO: 02:52:07 --> Port: 80
+INFO: 02:52:09 --> Se desconecto/127.0.0.1:56000
+INFO: 02:52:16 --> Starting CarlyAdmin Server...
+INFO: 02:52:22 --> Se conecto /127.0.0.1:56002
+ERROR: 02:52:22 --> invalid header
+ERROR: 02:52:22 --> invalid header
+INFO: 02:52:22 --> Host: www.example.com
+INFO: 02:52:22 --> Port: 80
+INFO: 02:53:49 --> Starting CarlyAdmin Server...
+INFO: 02:53:55 --> Se conecto /127.0.0.1:56009
+ERROR: 02:53:55 --> invalid header
+ERROR: 02:53:55 --> invalid header
+INFO: 02:53:55 --> Host: www.example.com
+INFO: 02:53:55 --> Port: 80
+INFO: 02:54:31 --> Starting CarlyAdmin Server...
+INFO: 02:54:36 --> Se conecto /127.0.0.1:56014
+ERROR: 02:54:36 --> invalid header
+ERROR: 02:54:36 --> invalid header
+INFO: 02:54:36 --> Host: www.example.com
+INFO: 02:54:36 --> Port: 80
+INFO: 02:57:38 --> Se conecto /127.0.0.1:56019
+ERROR: 02:57:38 --> invalid header
+ERROR: 02:57:38 --> invalid header
+ERROR: 02:57:38 --> invalid header
+INFO: 02:57:38 --> Host: www.adidas.com.ar
+INFO: 02:57:38 --> Port: 80
+INFO: 02:58:23 --> Se desconecto/127.0.0.1:56019
+INFO: 02:58:23 --> Se conecto /127.0.0.1:56023
+ERROR: 02:58:23 --> invalid header
+ERROR: 02:58:23 --> invalid header
+ERROR: 02:58:23 --> invalid header
+INFO: 02:58:23 --> Host: www.adidas.com.ar
+INFO: 02:58:23 --> Port: 80
