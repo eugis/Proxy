@@ -55,6 +55,7 @@ public class ParserUtils {
 		Set<String> rh = new HashSet<String>();
 		rh.add("Cache-Control");
 		rh.add("Connection");
+        rh.add("Content-Length");
 		rh.add("Date");
 		rh.add("Pragma");
         rh.add("Trailer");
@@ -83,9 +84,9 @@ public class ParserUtils {
 				message.pos++;
 			}
  
-			if(message.isCrFlag() && b != '\n'){
-				message.setcrFlag(false);
-			}
+//			if(message.isCrFlag() && b != '\n'){
+//				message.setcrFlag(false);
+//			}
 			
 			if(b == '\r'){
 //				if(message.isHeaderFinished()){
@@ -104,7 +105,10 @@ public class ParserUtils {
 					String emptyLine = "\n";
 					return emptyLine;
 				}
-			}			
+			}else{
+				message.setlfFlag(false);
+				message.setcrFlag(false);
+			}
 		}while(buf.hasRemaining() && !crFlag && !lfFlag);
 		if(!crFlag && !lfFlag){
 			return null;
@@ -252,10 +256,15 @@ public class ParserUtils {
 
 	public static boolean parseData(ByteBuffer buf, HttpMessage message) {
 		if(message.bodyEnable()){
-			String bytes = message.getHeader("content-length");
+			String bytes = message.getHeader("Content-Length");
 			if(bytes != null){
+				if(!message.initBody()){
+					message.setInitBody(message.pos);
+				}
+				//TODO hacer un metodo que vaya leyendo el buffer
+				ParserUtils.readLine(buf, message);
 				Integer cantbytes = Integer.parseInt(bytes);
-				if(buf.capacity() >= cantbytes){
+				if(message.getReadBody() >= cantbytes){
 					//TODO fijarse si hay que hacer algo mas
 					//validar que venga bien el final del msje
 					return true;

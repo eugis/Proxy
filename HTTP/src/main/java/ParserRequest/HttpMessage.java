@@ -32,6 +32,7 @@ public class HttpMessage {
 	private StringBuilder lastLine;
 	
 	protected int pos;
+	private int pos_initBody;
 	
 	public HttpMessage() {
 		this.state = StateHttp.REQUEST_LINE;
@@ -44,6 +45,7 @@ public class HttpMessage {
 		this.noContentLength = true;
 		this.headerFinished = false;
 		pos = 0;
+		pos_initBody = -1;
 		lastLine = new StringBuilder();
 	}
 
@@ -88,6 +90,8 @@ public class HttpMessage {
 					value = value.substring(0,index);
 				}
 				noHost = false;
+			}else if(header.equals("Content-Length")){
+				noContentLength = false;
 			}
 			headers.put(header, value);
 			return true;
@@ -112,7 +116,7 @@ public class HttpMessage {
 	}
 
 	public boolean bodyEnable() {
-		return headers.containsKey("content-length");
+		return headers.containsKey("Content-Length");
 	}
 
 	public void setcrFlag(boolean cr) {
@@ -217,5 +221,17 @@ public class HttpMessage {
 		if(lastLine == null){
 			lastLine = new StringBuilder();
 		}
+	}
+
+	public boolean initBody() {
+		return pos_initBody != -1;
+	}
+
+	public void setInitBody(int init) {
+		this.pos_initBody = init;	
+	}
+
+	public Integer getReadBody() {
+		return pos - pos_initBody;
 	}
 }

@@ -32,16 +32,6 @@ public enum StateHttp {
 		@Override
 		public StateHttp process(ByteBuffer buf, HttpMessage message) {
 			boolean finishedReading = ParserUtils.setHeaders(buf, message, message.getLastLine());
-//				String line = ParserUtils.readLine(buf, message);
-//				if(line == null){
-//					return this;
-//				}
-//				if(!line.equals("\n")){
-//					boolean valid = ParserUtils.parseHeaders(line.trim(), message);
-//					if(!valid){
-//						return INVALID;
-//					}
-//				}else{
 			if(finishedReading){
 				message.setHeaderFinished(true);
 				if(!ParserUtils.minHeaders(message)){
@@ -51,7 +41,6 @@ public enum StateHttp {
 					return message.state.process(buf, message);
 				}
 			}
-//				}
 			return this;
 		}
 		
@@ -62,7 +51,7 @@ public enum StateHttp {
 		public StateHttp process(ByteBuffer buf, HttpMessage message) {
 			if(message.getMethod().equals("POST")){
 				message.state = BODY;
-				return message.state.process(buf, message);
+				return BODY;
 			}else{
 				message.state = DONE;
 				return message.state.process(buf, message);
@@ -74,8 +63,9 @@ public enum StateHttp {
 
 		@Override
 		public StateHttp process(ByteBuffer buf, HttpMessage message) {
-			boolean finished = ParserUtils.parseData(buf, message);
-			if(finished){
+//			boolean finished = ParserUtils.parseData(buf, message);
+			ParserUtils.readLine(buf, message);
+			if(message.isFinished()){
 				message.state = DONE;
 				return message.state.process(buf, message);
 			}
