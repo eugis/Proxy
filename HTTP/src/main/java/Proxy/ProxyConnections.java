@@ -1,5 +1,6 @@
 package Proxy;
 
+import java.io.IOException;
 import java.net.Socket;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -13,6 +14,7 @@ public class ProxyConnections {
 	private HashMap<SocketRankingKey, Set<ProxySocket>> connections;
 	private static ProxyConnections instance;
 	
+	synchronized
 	public static ProxyConnections getInstance(){
 		if(instance == null){
 			instance = new ProxyConnections();
@@ -22,6 +24,7 @@ public class ProxyConnections {
 		return instance;
 	}
 	
+	synchronized
 	public void saveNewConnection(String host_port, ProxySocket ps){
 		makeAPlaceIfNeeded();
 		SocketRankingKey k = new SocketRankingKey(host_port);
@@ -38,6 +41,7 @@ public class ProxyConnections {
 		this.availableConnections--;
 	}
 	
+	synchronized
 	public ProxySocket getConnection(String host_port){
 		SocketRankingKey key = new SocketRankingKey(host_port);
 		Set<ProxySocket> psSet = this.connections.get(key);
@@ -47,17 +51,23 @@ public class ProxyConnections {
 		return null;
 	}
 	
+	synchronized
 	public HashMap<SocketRankingKey, Set<ProxySocket>> getConnections() {
 		return this.connections;
 	}
 	
-	public void closeConnectionForSocket(Socket s, boolean forceDelete) {
+	synchronized
+	public void closeConnectionForSocket(Socket s, boolean forceDelete) throws IOException {
 		for (Entry<SocketRankingKey, Set<ProxySocket>> e : this.connections.entrySet()) {
 			Iterator<ProxySocket> it = e.getValue().iterator();
 			while (it.hasNext()) {
 				ProxySocket ps = it.next();
 				if (ps.getSocket().equals(s)) {
 					if (e.getValue().size() > 1 || forceDelete) {
+						if (!ps.getSocket().isClosed()) {
+							System.out.println("cerrando socket en connection");
+							ps.close();	
+						}
 						it.remove();
 						this.availableConnections++ ;
 					} else {
@@ -71,6 +81,7 @@ public class ProxyConnections {
 		}
 	}
 
+	synchronized
 	//TODO: ver si se puede modularizar un poco más
 	private ProxySocket getUnusedSocket(Set<ProxySocket> psSet) {
 		for (Entry<SocketRankingKey, Set<ProxySocket>> e : this.connections.entrySet()) {
@@ -87,6 +98,7 @@ public class ProxyConnections {
 		return null;
 	}
 	
+	synchronized
 	private void updateKeyRank(String keyString) {
 		for(SocketRankingKey k : this.connections.keySet()) {
 			if (k.getHostPort().equals(keyString)) {
@@ -95,6 +107,7 @@ public class ProxyConnections {
 		}
 	}
 	
+	synchronized
 	private void makeAPlaceIfNeeded() {
 		if (this.availableConnections == 0) {
 			//TODO: revisar si esto está medianamente bien pensado

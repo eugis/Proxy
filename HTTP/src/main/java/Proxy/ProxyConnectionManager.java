@@ -32,7 +32,7 @@ public class ProxyConnectionManager {
 		//TODO: sacar el syso
 		System.out.println("CRANDO UN NUEVO SOCKET");
 		Socket serverSocket = new Socket(host, port);
-		serverSocket.setSoTimeout(5000);
+		serverSocket.setSoTimeout(50000);
 		ProxySocket pSocket = new ProxySocket(serverSocket);
 		return pSocket;
 	}
