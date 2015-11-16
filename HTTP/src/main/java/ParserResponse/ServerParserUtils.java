@@ -169,15 +169,23 @@ public class ServerParserUtils {
 	
 	private static boolean parseBody(ByteBuffer buf, final HttpResponse response, LinkedList<String> openedTags, ByteBuffer respBuf) throws IOException{
 
+		//TODO caso <style asdjflasjfd> </style> mismo que <A asfjasdjf> </A>
+		//cuando estoy metiendo cosas en la queue y encuentro espacio estoy en OnComment pero tengo q hacer lo q hace en getTag
+		//de meterlo en las openTags, para lo cual tengo que meter style, a y todas las demas q no estén.
+		//antes el meta se metia en la queue pero nunca era puesto en las openTags!
+		
 		System.out.println("Entra parseBody");
 		StringBuilder resp = new StringBuilder();
 		Set<String> tags = loadHtmlTags(); 
 		LinkedList<Character> queue = response.getState().getQueue();
 		char c;
+		boolean addLetter;
 		int b = 0;
 		int lenghtRead = 0;
 		boolean finished = false;
 		boolean onComment = response.getState().getOnComment();
+		boolean voidElement = false;
+		boolean rawElement = false;
 		while(buf.hasRemaining() && (b = buf.get()) != -1 && !finished){
 			String string = new String(buf.array());
 			System.out.println(string);
@@ -186,39 +194,72 @@ public class ServerParserUtils {
 			}else{
 				c = (char)b;
 				
+				
 				if (isLeetEnabled()) {
 					switch(c){
 					case '<': add2Queue(queue, c);
+								if(rawElement){
+									rawElement = false;
+								}
 								break;
 					case '>': 
-						if(onComment){
-								//Si es el tag malo q no reconocemos (puede ser solo meta????)
-								queue.removeLast();
-								onComment = false;
-								}else{
-									//saca el tag terminado tipo <HTML>
+						
+						//Ej: <meta ...atributos...\> o también <meta ...atributos...> 
+						if(voidElement && onComment){
+							emptyQueue(queue);
+							onComment = false;
+							voidElement = false;
+						}
+						//Si no es void element pero tiene atributos. Ej: <style ...atributos...> cosas q no quiero leetear </style>
+						//Ponemos los tags con atributos dentro de las openTags. El endTag se trata como cualquier otro caso en el else.
+						else if(onComment){
+							String queueContent = putIntoOpenTags(queue, openedTags, tags);
+							
+							//RawHtmlElements: style, script. Para que no aplique leet a su contenido.
+							if(queueContent != null && isRawElement(queueContent)){
+								rawElement = true;
+							}
+							onComment = false;
+						}
+						
+						//No hay atributos ni es un voidElement
+						else{
+									//saca el tag terminado tipo <HTML> o el endTag que corresponde a un tag con atributos.
 									getTag(response.getState(), queue, openedTags, tags);
-								}
+						}
 						break;
-					case ' ': 
+					case ' ':
 						if(!onComment){
-									onComment = addSpace2Queue(queue, c);
+							onComment = addSpace2Queue(queue, c);
+							
+							if(isVoidElement(queue) && onComment){
+								voidElement = true;
+							}
+															
 						}
 						break;
 						
 					case '/': 
-						finishedTag(queue, c); 
+						//Si la queue está vacía y hay un '/' es porque estoy en algún link, descripcion de atributo o texto entre tags. 
+						if(!queue.isEmpty()){
+							finishedTag(queue, c);
+						}
+						 
 					break;
 					
 					default: 
 						
 						if(!onComment){
 								onComment = onComment(queue, c);
-								if(!onComment && isLetter(c) && !addLetterInQueue(queue, c)){
+												
+																
+								addLetter = addLetterInQueue(queue, c);
+								
+								if(!onComment && isLetter(c) && !addLetter && !queue.contains('/') && !rawElement){
 									c = applyLeet(c);
 								}
 							  }
-								break;
+					break;
 					}
 				
 				} else {
@@ -232,10 +273,10 @@ public class ServerParserUtils {
 				response.getState().setOnComment(onComment);
 				resp.append(c);
 				
-				//TODO ver si este casteo está bien!!
+				
 				respBuf.put((byte)c);
 				
-				//respBuf.put((byte)b); //TODO: revisar si esto sería adecuado de poner acá
+				
 			} 
 
 		}
@@ -243,6 +284,61 @@ public class ServerParserUtils {
 		System.out.println(resp.toString());
 		return finished;
 	}
+	
+	private static boolean isRawElement(String queueContent) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	private static void emptyQueue(LinkedList<Character> queue) {
+		
+		while(!queue.isEmpty() && (queue.getLast()) != '<'){
+			queue.removeLast();
+		}
+				
+		queue.removeLast();//Me borra el <
+		
+	}
+
+	private static boolean isVoidElement(LinkedList<Character> queue) {
+		// TODO Auto-generated method stub
+		//readQueue();
+		//voidElements.contains();
+		return true;
+	}
+
+	private static String putIntoOpenTags(LinkedList<Character> queue, LinkedList<String> openedTags, Set<String> tags){
+		
+		StringBuilder tag = new StringBuilder();
+		String name = "";
+		char c;
+		
+		//Se guarda en tag lo ultimo que quedó en la pila. Que coincide con el último tag abierto.
+		while(!queue.isEmpty() && (c = queue.getLast()) != '<'){
+			tag.append(c);
+			queue.removeLast();
+		}
+		
+		if(!queue.isEmpty()){
+			queue.removeLast();//saca el < de la queue
+			name = tag.toString();
+			tag = new StringBuilder();
+			//Da vuelta el name para tener el último tag abierto.
+			for(int i=name.length()-1; i>=0; i--){
+				tag.append(name.charAt(i));
+			}
+			
+			if(!name.contains("/") && tags.contains(tag.toString())){
+				openedTags.addLast(tag.toString());
+				return tag.toString();
+			}
+					
+			
+			
+		}
+		return null;
+	}
+	
 	
 	private static void add2Queue(LinkedList<Character> queue, Character c){
 		if(queue.isEmpty()){
@@ -271,26 +367,30 @@ public class ServerParserUtils {
 			return;
 		}
 		
+		//Se guarda en tag lo ultimo que quedó en la pila. Que coincide con el último tag abierto.
 		while(!queue.isEmpty() && (c = queue.getLast()) != '<'){
 			tag.append(c);
 			queue.removeLast();
 		}
 		if(!queue.isEmpty()){
-			queue.removeLast();//saca el <
+			queue.removeLast();//saca el < de la queue
 			name = tag.toString();
 			tag = new StringBuilder();
-			//para que esto??
+			//Da vuelta el name para tener el último tag abierto.
 			for(int i=name.length()-1; i>=0; i--){
 				tag.append(name.charAt(i));
 			}
-			//porque no equals(name)
+			//Existe el caso: </style' '> incluso con </HTML' '>
 			if(name.contains("/")){
-				if(!openedTags.isEmpty() && openedTags.getLast().equals(tag.toString())){
+				String subs = tag.substring(name.indexOf('/')+1).toString();
+				if(!openedTags.isEmpty() && openedTags.getLast().equals(subs)){
 					openedTags.removeLast();
 				}
+								
 			}else{
 				if(!tags.contains(tag.toString())){
 					openedTags.removeLast();
+					
 				}
 				openedTags.addLast(tag.toString());
 			}
@@ -346,9 +446,10 @@ public class ServerParserUtils {
 	
 	private static boolean addLetterInQueue(LinkedList<Character> queue, char c){
 		char last;
+		
 		if(!queue.isEmpty()){
 			last = queue.getLast();
-			if(last == '<' || isLetter(last)){
+			if(last == '<' || last == '/' || isLetter(last)){
 					queue.addLast(c);
 					return true;
 			}
@@ -433,6 +534,29 @@ public class ServerParserUtils {
 		return new String(array).trim();
 	}
 	
+	private static Set<String> loadHtmlVoidElements(){
+		Set<String> ht = new HashSet<String>();
+		
+		ht.add("area");
+		ht.add("base");
+		ht.add("br");
+		ht.add("col");
+		ht.add("command");
+		ht.add("embed");
+		ht.add("hr");
+		ht.add("img");
+		ht.add("input");
+		ht.add("keygen");
+		ht.add("link");
+		ht.add("meta");
+		ht.add("param");
+		ht.add("source");
+		ht.add("track");		
+		ht.add("wbr");
+		
+		return ht;
+	}
+	
 	private static Set<String> loadHtmlTags() {
 		Set<String> ht = new HashSet<String>();
 		ht.add("TITLE");
@@ -472,6 +596,7 @@ public class ServerParserUtils {
         ht.add("TEXTAREA");
         ht.add("LI");
         ht.add("OPTION");
+        
             
         return ht;
 	}

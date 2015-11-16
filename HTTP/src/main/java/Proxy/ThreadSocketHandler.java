@@ -160,7 +160,7 @@ public class ThreadSocketHandler implements ConnectionHandler{
     	try {
     		while (keepReading && ((readSize = inFromServer.read(responseBuf)) != -1) /* && !resp.isResponseFinished()*/ ) {
 				bBuffer = ByteBuffer.wrap(responseBuf);
-//				responseBuf = ServerParserUtils.processResponse(bBuffer, resp);
+				responseBuf = ServerParserUtils.processResponse(bBuffer, resp);
 //				String res = new String(responseBuf);
 //                System.out.println("req:" + res);
 //                keepReading = !resp.getState().getIsFinished();
