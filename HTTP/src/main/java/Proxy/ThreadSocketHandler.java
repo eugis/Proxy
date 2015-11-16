@@ -78,8 +78,6 @@ public class ThreadSocketHandler implements ConnectionHandler{
 	                	
 	            	host2connect = parser.getHost();
 	                port2connect = parser.getPort();
-	                logs.info("Host: " + host2connect);
-					logs.info("Port: " + port2connect);
 					
 	                byteReq = parser.getRequest();
 //	                System.out.println("long request: " + byteReq.length);
@@ -193,7 +191,7 @@ public class ThreadSocketHandler implements ConnectionHandler{
 //		            return; //TODO: evitar pipeline?? ver si funciona.
 //		    	} 
 //                System.out.println("después de leet" + new String(responseBuf));
-    			logs.error("writing client");
+//   			  logs.error("writing client");
 //                System.out.println(out);
 //                System.out.println(readSize);
                 out.write(responseBuf, 0, readSize);

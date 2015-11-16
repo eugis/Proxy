@@ -94,6 +94,8 @@ public class HttpMessage {
 					}				
 					value = value.substring(0,index);
 				}
+				logs.info("host: "+ value);
+				logs.info("port: " + port);
 				noHost = false;
 			}else if(header.equals("Content-Length")){
 				noContentLength = false;

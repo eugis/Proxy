@@ -177,6 +177,7 @@ public class ParserUtils {
 	 * @return 
 	 */
 	public static RequestLine parseMethod(String line, HttpMessage message) {
+		logs.info(line);
 		String[] requestLine = line.split("\\s");
 		RequestLine resp = RequestLine.ERROR;
 		
