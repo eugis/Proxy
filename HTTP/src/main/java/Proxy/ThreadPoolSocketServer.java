@@ -16,7 +16,7 @@ import Proxy.ConnectionHandler;
 public class ThreadPoolSocketServer  {
     private ServerSocket serverSocket;
     private ConnectionHandler handler;
-    private int THREAD_POOL_SIZE = 2;
+    private int THREAD_POOL_SIZE = 10;
 
     private static Logger logs = CarlyLogger.getCarlyLogger();
     
