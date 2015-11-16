@@ -4,6 +4,7 @@ import java.nio.ByteBuffer;
 
 import org.apache.log4j.Logger;
 
+import CarlyAdmin.manager.StatisticsManager;
 import Logs.CarlyLogger;
 
 public class HttpParser {
@@ -59,6 +60,7 @@ public class HttpParser {
 	public byte[] getRequest() {
 		byte[] request = new byte[message.pos];
 		message.buffer.get(request, 0, message.pos);
+		StatisticsManager.getInstance().addBytes(message.pos);
 		
 //		System.out.println("Long request: "+ request.length);
 //		System.out.println(new String(request));

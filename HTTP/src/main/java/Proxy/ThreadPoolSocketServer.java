@@ -10,6 +10,7 @@ import java.util.Properties;
 import org.apache.log4j.Logger;
 
 import CarlyAdmin.CarlyAdmin;
+import CarlyAdmin.manager.StatisticsManager;
 import Logs.CarlyLogger;
 import Proxy.ConnectionHandler;
 
@@ -79,6 +80,8 @@ public class ThreadPoolSocketServer  {
                             String s = socket.getRemoteSocketAddress().toString();
                             System.out.printf("Se conecto %s (%s)\n", s, this.getName());
                             logs.info("Se conecto " + s + "(" + this.getName() + ")");
+                            //una nueva conexion
+                            StatisticsManager.getInstance().incRequestAccess();
                             
                             ThreadPoolSocketServer.this.handler.handle(socket);
                             
