@@ -47,6 +47,8 @@ public class HttpMessage {
 		pos = 0;
 		pos_initBody = -1;
 		lastLine = new StringBuilder();
+		version = null;
+		method = null;
 	}
 
 	public ReadingState parser(ByteBuffer buf) {
@@ -59,7 +61,7 @@ public class HttpMessage {
 			return ReadingState.ERROR;
 		case DONE:
 
-			if(noHost || (isNoContentLength() && method.equals("POST"))){
+			if(isInvalidHeader() || isInvalidVersion()){
 
 				return ReadingState.ERROR;
 			}
@@ -218,6 +220,8 @@ public class HttpMessage {
 		this.noContentLength = true;
 		this.headerFinished = false;
 		pos = 0;
+		method = null;
+		version = null;
 		if(lastLine == null){
 			lastLine = new StringBuilder();
 		}
@@ -233,5 +237,9 @@ public class HttpMessage {
 
 	public Integer getReadBody() {
 		return pos - pos_initBody;
+	}
+
+	public boolean isInvalidVersion() {
+		return version == null;
 	}
 }

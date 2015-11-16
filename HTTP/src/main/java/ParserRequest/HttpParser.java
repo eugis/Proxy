@@ -82,6 +82,8 @@ public class HttpParser {
 		int sCode = 0;
 		if(message.isInvalidMethod()){
 			sCode = 405;
+		}else if(message.isInvalidVersion()){
+			sCode = 505;
 		}else if(message.isInvalidHeader()){
 			sCode = 400;	
 		}

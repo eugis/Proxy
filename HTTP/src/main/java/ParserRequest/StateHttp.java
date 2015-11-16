@@ -19,7 +19,7 @@ public enum StateHttp {
 			case OK:
 				message.state = HEADER;
 				return message.state.process(buf, message);
-			case INVALIDVERSION: case INVALIDURL: case ERROR:
+			case INVALIDVERSION: case INVALIDURL:
 				return INVALID;
 			}
 			
