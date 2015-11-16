@@ -77,7 +77,10 @@ public class HttpParser {
 
 	public String getHttpResponse(int sCode) {
 		String version = "1.1";
-		return ResponseUtils.generateHttpResponseIM(sCode, version, message);
+		StatisticsManager.getInstance().addStatusCode(String.valueOf(sCode));
+		String response = ResponseUtils.generateHttpResponseIM(sCode, version, message);
+		StatisticsManager.getInstance().addBytes(response.length());
+		return response;
 	}
 	
 	public String getHttpResponse() {

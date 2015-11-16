@@ -88,7 +88,10 @@ public class HttpMessage {
 			if(header.equals("Host")){
 				int index = value.indexOf(":");
 				if(index > 0){
-					port = Integer.parseInt(value.substring(index + 1, value.length()));
+					String p = value.substring(index + 1, value.length());
+					if(p != null && !p.isEmpty() && !p.equals(" ")){
+						port = Integer.parseInt(p);
+					}				
 					value = value.substring(0,index);
 				}
 				noHost = false;
