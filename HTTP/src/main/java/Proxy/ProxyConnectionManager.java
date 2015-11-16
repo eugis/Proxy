@@ -12,7 +12,7 @@ public class ProxyConnectionManager {
 		ProxySocket pSocket = ProxyConnections.getInstance().getConnection(keyString);
 		if(pSocket == null){
 			//TODO: sacar el syso
-			System.out.println("CREA UNA NUEVA CONEXION");
+//			System.out.println("CREA UNA NUEVA CONEXION");
 			pSocket = generateNewSocket(host, port);
     		ProxyConnections.getInstance().saveNewConnection(keyString, pSocket);    		
 		}
@@ -23,14 +23,14 @@ public class ProxyConnectionManager {
 	public static void closeConnection(Socket s) throws IOException {
 		//Si el socket está cerrado, es que la conexión no soporta persistencia y fuerzo borrarlo del mapa.
 		//TODO: sacar el syso
-		System.out.println("CIERRA UNA CONEXION - la borra:" + s.isClosed());
+//		System.out.println("CIERRA UNA CONEXION - la borra:" + s.isClosed());
 		ProxyConnections.getInstance().closeConnectionForSocket(s, s.isClosed());
 	}
 	
 	synchronized
 	private static ProxySocket generateNewSocket(String host, int port) throws UnknownHostException, IOException {
 		//TODO: sacar el syso
-		System.out.println("CRANDO UN NUEVO SOCKET");
+//		System.out.println("CRANDO UN NUEVO SOCKET");
 		Socket serverSocket = new Socket(host, port);
 		serverSocket.setSoTimeout(5000*2);
 		ProxySocket pSocket = new ProxySocket(serverSocket);

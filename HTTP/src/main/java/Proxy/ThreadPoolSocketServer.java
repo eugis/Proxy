@@ -16,7 +16,7 @@ import Proxy.ConnectionHandler;
 public class ThreadPoolSocketServer  {
     private ServerSocket serverSocket;
     private ConnectionHandler handler;
-    private int THREAD_POOL_SIZE = 10;
+    private int THREAD_POOL_SIZE = 15;
 
     private static Logger logs = CarlyLogger.getCarlyLogger();
     
@@ -77,19 +77,18 @@ public class ThreadPoolSocketServer  {
                             Socket socket = ThreadPoolSocketServer.this.serverSocket.accept();
                             
                             String s = socket.getRemoteSocketAddress().toString();
-                            System.out.printf("Se conecto %s\n", s);
-                            logs.info("Se conecto " + s);
+                            System.out.printf("Se conecto %s (%s)\n", s, this.getName());
+                            logs.info("Se conecto " + s + "(" + this.getName() + ")");
                             
-                            System.out.println(ThreadPoolSocketServer.this.handler);
                             ThreadPoolSocketServer.this.handler.handle(socket);
                             
                             if (!socket.isClosed()) {
                                 socket.close();
-                                System.out.printf("Cerrando %s\n", s);
-                                logs.info("Cerrando" +  s);
+                                System.out.printf("Cerrando %s (%s)\n", s, this.getName());
+                                logs.info("Cerrando" +  s + "(" + this.getName() + ")");
                             }
-                            System.out.printf("Se desconecto %s\n", s);
-                            logs.info("Se desconecto" +  s);
+                            System.out.printf("Se desconecto %s (%s)\n", s, this.getName());
+                            logs.info("Se desconecto" +  s + "(" + this.getName() + ")");
                         } catch (IOException e) {
                         	e.printStackTrace();
                             System.err.printf("Excepcion al manejar conexion\n");            

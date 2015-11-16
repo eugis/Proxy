@@ -9,6 +9,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 public class ProxyConnections {
+	//TODO que es este valor, no es muy chico? 
 	private final int MaxConnections = 10;
 	private int availableConnections; 
 	private HashMap<SocketRankingKey, Set<ProxySocket>> connections;
@@ -65,7 +66,7 @@ public class ProxyConnections {
 				if (ps.getSocket().equals(s)) {
 					if (e.getValue().size() > 1 || forceDelete) {
 						if (!ps.getSocket().isClosed()) {
-							System.out.println("cerrando socket en connection");
+//							System.out.println("cerrando socket en connection");
 							ps.close();	
 						}
 						it.remove();
