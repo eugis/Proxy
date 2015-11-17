@@ -80,6 +80,9 @@ public class ParserUtils {
 			b = buf.get();
 			array[i++] = b;
 			if(b != 0){
+				if(message.buffer.capacity() == message.pos){
+					incBuffer(message);
+				}
 				message.buffer.put(message.pos, b);
 				message.pos++;
 			}
@@ -147,6 +150,9 @@ public class ParserUtils {
 		
 		while(buf.hasRemaining() && !doneReading && (b = buf.get())!= -1 && b != 0){
 			c = (char)b;
+			if(message.buffer.capacity() == message.pos){
+				incBuffer(message);
+			}
 			message.buffer.put(message.pos, b);
 			message.pos++;
 			
@@ -306,6 +312,13 @@ public class ParserUtils {
 			}
 		}
 		return valid;
+	}
+	
+	public static void incBuffer(HttpMessage message){
+		ByteBuffer aux = ByteBuffer.allocate(message.pos + 1024);
+		message.buffer.flip();
+		aux.put(message.buffer);
+		message.buffer = aux;
 	}
 	
 	public static void concatBuffer(ByteBuffer buf, HttpMessage message){

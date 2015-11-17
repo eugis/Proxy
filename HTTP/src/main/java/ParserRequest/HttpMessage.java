@@ -37,7 +37,8 @@ public class HttpMessage {
 		this.state = StateHttp.REQUEST_LINE;
 		this.headers = new HashMap<String, String>();
 		this.port = 80;
-		this.buffer = ByteBuffer.allocate(4096);
+//		this.buffer = ByteBuffer.allocate(4096);
+		this.buffer = ByteBuffer.allocate(2048);
 		this.crFlag = false;
 		this.lfFlag = false;
 		this.noHost = true;
@@ -215,7 +216,8 @@ public class HttpMessage {
 		this.state = StateHttp.REQUEST_LINE;
 		this.headers = new HashMap<String, String>();
 		this.port = 80;
-		this.buffer = ByteBuffer.allocate(4096);
+//		this.buffer = ByteBuffer.allocate(4096);
+		this.buffer = ByteBuffer.allocate(2048);
 		this.crFlag = false;
 		this.lfFlag = false;
 		this.noHost = true;
