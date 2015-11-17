@@ -191,7 +191,7 @@ public class ServerParserUtils {
 			}else{
 				c = (char)b;
 				
-				
+								
 				if (isLeetEnabled()) {
 					switch(c){
 					case '<': add2Queue(queue, c);
@@ -313,7 +313,7 @@ public class ServerParserUtils {
 		// TODO Auto-generated method stub
 		String tag = readQueue(queue);
 		
-		if(voidElements.contains(tag)){
+		if(voidElements.contains(tag.toLowerCase())){
 			return true;
 		}
 			
@@ -361,7 +361,7 @@ public class ServerParserUtils {
 			queue.removeLast();//saca el < de la queue
 			name = tag.reverse().toString().trim();
 						
-			if(!name.contains("/") && tags.contains(name)){
+			if(!name.contains("/") && tags.contains(name.toUpperCase())){
 				openedTags.addLast(name);
 				return name;
 			}
@@ -407,23 +407,18 @@ public class ServerParserUtils {
 		}
 		if(!queue.isEmpty()){
 			queue.removeLast();//saca el < de la queue
-			name = tag.reverse().toString();
+			name = tag.reverse().toString().trim();
 			
-//			tag = new StringBuilder();
-			//Da vuelta el name para tener el último tag abierto.
-//			for(int i=name.length()-1; i>=0; i--){
-//				tag.append(name.charAt(i));
-//			}
 								
 			//Existe el caso: </style' '> incluso con </HTML' '>
 			if(name.contains("/")){
-				String subs = name.substring(name.indexOf('/')+1).trim();
+				String subs = name.substring(name.indexOf('/')+1);
 				if(!openedTags.isEmpty() && openedTags.getLast().equals(subs)){
 					openedTags.removeLast();
 				}
 								
 			}else{
-				if(!tags.contains(tag.toString())){
+				if(!tags.contains(name.toUpperCase())){
 					openedTags.removeLast();
 					
 				}
@@ -436,7 +431,7 @@ public class ServerParserUtils {
 		char last;
 		if(!queue.isEmpty()){
 			last = queue.getLast();
-			if(last == '<' && c != ' ' && !isLetter(c)){
+			if(last == '<' && c != ' ' && !isLetter(c) && c!='!'){
 				return true;
 			}
 			/*if(isLetter(c)){
@@ -484,7 +479,7 @@ public class ServerParserUtils {
 		
 		if(!queue.isEmpty()){
 			last = queue.getLast();
-			if(last == '<' || last == '/' || isLetter(last)){
+			if(c!='!' && (last == '<' || last == '/' || isLetter(last))){
 					queue.addLast(c);
 					return true;
 			}
@@ -588,6 +583,7 @@ public class ServerParserUtils {
 		ht.add("source");
 		ht.add("track");		
 		ht.add("wbr");
+		ht.add("doctype");
 		
 		return ht;
 	}
