@@ -221,7 +221,7 @@ public class ServerParserUtils {
 						
 						//No hay atributos ni es un voidElement
 						else{
-									//saca el tag terminado tipo <HTML> o el endTag que corresponde a un tag con atributos.
+									//Saca los endTags que no sean voidElements.
 									getTag(response.getState(), queue, openedTags, tags);
 						}
 						break;
@@ -241,9 +241,9 @@ public class ServerParserUtils {
 						break;
 						
 					case '/': 
-						//Si la queue está vacía y hay un '/' es porque estoy en algún link, texto entre tags.
-						/*Como la pila queda llena cuando estoy en atributos de un voidElement y ellos pueden contener en su descripción 
-						 * una '/' también se agrega la condición onComment.
+						/* - Si la queue está vacía y hay un '/' es porque estoy en algún link, texto entre tags.
+						 * - Como la pila queda llena cuando estoy en atributos de un voidElement y ellos pueden 
+						 * 	 contener en su descripción una '/' también se agrega la condición onComment.
 						 */
 						if(!queue.isEmpty()&& !onComment){
 							finishedTag(queue, c);
@@ -359,16 +359,11 @@ public class ServerParserUtils {
 		
 		if(!queue.isEmpty()){
 			queue.removeLast();//saca el < de la queue
-			name = tag.toString();
-			tag = new StringBuilder();
-			//Da vuelta el name para tener el último tag abierto.
-			for(int i=name.length()-1; i>=0; i--){
-				tag.append(name.charAt(i));
-			}
-			
-			if(!name.contains("/") && tags.contains(tag.toString())){
-				openedTags.addLast(tag.toString());
-				return tag.toString();
+			name = tag.reverse().toString().trim();
+						
+			if(!name.contains("/") && tags.contains(name)){
+				openedTags.addLast(name);
+				return name;
 			}
 					
 			
