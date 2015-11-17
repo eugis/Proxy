@@ -34,6 +34,9 @@ public class ProxySocket {
 	}
 	
 	public void close() throws IOException {
+		this.getSocket().getInputStream().close();
+		this.getSocket().getOutputStream().flush();
+		this.getSocket().getOutputStream().close();
 		this.getSocket().close();
 	}
 }

@@ -26,10 +26,53 @@ public class ServerParserUtils {
 			if(!state.getIsFinished()){
 				switch(state.onMethod()){
 
+				case STATUS_LINE:
+							try{
+								doneReadingStLine = parseResponseStatusLine(buf, response, new StringBuilder(), respBuf);
+							}catch(Exception e){
+								//TODO
+							}
+							try{
+								if(doneReadingStLine){
+									doneReadingHeaders = getHeaders(buf, response, new StringBuilder(), respBuf);
+									if(!doneReadingHeaders){
+										state.setOnMethod(State.HEADERS);
+										state.setIsFinished(false);
+									}
+								}
+							}catch(Exception e){
+								//temita con los headers
+							}
+							//buf.flip();
+							if(doneReadingHeaders /*&& response.isPlainText() && isLeetEnabled()*/){
+								doneReading = parseBody(buf, response, state.getOpenedTags(), respBuf);
+			
+								if(!doneReading){
+									state.setOnMethod(State.BODY);
+									state.setIsFinished(false);
+								}else{
+									state.setIsFinished(true);
+								}
+							} 
+					break;
+				
 				case HEADERS:
 					
 					try{
 						doneReadingHeaders = getHeaders(buf, response, state.getLastLine(), respBuf);
+						if(!doneReadingHeaders){
+							state.setOnMethod(State.HEADERS);
+							state.setIsFinished(false);
+						}else{
+							doneReading = parseBody(buf, response, state.getOpenedTags(), respBuf);
+
+								if(!doneReading){
+									state.setOnMethod(State.BODY);
+									state.setIsFinished(false);
+								}else{
+									state.setIsFinished(true);
+								}
+						}
 					}catch(Exception e){
 						//temita con los headers
 					}
@@ -37,7 +80,13 @@ public class ServerParserUtils {
 					
 				case BODY:
 					
-					parseBody(buf, response, state.getOpenedTags(), respBuf);
+					doneReading = parseBody(buf, response, state.getOpenedTags(), respBuf);
+					if(!doneReading){
+						state.setOnMethod(State.BODY);
+						state.setIsFinished(false);
+					}else{
+						state.setIsFinished(true);
+					}
 					break;
 
 				}
@@ -50,12 +99,16 @@ public class ServerParserUtils {
 				try{
 					if(doneReadingStLine){
 						doneReadingHeaders = getHeaders(buf, response, new StringBuilder(), respBuf);
+						if(!doneReadingHeaders){
+							state.setOnMethod(State.HEADERS);
+							state.setIsFinished(false);
+						}
 					}
 				}catch(Exception e){
 					//temita con los headers
 				}
 				//buf.flip();
-				if(doneReadingHeaders && response.isPlainText() /*&& isLeetEnabled()*/){
+				if(doneReadingHeaders){
 					doneReading = parseBody(buf, response, state.getOpenedTags(), respBuf);
 
 					if(!doneReading){
@@ -193,6 +246,7 @@ public class ServerParserUtils {
 				
 								
 				if (isLeetEnabled()) {
+
 					switch(c){
 					case '<': add2Queue(queue, c);
 								if(rawElement){

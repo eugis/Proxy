@@ -15,10 +15,9 @@ public class HttpMessage {
 	private Logger logs = CarlyLogger.getCarlyLogger();
 	
 	private Map<String, String> headers;
-	//TODO supuestamente sale del host
 	private int port;
 	private String version;
-	//TODO creo q aca habria q ir guardando el buffer por si es mas largo y viene partido
+	//TODO tendriamos q ir liberando este buffer
 	protected ByteBuffer buffer;
 	
 	private String method;
@@ -32,11 +31,13 @@ public class HttpMessage {
 	private StringBuilder lastLine;
 	
 	protected int pos;
+	private int pos_initBody;
 	
 	public HttpMessage() {
 		this.state = StateHttp.REQUEST_LINE;
 		this.headers = new HashMap<String, String>();
 		this.port = 80;
+//		this.buffer = ByteBuffer.allocate(4096);
 		this.buffer = ByteBuffer.allocate(2048);
 		this.crFlag = false;
 		this.lfFlag = false;
@@ -44,7 +45,10 @@ public class HttpMessage {
 		this.noContentLength = true;
 		this.headerFinished = false;
 		pos = 0;
+		pos_initBody = -1;
 		lastLine = new StringBuilder();
+		version = null;
+		method = null;
 	}
 
 	public ReadingState parser(ByteBuffer buf) {
@@ -57,7 +61,7 @@ public class HttpMessage {
 			return ReadingState.ERROR;
 		case DONE:
 
-			if(noHost || (isNoContentLength() && method.equals("POST"))){
+			if(isInvalidHeader() || isInvalidVersion()){
 
 				return ReadingState.ERROR;
 			}
@@ -84,10 +88,17 @@ public class HttpMessage {
 			if(header.equals("Host")){
 				int index = value.indexOf(":");
 				if(index > 0){
-					port = Integer.parseInt(value.substring(index + 1, value.length()));
+					String p = value.substring(index + 1, value.length());
+					if(p != null && !p.isEmpty() && !p.equals(" ")){
+						port = Integer.parseInt(p);
+					}				
 					value = value.substring(0,index);
 				}
+				logs.info("host: "+ value);
+				logs.info("port: " + port);
 				noHost = false;
+			}else if(header.equals("Content-Length")){
+				noContentLength = false;
 			}
 			headers.put(header, value);
 			return true;
@@ -112,7 +123,7 @@ public class HttpMessage {
 	}
 
 	public boolean bodyEnable() {
-		return headers.containsKey("content-length");
+		return headers.containsKey("Content-Length");
 	}
 
 	public void setcrFlag(boolean cr) {
@@ -133,7 +144,6 @@ public class HttpMessage {
 	}
 
 	public boolean isFinished() {
-		//TODO esto no se puede probar en consola, para probarlo hay q setear
 		return crFlag && lfFlag;
 	}
 
@@ -163,7 +173,6 @@ public class HttpMessage {
 	}
 
 	public boolean isInvalidHeader() {
-		//TODO aca tendria que agregar si no viene el content-lenght y es necesario
 		if(noHost || (method!=null && method.equals("POST") && noContentLength)){
 			return true;
 		}
@@ -207,6 +216,7 @@ public class HttpMessage {
 		this.state = StateHttp.REQUEST_LINE;
 		this.headers = new HashMap<String, String>();
 		this.port = 80;
+//		this.buffer = ByteBuffer.allocate(4096);
 		this.buffer = ByteBuffer.allocate(2048);
 		this.crFlag = false;
 		this.lfFlag = false;
@@ -214,8 +224,26 @@ public class HttpMessage {
 		this.noContentLength = true;
 		this.headerFinished = false;
 		pos = 0;
+		method = null;
+		version = null;
 		if(lastLine == null){
 			lastLine = new StringBuilder();
 		}
+	}
+
+	public boolean initBody() {
+		return pos_initBody != -1;
+	}
+
+	public void setInitBody(int init) {
+		this.pos_initBody = init;	
+	}
+
+	public Integer getReadBody() {
+		return pos - pos_initBody;
+	}
+
+	public boolean isInvalidVersion() {
+		return version == null;
 	}
 }

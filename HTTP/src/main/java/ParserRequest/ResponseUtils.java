@@ -77,7 +77,7 @@ public class ResponseUtils {
 		
 		aux += firstLine + printHeaders(headerLine) + dataLine;
 		
-		logs.error(sCode + ": " + statusCode.get(sCode));
+		logs.info(sCode + ": " + statusCode.get(sCode));
 		
 		return aux;
 	}

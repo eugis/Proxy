@@ -4,6 +4,7 @@ import java.nio.ByteBuffer;
 
 import org.apache.log4j.Logger;
 
+import CarlyAdmin.manager.StatisticsManager;
 import Logs.CarlyLogger;
 
 public class HttpParser {
@@ -59,6 +60,7 @@ public class HttpParser {
 	public byte[] getRequest() {
 		byte[] request = new byte[message.pos];
 		message.buffer.get(request, 0, message.pos);
+		StatisticsManager.getInstance().addBytes(message.pos);
 		
 //		System.out.println("Long request: "+ request.length);
 //		System.out.println(new String(request));
@@ -75,13 +77,18 @@ public class HttpParser {
 
 	public String getHttpResponse(int sCode) {
 		String version = "1.1";
-		return ResponseUtils.generateHttpResponseIM(sCode, version, message);
+		StatisticsManager.getInstance().addStatusCode(String.valueOf(sCode));
+		String response = ResponseUtils.generateHttpResponseIM(sCode, version, message);
+		StatisticsManager.getInstance().addBytes(response.length());
+		return response;
 	}
 	
 	public String getHttpResponse() {
 		int sCode = 0;
 		if(message.isInvalidMethod()){
 			sCode = 405;
+		}else if(message.isInvalidVersion()){
+			sCode = 505;
 		}else if(message.isInvalidHeader()){
 			sCode = 400;	
 		}
