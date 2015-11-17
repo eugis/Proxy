@@ -9,39 +9,28 @@ import org.apache.log4j.Logger;
 import CarlyAdmin.manager.StatisticsManager;
 import Logs.CarlyLogger;
 
-public class ThreadSocket extends Thread {
+public class RunnableSocket implements Runnable {
 	
 	private Socket currentSocket;
 	private ConnectionHandler handler;
 	
-//	private ServerSocket serverSocket;
-	
 	private static Logger logs = CarlyLogger.getCarlyLogger();
 
-	public ThreadSocket(Socket socket, ConnectionHandler handler) {
+	public RunnableSocket(Socket socket, ConnectionHandler handler) {
 		super();
 
 		this.currentSocket = socket;
 		this.handler = handler;
 	}
-	
-//	public ThreadSocket(ConnectionHandler handler, ServerSocket serverSocket) {
-//		this.handler = handler;
-//		this.serverSocket = serverSocket;
-//	}
 
 	public void run() {
-		
-//		while(true) {
 
 		try {
-			
-//			currentSocket = serverSocket.accept();
-			
+					
 			String s = currentSocket.getRemoteSocketAddress().toString();
 			
-			System.out.printf("Se conecto %s en %s\n", s, this.getName());
-			logs.info("Se conecto " + s + "(" + this.getName() + ")");
+			System.out.printf("Se conecto %s\n", s);
+			logs.info("Se conecto " + s );
 			//una nueva conexion
 			StatisticsManager.getInstance().incRequestAccess();
 			
@@ -49,12 +38,12 @@ public class ThreadSocket extends Thread {
 			
 			if (!currentSocket.isClosed()) {
 				currentSocket.close();
-				System.out.printf("Cerrando %s (%s)\n", s, this.getName());
-				logs.info("Cerrando" +  s + "(" + this.getName() + ")");
+				System.out.printf("Cerrando %s \n", s);
+				logs.info("Cerrando" +  s );
 			}
 			
-			System.out.printf("Se desconecto %s en %s\n", s, this.getName());
-			logs.info("Se desconecto" +  s + "(" + this.getName() + ")");
+			System.out.printf("Se desconecto %s\n", s);
+			logs.info("Se desconecto" +  s );
 			
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -62,7 +51,6 @@ public class ThreadSocket extends Thread {
 			logs.error("Excepcion al manejar conexion\n");
 			logs.error(e);
 		}
-		}
-//	}
+	}
 
 }
