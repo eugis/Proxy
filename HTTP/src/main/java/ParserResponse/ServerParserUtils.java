@@ -233,7 +233,7 @@ public class ServerParserUtils {
 								System.out.println();
 							}
 							
-							if(isVoidElement(queue, voidElements) && onComment){
+							if(!queue.isEmpty() && isVoidElement(queue, voidElements) && onComment){
 								voidElement = true;
 							}
 															
@@ -313,7 +313,7 @@ public class ServerParserUtils {
 		// TODO Auto-generated method stub
 		String tag = readQueue(queue);
 		
-		if(voidElements.contains(tag.toLowerCase())){
+		if(tag!=null && voidElements.contains(tag.toLowerCase())){
 			return true;
 		}
 			
