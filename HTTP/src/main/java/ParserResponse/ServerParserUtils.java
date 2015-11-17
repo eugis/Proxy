@@ -241,14 +241,19 @@ public class ServerParserUtils {
 						break;
 						
 					case '/': 
-						//Si la queue está vacía y hay un '/' es porque estoy en algún link, descripcion de atributo o texto entre tags. 
-						if(!queue.isEmpty()){
+						//Si la queue está vacía y hay un '/' es porque estoy en algún link, texto entre tags.
+						/*Como la pila queda llena cuando estoy en atributos de un voidElement y ellos pueden contener en su descripción 
+						 * una '/' también se agrega la condición onComment.
+						 */
+						if(!queue.isEmpty()&& !onComment){
 							finishedTag(queue, c);
 						}
 						 
 					break;
 					
 					default: 
+						
+						
 						
 						if(!onComment){
 								onComment = onComment(queue, c);
@@ -319,14 +324,17 @@ public class ServerParserUtils {
 		StringBuilder tag = new StringBuilder();
 		String ret;
 		char c;
+		int i;
 		
 		
 		if(!queue.isEmpty())
 		{
-			while((c = queue.getLast()) != '<'){
+			i = queue.size()-1;
+			while((c = queue.get(i)) != '<'){
 				tag.append(c);
+				i--;
 			}
-			ret = tag.reverse().toString();
+			ret = tag.reverse().toString().trim();
 			
 			if(ret != null && !ret.isEmpty()){
 				return ret;
@@ -404,15 +412,17 @@ public class ServerParserUtils {
 		}
 		if(!queue.isEmpty()){
 			queue.removeLast();//saca el < de la queue
-			name = tag.toString();
-			tag = new StringBuilder();
+			name = tag.reverse().toString();
+			
+//			tag = new StringBuilder();
 			//Da vuelta el name para tener el último tag abierto.
-			for(int i=name.length()-1; i>=0; i--){
-				tag.append(name.charAt(i));
-			}
+//			for(int i=name.length()-1; i>=0; i--){
+//				tag.append(name.charAt(i));
+//			}
+								
 			//Existe el caso: </style' '> incluso con </HTML' '>
 			if(name.contains("/")){
-				String subs = tag.substring(name.indexOf('/')+1).toString();
+				String subs = name.substring(name.indexOf('/')+1).trim();
 				if(!openedTags.isEmpty() && openedTags.getLast().equals(subs)){
 					openedTags.removeLast();
 				}
