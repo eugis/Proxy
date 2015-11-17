@@ -33,6 +33,7 @@ public class ThreadSocketHandler implements ConnectionHandler{
 	
 	synchronized
 	private void readDataFromClient(Socket s) throws IOException{
+		Socket serverSocket = null;
 		try{
 		InputStream in = s.getInputStream();
         OutputStream out = s.getOutputStream();
@@ -45,11 +46,9 @@ public class ThreadSocketHandler implements ConnectionHandler{
         int port2connect = -1;
         
         // Receive until client closes connection, indicated by -1 return
-        Socket serverSocket = null;
         boolean keepReading = !s.isClosed() && s.isConnected();
         ByteBuffer bBuffer;
         byte[] byteReq;
-        int i = 0;
         
         while ((keepReading && (in.read(receiveBuf)) != -1)) {      //Connection reset
         	bBuffer = ByteBuffer.wrap(receiveBuf);
@@ -60,7 +59,8 @@ public class ThreadSocketHandler implements ConnectionHandler{
 						
 					break;
 				case FINISHED:
-	                	
+	                keepReading = false; //indicar el fin del request
+
 	            	host2connect = parser.getHost();
 	                port2connect = parser.getPort();
 					
@@ -71,11 +71,11 @@ public class ThreadSocketHandler implements ConnectionHandler{
 	                try{	                  	
 	                   	serverSocket = writeToServer(host2connect, port2connect, byteReq, serverSocket);
 	                   	parser.resetParser();
-		                i = readFromServer(serverSocket, out, i);
+		                readFromServer(serverSocket, out);
 	                }catch(UnknownHostException e){
 	       				logs.error(e);
 	        			serverSocket = null;
-        				int sCode = 112;
+        				int sCode = 112; //TODO: cambiar po un 500
         				byteReq = parser.getHttpResponse(sCode).getBytes();
 	        			out.write(byteReq, 0, byteReq.length);
 	        			out.flush();
@@ -90,6 +90,7 @@ public class ThreadSocketHandler implements ConnectionHandler{
 						byteReq = parser.getHttpResponse().getBytes();
 						out.write(byteReq);
 						out.flush();	
+						keepReading = false;
 					}
 					break;
 				}
@@ -100,20 +101,21 @@ public class ThreadSocketHandler implements ConnectionHandler{
         }
 
         // Close the socket.  We are done with this client!
-        if (serverSocket != null) {
-        	ProxyConnectionManager.closeConnection(serverSocket);
-        	serverSocket = null;
-        }
-        if (!s.isClosed()) {
-			s.getInputStream().close();
-	        s.close();	
-		}
+  //       if (serverSocket != null) {
+  //       	ProxyConnectionManager.closeConnection(serverSocket);
+  //       	serverSocket = null;
+  //       }
 		}catch(SocketException e){
-			if (!s.isClosed()) {
-				System.out.println("reset connection?? ");
-				s.getInputStream().close();
+			System.out.println("reset connection??");	
+			//TODO: add logger
+		} finally {
+			if (serverSocket != null) {
+	        	ProxyConnectionManager.closeConnection(serverSocket);
+	        	serverSocket = null;
+	        }
+	        if (!s.isClosed()) {
 		        s.close();	
-			}			
+			}
 		}
 	}
 
@@ -128,7 +130,6 @@ public class ThreadSocketHandler implements ConnectionHandler{
 			ProxySocket pSocket = ProxyConnectionManager.getConnection(host, port);
 			serverSocket = pSocket.getSocket();	
 		}
-		
     	OutputStream outFromServer = serverSocket.getOutputStream();
     	outFromServer.write(byteReq, 0, byteReq.length);
     	outFromServer.flush();
@@ -136,21 +137,16 @@ public class ThreadSocketHandler implements ConnectionHandler{
 	}
     synchronized
 	//TODO: Agregar el parser de respuesta al contenido del servidor
-    private int readFromServer(Socket serverSocket, OutputStream out, int i) throws IOException{
+    private void readFromServer(Socket serverSocket, OutputStream out) throws IOException{
     	byte[] responseBuf = new byte[BUFSIZE];
     	HttpResponse resp = new HttpResponse();
     	boolean keepReading = true;
     	InputStream inFromServer = serverSocket.getInputStream();
     	ByteBuffer bBuffer;
-    	boolean read = false;
     	int readSize = 0;
-//    	System.out.println("corridas del read del servidor" + i);
-        i ++;
     	try {
     		
     		while (/*!resp.isResponseFinished() &&*/ keepReading && ((readSize = inFromServer.read(responseBuf)) != -1) ) {
-    			
-    			read = true;
 //    			bBuffer = ByteBuffer.wrap(responseBuf);
 //				responseBuf = ServerParserUtils.processResponse(bBuffer, resp);
 
@@ -166,18 +162,14 @@ public class ThreadSocketHandler implements ConnectionHandler{
 //		            return; //TODO: evitar pipeline?? ver si funciona.
 //		    	} 
 //                System.out.println("después de leet" + new String(responseBuf));
-//   			  logs.error("writing client");
-//                System.out.println(out);
-//                System.out.println(readSize);
+
                 out.write(responseBuf, 0, readSize);
 				out.flush();
-				
 				responseBuf = new byte[BUFSIZE];
 //				boolean d = resp.isResponseFinished();
 				
     		}
 		} catch (SocketTimeoutException e) {
-//				System.out.println("timeout");
 				logs.error("timeout");
 				
 				int sCode = 504;
@@ -186,7 +178,7 @@ public class ThreadSocketHandler implements ConnectionHandler{
 				out.flush();
 
 				keepReading = false;
-//				System.out.println("timeout completed");
+				return;
 		}
     	if (serverSocket.isClosed() || !serverSocket.isConnected()) {
     		String host = serverSocket.getInetAddress().getHostName();
@@ -197,13 +189,11 @@ public class ThreadSocketHandler implements ConnectionHandler{
 			System.out.println("Reabriendo Socket!!");
     	} //TODO: ver si esto está realmente de forma coherente...
     	if (readSize == -1) {
-//    		System.out.println("DEVOLVIOOOO -1");
-    		int sCode = 504;
+    		//TODO: verificar si el status code es válido
+    		int sCode = 503;
 			byte[] byteReq = parser.getHttpResponse(sCode).getBytes();
 			out.write(byteReq, 0, byteReq.length);
 			out.flush();
     	}
-//    	System.out.println("terminando el read");
-    	return i;
     }
 }
