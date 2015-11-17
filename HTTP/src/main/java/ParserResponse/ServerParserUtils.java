@@ -392,11 +392,7 @@ public class ServerParserUtils {
 		String name = "";
 		char c;
 		if(queue.isEmpty() || queue.getLast() == '>'){
-			/*if(!tags.contains(openedTags.getLast().toUpperCase())){
-				openedTags.removeLast();
-				status.setOnTag(false);
-				return;
-			}*/
+			
 			return;
 		}
 		
@@ -434,32 +430,6 @@ public class ServerParserUtils {
 			if(last == '<' && c != ' ' && !isLetter(c) && c!='!'){
 				return true;
 			}
-			/*if(isLetter(c)){
-				//repite codigo
-				StringBuilder tag = new StringBuilder();
-				String name;
-				while(!queue.isEmpty() && (c = queue.getLast()) != '<'){
-					tag.append(c);
-					queue.removeLast();
-				}
-				if(!queue.isEmpty()){
-					queue.removeLast();
-					name = tag.toString();
-					tag = new StringBuilder();
-					for(int i=name.length()-1; i>=0; i--){
-						tag.append(name.charAt(i));
-					}
-
-					if(name.contains("/")){
-						if(!openedTags.isEmpty() && openedTags.getLast().equals(tag.toString())){
-							openedTags.removeLast();
-						}
-					}else{
-						openedTags.addLast(tag.toString());
-						return true;
-					}
-				}
-			}*/
 		}
 		return false;
 	}
