@@ -262,7 +262,6 @@ public class ParserUtils {
 				if(!message.initBody()){
 					message.setInitBody(message.pos);
 				}
-				//TODO hacer un metodo que vaya leyendo el buffer
 				ParserUtils.readLine(buf, message);
 				Integer cantbytes = Integer.parseInt(bytes);
 				if(message.getReadBody() >= cantbytes){

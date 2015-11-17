@@ -1,5 +1,7 @@
 package ParserRequest;
 
+//TODO esta clase no la usa nadieee!!
+
 public class ParserResponse {
 
 	private boolean error;

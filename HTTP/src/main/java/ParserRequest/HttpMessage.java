@@ -15,10 +15,9 @@ public class HttpMessage {
 	private Logger logs = CarlyLogger.getCarlyLogger();
 	
 	private Map<String, String> headers;
-	//TODO supuestamente sale del host
 	private int port;
 	private String version;
-	//TODO creo q aca habria q ir guardando el buffer por si es mas largo y viene partido
+	//TODO tendriamos q ir liberando este buffer
 	protected ByteBuffer buffer;
 	
 	private String method;
@@ -38,7 +37,7 @@ public class HttpMessage {
 		this.state = StateHttp.REQUEST_LINE;
 		this.headers = new HashMap<String, String>();
 		this.port = 80;
-		this.buffer = ByteBuffer.allocate(2048);
+		this.buffer = ByteBuffer.allocate(4096);
 		this.crFlag = false;
 		this.lfFlag = false;
 		this.noHost = true;
@@ -144,7 +143,6 @@ public class HttpMessage {
 	}
 
 	public boolean isFinished() {
-		//TODO esto no se puede probar en consola, para probarlo hay q setear
 		return crFlag && lfFlag;
 	}
 
@@ -174,7 +172,6 @@ public class HttpMessage {
 	}
 
 	public boolean isInvalidHeader() {
-		//TODO aca tendria que agregar si no viene el content-lenght y es necesario
 		if(noHost || (method!=null && method.equals("POST") && noContentLength)){
 			return true;
 		}
@@ -218,7 +215,7 @@ public class HttpMessage {
 		this.state = StateHttp.REQUEST_LINE;
 		this.headers = new HashMap<String, String>();
 		this.port = 80;
-		this.buffer = ByteBuffer.allocate(2048);
+		this.buffer = ByteBuffer.allocate(4096);
 		this.crFlag = false;
 		this.lfFlag = false;
 		this.noHost = true;

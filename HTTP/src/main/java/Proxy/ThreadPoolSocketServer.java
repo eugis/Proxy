@@ -31,7 +31,7 @@ public class ThreadPoolSocketServer  {
         init(new ServerSocket(port, 50), handler);
     }
 
-    public ThreadPoolSocketServer() {
+    public ThreadPoolSocketServer(final ConnectionHandler handler) {
     	InputStream is = getClass().getResourceAsStream(
 				"resources/setup.properties");
     	Properties p = new Properties();
@@ -41,7 +41,7 @@ public class ThreadPoolSocketServer  {
 			String address = p.getProperty("proxy-address");
 			int port = Integer.parseInt(stringPort);
 			InetAddress interfaz = InetAddress.getByName(address);
-			ConnectionHandler handler = new ThreadSocketHandler();
+			this.handler = handler;
 			
 			init(new ServerSocket(port, 50, interfaz), handler);
 		} catch (Exception e) {
@@ -66,45 +66,77 @@ public class ThreadPoolSocketServer  {
         this.serverSocket = s;
         this.handler = handler;
     }
-
+	
     public void run() {
         System.out.printf("Escuchando en %s\n", serverSocket.getLocalSocketAddress());
         
-        for(int i = 0; i < THREAD_POOL_SIZE; i++) {
-            Thread thread = new Thread() {
-                public void run() {
-                    while(true) {
-                        try {
-                            Socket socket = ThreadPoolSocketServer.this.serverSocket.accept();
-                            
-                            String s = socket.getRemoteSocketAddress().toString();
-                            System.out.printf("Se conecto %s (%s)\n", s, this.getName());
-                            logs.info("Se conecto " + s + "(" + this.getName() + ")");
-                            //una nueva conexion
-                            StatisticsManager.getInstance().incRequestAccess();
-                            
-                            ThreadPoolSocketServer.this.handler.handle(socket);
-                            
-                            if (!socket.isClosed()) {
-                                socket.close();
-                                System.out.printf("Cerrando %s (%s)\n", s, this.getName());
-                                logs.info("Cerrando" +  s + "(" + this.getName() + ")");
-                            }
-                            System.out.printf("Se desconecto %s (%s)\n", s, this.getName());
-                            logs.info("Se desconecto" +  s + "(" + this.getName() + ")");
-                        } catch (IOException e) {
-                        	e.printStackTrace();
-                            System.err.printf("Excepcion al manejar conexion\n");            
-                            logs.error(e);
-                            
-                        }
-                    }
-                };
-            };
-            thread.start();
-            System.out.println("Se inicio el thread " + thread.getName());
-        }
+		try {
+			while(true) {
+				Socket socket = serverSocket.accept();
+				ConnectionHandler handler = new ThreadSocketHandler();
+				ThreadSocket thread = new ThreadSocket(socket, handler);
+		        thread.start();
+		        System.out.println("Se inicio el thread " + thread.getName());
+			}
+		} catch (IOException e) {
+			System.out.println("Error al hacer el accept");
+			logs.error(e);
+		}
     }
+    
+//    public void run(){
+//    	System.out.printf("Escuchando en %s\n", serverSocket.getLocalSocketAddress());
+//    	
+//    	for(int i = 0; i < THREAD_POOL_SIZE; i++) {
+//			ConnectionHandler handler = new ThreadSocketHandler();
+//			ThreadSocket thread = new ThreadSocket(handler, serverSocket);
+//	        thread.start();
+//	        System.out.println("Se inicio el thread " + thread.getName());
+//    	}
+//    	
+//    }
+    
+//    public void run() {
+//        System.out.printf("Escuchando en %s\n", serverSocket.getLocalSocketAddress());
+        
+//        for(int i = 0; i < THREAD_POOL_SIZE; i++) {
+//            Thread thread = new Thread() {
+//                public void run() {
+//                    while(true) {
+//                        try {
+//                            Socket socket = ThreadPoolSocketServer.this.serverSocket.accept();
+//                            
+//                            String s = socket.getRemoteSocketAddress().toString();
+//                            System.out.printf("Se conecto %s (%s)\n", s, this.getName());
+//                            logs.info("Se conecto " + s + "(" + this.getName() + ")");
+//                            //una nueva conexion
+//                            StatisticsManager.getInstance().incRequestAccess();
+//                            
+//                            ConnectionHandler hand = new SocketHandler();
+//                            hand.handle(socket);
+//                            
+////                            ThreadPoolSocketServer.this.handler.handle(socket);
+//                            
+//                            if (!socket.isClosed()) {
+//                                socket.close();
+//                                System.out.printf("Cerrando %s (%s)\n", s, this.getName());
+//                                logs.info("Cerrando" +  s + "(" + this.getName() + ")");
+//                            }
+//                            System.out.printf("Se desconecto %s (%s)\n", s, this.getName());
+//                            logs.info("Se desconecto" +  s + "(" + this.getName() + ")");
+//                        } catch (IOException e) {
+//                        	e.printStackTrace();
+//                            System.err.printf("Excepcion al manejar conexion\n");            
+//                            logs.error(e);
+//                            
+//                        }
+//                    }
+//                };
+//            };
+//            thread.start();
+//            System.out.println("Se inicio el thread " + thread.getName());
+//        }
+//    }
 
     public static void main(String[] args) {
         try {
@@ -112,7 +144,7 @@ public class ThreadPoolSocketServer  {
     		logs.info("Starting CarlyAdmin Server...");
     		(new Thread(new CarlyAdmin())).start();
             //ThreadPoolSocketServer server = new ThreadPoolSocketServer(20007, InetAddress.getByName("localhost"), new ThreadSocketHandler());
-            ThreadPoolSocketServer server = new ThreadPoolSocketServer();
+            ThreadPoolSocketServer server = new ThreadPoolSocketServer(new ThreadSocketHandler());
             server.run();
         } catch (final Exception e) {
             System.out.println("Ocurrio un error");
