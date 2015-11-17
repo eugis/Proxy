@@ -310,9 +310,7 @@ public class ServerParserUtils {
 						
 						
 						if(!onComment){
-								onComment = onComment(queue, c);
-												
-																
+																								
 								addLetter = addLetterInQueue(queue, c);
 								
 								if(!onComment && isLetter(c) && !addLetter && !queue.contains('/') && !rawElement){
@@ -477,16 +475,7 @@ public class ServerParserUtils {
 		}
 	}
 	
-	private static boolean onComment(LinkedList<Character> queue, char c){
-		char last;
-		if(!queue.isEmpty()){
-			last = queue.getLast();
-			if(last == '<' && c != ' ' && !isLetter(c) && c!='!'){
-				return true;
-			}
-		}
-		return false;
-	}
+	
 	
 	private static void finishedTag(LinkedList<Character> queue, char c){
 		char last;
