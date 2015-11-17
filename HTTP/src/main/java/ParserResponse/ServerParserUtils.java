@@ -169,14 +169,11 @@ public class ServerParserUtils {
 	
 	private static boolean parseBody(ByteBuffer buf, final HttpResponse response, LinkedList<String> openedTags, ByteBuffer respBuf) throws IOException{
 
-		//TODO caso <style asdjflasjfd> </style> mismo que <A asfjasdjf> </A>
-		//cuando estoy metiendo cosas en la queue y encuentro espacio estoy en OnComment pero tengo q hacer lo q hace en getTag
-		//de meterlo en las openTags, para lo cual tengo que meter style, a y todas las demas q no estén.
-		//antes el meta se metia en la queue pero nunca era puesto en las openTags!
 		
 		System.out.println("Entra parseBody");
 		StringBuilder resp = new StringBuilder();
-		Set<String> tags = loadHtmlTags(); 
+		Set<String> tags = loadHtmlTags();
+		Set<String> voidElements = loadHtmlVoidElements();
 		LinkedList<Character> queue = response.getState().getQueue();
 		char c;
 		boolean addLetter;
@@ -232,7 +229,11 @@ public class ServerParserUtils {
 						if(!onComment){
 							onComment = addSpace2Queue(queue, c);
 							
-							if(isVoidElement(queue) && onComment){
+							if(onComment){
+								System.out.println();
+							}
+							
+							if(isVoidElement(queue, voidElements) && onComment){
 								voidElement = true;
 							}
 															
@@ -286,7 +287,10 @@ public class ServerParserUtils {
 	}
 	
 	private static boolean isRawElement(String queueContent) {
-		// TODO Auto-generated method stub
+		String q = queueContent.trim().toLowerCase();
+		if(q.equals("style") || q.equals("script")){
+			return true;
+		}
 		return false;
 	}
 
@@ -300,13 +304,39 @@ public class ServerParserUtils {
 		
 	}
 
-	private static boolean isVoidElement(LinkedList<Character> queue) {
+	private static boolean isVoidElement(LinkedList<Character> queue, Set<String> voidElements) {
 		// TODO Auto-generated method stub
-		//readQueue();
-		//voidElements.contains();
-		return true;
+		String tag = readQueue(queue);
+		
+		if(voidElements.contains(tag)){
+			return true;
+		}
+			
+		return false;
 	}
 
+	private static String readQueue(LinkedList<Character> queue){
+		StringBuilder tag = new StringBuilder();
+		String ret;
+		char c;
+		
+		
+		if(!queue.isEmpty())
+		{
+			while((c = queue.getLast()) != '<'){
+				tag.append(c);
+			}
+			ret = tag.reverse().toString();
+			
+			if(ret != null && !ret.isEmpty()){
+				return ret;
+			}
+		}
+		
+		
+		return null;
+	}
+	
 	private static String putIntoOpenTags(LinkedList<Character> queue, LinkedList<String> openedTags, Set<String> tags){
 		
 		StringBuilder tag = new StringBuilder();
@@ -596,6 +626,8 @@ public class ServerParserUtils {
         ht.add("TEXTAREA");
         ht.add("LI");
         ht.add("OPTION");
+        ht.add("STYLE");
+        ht.add("SCRIPT");
         
             
         return ht;
