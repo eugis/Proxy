@@ -10,7 +10,7 @@ import java.util.Set;
 
 public class ProxyConnections {
 	//TODO que es este valor, no es muy chico? 
-	private final int MaxConnections = 10;
+	private final int MaxConnections = 30;
 	private int availableConnections; 
 	private HashMap<SocketRankingKey, Set<ProxySocket>> connections;
 	private static ProxyConnections instance;

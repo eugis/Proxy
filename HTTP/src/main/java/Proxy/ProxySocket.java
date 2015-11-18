@@ -34,6 +34,7 @@ public class ProxySocket {
 	}
 	
 	public void close() throws IOException {
+		//TODO: se cierra el socket sólamente porqeu el cerrar el input o el output desemboca en el cierre del socket- por eso era la excepción
 		this.getSocket().close();
 	}
 }

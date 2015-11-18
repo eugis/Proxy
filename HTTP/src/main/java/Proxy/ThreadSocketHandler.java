@@ -35,80 +35,76 @@ public class ThreadSocketHandler implements ConnectionHandler{
 	private void readDataFromClient(Socket s) throws IOException{
 		Socket serverSocket = null;
 		try{
-		InputStream in = s.getInputStream();
-        OutputStream out = s.getOutputStream();
-        
-        byte[] receiveBuf = new byte[BUFSIZE];  // Receive buffer
-        
-        ReadingState state = ReadingState.UNFINISHED;
-        
-        String host2connect = "";
-        int port2connect = -1;
-        
-        // Receive until client closes connection, indicated by -1 return
-        boolean keepReading = !s.isClosed() && s.isConnected();
-        ByteBuffer bBuffer;
-        byte[] byteReq;
-        
-        while ((keepReading && (in.read(receiveBuf)) != -1)) {      //Connection reset
-        	bBuffer = ByteBuffer.wrap(receiveBuf);
-        	
-            state = parser.sendData(bBuffer);
-            switch (state) {
-				case UNFINISHED:
+			InputStream in = s.getInputStream();
+	        OutputStream out = s.getOutputStream();
+	        
+	        byte[] receiveBuf = new byte[BUFSIZE];  // Receive buffer
+	        
+	        ReadingState state = ReadingState.UNFINISHED;
+	        
+	        String host2connect = "";
+	        int port2connect = -1;
+	        
+	        // Receive until client closes connection, indicated by -1 return
+	        boolean keepReading = !s.isClosed() && s.isConnected();
+	        ByteBuffer bBuffer;
+	        byte[] byteReq;
+	        
+	        while ((keepReading && (in.read(receiveBuf)) != -1)) {      //Connection reset
+	        	bBuffer = ByteBuffer.wrap(receiveBuf);
+	        	
+	            state = parser.sendData(bBuffer);
+	            switch (state) {
+					case UNFINISHED:
+							
+						break;
+					case FINISHED:
+		                keepReading = false; //indicar el fin del request
+	
+		            	host2connect = parser.getHost();
+		                port2connect = parser.getPort();
 						
-					break;
-				case FINISHED:
-	                keepReading = false; //indicar el fin del request
-
-	            	host2connect = parser.getHost();
-	                port2connect = parser.getPort();
-					
-	                byteReq = parser.getRequest();
-//	                System.out.println("long request: " + byteReq.length);                   
-//	                System.out.println("request: " + new String(byteReq));
-
-	                try{	                  	
-	                   	serverSocket = writeToServer(host2connect, port2connect, byteReq, serverSocket);
-	                   	parser.resetParser();
-		                readFromServer(serverSocket, out);
-	                }catch(UnknownHostException e){
-	       				logs.error(e);
-	        			serverSocket = null;
-        				int sCode = 112; //TODO: cambiar po un 500
-        				byteReq = parser.getHttpResponse(sCode).getBytes();
-	        			out.write(byteReq, 0, byteReq.length);
-	        			out.flush();
-	                }catch(SocketException e){
-	                	if (s.isClosed()) {
-	                		keepReading = false;
-	                	}
-	                }
-           			break;
-				case ERROR:
-					if(parser.isFinished()){
-						byteReq = parser.getHttpResponse().getBytes();
-						out.write(byteReq);
-						out.flush();	
-						keepReading = false;
+		                byteReq = parser.getRequest();
+	//	                System.out.println("long request: " + byteReq.length);                   
+	//	                System.out.println("request: " + new String(byteReq));
+	
+		                try{	                  	
+		                   	serverSocket = writeToServer(host2connect, port2connect, byteReq, serverSocket);
+		                   	parser.resetParser();
+			                readFromServer(serverSocket, out);
+		                }catch(UnknownHostException e){
+		       				logs.error(e);
+		        			serverSocket = null;
+	        				int sCode = 112; //TODO: cambiar po un 500
+	        				byteReq = parser.getHttpResponse(sCode).getBytes();
+		        			out.write(byteReq, 0, byteReq.length);
+		        			out.flush();
+		                }catch(SocketException e){
+		                	if (s.isClosed()) {
+		                		keepReading = false;
+		                	}
+		                }
+	           			break;
+					case ERROR:
+						if(parser.isFinished()){
+							byteReq = parser.getHttpResponse().getBytes();
+							out.write(byteReq);
+							out.flush();	
+							keepReading = false;
+						}
+						break;
 					}
-					break;
-				}
-           	receiveBuf = new byte[BUFSIZE];
-           	if(s.isClosed() || !s.isConnected()) {
-       			keepReading = false;
-       		}
-        }
+	           	receiveBuf = new byte[BUFSIZE];
+	           	if(s.isClosed() || !s.isConnected()) {
+	       			keepReading = false;
+	       		}
+	        }
 
-        // Close the socket.  We are done with this client!
-  //       if (serverSocket != null) {
-  //       	ProxyConnectionManager.closeConnection(serverSocket);
-  //       	serverSocket = null;
-  //       }
 		}catch(SocketException e){
 			System.out.println("reset connection??");	
 			//TODO: add logger
 		} finally {
+			//Agregado del finally para las cosas que siempre deberán pasar: cerar el serversocket y cerrar el cliente en aso de que terminase o sucediecen exceptionse
 			if (serverSocket != null) {
 	        	ProxyConnectionManager.closeConnection(serverSocket);
 	        	serverSocket = null;
